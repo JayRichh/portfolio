@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import { ThemeProvider } from "../components/theme-provider";
 import { SiteHeader } from "../components/site-header";
+import { Analytics } from "@vercel/analytics/react"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -48,6 +49,7 @@ export default function RootLayout({
           </div>
         </ThemeProvider>
       </body>
+      <Analytics />
     </html>
   );
 }
