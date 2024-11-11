@@ -1,101 +1,150 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React from "react";
+
+import Link from "next/link";
+
+import { motion } from "framer-motion";
+import { GithubIcon, LinkedinIcon, MailIcon } from "lucide-react";
+
+import { CtaButton } from "../components/cta-button";
+import { GradientSecondaryText } from "../components/gradient-secondary-text";
+
+import ContactForm from "../components/contact-form";
+
+const JaydenRichardsonHero: React.FC = () => {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="relative my-20 mb-32 min-h-screen w-full overflow-hidden bg-gradient-to-br from-background via-background/95 to-background/90 text-foreground">
+      <div className="bg-gradient-radial absolute inset-0 from-transparent to-background/20 dark:to-background/40" />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      {/* Content */}
+      <div className="relative z-10 w-full">
+        <section className="m-0 flex min-h-screen w-full flex-col items-center justify-center p-0">
+          <div className="mt-40 w-full">
+            <div className="flex flex-col items-center text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="mb-2 space-y-1 text-4xl font-bold sm:text-5xl md:mb-4 md:space-y-2 md:text-6xl lg:text-7xl"
+              >
+                <span className="block text-foreground">Hi, I'm</span>
+                <GradientSecondaryText className="block bg-gradient-to-r from-black/100 to-black/70 bg-clip-text pb-3 font-bold dark:from-white dark:to-white/60">
+                  Jayden Richardson
+                </GradientSecondaryText>
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground sm:text-xl md:text-2xl"
+              >
+                Full Stack Web Developer with a background in Industrial
+                Electrical Engineering
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="mt-2 text-lg text-muted-foreground sm:text-xl md:text-2xl"
+              >
+                Kiwi innovating in the UK
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="mt-8 flex flex-col justify-center gap-4 sm:flex-row md:mt-12"
+              >
+                <Link href="/about" passHref>
+                  <CtaButton className="w-full bg-primary px-8 py-3 text-lg text-primary-foreground hover:bg-primary/90 sm:w-auto">
+                    <motion.span
+                      className="block"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 10,
+                      }}
+                    >
+                      About Me
+                    </motion.span>
+                  </CtaButton>
+                </Link>
+                <Link href="/code" passHref>
+                  <CtaButton
+                    variant="outline"
+                    className="w-full border-primary px-8 py-3 text-lg text-primary hover:bg-primary/10 sm:w-auto"
+                  >
+                    <motion.span
+                      className="block"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 10,
+                      }}
+                    >
+                      View Projects
+                    </motion.span>
+                  </CtaButton>
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="m-0 mb-16 w-full p-0"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="mt-8 flex justify-center space-x-6 md:mt-12"
+            >
+              <motion.a
+                href="https://github.com/JayRichh"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, color: "hsl(var(--primary))" }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="text-muted-foreground transition-colors hover:text-primary"
+              >
+                <GithubIcon className="h-8 w-8" />
+              </motion.a>
+              <motion.a
+                href="https://linkedin.com/in/jaydenrichardson"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, color: "hsl(var(--primary))" }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="text-muted-foreground transition-colors hover:text-primary"
+              >
+                <LinkedinIcon className="h-8 w-8" />
+              </motion.a>
+              <motion.a
+                href="mailto:jayrich.dev@gmail.com"
+                whileHover={{ scale: 1.2, color: "hsl(var(--primary))" }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="text-muted-foreground transition-colors hover:text-primary"
+              >
+                <MailIcon className="h-8 w-8" />
+              </motion.a>
+            </motion.div>
+
+            <ContactForm />
+          </motion.div>
+        </section>
+      </div>
     </div>
   );
-}
+};
+
+export default JaydenRichardsonHero;
