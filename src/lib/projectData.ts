@@ -1581,113 +1581,92 @@ export const projectData: Project[] = [
   },
 
   {
-    title: "Portfolio Website with Interactive Elements",
-    description:
-      "A portfolio website that showcases my projects, skills, and experience through interactive features and a mini-game, demonstrating my abilities in web development and creating engaging user experiences.",
-    imgUrl: "/images/main1.png",
-    repoUrl: "https://github.com/JayRichh/portfolio",
-    liveUrl: "https://jayrichh.com",
-    details: {
-      title: "Portfolio Website",
-      description:
-        "My personal portfolio website includes an interactive hero page and a multiplayer mini-game, highlighting my proficiency in web development, 3D graphics, physics simulations, and real-time networking. The website aims to provide visitors with an immersive and memorable experience while presenting my work and capabilities.",
-      technologies: [
-        "Next.js",
-        "React	",
-        "Three.js",
-        "Tailwind CSS",
+    "title": "New Portfolio Website",
+    "description": "A modern, responsive portfolio website built with the latest Next.js 15 and TypeScript, featuring interactive visualizations, dark mode support, and dynamic animations. Showcases professional growth and technical expertise through an intuitive user interface.",
+    "imgUrl": "/images/main1.png",
+    "repoUrl": "https://github.com/JayRichh/portfolio",
+    "liveUrl": "https://jayrich.dev",
+    "details": {
+      "title": "Portfolio Website",
+      "description": "A comprehensive portfolio platform built using Next.js 15's app router and server components. Features include interactive data visualizations, dynamic animations, and responsive design. The site serves as both a showcase of work and a demonstration of modern web development practices.",
+      "technologies": [
+        "Next.js 15",
+        "React 19",
         "TypeScript",
-        "WebSockets",
-        "Node.js",
-        "CANNON.js",
-        "Rapier Physics Engine",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Radix UI",
+        "D3.js",
+        "Recharts"
       ],
-      features: [
+      "features": [
         {
-          title: "Interactive Hero Page",
-          text: "The hero page features an interactive 3D scene that responds to user input, creating an engaging and dynamic introduction to the portfolio. Visitors can interact with various elements and explore the scene, adding a layer of immersion and interest.",
-          image: "/images/main2.png",
+          "title": "Interactive Learning Mindmap",
+          "text": "Dynamic visualization of web development concepts using D3.js, providing an interactive way to explore technical knowledge and skills. The mindmap features smooth animations and responsive design, adapting to different screen sizes."
         },
         {
-          title: "Physics-based Interactions",
-          text: "Both the hero page and the mini-game incorporate physics simulations using CANNON.js and Rapier Physics Engine to enhance the sense of realism and interactivity. Objects behave in a lifelike manner, responding to user interactions and collisions, creating a more engaging and believable experience.",
-          image: "/images/main3.png",
+          "title": "Project Showcase",
+          "text": "Comprehensive project display system with filtering by technology, detailed project information, and interactive image galleries. Built using Radix UI components and Framer Motion animations for smooth transitions."
         },
         {
-          title: "Multiplayer Mini-Game",
-          text: "The portfolio includes a multiplayer mini-game that allows visitors to interact and collaborate with each other in real-time. Players can explore a shared virtual environment, compete in challenges, and engage in social experiences, adding an extra layer of interactivity and fun to the website.",
-          image: "/images/main4.png",
+          "title": "Dynamic Experience Timeline",
+          "text": "Animated timeline showcasing professional experience with scroll-based animations and responsive design. Implements Framer Motion for smooth transitions and intersection observers for scroll-based animations."
         },
         {
-          title: "Responsive Design",
-          text: "The portfolio website is built with a responsive design approach, ensuring that it adapts seamlessly to different screen sizes and devices. Whether accessed on a desktop computer, tablet, or mobile phone, the website maintains its visual appeal, functionality, and performance.",
-          image: "/images/main1.png",
-        },
+          "title": "Technology Distribution Chart",
+          "text": "Interactive pie chart built with Recharts showing technology usage distribution. Features custom animations, tooltips, and responsive design for optimal viewing across devices."
+        }
       ],
-      challenges: [
+      "challenges": [
         {
-          title: "Integration of Technologies",
-          text: "One of the main challenges in developing the portfolio website was integrating various technologies and libraries seamlessly. Ensuring smooth communication and synchronization between the front-end and back-end components, as well as optimizing the performance of 3D graphics and physics simulations, required careful planning and implementation.",
-          image: "",
+          "title": "Performance Optimization",
+          "text": "Implementing efficient data visualization and animations while maintaining smooth performance. Solved through careful optimization of D3.js renders, code splitting, and lazy loading of components."
         },
         {
-          title: "Performance Optimization",
-          text: "Optimizing the performance of the website and mini-game was crucial to provide a smooth and responsive user experience. This involved techniques such as asset optimization, efficient rendering, and minimizing resource usage to ensure fast loading times and smooth interactions across different devices and network conditions.",
-          image: "",
+          "title": "Responsive Design Implementation",
+          "text": "Creating a consistent experience across devices while maintaining complex interactive features. Addressed through mobile-first design approach and responsive breakpoints using Tailwind CSS."
         },
         {
-          title: "Balancing Interactivity and Content",
-          text: "Striking the right balance between interactive elements and the presentation of projects, skills, and experience was another challenge. The goal was to create an engaging and immersive experience without overwhelming visitors or detracting from the main purpose of showcasing my work and abilities.",
-          image: "",
-        },
+          "title": "Accessibility and SEO",
+          "text": "Ensuring the site remains accessible while incorporating rich interactive features. Implemented proper ARIA attributes, semantic HTML, and SEO best practices while maintaining visual appeal."
+        }
       ],
-      learnings: [
+      "learnings": [
         {
-          title: "3D Graphics and Physics",
-          points: [
+          "title": "Modern React Development",
+          "points": [
             {
-              text: "Developing the portfolio website provided valuable experience in creating immersive 3D environments and incorporating realistic physics simulations. I learned techniques for modeling, texturing, and animating 3D assets, as well as optimizing their performance for web-based delivery.",
-              image: "",
+              "text": "Mastered Next.js 13 app router and server components, implementing efficient rendering strategies and optimizing performance."
             },
             {
-              text: "I gained knowledge in using libraries like Three.js, CANNON.js, and Rapier Physics Engine to create interactive and dynamic scenes that respond to user input and simulate real-world behavior. This involved learning about scene management, camera controls, lighting, and rendering optimizations.",
-              image: "/images/main3.png",
-            },
-          ],
+              "text": "Developed expertise in TypeScript for type-safe development and improved code maintainability."
+            }
+          ]
         },
         {
-          title: "Multiplayer Networking",
-          points: [
+          "title": "Data Visualization",
+          "points": [
             {
-              text: "Implementing the multiplayer mini-game required diving into real-time networking concepts and technologies. I learned about WebSockets and how to establish bi-directional communication between clients and servers to enable real-time interactions and updates.",
-              image: "",
+              "text": "Implemented complex data visualizations using D3.js and Recharts, creating interactive and informative user experiences."
             },
             {
-              text: "I gained experience in designing and implementing network protocols, handling data synchronization, and optimizing network performance to minimize latency and ensure a smooth multiplayer experience. This involved techniques such as client-side prediction, interpolation, and handling network interruptions gracefully.",
-              image: "",
-            },
-          ],
+              "text": "Optimized rendering performance for smooth animations and transitions in data-heavy visualizations."
+            }
+          ]
         },
         {
-          title: "Web Development Best Practices",
-          points: [
+          "title": "UI/UX Design",
+          "points": [
             {
-              text: "Throughout the development of the portfolio website, I reinforced my understanding of web development best practices. This included creating modular and reusable code components, following a clean and maintainable architecture, and using version control effectively.",
-              image: "",
+              "text": "Created an intuitive and accessible user interface using Radix UI primitives and custom components."
             },
             {
-              text: "I also gained valuable insights into performance optimization techniques, such as lazy loading, code splitting, and caching strategies, to ensure fast loading times and efficient resource utilization. Accessibility and cross-browser compatibility were also key considerations in the development process.",
-              image: "",
-            },
-          ],
-        },
+              "text": "Implemented responsive design patterns and animations using Tailwind CSS and Framer Motion."
+            }
+          ]
+        }
       ],
-      additionalImages: [
-        "/images/main1.png",
-        "/images/main2.png",
-        "/images/main3.png",
-        "/images/main4.png",
-      ],
-    },
-  },
+      "additionalImages": []
+    }
+  }
 ];
