@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, {
   createContext,
@@ -6,9 +6,9 @@ import React, {
   useContext,
   useEffect,
   useState,
-} from 'react';
+} from "react";
 
-type FilterOption = 'category' | 'tag' | 'date' | 'topics';
+type FilterOption = "category" | "tag" | "date" | "topics";
 
 interface SidebarState {
   isCollapsed: boolean;
@@ -37,7 +37,7 @@ export const useSidebarState = () => {
   const context = useContext(SidebarStateContext);
   if (!context) {
     throw new Error(
-      'useSidebarState must be used within a SidebarStateProvider',
+      "useSidebarState must be used within a SidebarStateProvider",
     );
   }
   return context;
@@ -48,51 +48,53 @@ export const SidebarStateProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   // Existing state
   const [isCollapsed, setIsCollapsed] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('sidebarCollapsed') === 'true';
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("sidebarCollapsed") === "true";
     }
     return false;
   });
   const [collapsedSections, setCollapsedSections] = useState<
     Record<string, boolean>
   >(() => {
-    if (typeof window !== 'undefined') {
-      const savedSections = localStorage.getItem('collapsedSections');
+    if (typeof window !== "undefined") {
+      const savedSections = localStorage.getItem("collapsedSections");
       return savedSections ? JSON.parse(savedSections) : {};
     }
     return {};
   });
   const [openCategories, setOpenCategories] = useState<string[]>(() => {
-    if (typeof window !== 'undefined') {
-      const savedCategories = localStorage.getItem('openCategories');
+    if (typeof window !== "undefined") {
+      const savedCategories = localStorage.getItem("openCategories");
       return savedCategories ? JSON.parse(savedCategories) : [];
     }
     return [];
   });
-  const [filterOption, setFilterOption] = useState<FilterOption>('date');
+  const [filterOption, setFilterOption] = useState<FilterOption>("date");
   const [isContentCollapsed, setIsContentCollapsed] = useState<boolean>(false);
 
   // New state for mindmap integration
   const [highlightedGroups, setHighlightedGroups] = useState<string[]>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('highlightedGroups');
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("highlightedGroups");
       return saved ? JSON.parse(saved) : [];
     }
     return [];
   });
-  const [highlightedImportance, setHighlightedImportance] = useState<number[]>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('highlightedImportance');
-      return saved ? JSON.parse(saved) : [];
-    }
-    return [];
-  });
+  const [highlightedImportance, setHighlightedImportance] = useState<number[]>(
+    () => {
+      if (typeof window !== "undefined") {
+        const saved = localStorage.getItem("highlightedImportance");
+        return saved ? JSON.parse(saved) : [];
+      }
+      return [];
+    },
+  );
 
   // Existing callbacks
   const toggleSidebar = useCallback(() => {
     setIsCollapsed((prev) => {
       const newValue = !prev;
-      localStorage.setItem('sidebarCollapsed', newValue.toString());
+      localStorage.setItem("sidebarCollapsed", newValue.toString());
       return newValue;
     });
   }, []);
@@ -103,7 +105,7 @@ export const SidebarStateProvider: React.FC<React.PropsWithChildren> = ({
         ...prev,
         [section]: !prev[section],
       };
-      localStorage.setItem('collapsedSections', JSON.stringify(newState));
+      localStorage.setItem("collapsedSections", JSON.stringify(newState));
       return newState;
     });
   }, []);
@@ -113,7 +115,7 @@ export const SidebarStateProvider: React.FC<React.PropsWithChildren> = ({
       const newState = prev.includes(category)
         ? prev.filter((c) => c !== category)
         : [...prev, category];
-      localStorage.setItem('openCategories', JSON.stringify(newState));
+      localStorage.setItem("openCategories", JSON.stringify(newState));
       return newState;
     });
   }, []);
@@ -128,7 +130,7 @@ export const SidebarStateProvider: React.FC<React.PropsWithChildren> = ({
       const newState = prev.includes(group)
         ? prev.filter((g) => g !== group)
         : [...prev, group];
-      localStorage.setItem('highlightedGroups', JSON.stringify(newState));
+      localStorage.setItem("highlightedGroups", JSON.stringify(newState));
       return newState;
     });
   }, []);
@@ -138,7 +140,7 @@ export const SidebarStateProvider: React.FC<React.PropsWithChildren> = ({
       const newState = prev.includes(level)
         ? prev.filter((l) => l !== level)
         : [...prev, level];
-      localStorage.setItem('highlightedImportance', JSON.stringify(newState));
+      localStorage.setItem("highlightedImportance", JSON.stringify(newState));
       return newState;
     });
   }, []);
@@ -146,35 +148,37 @@ export const SidebarStateProvider: React.FC<React.PropsWithChildren> = ({
   const resetHighlights = useCallback(() => {
     setHighlightedGroups([]);
     setHighlightedImportance([]);
-    localStorage.removeItem('highlightedGroups');
-    localStorage.removeItem('highlightedImportance');
+    localStorage.removeItem("highlightedGroups");
+    localStorage.removeItem("highlightedImportance");
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // Load existing state from localStorage
-      const savedCollapsed = localStorage.getItem('sidebarCollapsed');
+      const savedCollapsed = localStorage.getItem("sidebarCollapsed");
       if (savedCollapsed !== null) {
-        setIsCollapsed(savedCollapsed === 'true');
+        setIsCollapsed(savedCollapsed === "true");
       }
 
-      const savedSections = localStorage.getItem('collapsedSections');
+      const savedSections = localStorage.getItem("collapsedSections");
       if (savedSections) {
         setCollapsedSections(JSON.parse(savedSections));
       }
 
-      const savedCategories = localStorage.getItem('openCategories');
+      const savedCategories = localStorage.getItem("openCategories");
       if (savedCategories) {
         setOpenCategories(JSON.parse(savedCategories));
       }
 
       // Load new state from localStorage
-      const savedHighlightedGroups = localStorage.getItem('highlightedGroups');
+      const savedHighlightedGroups = localStorage.getItem("highlightedGroups");
       if (savedHighlightedGroups) {
         setHighlightedGroups(JSON.parse(savedHighlightedGroups));
       }
 
-      const savedHighlightedImportance = localStorage.getItem('highlightedImportance');
+      const savedHighlightedImportance = localStorage.getItem(
+        "highlightedImportance",
+      );
       if (savedHighlightedImportance) {
         setHighlightedImportance(JSON.parse(savedHighlightedImportance));
       }

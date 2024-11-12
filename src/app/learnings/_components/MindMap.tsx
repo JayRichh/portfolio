@@ -1,9 +1,15 @@
-'use client';
+"use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import * as d3 from 'd3';
-import debounce from 'lodash.debounce';
-import { useSidebarState } from './SidebarStateContext';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import * as d3 from "d3";
+import debounce from "lodash.debounce";
+import { useSidebarState } from "./SidebarStateContext";
 
 interface LearningNode extends d3.SimulationNodeDatum {
   id: string;
@@ -38,13 +44,20 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [selectedNode, setSelectedNode] = useState<LearningNode | null>(null);
   const [hoveredNode, setHoveredNode] = useState<LearningNode | null>(null);
-  const [activeBranchNodes, setActiveBranchNodes] = useState<Set<string>>(new Set());
+  const [activeBranchNodes, setActiveBranchNodes] = useState<Set<string>>(
+    new Set(),
+  );
   const [rotationX, setRotationX] = useState(0);
   const [rotationY, setRotationY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [lastMousePosition, setLastMousePosition] = useState<{ x: number; y: number } | null>(null);
+  const [lastMousePosition, setLastMousePosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
   const [zoom, setZoom] = useState(1);
-  const [touchStartDistance, setTouchStartDistance] = useState<number | null>(null);
+  const [touchStartDistance, setTouchStartDistance] = useState<number | null>(
+    null,
+  );
   const [initialZoom, setInitialZoom] = useState<number>(1);
 
   const memoizedHighlightedGroups = useMemo(
@@ -61,7 +74,8 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
     () =>
       debounce(() => {
         if (containerRef.current) {
-          const { width, height } = containerRef.current.getBoundingClientRect();
+          const { width, height } =
+            containerRef.current.getBoundingClientRect();
           setDimensions({ width, height: Math.max(600, height) });
         }
       }, 300),
@@ -70,8 +84,8 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
 
   useEffect(() => {
     updateDimensions();
-    window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
   }, [updateDimensions]);
 
   const nodeRadius = useCallback(
@@ -89,7 +103,10 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       ...node,
       x: (Math.random() - 0.5) * dimensions.width * 0.8,
       y: (Math.random() - 0.5) * dimensions.height * 0.8,
-      z: (Math.random() - 0.5) * Math.min(dimensions.width, dimensions.height) * 0.8,
+      z:
+        (Math.random() - 0.5) *
+        Math.min(dimensions.width, dimensions.height) *
+        0.8,
       rotX: Math.random() * Math.PI * 2,
       rotY: Math.random() * Math.PI * 2,
       rotZ: Math.random() * Math.PI * 2,
@@ -99,23 +116,24 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
   const links = useMemo(() => generateLinks(nodesWithZ), [nodesWithZ]);
 
   useEffect(() => {
-    if (!svgRef.current || dimensions.width === 0 || dimensions.height === 0) return;
+    if (!svgRef.current || dimensions.width === 0 || dimensions.height === 0)
+      return;
 
     const svg = d3.select<SVGSVGElement, unknown>(svgRef.current);
-    svg.selectAll('*').remove();
+    svg.selectAll("*").remove();
 
-    const g = svg.append('g');
+    const g = svg.append("g");
 
     const link = g
-      .append('g')
-      .attr('class', 'links')
-      .selectAll<SVGLineElement, LinkData>('line')
+      .append("g")
+      .attr("class", "links")
+      .selectAll<SVGLineElement, LinkData>("line")
       .data(links)
       .enter()
-      .append('line')
-      .attr('stroke', (d) => getColor((d.source as LearningNode).group))
-      .attr('stroke-opacity', 0.3)
-      .attr('stroke-width', (d) =>
+      .append("line")
+      .attr("stroke", (d) => getColor((d.source as LearningNode).group))
+      .attr("stroke-opacity", 0.3)
+      .attr("stroke-width", (d) =>
         Math.max(
           1,
           Math.min(
@@ -126,86 +144,94 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       );
 
     const nodeSelection = g
-      .append('g')
-      .attr('class', 'nodes')
-      .selectAll<SVGCircleElement, LearningNode>('circle')
+      .append("g")
+      .attr("class", "nodes")
+      .selectAll<SVGCircleElement, LearningNode>("circle")
       .data(nodesWithZ)
       .enter()
-      .append('circle')
-      .attr('r', (d) => nodeRadius(d))
-      .attr('fill', (d) => getColor(d.group))
-      .style('cursor', 'pointer');
+      .append("circle")
+      .attr("r", (d) => nodeRadius(d))
+      .attr("fill", (d) => getColor(d.group))
+      .style("cursor", "pointer");
 
     const label = g
-      .append('g')
-      .attr('class', 'labels')
-      .selectAll<SVGGElement, LearningNode>('g')
+      .append("g")
+      .attr("class", "labels")
+      .selectAll<SVGGElement, LearningNode>("g")
       .data(nodesWithZ)
       .enter()
-      .append('g')
-      .style('pointer-events', 'none');
+      .append("g")
+      .style("pointer-events", "none");
 
     label
-      .append('rect')
-      .attr('x', 0)
-      .attr('y', -10)
-      .attr('height', 20)
-      .attr('fill', 'rgba(255, 255, 255, 0.8)')
-      .attr('stroke', '#ccc')
-      .attr('rx', 5)
-      .attr('ry', 5);
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", -10)
+      .attr("height", 20)
+      .attr("fill", "rgba(255, 255, 255, 0.8)")
+      .attr("stroke", "#ccc")
+      .attr("rx", 5)
+      .attr("ry", 5);
 
     label
-      .append('text')
+      .append("text")
       .text((d) => d.title)
-      .attr('font-size', () => {
+      .attr("font-size", () => {
         const minDimension = Math.min(dimensions.width, dimensions.height);
         const scaleFactor = minDimension / 800;
         return `${10 * scaleFactor}px`;
       })
-      .attr('dx', 5)
-      .attr('dy', 5)
-      .attr('fill', '#333');
+      .attr("dx", 5)
+      .attr("dy", 5)
+      .attr("fill", "#333");
 
     const simulation = d3
       .forceSimulation<LearningNode>()
       .nodes(nodesWithZ)
       .force(
-        'link',
+        "link",
         d3
           .forceLink<LearningNode, LinkData>(links)
           .id((d) => d.id)
           .distance(
             (d) =>
               100 +
-              (learnings.find((n) => n.id === (d.source as LearningNode).id)?.importance || 0) *
+              (learnings.find((n) => n.id === (d.source as LearningNode).id)
+                ?.importance || 0) *
                 20,
           )
           .strength(
             (d) =>
               0.1 +
               Math.min(
-                learnings.find((n) => n.id === (d.source as LearningNode).id)?.importance || 0,
-                learnings.find((n) => n.id === (d.target as LearningNode).id)?.importance || 0,
+                learnings.find((n) => n.id === (d.source as LearningNode).id)
+                  ?.importance || 0,
+                learnings.find((n) => n.id === (d.target as LearningNode).id)
+                  ?.importance || 0,
               ) *
                 0.02,
           ),
       )
       .force(
-        'charge',
-        d3.forceManyBody<LearningNode>().strength((d) => -50 - (d.importance || 0) * 10),
+        "charge",
+        d3
+          .forceManyBody<LearningNode>()
+          .strength((d) => -50 - (d.importance || 0) * 10),
       )
-      .force('center', (alpha: number) => {
+      .force("center", (alpha: number) => {
         nodesWithZ.forEach((node) => {
           node.x! += (0 - node.x!) * alpha * 0.1;
           node.y! += (0 - node.y!) * alpha * 0.1;
           node.z! += (0 - node.z!) * alpha * 0.1;
         });
       })
-      .force('collision', d3.forceCollide<LearningNode>().radius((d) => nodeRadius(d) + 5))
+      .force(
+        "collision",
+        d3.forceCollide<LearningNode>().radius((d) => nodeRadius(d) + 5),
+      )
       .stop();
 
-    simulation.on('tick', () => {
+    simulation.on("tick", () => {
       const cosX = Math.cos(rotationX);
       const sinX = Math.sin(rotationX);
       const cosY = Math.cos(rotationY);
@@ -259,22 +285,22 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       });
 
       link
-        .attr('x1', (d) => (d.source as LearningNode).projX!)
-        .attr('y1', (d) => (d.source as LearningNode).projY!)
-        .attr('x2', (d) => (d.target as LearningNode).projX!)
-        .attr('y2', (d) => (d.target as LearningNode).projY!)
-        .attr('opacity', (d) => {
+        .attr("x1", (d) => (d.source as LearningNode).projX!)
+        .attr("y1", (d) => (d.source as LearningNode).projY!)
+        .attr("x2", (d) => (d.target as LearningNode).projX!)
+        .attr("y2", (d) => (d.target as LearningNode).projY!)
+        .attr("opacity", (d) => {
           const sourceId = (d.source as LearningNode).id;
           const targetId = (d.target as LearningNode).id;
           const sourceHighlighted =
             memoizedHighlightedGroups.length === 0 ||
             memoizedHighlightedGroups.includes(
-              (d.source as LearningNode).group?.toLowerCase() || '',
+              (d.source as LearningNode).group?.toLowerCase() || "",
             );
           const targetHighlighted =
             memoizedHighlightedGroups.length === 0 ||
             memoizedHighlightedGroups.includes(
-              (d.target as LearningNode).group?.toLowerCase() || '',
+              (d.target as LearningNode).group?.toLowerCase() || "",
             );
           const bothPassFilters = sourceHighlighted && targetHighlighted;
 
@@ -290,12 +316,14 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         });
 
       nodeSelection
-        .attr('cx', (d) => d.projX!)
-        .attr('cy', (d) => d.projY!)
-        .attr('opacity', (d) => {
+        .attr("cx", (d) => d.projX!)
+        .attr("cy", (d) => d.projY!)
+        .attr("opacity", (d) => {
           const passesFilters =
             (memoizedHighlightedGroups.length === 0 ||
-              memoizedHighlightedGroups.includes(d.group?.toLowerCase() || '')) &&
+              memoizedHighlightedGroups.includes(
+                d.group?.toLowerCase() || "",
+              )) &&
             (memoizedHighlightedImportance.length === 0 ||
               memoizedHighlightedImportance.includes(d.importance || 0));
 
@@ -314,33 +342,34 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
           }
         });
 
-        label
-        .attr('transform', (d) => `translate(${d.projX},${d.projY})`)
-        .attr('display', (d) => {
+      label
+        .attr("transform", (d) => `translate(${d.projX},${d.projY})`)
+        .attr("display", (d) => {
           const passesFilters =
             (memoizedHighlightedGroups.length === 0 ||
-              memoizedHighlightedGroups.includes(d.group?.toLowerCase() || '')) &&
+              memoizedHighlightedGroups.includes(
+                d.group?.toLowerCase() || "",
+              )) &&
             (memoizedHighlightedImportance.length === 0 ||
               memoizedHighlightedImportance.includes(d.importance || 0));
-      
+
           if (d.id === hoveredNode?.id || d.id === selectedNode?.id) {
-            return 'block';
+            return "block";
           }
-      
+
           if (
             selectedNode &&
             activeBranchNodes.has(d.id) &&
             passesFilters &&
             d.group?.toLowerCase() === selectedNode.group?.toLowerCase()
           ) {
-            return 'block';
+            return "block";
           }
-      
-          return 'none';
-        });
-      
 
-      label.select('rect').attr('width', (d) => {
+          return "none";
+        });
+
+      label.select("rect").attr("width", (d) => {
         const textWidth =
           getTextWidth(
             d.title,
@@ -353,7 +382,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
     simulation.alpha(1).restart();
 
     nodeSelection
-      .on('click', (event, d) => {
+      .on("click", (event, d) => {
         event.stopPropagation();
         const newSelectedNode = d === selectedNode ? null : d;
         setSelectedNode(newSelectedNode);
@@ -365,10 +394,10 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
           setActiveBranchNodes(new Set());
         }
       })
-      .on('mouseover', (event, d) => setHoveredNode(d))
-      .on('mouseout', () => setHoveredNode(null));
+      .on("mouseover", (event, d) => setHoveredNode(d))
+      .on("mouseout", () => setHoveredNode(null));
 
-    svg.on('click', () => {
+    svg.on("click", () => {
       setSelectedNode(null);
       setActiveBranchNodes(new Set());
     });
@@ -421,7 +450,9 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
     event.preventDefault();
     const delta = event.deltaY;
     const zoomFactor = 0.1;
-    setZoom((prevZoom) => Math.max(0.1, Math.min(5, prevZoom - delta * zoomFactor * 0.01)));
+    setZoom((prevZoom) =>
+      Math.max(0.1, Math.min(5, prevZoom - delta * zoomFactor * 0.01)),
+    );
   };
 
   const handleTouchStart = (event: React.TouchEvent<SVGSVGElement>) => {
@@ -496,11 +527,11 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       ref={containerRef}
       className="no-text-select"
       style={{
-        width: '100%',
-        height: '100%',
-        minHeight: '600px',
-        position: 'relative',
-        overflow: 'hidden',
+        width: "100%",
+        height: "100%",
+        minHeight: "600px",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
       <svg
@@ -517,11 +548,11 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchEnd}
         style={{
-          position: 'absolute',
+          position: "absolute",
           top: 0,
           left: 0,
-          cursor: isDragging ? 'grabbing' : 'grab',
-          touchAction: 'none',
+          cursor: isDragging ? "grabbing" : "grab",
+          touchAction: "none",
         }}
       />
     </div>
@@ -544,7 +575,7 @@ function generateLinks(nodes: LearningNode[]): LinkData[] {
 
   const centralNode = nodes[0];
   if (!centralNode) {
-    throw new Error('Central node is not defined');
+    throw new Error("Central node is not defined");
   }
 
   Object.values(groupedNodes).forEach((group) => {
@@ -580,16 +611,19 @@ function generateLinks(nodes: LearningNode[]): LinkData[] {
 
 function getColor(group?: string): string {
   const colors: { [key: string]: string } = {
-    language: '#FFB6C1',
-    framework: '#87CEFA',
-    tool: '#98FB98',
-    concept: '#DDA0DD',
-    activity: '#FFD700',
+    language: "#FFB6C1",
+    framework: "#87CEFA",
+    tool: "#98FB98",
+    concept: "#DDA0DD",
+    activity: "#FFD700",
   };
-  return colors[group?.toLowerCase() || ''] || '#B0C4DE';
+  return colors[group?.toLowerCase() || ""] || "#B0C4DE";
 }
 
-function getConnectedNodes(selectedNodeId: string, links: LinkData[]): Set<string> {
+function getConnectedNodes(
+  selectedNodeId: string,
+  links: LinkData[],
+): Set<string> {
   const visited = new Set<string>();
   const queue = [selectedNodeId];
 
@@ -613,8 +647,8 @@ function getConnectedNodes(selectedNodeId: string, links: LinkData[]): Set<strin
 }
 
 function getTextWidth(text: string, font: string): number {
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
   if (!context) return 0;
   context.font = font;
   const metrics = context.measureText(text);

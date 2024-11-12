@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
-import { SidebarStateProvider } from './SidebarStateContext';
-import { LearningsSidebar } from './LearningsSidebar';
-import { LearningsContent } from './LearningsContent';
+import { SidebarStateProvider } from "./SidebarStateContext";
+import { LearningsSidebar } from "./LearningsSidebar";
+import { LearningsContent } from "./LearningsContent";
 
 export const LearningsPageWrapper: React.FC = () => {
   return (

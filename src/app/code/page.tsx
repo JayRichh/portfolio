@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, {
   useCallback,
@@ -6,13 +6,13 @@ import React, {
   useMemo,
   useRef,
   useState,
-} from 'react';
+} from "react";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Code as CodeIcon,
   ExternalLink,
@@ -20,50 +20,50 @@ import {
   Github,
   Pen,
   X,
-} from 'lucide-react';
+} from "lucide-react";
 
-import { Button } from '../../components/ui/button';
+import { Button } from "../../components/ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../../components/ui/card';
+} from "../../components/ui/card";
 
-import { Project, projectData } from '../../lib/projectData';
-import { techIcons } from '../../lib/techIcons';
+import { Project, projectData } from "../../lib/projectData";
+import { techIcons } from "../../lib/techIcons";
 
-import ProjectDetailDialog from './_components/project-detail-dialog';
+import ProjectDetailDialog from "./_components/project-detail-dialog";
 
 // Universal relaxation function
 export const universalRelaxation = (tech: string): string => {
   const techMap: Record<string, string[]> = {
-    'Vue.js': ['Vue', 'Vue3', 'Vue 3', 'VueJS', 'Vue 2'],
-    React: ['React.js', 'ReactJS', 'React 18'],
-    'CSS Framework': ['CSS', 'Tailwind CSS', 'Bootstrap', 'Styled-Components'],
-    JavaScript: ['JS', 'JavaScript', 'ECMAScript'],
-    TypeScript: ['TS', 'TypeScript'],
-    'Node.js': ['Node', 'NodeJS', 'Node.js'],
-    Express: ['ExpressJS', 'Express.js'],
-    MongoDB: ['Mongo', 'MongoDB', 'Mongoose'],
-    HTML5: ['HTML', 'HTML5'],
-    CSS3: ['CSS', 'CSS3'],
-    'Next.js': ['NextJS', 'Next.js'],
-    GSAP: ['GSAP'],
-    Firebase: ['Firebase'],
-    Vuex: ['Vuex'],
-    Bootstrap: ['Bootstrap'],
-    'Three.js': ['ThreeJS', 'Three.js'],
-    WebSockets: ['Socket.io', 'WebSockets', 'SocketIO'],
-    'Physics Engine': [
-      'Rapier',
-      'Rapier Physics Engine',
-      'CANNON.js',
-      'CannonJS',
+    "Vue.js": ["Vue", "Vue3", "Vue 3", "VueJS", "Vue 2"],
+    React: ["React.js", "ReactJS", "React 18"],
+    "CSS Framework": ["CSS", "Tailwind CSS", "Bootstrap", "Styled-Components"],
+    JavaScript: ["JS", "JavaScript", "ECMAScript"],
+    TypeScript: ["TS", "TypeScript"],
+    "Node.js": ["Node", "NodeJS", "Node.js"],
+    Express: ["ExpressJS", "Express.js"],
+    MongoDB: ["Mongo", "MongoDB", "Mongoose"],
+    HTML5: ["HTML", "HTML5"],
+    CSS3: ["CSS", "CSS3"],
+    "Next.js": ["NextJS", "Next.js"],
+    GSAP: ["GSAP"],
+    Firebase: ["Firebase"],
+    Vuex: ["Vuex"],
+    Bootstrap: ["Bootstrap"],
+    "Three.js": ["ThreeJS", "Three.js"],
+    WebSockets: ["Socket.io", "WebSockets", "SocketIO"],
+    "Physics Engine": [
+      "Rapier",
+      "Rapier Physics Engine",
+      "CANNON.js",
+      "CannonJS",
     ],
-    AI: ['OpenAI', 'Claude'],
-    'Styled-Components': ['Styled-Components'],
+    AI: ["OpenAI", "Claude"],
+    "Styled-Components": ["Styled-Components"],
   };
 
   for (const [key, aliases] of Object.entries(techMap)) {
@@ -75,8 +75,8 @@ export const universalRelaxation = (tech: string): string => {
 };
 
 const techCategories: Record<string, string[]> = {
-  Frameworks: ['Vue.js', 'TypeScript', 'Node.js', 'React', 'Next.js'],
-  Other: ['Three.js', 'CSS Framework', 'Physics Engine', 'AI'],
+  Frameworks: ["Vue.js", "TypeScript", "Node.js", "React", "Next.js"],
+  Other: ["Three.js", "CSS Framework", "Physics Engine", "AI"],
 };
 
 const CodePage: React.FC = () => {
@@ -124,16 +124,16 @@ const CodePage: React.FC = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
   useEffect(() => {
     const hash = window.location.hash.substring(1);
     if (hash) {
-      const projectTitle = hash.replace(/-/g, ' ');
+      const projectTitle = hash.replace(/-/g, " ");
       const project = projectData.find(
         (proj) => proj.title.toLowerCase() === projectTitle.toLowerCase(),
       );
@@ -146,11 +146,11 @@ const CodePage: React.FC = () => {
   useEffect(() => {
     if (selectedProject) {
       router.push(
-        `#${selectedProject.title.replace(/\s+/g, '-').toLowerCase()}`,
+        `#${selectedProject.title.replace(/\s+/g, "-").toLowerCase()}`,
         { scroll: false },
       );
     } else {
-      router.push('', { scroll: false });
+      router.push("", { scroll: false });
     }
   }, [selectedProject, router]);
   const renderTechBadge = (
@@ -159,17 +159,17 @@ const CodePage: React.FC = () => {
     isClickable: boolean = true,
   ) => {
     const Icon = techIcons[tech]?.icon;
-    const color = techIcons[tech]?.color || '#888';
+    const color = techIcons[tech]?.color || "#888";
     return (
       <Button
         key={tech}
         onClick={isClickable ? () => toggleTechFilter(tech) : undefined}
         className={`group relative m-1 flex items-center justify-between rounded-md px-3 py-2 text-sm transition-colors ${
           isActive
-            ? 'dark:text-primary-light bg-primary/10 text-primary dark:bg-primary/20'
-            : 'dark:hover:text-primary-light hover:bg-primary/5 hover:text-primary dark:hover:bg-primary/10'
+            ? "dark:text-primary-light bg-primary/10 text-primary dark:bg-primary/20"
+            : "dark:hover:text-primary-light hover:bg-primary/5 hover:text-primary dark:hover:bg-primary/10"
         }`}
-        variant={isActive ? 'secondary' : 'ghost'}
+        variant={isActive ? "secondary" : "ghost"}
       >
         <span className="flex w-full items-center justify-center">
           {Icon && (
@@ -199,13 +199,11 @@ const CodePage: React.FC = () => {
           <h1 className="mb-4 mt-16 text-4xl font-extrabold text-primary sm:text-5xl md:text-6xl">
             Projects
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-muted-foreground sm:text-xl">
-            Welcome to my project showcase. Here you'll find a collection of web
-            development projects I've worked on, featuring various technologies
-            and approaches. These projects reflect my journey in learning and
-            applying modern tools and frameworks to create functional and
-            innovative web solutions.
+          <p className="mt-4 max-w-2xl text-lg text-muted-foreground sm:text-xl pb-8">
+            Here’s a look at the web development projects I’ve worked on, with a
+            range of technologies and approaches.
           </p>
+
           <div className="mt-8 flex flex-wrap gap-4">
             <Button
               asChild

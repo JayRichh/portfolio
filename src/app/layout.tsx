@@ -4,7 +4,7 @@ import "./globals.css";
 import React from "react";
 import { ThemeProvider } from "../components/theme-provider";
 import { SiteHeader } from "../components/site-header";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,7 +24,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Jayden Richardson | Web Developer",
-  description: "Portfolio of Jayden Richardson, showcasing expertise in TypeScript, React, Vue.js, and modern web solutions.",
+  description:
+    "Portfolio of Jayden Richardson, showcasing expertise in TypeScript, React, Vue.js, and modern web solutions.",
 };
 
 export default function RootLayout({
@@ -37,8 +38,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background font-sans antialiased`}
       >
-        <ThemeProvider
-        >
+        <ThemeProvider>
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />
             <main className="flex-1">{children}</main>

@@ -1,8 +1,8 @@
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from "react";
 
-import { cn } from '../../utils';
-import { Spinner } from './spinner';
-import React from 'react';
+import { cn } from "../../utils";
+import { Spinner } from "./spinner";
+import React from "react";
 
 export function LoadingOverlay({
   children,
@@ -18,7 +18,7 @@ export function LoadingOverlay({
   return (
     <div
       className={cn(
-        'flex flex-col items-center justify-center space-y-4',
+        "flex flex-col items-center justify-center space-y-4",
         className,
         {
           [`fixed left-0 top-0 z-[100] h-screen w-screen bg-background`]:
@@ -28,7 +28,7 @@ export function LoadingOverlay({
     >
       <Spinner className={spinnerClassName} />
 
-      <div className={'text-sm text-muted-foreground'}>{children}</div>
+      <div className={"text-sm text-muted-foreground"}>{children}</div>
     </div>
   );
 }

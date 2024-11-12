@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import dynamic from "next/dynamic";
+import Link from "next/link";
 
 import {
   motion,
@@ -11,7 +11,7 @@ import {
   useInView,
   useScroll,
   useTransform,
-} from 'framer-motion';
+} from "framer-motion";
 import {
   Book,
   Code,
@@ -22,7 +22,7 @@ import {
   Rocket,
   Server,
   Zap,
-} from 'lucide-react';
+} from "lucide-react";
 import {
   Cell,
   Pie,
@@ -30,78 +30,78 @@ import {
   ResponsiveContainer,
   Sector,
   Tooltip,
-} from 'recharts';
-import { PieSectorDataItem } from 'recharts/types/polar/Pie';
-import { ActiveShape } from 'recharts/types/util/types';
+} from "recharts";
+import { PieSectorDataItem } from "recharts/types/polar/Pie";
+import { ActiveShape } from "recharts/types/util/types";
 
-import { Button } from '../../components/ui/button';
+import { Button } from "../../components/ui/button";
 
-import HobbiesSection from './_components/about-hobbies';
+import HobbiesSection from "./_components/about-hobbies";
 
 const ScrollDownIndicator = dynamic(
-  () => import('./_components/scroll-down-indicator'),
+  () => import("./_components/scroll-down-indicator"),
   { ssr: false },
 );
 
 const distributionData = [
-  { name: 'TypeScript', value: 48.17 },
-  { name: 'JavaScript', value: 31.26 },
-  { name: 'Vue', value: 8.86 },
-  { name: 'CSS', value: 6.05 },
-  { name: 'HTML', value: 3.57 },
-  { name: 'SCSS', value: 2.1 },
+  { name: "TypeScript", value: 48.17 },
+  { name: "JavaScript", value: 31.26 },
+  { name: "Vue", value: 8.86 },
+  { name: "CSS", value: 6.05 },
+  { name: "HTML", value: 3.57 },
+  { name: "SCSS", value: 2.1 },
 ];
 
 const COLORS = [
-  '#A3B1F7',
-  '#FDBBA9',
-  '#C1E5D7',
-  '#F2E1C1',
-  '#F7D6E0',
-  '#B9C0DA',
+  "#A3B1F7",
+  "#FDBBA9",
+  "#C1E5D7",
+  "#F2E1C1",
+  "#F7D6E0",
+  "#B9C0DA",
 ];
 
 const timelineData = [
   {
-    year: '2022 - Present',
-    title: 'Software Developer',
+    year: "2022 - Present",
+    title: "Software Developer",
     description:
-      'Developing scalable software for project and operations management, collaborating with teams to deliver user-centric tools.',
+      "Developing scalable software for project and operations management, collaborating with teams to deliver user-centric tools.",
     icon: Code,
   },
   {
-    year: '2022',
-    title: 'Web Developer',
+    year: "2022",
+    title: "Web Developer",
     description:
-      'Built full-stack applications using HTML, CSS, JavaScript, and the MERN stack, focusing on best practices for robust solutions.',
+      "Built full-stack applications using HTML, CSS, JavaScript, and the MERN stack, focusing on best practices for robust solutions.",
     icon: Rocket,
   },
   {
-    year: '2020 - 2022',
-    title: 'Estimator',
+    year: "2020 - 2022",
+    title: "Estimator",
     description:
-      'Quoted and designed control systems, improved internal processes, and delivered tailored solutions through strong client relationships.',
+      "Quoted and designed control systems, improved internal processes, and delivered tailored solutions through strong client relationships.",
     icon: Cpu,
   },
   {
-    year: '2020',
-    title: 'Industrial Electrician',
+    year: "2020",
+    title: "Industrial Electrician",
     description:
-      'Led electrical installations in the dairy industry, mentoring apprentices and ensuring accurate equipment calibration.',
+      "Led electrical installations in the dairy industry, mentoring apprentices and ensuring accurate equipment calibration.",
     icon: Zap,
   },
   {
-    year: '2019',
-    title: 'Electrical Apprentice',
+    year: "2019",
+    title: "Electrical Apprentice",
     description:
-      'Certified in instrumentation while maintaining systems, with a focus on improving reliability and process efficiency.',
+      "Certified in instrumentation while maintaining systems, with a focus on improving reliability and process efficiency.",
     icon: Server,
   },
   {
-    year: '2013 - 2018',
-    title: 'Fire Systems Engineer',
+    year: "2013 - 2018",
+    title: "Fire Systems Engineer",
     description:
-      'Managed fire detection system installations, ensuring compliance with NZ codes and training apprentices on safety protocols.',
+      "Managed fire detection system installations, ensuring compliance with NZ codes and training apprentices on safety protocols.",
     icon: Book,
   },
 ];
@@ -128,7 +128,7 @@ const CustomLabel: React.FC<CustomLabelProps> = ({
   const radius = outerRadius + 60;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
-  const textAnchor = x > cx ? 'start' : 'end';
+  const textAnchor = x > cx ? "start" : "end";
 
   return (
     <g>
@@ -177,7 +177,7 @@ const renderActiveShape = (props: any) => {
   const my = cy + (outerRadius + 30) * sin;
   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
   const ey = my;
-  const textAnchor = cos >= 0 ? 'start' : 'end';
+  const textAnchor = cos >= 0 ? "start" : "end";
 
   return (
     <g>
@@ -210,8 +210,8 @@ const TopSection: React.FC = () => {
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const onPieEnter = (_: any, index: number) => {
@@ -330,18 +330,18 @@ const SocialLinks: React.FC = () => (
 
 const Timeline: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [containerHeight, setContainerHeight] = useState('auto');
+  const [containerHeight, setContainerHeight] = useState("auto");
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const controls = useAnimation();
 
   useEffect(() => {
     if (isInView) {
-      controls.start('visible');
+      controls.start("visible");
     }
   }, [isInView, controls]);
 
   const getLineHeightProgress = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       if (window.innerWidth < 640) {
         return [0.1, 0.9];
       } else if (window.innerWidth < 1024) {
@@ -355,12 +355,12 @@ const Timeline: React.FC = () => {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
   const lineHeight = useTransform(scrollYProgress, getLineHeightProgress(), [
-    '0%',
-    '100%',
+    "0%",
+    "100%",
   ]);
 
   return (
@@ -373,10 +373,10 @@ const Timeline: React.FC = () => {
         className="absolute left-1/2 top-0 hidden w-0.5 rounded-full bg-gray-300 dark:bg-gray-600 md:block"
         style={{
           height: lineHeight,
-          transformOrigin: 'top',
-          left: 'calc(50% - 1px)',
-          top: '150px',
-          bottom: '150px',
+          transformOrigin: "top",
+          left: "calc(50% - 1px)",
+          top: "150px",
+          bottom: "150px",
         }}
       />
       {timelineData.map((item, index) => (
@@ -398,22 +398,22 @@ const TimelineCard: React.FC<{ item: any; index: number; total: number }> = ({
   const cardRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: cardRef,
-    offset: ['start end', 'center center'],
+    offset: ["start end", "center center"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['100px', '0px']);
+  const y = useTransform(scrollYProgress, [0, 1], ["100px", "0px"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 1]);
   return (
     <motion.div
       ref={cardRef}
       style={{ y, opacity }}
-      className={`flex ${index % 2 === 0 ? 'justify-end md:justify-start' : 'justify-start md:justify-end'} relative mb-12 w-full items-center`}
+      className={`flex ${index % 2 === 0 ? "justify-end md:justify-start" : "justify-start md:justify-end"} relative mb-12 w-full items-center`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
     >
       <div
-        className={`w-full rounded-lg bg-card p-6 text-left text-card-foreground shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:bg-card dark:text-card-foreground md:w-5/12 ${index % 2 === 0 ? 'border-r-2 md:text-right' : 'border-l-2 md:text-left'} border-primary`}
+        className={`w-full rounded-lg bg-card p-6 text-left text-card-foreground shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:bg-card dark:text-card-foreground md:w-5/12 ${index % 2 === 0 ? "border-r-2 md:text-right" : "border-l-2 md:text-left"} border-primary`}
       >
         <div className="mb-4 flex items-center md:hidden">
           <item.icon className="mr-2 h-8 w-8 text-primary dark:text-primary" />
@@ -433,7 +433,7 @@ const TimelineCard: React.FC<{ item: any; index: number; total: number }> = ({
       </div>
       <div
         className="absolute left-1/2 hidden h-16 w-16 -translate-x-1/2 transform items-center justify-center rounded-full bg-card shadow-lg dark:bg-card dark:shadow-primary/20 md:flex"
-        style={{ top: '50%' }}
+        style={{ top: "50%" }}
       >
         <motion.div
           className="absolute flex h-16 w-16 transform items-center justify-center rounded-full bg-card shadow-lg dark:bg-card dark:shadow-primary/20"
@@ -452,7 +452,7 @@ const AboutPage: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: scrollRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
 
   return (

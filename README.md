@@ -21,6 +21,7 @@ A showcase of web development projects and technical expertise.
 ## Projects
 
 Showcases expertise in:
+
 - Full-stack applications
 - Browser extensions
 - Interactive visualizations

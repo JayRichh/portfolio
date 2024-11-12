@@ -53,12 +53,10 @@ export const projectData: Project[] = [
         "Encompass Tours required a complete digital overhaul to showcase their New Zealand motorcycle tours. Our agency provided end-to-end services, including rebranding, UX/UI design, and full-stack development to create an immersive and informative web experience.",
       technologies: [
         "Vue.js",
-        "Node.js",
-        "Express",
-        "MongoDB",
+        "Supabase",
         "Tailwind CSS",
-        "JavaScript",
-        "Figma",
+        "Node.js",
+        "TypeScript",
         "Adobe Creative Suite",
       ],
       features: [
@@ -166,6 +164,7 @@ export const projectData: Project[] = [
       ],
     },
   },
+
   {
     title: "Restyled 2.0",
     description:
@@ -1581,15 +1580,17 @@ export const projectData: Project[] = [
   },
 
   {
-    "title": "New Portfolio Website",
-    "description": "A modern, responsive portfolio website built with the latest Next.js 15 and TypeScript, featuring interactive visualizations, dark mode support, and dynamic animations. Showcases professional growth and technical expertise through an intuitive user interface.",
-    "imgUrl": "/images/main1.png",
-    "repoUrl": "https://github.com/JayRichh/portfolio",
-    "liveUrl": "https://jayrich.dev",
-    "details": {
-      "title": "Portfolio Website",
-      "description": "A comprehensive portfolio platform built using Next.js 15's app router and server components. Features include interactive data visualizations, dynamic animations, and responsive design. The site serves as both a showcase of work and a demonstration of modern web development practices.",
-      "technologies": [
+    title: "New Portfolio Website",
+    description:
+      "A modern, responsive portfolio website built with the latest Next.js 15 and TypeScript, featuring interactive visualizations, dark mode support, and dynamic animations. Showcases professional growth and technical expertise through an intuitive user interface.",
+    imgUrl: "/images/main1.png",
+    repoUrl: "https://github.com/JayRichh/portfolio",
+    liveUrl: "https://jayrich.dev",
+    details: {
+      title: "Portfolio Website",
+      description:
+        "A comprehensive portfolio platform built using Next.js 15's app router and server components. Features include interactive data visualizations, dynamic animations, and responsive design. The site serves as both a showcase of work and a demonstration of modern web development practices.",
+      technologies: [
         "Next.js 15",
         "React 19",
         "TypeScript",
@@ -1597,76 +1598,76 @@ export const projectData: Project[] = [
         "Framer Motion",
         "Radix UI",
         "D3.js",
-        "Recharts"
+        "Recharts",
       ],
-      "features": [
+      features: [
         {
-          "title": "Interactive Learning Mindmap",
-          "text": "Dynamic visualization of web development concepts using D3.js, providing an interactive way to explore technical knowledge and skills. The mindmap features smooth animations and responsive design, adapting to different screen sizes."
+          title: "Interactive Learning Mindmap",
+          text: "Dynamic visualization of web development concepts using D3.js, providing an interactive way to explore technical knowledge and skills. The mindmap features smooth animations and responsive design, adapting to different screen sizes.",
         },
         {
-          "title": "Project Showcase",
-          "text": "Comprehensive project display system with filtering by technology, detailed project information, and interactive image galleries. Built using Radix UI components and Framer Motion animations for smooth transitions."
+          title: "Project Showcase",
+          text: "Comprehensive project display system with filtering by technology, detailed project information, and interactive image galleries. Built using Radix UI components and Framer Motion animations for smooth transitions.",
         },
         {
-          "title": "Dynamic Experience Timeline",
-          "text": "Animated timeline showcasing professional experience with scroll-based animations and responsive design. Implements Framer Motion for smooth transitions and intersection observers for scroll-based animations."
+          title: "Dynamic Experience Timeline",
+          text: "Animated timeline showcasing professional experience with scroll-based animations and responsive design. Implements Framer Motion for smooth transitions and intersection observers for scroll-based animations.",
         },
         {
-          "title": "Technology Distribution Chart",
-          "text": "Interactive pie chart built with Recharts showing technology usage distribution. Features custom animations, tooltips, and responsive design for optimal viewing across devices."
-        }
+          title: "Technology Distribution Chart",
+          text: "Interactive pie chart built with Recharts showing technology usage distribution. Features custom animations, tooltips, and responsive design for optimal viewing across devices.",
+        },
       ],
-      "challenges": [
+      challenges: [
         {
-          "title": "Performance Optimization",
-          "text": "Implementing efficient data visualization and animations while maintaining smooth performance. Solved through careful optimization of D3.js renders, code splitting, and lazy loading of components."
+          title: "Performance Optimization",
+          text: "Implementing efficient data visualization and animations while maintaining smooth performance. Solved through careful optimization of D3.js renders, code splitting, and lazy loading of components.",
         },
         {
-          "title": "Responsive Design Implementation",
-          "text": "Creating a consistent experience across devices while maintaining complex interactive features. Addressed through mobile-first design approach and responsive breakpoints using Tailwind CSS."
+          title: "Responsive Design Implementation",
+          text: "Creating a consistent experience across devices while maintaining complex interactive features. Addressed through mobile-first design approach and responsive breakpoints using Tailwind CSS.",
         },
         {
-          "title": "Accessibility and SEO",
-          "text": "Ensuring the site remains accessible while incorporating rich interactive features. Implemented proper ARIA attributes, semantic HTML, and SEO best practices while maintaining visual appeal."
-        }
+          title: "Accessibility and SEO",
+          text: "Ensuring the site remains accessible while incorporating rich interactive features. Implemented proper ARIA attributes, semantic HTML, and SEO best practices while maintaining visual appeal.",
+        },
       ],
-      "learnings": [
+      learnings: [
         {
-          "title": "Modern React Development",
-          "points": [
+          title: "Modern React Development",
+          points: [
             {
-              "text": "Mastered Next.js 13 app router and server components, implementing efficient rendering strategies and optimizing performance."
+              text: "Mastered Next.js 13 app router and server components, implementing efficient rendering strategies and optimizing performance.",
             },
             {
-              "text": "Developed expertise in TypeScript for type-safe development and improved code maintainability."
-            }
-          ]
+              text: "Developed expertise in TypeScript for type-safe development and improved code maintainability.",
+            },
+          ],
         },
         {
-          "title": "Data Visualization",
-          "points": [
+          title: "Data Visualization",
+          points: [
             {
-              "text": "Implemented complex data visualizations using D3.js and Recharts, creating interactive and informative user experiences."
+              text: "Implemented complex data visualizations using D3.js and Recharts, creating interactive and informative user experiences.",
             },
             {
-              "text": "Optimized rendering performance for smooth animations and transitions in data-heavy visualizations."
-            }
-          ]
+              text: "Optimized rendering performance for smooth animations and transitions in data-heavy visualizations.",
+            },
+          ],
         },
         {
-          "title": "UI/UX Design",
-          "points": [
+          title: "UI/UX Design",
+          points: [
             {
-              "text": "Created an intuitive and accessible user interface using Radix UI primitives and custom components."
+              text: "Created an intuitive and accessible user interface using Radix UI primitives and custom components.",
             },
             {
-              "text": "Implemented responsive design patterns and animations using Tailwind CSS and Framer Motion."
-            }
-          ]
-        }
+              text: "Implemented responsive design patterns and animations using Tailwind CSS and Framer Motion.",
+            },
+          ],
+        },
       ],
-      "additionalImages": []
-    }
-  }
+      additionalImages: [],
+    },
+  },
 ];

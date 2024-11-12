@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../../../components/ui/tooltip';
+} from "../../../components/ui/tooltip";
 
 const ScrollIcon = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -32,16 +32,16 @@ const ScrollIcon = () => {
       setIsNearBottom(scrollPosition + windowHeight > documentHeight - 100);
     };
 
-    window.addEventListener('scroll', checkIfNearBottom);
+    window.addEventListener("scroll", checkIfNearBottom);
     checkIfNearBottom(); // Initial check
 
-    return () => window.removeEventListener('scroll', checkIfNearBottom);
+    return () => window.removeEventListener("scroll", checkIfNearBottom);
   }, []);
 
   const handleClick = () => {
     window.scrollTo({
       top: isNearBottom ? 0 : document.documentElement.scrollHeight / 5,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
@@ -69,7 +69,7 @@ const ScrollIcon = () => {
           </motion.div>
         </TooltipTrigger>
         <TooltipContent>
-          <p>{isNearBottom ? 'Scroll to top' : 'Scroll down'}</p>
+          <p>{isNearBottom ? "Scroll to top" : "Scroll down"}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

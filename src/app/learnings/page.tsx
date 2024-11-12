@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { LearningsPageWrapper } from './_components/LearningsPageWrapper';
+import React from "react";
+import { LearningsPageWrapper } from "./_components/LearningsPageWrapper";
 
 export default function LearningsPage() {
   return <LearningsPageWrapper />;

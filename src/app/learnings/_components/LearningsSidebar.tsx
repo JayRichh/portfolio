@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 import {
   AnimatePresence,
@@ -8,17 +8,11 @@ import {
   useAnimation,
   useMotionValue,
   useTransform,
-} from 'framer-motion';
-import {
-  ChevronLeft,
-  ChevronRight,
-  Layers,
-  Pencil,
-  Star,
-} from 'lucide-react';
+} from "framer-motion";
+import { ChevronLeft, ChevronRight, Layers, Pencil, Star } from "lucide-react";
 
-import { Button } from '../../../components/ui/button';
-import { useSidebarState } from './SidebarStateContext';
+import { Button } from "../../../components/ui/button";
+import { useSidebarState } from "./SidebarStateContext";
 
 const SpinningPen: React.FC = () => {
   const controls = useAnimation();
@@ -41,7 +35,7 @@ const SpinningPen: React.FC = () => {
       transition: {
         duration: 1.2,
         repeat: Infinity,
-        repeatType: 'loop',
+        repeatType: "loop",
         ease: [0.45, 0.05, 0.55, 0.95],
       },
     });
@@ -54,7 +48,7 @@ const SpinningPen: React.FC = () => {
       rotate: 0,
       skewX: 0,
       skewY: 0,
-      transition: { duration: 0.5, ease: 'easeOut' },
+      transition: { duration: 0.5, ease: "easeOut" },
     });
   };
 
@@ -75,8 +69,8 @@ const SpinningPen: React.FC = () => {
           scale,
           x,
           y,
-          transformOrigin: 'center center',
-          display: 'inline-block',
+          transformOrigin: "center center",
+          display: "inline-block",
         }}
       >
         <Pencil
@@ -84,8 +78,8 @@ const SpinningPen: React.FC = () => {
           className="text-primary"
           style={{
             filter: isHovering
-              ? 'drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.7))'
-              : 'none',
+              ? "drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.7))"
+              : "none",
           }}
         />
       </motion.div>
@@ -95,7 +89,7 @@ const SpinningPen: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0], scale: [0.5, 1.5, 0.5] }}
           transition={{ duration: 1.2, repeat: Infinity }}
-          style={{ transform: 'translate(-50%, -50%)' }}
+          style={{ transform: "translate(-50%, -50%)" }}
         />
       )}
     </motion.a>
@@ -123,7 +117,7 @@ export const LearningsSidebar: React.FC = () => {
     return null;
   }
 
-  const groups = ['language', 'framework', 'tool', 'concept', 'activity'];
+  const groups = ["language", "framework", "tool", "concept", "activity"];
   const importanceLevels = [1, 2, 3, 4, 5];
 
   return (
@@ -183,7 +177,11 @@ export const LearningsSidebar: React.FC = () => {
                   {groups.map((group) => (
                     <Button
                       key={group}
-                      variant={highlightedGroups.includes(group) ? 'default' : 'outline'}
+                      variant={
+                        highlightedGroups.includes(group)
+                          ? "default"
+                          : "outline"
+                      }
                       size="sm"
                       className="w-full justify-start capitalize"
                       onClick={() => toggleHighlightedGroup(group)}
@@ -202,8 +200,8 @@ export const LearningsSidebar: React.FC = () => {
                       key={level}
                       variant={
                         highlightedImportance.includes(level)
-                          ? 'default'
-                          : 'outline'
+                          ? "default"
+                          : "outline"
                       }
                       size="sm"
                       onClick={() => toggleHighlightedImportance(level)}
