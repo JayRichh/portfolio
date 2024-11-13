@@ -306,6 +306,107 @@ export const projectData: Project[] = [
     },
   },
   {
+    title: "Rack 'n' Bag",
+    description:
+      "A tournament management application for cornhole games, featuring real-time scoring, player rankings, and comprehensive tournament statistics.",
+    imgUrl: "/images/corn-main.png",
+    repoUrl: "https://github.com/JayRichh/rack-n-bag",
+    liveUrl: "https://rack-n-bag.vercel.app",
+    details: {
+      title: "Rack 'n' Bag - Tournament Management Platform",
+      description:
+        "A modern tournament management system built with Next.js 13, featuring real-time scoring, player rankings, and detailed statistics. The platform offers intuitive tournament creation and management, with a focus on player experience and data visualization.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Radix UI",
+        "Local Storage",
+      ],
+      features: [
+        {
+          title: "Tournament Creation and Management",
+          text: "Intuitive tournament creation with customizable formats (single round or home & away), flexible point systems, and player management. Features dynamic form validation and real-time updates.",
+          image: "/images/corn-settings.png",
+        },
+        {
+          title: "Real-time Results Grid",
+          text: "Interactive results matrix showing game outcomes with color-coded indicators for wins, losses, and draws. Includes tooltips for detailed match information and quick score entry.",
+          image: "/images/corn-overview.png",
+        },
+        {
+          title: "Player Rankings and Statistics",
+          text: "Comprehensive player statistics including win rates, points difference, and form streaks. Features sortable columns and responsive design for optimal viewing on all devices.",
+        },
+        {
+          title: "Performance Analytics",
+          text: "Detailed performance tracking with visualizations of player statistics, including recent form, matches played/remaining, and head-to-head records.",
+        },
+        {
+          title: "Point System Configuration",
+          text: "Flexible point system configuration allowing customization of win, draw, and loss points. Includes validation rules for game scoring and win conditions.",
+        },
+      ],
+      challenges: [
+        {
+          title: "Complex State Management",
+          text: "Implementing efficient state management for tournament data, ensuring consistency across different views and components while maintaining smooth performance.",
+        },
+        {
+          title: "Data Persistence",
+          text: "Designing a robust local storage system for tournament data persistence, including handling data migrations and state recovery.",
+        },
+        {
+          title: "Real-time Updates",
+          text: "Ensuring seamless updates of tournament standings and statistics across all components when new results are entered.",
+        },
+        {
+          title: "Responsive Design",
+          text: "Creating a responsive interface that maintains functionality and usability across different screen sizes, particularly for complex components like the results grid.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Next.js and TypeScript Integration",
+          points: [
+            {
+              text: "Mastered Next.js 13 app router and server components, implementing efficient rendering strategies and optimizing performance.",
+            },
+            {
+              text: "Developed robust TypeScript interfaces and types for tournament data structures, improving code reliability and maintainability.",
+            },
+          ],
+        },
+        {
+          title: "State Management Patterns",
+          points: [
+            {
+              text: "Implemented efficient state management using React hooks and context, ensuring smooth data flow throughout the application.",
+            },
+            {
+              text: "Created a robust local storage system with data persistence and state recovery mechanisms.",
+            },
+          ],
+        },
+        {
+          title: "UI/UX Design",
+          points: [
+            {
+              text: "Developed an intuitive user interface using Radix UI primitives and custom components, ensuring accessibility and ease of use.",
+            },
+            {
+              text: "Implemented responsive design patterns and smooth animations using Tailwind CSS and Framer Motion.",
+            },
+          ],
+        },
+      ],
+      additionalImages: [
+        "/images/corn-logo.png",
+      ],
+    },
+  },
+  {
     title: "V2 - Audio Visualizer",
     description:
       "An interactive music player with advanced audio visualization capabilities, built using Vue.js and Web Audio API. This app transforms the listening experience by providing a rich, visual representation of audio in real-time.",
