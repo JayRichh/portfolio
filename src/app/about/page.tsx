@@ -44,12 +44,12 @@ const ScrollDownIndicator = dynamic(
 );
 
 const distributionData = [
-  { name: "TypeScript", value: 48.17 },
-  { name: "JavaScript", value: 31.26 },
-  { name: "Vue", value: 8.86 },
-  { name: "CSS", value: 6.05 },
-  { name: "HTML", value: 3.57 },
-  { name: "SCSS", value: 2.1 },
+  { name: "TypeScript", value: 59.49 },
+  { name: "JavaScript", value: 20.64 },
+  { name: "Vue", value: 12.15 },
+  { name: "CSS", value: 4.27 },
+  { name: "HTML", value: 2.41 },
+  { name: "SCSS", value: 1.03 },
 ];
 
 const COLORS = [

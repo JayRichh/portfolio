@@ -48,9 +48,9 @@ export const projectData: Project[] = [
     repoUrl: "https://github.com/JayRichh",
     liveUrl: "https://encompasstours.co.nz",
     details: {
-      title: "Encompass Tours - RideWithUs",
+      title: "Encompass Tours",
       description:
-        "Encompass Tours required a complete digital overhaul to showcase their New Zealand motorcycle tours. Our agency provided end-to-end services, including rebranding, UX/UI design, and full-stack development to create an immersive and informative web experience.",
+        "Encompass Tours required a complete digital overhaul to showcase their New Zealand motorcycle tours. I provided end-to-end services, including rebranding, UX/UI design, and full-stack development to create an immersive and informative web experience.",
       technologies: [
         "Vue.js",
         "Supabase",
