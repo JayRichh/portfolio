@@ -893,7 +893,100 @@ export const projectData: Project[] = [
       ],
     },
   },
-
+  {
+    title: 'Next.js Template',
+    description:
+      'A comprehensive Next.js template with UI components, 3D capabilities, and example implementations',
+    imgUrl: '/temp1.png',
+    liveUrl: 'next-template-theta-ten.vercel.app',
+    repoUrl: 'https://github.com/JayRichh/next-template',
+    details: {
+      title: 'Modern Next.js Development Template',
+      description:
+        'A feature-rich Next.js template that combines modern web technologies, UI components, and 3D capabilities to provide a solid foundation for web applications',
+      technologies: [
+        'Next.js',
+        'TypeScript',
+        'Tailwind CSS',
+        'Three.js',
+        'React',
+      ],
+      features: [
+        {
+          title: 'UI Component Library',
+          text: 'Extensive collection of reusable UI components including Accordion, Badge, Button, Card, Modal, Progress, Select, Slider, Spinner, Tabs, Toast, and Tooltip',
+          image: '/temp2.png',
+        },
+        {
+          title: '3D Capabilities',
+          text: 'Integrated Three.js setup with example scenes, material examples, morph targets, and physics simulations',
+          image: '/temp3.png',
+        },
+        {
+          title: 'Custom Hooks',
+          text: 'Utility hooks for animation controls, async operations, persistent state management, and resizable elements',
+          image: '',
+        },
+        {
+          title: 'Example Implementations',
+          text: 'Comprehensive examples showcasing UI components, data handling, Next.js features, and 3D capabilities',
+          image: '/temp4.png',
+        },
+      ],
+      challenges: [
+        {
+          title: 'Component Organization',
+          text: 'Structured UI components into logical categories: data-display, effects, feedback, inputs, layout, and overlay',
+        },
+        {
+          title: 'Type Safety',
+          text: 'Implemented comprehensive TypeScript types and interfaces for components, hooks, and services',
+        },
+        {
+          title: '3D Integration',
+          text: 'Seamlessly integrated Three.js with Next.js, including scene management and component lifecycle handling',
+        },
+      ],
+      learnings: [
+        {
+          title: 'Next.js Architecture',
+          points: [
+            {
+              text: 'Organized project structure following Next.js 13+ app directory conventions',
+            },
+            {
+              text: 'Implemented efficient routing and layout management',
+            },
+          ],
+        },
+        {
+          title: 'Component Design',
+          points: [
+            {
+              text: 'Created modular and reusable UI components with consistent styling using Tailwind CSS',
+            },
+            {
+              text: 'Implemented accessible and responsive design patterns',
+            },
+          ],
+        },
+        {
+          title: '3D Development',
+          points: [
+            {
+              text: 'Integrated Three.js scenes and components within the Next.js framework',
+            },
+            {
+              text: 'Developed example implementations for materials, morphing, and physics',
+            },
+          ],
+        },
+      ],
+      additionalImages: [
+        '/temp6.png',
+      ],
+    },
+  },
   {
     title: "Off The Floor",
     description:
