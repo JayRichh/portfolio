@@ -897,7 +897,7 @@ export const projectData: Project[] = [
     title: 'Next.js Template',
     description:
       'A comprehensive Next.js template with UI components, 3D capabilities, and example implementations',
-    imgUrl: '/temp1.png',
+    imgUrl: '/images/temp1.png',
     liveUrl: 'next-template-theta-ten.vercel.app',
     repoUrl: 'https://github.com/JayRichh/next-template',
     details: {
@@ -915,12 +915,12 @@ export const projectData: Project[] = [
         {
           title: 'UI Component Library',
           text: 'Extensive collection of reusable UI components including Accordion, Badge, Button, Card, Modal, Progress, Select, Slider, Spinner, Tabs, Toast, and Tooltip',
-          image: '/temp2.png',
+          image: '/images/temp2.png',
         },
         {
           title: '3D Capabilities',
           text: 'Integrated Three.js setup with example scenes, material examples, morph targets, and physics simulations',
-          image: '/temp3.png',
+          image: '/images/temp3.png',
         },
         {
           title: 'Custom Hooks',
@@ -930,7 +930,7 @@ export const projectData: Project[] = [
         {
           title: 'Example Implementations',
           text: 'Comprehensive examples showcasing UI components, data handling, Next.js features, and 3D capabilities',
-          image: '/temp4.png',
+          image: '/images/temp4.png',
         },
       ],
       challenges: [
@@ -983,7 +983,7 @@ export const projectData: Project[] = [
         },
       ],
       additionalImages: [
-        '/temp6.png',
+        '/images/temp6.png',
       ],
     },
   },
