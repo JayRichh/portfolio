@@ -43,114 +43,96 @@ export const projectData: Project[] = [
   {
     title: "Encompass Travel",
     description:
-      "Delivered a comprehensive digital transformation for Encompass Travel, a premier motorcycle tour company in New Zealand, with a focus on stunning design, responsive development, and brand identity.",
+      "Digital platform for NZ motorcycle tours using Vue, Supabase and server-side caching. Focused on performance and progressive enhancement.",
     imgUrl: "/images/encompass-hero.png",
     repoUrl: "https://github.com/JayRichh",
     liveUrl: "https://encompasstours.co.nz",
     details: {
       title: "Encompass Tours",
       description:
-        "Encompass Tours required a complete digital overhaul to showcase their New Zealand motorcycle tours. I provided end-to-end services, including rebranding, UX/UI design, and full-stack development to create an immersive and informative web experience.",
+        "A Vue-based tourism platform with server-side caching and Supabase backend. Handles tour bookings, user auth, and content management for a NZ motorcycle tour company.",
       technologies: [
         "Vue.js",
         "Supabase",
-        "Tailwind CSS",
+        "Redis",
         "Node.js",
         "TypeScript",
-        "Adobe Creative Suite",
+        "TailwindCSS",
+        "Vercel",
+        "Adobe CS",
       ],
       features: [
         {
-          title: "Responsive Design",
-          text: "Implemented a mobile-first, fully responsive design ensuring seamless user experience across all devices, from smartphones to large desktop screens, crucial for on-the-go travelers.",
+          title: "Supabase Integration",
+          text: "Full auth system with email/social login, role-based access, and secure session management. Uses Supabase tables with RLS policies for tour data, bookings and user profiles.",
           image: "/images/encompass-responsive.png",
         },
         {
-          title: "Dynamic Tour Showcase",
-          text: "Developed an interactive tour showcase allowing users to explore different routes, view high-quality images, and get detailed information about each tour option.",
+          title: "Server-side Caching",
+          text: "Implemented Redis caching layer for tour data and static content. Significantly reduced database loads and improved response times from ~800ms to <100ms.",
           image: "/images/encompass-tour-showcase.png",
         },
         {
-          title: "Brand Identity Redesign",
-          text: "Created a new visual identity including logo, color palette, and typography that captures the spirit of motorcycle adventure in New Zealand.",
+          title: "Tour Management",
+          text: "Dynamic tour catalog with real-time availability, booking system, and admin dashboard for managing schedules and capacity.",
           image: "/images/encompass-branding.png",
         },
         {
-          title: "Content Management System (CMS)",
-          text: "Implemented a user-friendly CMS allowing Encompass staff to easily update tour information, blog posts, and dynamic content without technical expertise.",
+          title: "Content Pipeline",
+          text: "Image optimization pipeline using Sharp.js, automated WebP conversion, and CDN delivery. Lazy loading and progressive enhancement for fast initial loads.",
           image: "/images/encompass-cms.png",
         },
         {
-          title: "Immersive Imagery Integration",
-          text: "Integrated high-quality, immersive imagery and videos showcasing New Zealand's breathtaking landscapes, optimized for fast loading without compromising visual impact.",
-          image: "/images/encompass-imagery.png",
-        },
-        {
-          title: "SEO Optimization",
-          text: "Implemented comprehensive SEO strategies, including schema markup, optimized meta tags, and a content strategy to improve organic search rankings for New Zealand tourism-related keywords.",
-          image: "/images/encompass-seo.png",
+          title: "Interactive Maps",
+          text: "Tour route visualization using Mapbox GL JS with custom styling. Cached route data and vector tiles for offline support.",
+          image: "/images/encompass-maps.png",
         },
       ],
       challenges: [
         {
-          title: "Performance with Rich Media",
-          text: "Balancing the use of high-quality images and videos to showcase New Zealand's beauty while ensuring fast loading times and smooth performance across devices.",
+          title: "Performance at Scale",
+          text: "Optimizing for high-traffic periods with potentially thousands of concurrent users checking tour availability. Solved through aggressive caching and DB query optimization.",
         },
         {
-          title: "Intuitive Information Architecture",
-          text: "Designing an intuitive navigation and information structure to help users easily find tour information, destinations, and company details without overwhelming them.",
+          title: "Complex Data Relations",
+          text: "Managing relationships between tours, bookings, users and availability calendars. Used Supabase foreign keys and views for data integrity.",
         },
         {
-          title: "Capturing Brand Essence",
-          text: "Translating the excitement and freedom of motorcycle touring in New Zealand into a cohesive digital brand identity that resonates with the target audience.",
-        },
-        {
-          title: "Responsive Interactive Elements",
-          text: "Creating interactive elements like the tour showcase that remain engaging and functional across all device sizes and orientations.",
+          title: "Image Performance",
+          text: "Handling large volumes of high-res tour photos while maintaining fast page loads. Implemented responsive images, WebP conversion and CDN caching.",
         },
       ],
       learnings: [
         {
-          title: "Brand Identity Development",
+          title: "Backend Architecture",
           points: [
             {
-              text: "Created a cohesive visual language that captures the spirit of New Zealand motorcycle tours, balancing ruggedness with sophistication.",
+              text: "Designed scalable data models with Supabase, including complex relations and RLS policies",
             },
             {
-              text: "Developed a flexible design system that extends from digital to print materials, ensuring brand consistency across all touchpoints.",
+              text: "Implemented efficient caching strategies using Redis and CDN edge caching",
             },
           ],
         },
         {
-          title: "Performance Optimization Techniques",
+          title: "Frontend Optimization",
           points: [
             {
-              text: "Mastered advanced image optimization techniques to deliver high-quality visuals with minimal load times.",
+              text: "Built responsive components with Vue Composition API and TypeScript",
             },
             {
-              text: "Implemented lazy loading and code splitting to improve initial page load performance and user experience.",
+              text: "Learned advanced image optimization techniques for large media libraries",
             },
           ],
         },
         {
-          title: "Responsive Design Best Practices",
+          title: "DevOps & Monitoring",
           points: [
             {
-              text: "Refined our approach to mobile-first design, ensuring a seamless experience from small screens to large displays.",
+              text: "Set up CI/CD pipelines with automated testing and deployment",
             },
             {
-              text: "Developed custom responsive components that adapt not just in size, but in functionality to suit different device capabilities.",
-            },
-          ],
-        },
-        {
-          title: "Content Strategy for Tourism",
-          points: [
-            {
-              text: "Crafted a content strategy that balances inspirational imagery with practical tour information to drive user engagement and conversions.",
-            },
-            {
-              text: "Integrated SEO best practices specific to the tourism industry, improving visibility for location-based searches.",
+              text: "Implemented error tracking and performance monitoring",
             },
           ],
         },
@@ -160,7 +142,6 @@ export const projectData: Project[] = [
         "/images/encompass-tours.png",
         "/images/encompass-about.png",
         "/images/encompass-blog.png",
-        "/images/encompass-contact.png",
       ],
     },
   },
@@ -168,131 +149,89 @@ export const projectData: Project[] = [
   {
     title: "Restyled 2.0",
     description:
-      "An AI-enhanced wardrobe platform built with Next.js, Supabase, and Lemon Squeezy. Focused on advanced AI integration, streamlined digital exploration, branding, and user experience for a personalized fashion experience.",
+      "Wardrobe management app exploring AI integration and multi-tenant architecture",
     imgUrl: "/images/restyled-logo.png",
     repoUrl: "https://github.com/JayRichh/",
     liveUrl: "https://restyled.app",
     details: {
-      title: "Restyled 2.0 - AI-Powered Style Management",
+      title: "Restyled 2.0 - AI and Auth Learning Project",
       description:
-        "Restyled 2.0 reimagines wardrobe management and style inspiration by leveraging cutting-edge technologies and AI integration. This platform offers a seamless, secure, and highly personalized experience for individuals and organizations in the fashion industry.",
+        "Practice project combining Supabase Auth, AI integration, and payment processing. Focus on security patterns and multi-tenant architecture.",
       technologies: [
         "Next.js",
         "Supabase",
         "Lemon Squeezy",
-        "Stripe",
         "TypeScript",
-        "Tailwind CSS",
+        "OpenAI API",
         "Stable Diffusion",
-        "OpenAI",
       ],
       features: [
         {
-          title: "Advanced Authentication",
-          text: "Secure sign-up, sign-in, and sign-out processes with forgot password functionality and Multi-Factor Authentication (MFA) for enhanced security.",
+          title: "Auth System",
+          text: "Supabase authentication with social logins and MFA. Focused on security patterns and session management.",
           image: "/images/restyled-auth.png",
         },
         {
-          title: "Flexible Account Management",
-          text: "Support for both personal and organization accounts with role-based access control and invitation system for seamless collaboration.",
+          title: "Multi-tenant System",
+          text: "Organization management using Supabase RLS policies. Implemented role-based access and data isolation.",
           image: "/images/restyled-accounts.png",
         },
         {
-          title: "Comprehensive Billing System",
-          text: "Robust billing management for personal and organization accounts, supporting various subscription models and multiple payment providers including Stripe, Lemon Squeezy, and Paddle.",
+          title: "Subscription Handling",
+          text: "Basic payment processing with Lemon Squeezy. Includes webhook handling and usage tracking.",
           image: "/images/restyled-billing.png",
         },
         {
-          title: "AI-Powered Style Recommendations",
-          text: "Integration of advanced AI models to provide personalized style recommendations based on user preferences, body type, and current fashion trends.",
+          title: "AI Integration",
+          text: "Simple outfit visualization using Stable Diffusion. Implemented request queuing and basic caching.",
           image: "/images/restyled-ai-recommendations.png",
-        },
-        {
-          title: "Virtual Try-On with Stable Diffusion",
-          text: "Utilizes Stable Diffusion to generate images of users wearing recommended outfits, providing a virtual try-on experience for inspiration.",
-          image: "/images/restyled-virtual-tryon.png",
-        },
-        {
-          title: "Mood and Context-Based Styling",
-          text: "AI-driven outfit suggestions based on mood, color preferences, seasons, and weather conditions, ensuring users always have the perfect outfit for any occasion.",
-          image: "/images/restyled-context-styling.png",
-        },
-        {
-          title: "Wardrobe Digitization and Management",
-          text: "Tools for users to easily digitize and categorize their existing wardrobe, with AI assistance for automatic item recognition and categorization.",
-          image: "/images/restyled-wardrobe-management.png",
-        },
-        {
-          title: "Social Sharing and Inspiration",
-          text: "A platform for users to share their outfits, get feedback from the community, and find inspiration from other users and fashion influencers.",
-          image: "/images/restyled-social.png",
-        },
-        {
-          title: "Sustainability Insights",
-          text: "AI-powered analysis of wardrobe usage patterns and suggestions for more sustainable fashion choices and outfit combinations.",
-          image: "/images/restyled-sustainability.png",
         },
       ],
       challenges: [
         {
-          title: "AI Model Integration and Training",
-          text: "Integrating and fine-tuning AI models for accurate style recommendations and virtual try-on functionality, ensuring high-quality and realistic results.",
+          title: "Multi-tenant Data",
+          text: "Building efficient data isolation while maintaining good query performance. Implemented row-level security.",
         },
         {
-          title: "Data Privacy and Security",
-          text: "Implementing robust security measures to protect user data, especially with the integration of AI and image processing technologies.",
+          title: "Payment Processing",
+          text: "Managing subscription states and usage limits across organizations. Added webhook validation.",
         },
         {
-          title: "Scalability and Performance",
-          text: "Ensuring the platform remains responsive and fast, even with complex AI operations and a growing user base.",
-        },
-        {
-          title: "User Experience Design",
-          text: "Creating an intuitive and engaging user interface that seamlessly integrates advanced features without overwhelming users.",
+          title: "AI Performance",
+          text: "Balancing image quality with generation speed. Working on better request batching.",
         },
       ],
       learnings: [
         {
-          title: "AI and Machine Learning in Fashion Tech",
+          title: "Auth Patterns",
           points: [
             {
-              text: "Gained expertise in applying AI and machine learning technologies specifically to fashion and style recommendations.",
+              text: "Multi-tenant authentication patterns and security practices",
             },
             {
-              text: "Developed skills in training and fine-tuning AI models on fashion-related datasets for improved accuracy and relevance.",
+              text: "Session management and access control implementation",
             },
           ],
         },
         {
-          title: "Advanced Next.js and Supabase Integration",
+          title: "Database Design",
           points: [
             {
-              text: "Mastered complex state management and server-side rendering techniques in Next.js for optimal performance.",
+              text: "Efficient data modeling for multi-tenant applications",
             },
             {
-              text: "Leveraged Supabase's real-time capabilities for dynamic content updates and collaborative features.",
+              text: "Row-level security and query optimization",
             },
           ],
         },
         {
-          title: "Multi-Tenant Architecture",
+          title: "API Integration",
           points: [
             {
-              text: "Implemented a sophisticated multi-tenant system supporting both individual users and organizations with varying permission levels.",
+              text: "Payment provider integration and webhook handling",
             },
             {
-              text: "Developed strategies for efficient data isolation and sharing within the multi-tenant environment.",
-            },
-          ],
-        },
-        {
-          title: "Integration of Multiple Payment Systems",
-          points: [
-            {
-              text: "Gained experience in integrating and managing multiple payment providers, ensuring a smooth and flexible billing experience for users.",
-            },
-            {
-              text: "Implemented complex subscription models including tiered and per-seat pricing structures.",
+              text: "AI service queuing and response caching",
             },
           ],
         },
@@ -308,14 +247,14 @@ export const projectData: Project[] = [
   {
     title: "Rack 'n' Bag",
     description:
-      "A tournament management application for cornhole games, featuring real-time scoring, player rankings, and comprehensive tournament statistics.",
+      "Simple tournament tracker built while learning Next.js app router and TypeScript",
     imgUrl: "/images/corn-main.png",
     repoUrl: "https://github.com/JayRichh/rack-n-bag",
     liveUrl: "https://rack-n-bag.vercel.app",
     details: {
-      title: "Rack 'n' Bag - Tournament Management Platform",
+      title: "Rack 'n' Bag - Tournament Manager",
       description:
-        "A modern tournament management system built with Next.js 13, featuring real-time scoring, player rankings, and detailed statistics. The platform offers intuitive tournament creation and management, with a focus on player experience and data visualization.",
+        "Basic tournament management tool for cornhole games. Built to learn state management and data visualization in Next.js.",
       technologies: [
         "Next.js",
         "TypeScript",
@@ -326,336 +265,256 @@ export const projectData: Project[] = [
       ],
       features: [
         {
-          title: "Tournament Creation and Management",
-          text: "Intuitive tournament creation with customizable formats (single round or home & away), flexible point systems, and player management. Features dynamic form validation and real-time updates.",
+          title: "Tournament Setup",
+          text: "Basic tournament creation with customizable formats. Uses local storage for data persistence.",
           image: "/images/corn-settings.png",
         },
         {
-          title: "Real-time Results Grid",
-          text: "Interactive results matrix showing game outcomes with color-coded indicators for wins, losses, and draws. Includes tooltips for detailed match information and quick score entry.",
+          title: "Results Grid",
+          text: "Simple match matrix showing game outcomes. Includes basic sorting and filtering.",
           image: "/images/corn-overview.png",
         },
         {
-          title: "Player Rankings and Statistics",
-          text: "Comprehensive player statistics including win rates, points difference, and form streaks. Features sortable columns and responsive design for optimal viewing on all devices.",
+          title: "Player Stats",
+          text: "Basic statistics tracking including wins, losses and points difference.",
+          image: "/images/corn-stats.png",
         },
         {
-          title: "Performance Analytics",
-          text: "Detailed performance tracking with visualizations of player statistics, including recent form, matches played/remaining, and head-to-head records.",
-        },
-        {
-          title: "Point System Configuration",
-          text: "Flexible point system configuration allowing customization of win, draw, and loss points. Includes validation rules for game scoring and win conditions.",
+          title: "Match Updates",
+          text: "Real-time score entry and standings updates using React state management.",
+          image: "/images/corn-matches.png",
         },
       ],
       challenges: [
         {
-          title: "Complex State Management",
-          text: "Implementing efficient state management for tournament data, ensuring consistency across different views and components while maintaining smooth performance.",
+          title: "State Management",
+          text: "Managing tournament data consistently across components. Implemented context-based state.",
         },
         {
           title: "Data Persistence",
-          text: "Designing a robust local storage system for tournament data persistence, including handling data migrations and state recovery.",
+          text: "Handling data storage and recovery with local storage. Added state migration handling.",
         },
         {
-          title: "Real-time Updates",
-          text: "Ensuring seamless updates of tournament standings and statistics across all components when new results are entered.",
-        },
-        {
-          title: "Responsive Design",
-          text: "Creating a responsive interface that maintains functionality and usability across different screen sizes, particularly for complex components like the results grid.",
+          title: "UI Updates",
+          text: "Keeping all stats and standings in sync after score updates. Improved render optimization.",
         },
       ],
       learnings: [
         {
-          title: "Next.js and TypeScript Integration",
+          title: "React Patterns",
           points: [
             {
-              text: "Mastered Next.js 13 app router and server components, implementing efficient rendering strategies and optimizing performance.",
+              text: "State management with context and reducers",
             },
             {
-              text: "Developed robust TypeScript interfaces and types for tournament data structures, improving code reliability and maintainability.",
+              text: "Component optimization and render control",
             },
           ],
         },
         {
-          title: "State Management Patterns",
+          title: "TypeScript Usage",
           points: [
             {
-              text: "Implemented efficient state management using React hooks and context, ensuring smooth data flow throughout the application.",
+              text: "Type definitions for complex tournament data",
             },
             {
-              text: "Created a robust local storage system with data persistence and state recovery mechanisms.",
+              text: "Generic components and utility types",
             },
           ],
         },
         {
-          title: "UI/UX Design",
+          title: "UI Components",
           points: [
             {
-              text: "Developed an intuitive user interface using Radix UI primitives and custom components, ensuring accessibility and ease of use.",
+              text: "Accessible component patterns with Radix UI",
             },
             {
-              text: "Implemented responsive design patterns and smooth animations using Tailwind CSS and Framer Motion.",
+              text: "Animation implementation with Framer Motion",
             },
           ],
         },
       ],
-      additionalImages: [
-        "/images/corn-logo.png",
-      ],
+      additionalImages: ["/images/corn-logo.png", "/images/corn-mobile.png"],
     },
   },
   {
     title: "V2 - Audio Visualizer",
     description:
-      "An interactive music player with advanced audio visualization capabilities, built using Vue.js and Web Audio API. This app transforms the listening experience by providing a rich, visual representation of audio in real-time.",
+      "Basic audio visualization experiments built while learning Web Audio API and Vue3",
     imgUrl: "/images/v2.webp",
     repoUrl: "https://github.com/JayRichh/v-2",
     liveUrl: "",
     details: {
-      title: "V2 - Audio Visualizer - Interactive Music Player",
+      title: "V2 - Audio Visualization Testing",
       description:
-        "This application combines a feature-rich music player with real-time audio visualization, offering users an immersive audio-visual experience. It supports multiple visualization effects, playlist management, and advanced audio controls.",
+        "A learning project exploring Web Audio API fundamentals and real-time visualization techniques. Helped understand audio processing basics and Canvas rendering.",
       technologies: [
-        "Vue.js",
-        "TypeScript",
+        "Vue3",
         "Web Audio API",
-        "HTML5 Canvas",
-        "Ionic Framework",
+        "Canvas API",
+        "TypeScript",
         "GLSL",
+        "Ionic",
       ],
       features: [
         {
-          title: "Multiple Visualization Effects",
-          text: "Offers a variety of audio visualization effects including Waveform, Bars, Circle, Particles, Spectrum, Terrain, Grid, Flow, Ripple, and Fractal. Users can switch between these effects in real-time.",
+          title: "Basic Visualizations",
+          text: "Simple frequency bars and waveform displays using Canvas. Includes basic color and shape variations.",
           image: "/images/test1.png",
         },
         {
-          title: "Customizable Visualization Settings",
-          text: "Allows users to adjust visualization parameters such as detail level, movement speed, color intensity, and BPM. Includes options for randomization and reset to default settings.",
+          title: "Audio Processing",
+          text: "Basic audio analysis using Web Audio API's analyzer node. Still learning optimal FFT sizes and smoothing.",
           image: "/images/test3.png",
         },
         {
-          title: "Playlist Management",
-          text: "Supports creating and managing playlists with features to add, remove, and reorder tracks. Users can easily navigate between tracks in the playlist.",
+          title: "Simple Controls",
+          text: "Basic audio controls and visualization adjustments. First attempt at real-time parameter updates.",
           image: "/images/test2.png",
-        },
-        {
-          title: "Advanced Audio Controls",
-          text: "Provides comprehensive audio controls including play, pause, stop, next, previous, volume adjustment, and seek functionality. Also includes a mute toggle for quick audio management.",
-          image: "/images/test1.png",
-        },
-        {
-          title: "Real-time BPM Detection",
-          text: "Features automatic BPM (Beats Per Minute) detection, allowing the visualization to sync with the rhythm of the music. Users can also manually set the BPM if desired.",
-          image: "",
-        },
-        {
-          title: "Responsive Design",
-          text: "Built with a responsive layout using Ionic Framework, ensuring a consistent and user-friendly experience across various device sizes and orientations.",
-          image: "",
         },
       ],
       challenges: [
         {
-          title: "Real-time Audio Processing",
-          text: "Implementing efficient audio data processing and visualization rendering to ensure smooth performance, especially for complex effects and high detail levels.",
+          title: "Performance Issues",
+          text: "Learning to handle audio processing and visualization without frame drops. Still needs optimization.",
         },
         {
-          title: "Cross-browser Compatibility",
-          text: "Ensuring consistent functionality and appearance across different web browsers, particularly for advanced Web Audio API features and Canvas rendering.",
+          title: "Audio Timing",
+          text: "Understanding audio buffering and synchronization. Lots of room for improvement.",
         },
         {
-          title: "Performance Optimization",
-          text: "Balancing visual complexity with performance, especially on mobile devices, to provide a smooth experience without overwhelming system resources.",
-        },
-        {
-          title: "User Experience Design",
-          text: "Creating an intuitive interface that allows users to easily control both the music playback and visualization settings without cluttering the UI.",
+          title: "Browser Support",
+          text: "Dealing with different browser implementations of Web Audio API. Currently only fully tested in Chrome.",
         },
       ],
       learnings: [
         {
-          title: "Web Audio API Mastery",
+          title: "Audio Processing",
           points: [
             {
-              text: "Gained deep understanding of Web Audio API, including creating and manipulating audio contexts, nodes, and analyzers for real-time audio processing.",
+              text: "Learned basics of digital audio processing and real-time analysis",
             },
             {
-              text: "Implemented advanced audio features such as gain control, seeking, and audio buffering for smooth playback and visualization.",
+              text: "Started understanding FFT and frequency analysis concepts",
             },
           ],
         },
         {
-          title: "Canvas-based Visualizations",
+          title: "Vue3 State Management",
           points: [
             {
-              text: "Developed skills in creating various audio visualization techniques using HTML5 Canvas, including optimizing render loops for smooth animations.",
+              text: "First time using Vue3's Composition API for real-time updates",
             },
             {
-              text: "Explored different approaches to translate audio data into visually appealing and responsive graphics.",
+              text: "Basic reactive state management for audio parameters",
             },
           ],
         },
         {
-          title: "State Management in Vue.js",
+          title: "Canvas Performance",
           points: [
             {
-              text: "Implemented efficient state management practices in Vue.js to handle complex application state, including audio playback, visualization settings, and playlist data.",
+              text: "Learning about efficient Canvas rendering and animation",
             },
             {
-              text: "Utilized Vue.js composition API for better code organization and reusability across components.",
-            },
-          ],
-        },
-        {
-          title: "Audio Analysis Algorithms",
-          points: [
-            {
-              text: "Implemented algorithms for audio analysis, including real-time BPM detection and frequency data extraction for visualization.",
-            },
-            {
-              text: "Gained insights into digital signal processing concepts and their application in web-based audio applications.",
+              text: "Basic understanding of requestAnimationFrame timing",
             },
           ],
         },
       ],
-      additionalImages: [],
+      additionalImages: [
+        "/images/test1.png",
+        "/images/test2.png",
+        "/images/test3.png",
+      ],
     },
   },
   {
     title: "DevMap",
     description:
-      "A comprehensive project management and personal growth tracking application designed to help developers improve their time estimation skills, track learning progress, and gain insights into their development process.",
+      "Basic time tracking tool built while learning React hooks and charts. Helps track coding time and project progress.",
     imgUrl: "/images/devmap-logo.webp",
     repoUrl: "",
     liveUrl: "https://devmap.me",
     details: {
-      title: "DevMap - Developer Growth Tracker",
+      title: "DevMap - Time Tracking Tool",
       description:
-        "DevMap is an all-in-one solution for developers to manage projects, track time, visualize learning progress, and gain insights into their development process. It focuses on improving estimation accuracy, identifying skill growth, and providing meaningful analytics to enhance productivity and personal development.",
+        "Simple development time tracker built to learn React and data visualization. Tracks time spent coding and basic project progress metrics.",
       technologies: [
-        "Next.js",
         "React",
         "TypeScript",
         "Node.js",
         "Express",
         "PostgreSQL",
-        "Tailwind CSS",
-        "Redis",
         "Recharts",
-        "WebSockets",
       ],
       features: [
         {
-          title: "Comprehensive Time Tracking",
-          text: "Real-time and manual time tracking for tasks and projects, with comparison between estimated and actual time spent.",
+          title: "Time Logging",
+          text: "Basic time tracking for coding sessions. Uses local storage with PostgreSQL backup. Still working on sync reliability.",
           image: "/images/devmap-time-tracking.png",
         },
         {
-          title: "Project and Task Management",
-          text: "Hierarchical project structure with tasks and subtasks, featuring drag-and-drop reordering and component tagging.",
+          title: "Project Lists",
+          text: "Simple project and task organization with drag-drop sorting. Needs better state management.",
           image: "/images/devmap-project-management.png",
         },
         {
-          title: "Learning Progress Visualization",
-          text: "Track and visualize time spent on different skills, with customizable categories and progress charts using Recharts.",
+          title: "Progress Charts",
+          text: "Basic charts showing time spent on different technologies. First attempt at using Recharts.",
           image: "/images/devmap-learning-progress.png",
         },
         {
-          title: "Estimation Accuracy Insights",
-          text: "Advanced analytics on estimation accuracy, including historical trends and pattern recognition for improved future estimates.",
+          title: "Time Estimates",
+          text: "Basic comparison of estimated vs actual time spent. Helps learn estimation skills.",
           image: "/images/devmap-estimation-insights.png",
-        },
-        {
-          title: "Personal Growth Tracking",
-          text: "Self-assessment tools for skill levels, efficiency metrics, and visualization of improvements over time.",
-          image: "/images/devmap-growth-tracking.png",
-        },
-        {
-          title: "Customizable Dashboard",
-          text: "A clean, user-friendly interface built with Tailwind CSS, featuring customizable widgets for at-a-glance information on current projects, tasks, and personal growth.",
-          image: "/images/devmap-dashboard.png",
         },
       ],
       challenges: [
         {
-          title: "Real-time Data Synchronization",
-          text: "Implementing efficient real-time updates using WebSockets across multiple clients while maintaining data consistency and minimizing server load.",
-          image: "",
+          title: "Data Syncing",
+          text: "Learning to handle offline-first data with eventual server sync. Still working on conflict resolution.",
         },
         {
-          title: "Complex Data Relationships",
-          text: "Designing and managing intricate data relationships between projects, tasks, time entries, and learning activities in PostgreSQL while ensuring optimal query performance.",
-          image: "",
+          title: "State Management",
+          text: "First time managing complex state with React hooks. Needs refactoring for better organization.",
         },
         {
-          title: "Scalable Analytics Processing",
-          text: "Developing a system to process and analyze large volumes of time and project data in real-time without impacting application performance, utilizing Redis for caching frequently accessed data.",
-          image: "",
-        },
-        {
-          title: "Intuitive UI for Complex Features",
-          text: "Creating a simple and intuitive user interface with Tailwind CSS that effectively presents complex data and features without overwhelming the user.",
-          image: "",
-        },
-        {
-          title: "TypeScript Integration",
-          text: "Ensuring type safety and improved developer experience across the full stack by integrating TypeScript with React, Next.js, and Node.js/Express backend.",
-          image: "",
+          title: "Performance",
+          text: "Learning to optimize React renders with large datasets. Currently has issues with larger project lists.",
         },
       ],
       learnings: [
         {
-          title: "Full-Stack TypeScript Development",
+          title: "React Patterns",
           points: [
             {
-              text: "Mastered end-to-end TypeScript development, creating type-safe interfaces between frontend and backend, improving code quality and reducing runtime errors.",
-              image: "",
+              text: "First deep dive into React hooks and context",
             },
             {
-              text: "Leveraged TypeScript's advanced features to create robust data models and type-safe API interactions.",
-              image: "",
+              text: "Learning about component optimization and memo usage",
             },
           ],
         },
         {
-          title: "Real-time Data Visualization with Recharts",
+          title: "Data Visualization",
           points: [
             {
-              text: "Utilized Recharts to create dynamic, real-time data visualizations that update seamlessly as new data becomes available.",
-              image: "",
+              text: "Basic usage of Recharts for time series data",
             },
             {
-              text: "Optimized rendering performance for large datasets through efficient use of Recharts components and data aggregation techniques.",
-              image: "",
+              text: "Learning about chart performance with live updates",
             },
           ],
         },
         {
-          title: "Scalable Backend Architecture",
+          title: "Backend Integration",
           points: [
             {
-              text: "Designed and implemented a scalable backend architecture using Node.js, Express, and PostgreSQL, with Redis for caching to handle high-volume data processing and real-time updates.",
-              image: "",
+              text: "First attempt at building a REST API with Express",
             },
             {
-              text: "Implemented advanced database optimization techniques in PostgreSQL, including indexing strategies and query optimization, to ensure fast data retrieval for complex analytics.",
-              image: "",
-            },
-          ],
-        },
-        {
-          title: "Next.js and React Optimization",
-          points: [
-            {
-              text: "Leveraged Next.js features like Static Site Generation (SSG) and Incremental Static Regeneration (ISR) to optimize page load times and improve SEO.",
-              image: "",
-            },
-            {
-              text: "Implemented efficient state management and data fetching strategies in React, utilizing hooks and context for a more maintainable and performant application structure.",
-              image: "",
+              text: "Basic PostgreSQL queries and relationships",
             },
           ],
         },
@@ -664,7 +523,6 @@ export const projectData: Project[] = [
         "/images/devmap-dashboard.png",
         "/images/devmap-project-view.png",
         "/images/devmap-analytics.png",
-        "/images/devmap-learning-tracker.png",
       ],
     },
   },
@@ -766,16 +624,107 @@ export const projectData: Project[] = [
     },
   },
   {
+    title: "Axiom",
+    description:
+      "3D graphics and game dev testing environment built with Three.js",
+    repoUrl: "https://github.com/JayRichh/axiom",
+    imgUrl: "/images/axiom-1.png",
+    liveUrl: "",
+    details: {
+      title: "Axiom - Dev Testing Ground",
+      description:
+        "Personal sandbox for experimenting with 3D graphics, shaders, and game mechanics",
+      technologies: [
+        "Next.js",
+        "Three.js",
+        "TypeScript",
+        "GLSL",
+        "WGSL",
+        "React Three Fiber",
+        "Rapier Physics",
+        "Tailwind CSS",
+      ],
+      features: [
+        {
+          title: "Particles",
+          text: "GPU-accelerated particle system with configurable emitters and custom shaders",
+        },
+        {
+          title: "Weapons",
+          text: "Test implementations of FPS mechanics including sights, scopes and effects",
+        },
+        {
+          title: "Shaders",
+          text: "Collection of custom GLSL/WGSL shaders for various visual effects",
+        },
+        {
+          title: "Physics",
+          text: "Basic player controller and physics interactions using Rapier",
+        },
+      ],
+      challenges: [
+        {
+          title: "Performance",
+          text: "Optimizing particle and shader systems for smooth framerates",
+        },
+        {
+          title: "Physics",
+          text: "Balancing physical accuracy with playable mechanics",
+        },
+        {
+          title: "Shaders",
+          text: "Cross-platform shader development and optimization",
+        },
+      ],
+      learnings: [
+        {
+          title: "Graphics",
+          points: [
+            {
+              text: "GPU particle systems and shader programming",
+            },
+            {
+              text: "Real-time graphics and post-processing",
+            },
+          ],
+        },
+        {
+          title: "Architecture",
+          points: [
+            {
+              text: "Modular systems for weapons, particles and physics",
+            },
+            {
+              text: "Game state management patterns",
+            },
+          ],
+        },
+        {
+          title: "Optimization",
+          points: [
+            {
+              text: "GPU-efficient rendering and physics",
+            },
+            {
+              text: "Batched rendering and shader optimization",
+            },
+          ],
+        },
+      ],
+      additionalImages: ["/images/axiom-2.png", "/images/axiom-3.png"],
+    },
+  },
+  {
     title: "Aim Trainer",
     description:
-      "While learning Three.js and React, I built a first-person shooter training game to enhance aiming skills and improve reaction times.",
+      "A basic FPS training prototype built while learning Three.js and React",
     imgUrl: "/images/a11.png",
     repoUrl: "https://github.com/JayRichh/aimtrainer",
     liveUrl: "https://aimtrainer-zeta.vercel.app/",
     details: {
       title: "FPS Aim Trainer",
       description:
-        "I developed this Aim Trainer as a project to deepen my understanding of React and Three.js. It allowed me to create an immersive 3D environment where players can practice and refine their aiming abilities. Working on this project helped me explore various aspects of game development, such as implementing different weapon types and target systems to simulate realistic shooting scenarios.",
+        "A simple aim training project I made to learn React and Three.js basics. It helped me understand 3D environments and basic game mechanics.",
       technologies: [
         "Next.js",
         "React",
@@ -785,101 +734,101 @@ export const projectData: Project[] = [
       ],
       features: [
         {
-          title: "Weapon System",
-          text: "Implemented multiple weapon types, each with distinct characteristics like bullet speed, fire rate, and recoil patterns. This ensured varied and realistic shooting experiences, allowing players to adapt to different weapon mechanics.",
+          title: "Basic Weapon System",
+          text: "Simple weapon mechanics including basic bullet behavior and fire rates. Still needs work on recoil patterns and accuracy.",
           image: "/images/a12.png",
         },
         {
-          title: "Target System",
-          text: "Developed both static and dynamic targets with diverse movement patterns and sizes. This provided a range of challenges to improve accuracy and reaction times under varying conditions.",
+          title: "Target Practice",
+          text: "Basic static and moving targets to shoot at. Nothing fancy, just helps practice aim.",
           image: "/images/a1.png",
         },
         {
-          title: "Player Controls",
-          text: "Designed smooth and responsive player movement and aiming controls, including adjustable mouse sensitivity, sprinting, crouching, and jumping mechanics. These controls enhanced the realism and fluidity of the gameplay.",
+          title: "Player Movement",
+          text: "Basic WASD controls with mouse look. Added simple jumping and crouching, though the physics need improvement.",
           image: "/images/a2.png",
         },
         {
-          title: "3D Environment",
-          text: "Created an engaging 3D training environment using Three.js, featuring customizable layouts and obstacle placements. This offered varied training scenarios to simulate different combat situations.",
+          title: "Simple 3D Space",
+          text: "Basic training area built with Three.js. Pretty bare-bones but works for practice.",
           image: "/images/a3.png",
         },
         {
-          title: "Performance Tracking",
-          text: "Implemented a performance tracking system that monitors accuracy, reaction time, and overall scores. Players receive real-time feedback and post-session summaries to track their progress.",
+          title: "Score Tracking",
+          text: "Basic hit/miss counter and timer. Shows you how you did after each session.",
         },
         {
-          title: "Customizable Settings",
-          text: "Added customization options, including graphics settings, control sensitivity, and training mode selection. These settings allow players to tailor the training experience to their preferences.",
+          title: "Basic Settings",
+          text: "Added some simple options like mouse sensitivity and graphics quality toggles.",
         },
         {
-          title: "HUD and User Interface",
-          text: "Designed an intuitive Heads-Up Display (HUD) and user interface elements, such as main menus and pause menus. These interfaces ensure seamless navigation without disrupting gameplay.",
+          title: "Basic UI",
+          text: "Simple menu system and in-game HUD. Nothing special, just the essentials.",
         },
       ],
       challenges: [
         {
-          title: "3D Rendering and Performance",
-          text: "Optimizing 3D rendering to maintain smooth performance across devices and browsers. I experimented with different Three.js features and React optimization techniques to balance visual fidelity with frame rates.",
+          title: "Performance Issues",
+          text: "Struggled with keeping framerates stable while learning Three.js optimization basics.",
         },
         {
-          title: "Realistic Physics",
-          text: "Implementing accurate bullet physics and player movement required balancing realism with playability. Fine-tuning physics parameters to achieve lifelike interactions without compromising responsiveness was a significant challenge.",
+          title: "Basic Physics",
+          text: "Implementing even simple bullet and movement mechanics was trickier than expected.",
         },
         {
-          title: "State Management",
-          text: "Managing the state of multiple game elements, including players, weapons, and targets, in real-time. I explored efficient state management approaches in React to ensure synchronization and consistency across components.",
+          title: "React State",
+          text: "Learning to manage game state in React without everything breaking was challenging.",
         },
         {
-          title: "User Interface Design",
-          text: "Creating an intuitive and non-intrusive UI that complements the 3D gameplay. I experimented with various layouts and information displays to strike the right balance between functionality and minimalism.",
+          title: "UI Design",
+          text: "First attempt at combining 3D gameplay with basic UI elements - lots of room for improvement.",
         },
       ],
       learnings: [
         {
-          title: "3D Web Development",
+          title: "3D Basics",
           points: [
             {
-              text: "Mastered the use of Three.js with React to create interactive and immersive 3D environments directly in the browser.",
+              text: "First time using Three.js with React - learned basic 3D rendering concepts.",
             },
             {
-              text: "Gained a deep understanding of 3D mathematics and camera controls, enhancing the realism and responsiveness of in-game movements.",
+              text: "Started understanding 3D math and camera controls, though still lots to learn.",
             },
             {
-              text: "Learned to optimize 3D rendering performance through techniques like level of detail (LOD) and efficient asset management.",
+              text: "Learned about basic performance optimization the hard way.",
             },
           ],
         },
         {
-          title: "Game Development Concepts",
+          title: "Game Dev Fundamentals",
           points: [
             {
-              text: "Explored fundamental game development principles, including game loops, delta time, collision detection, and simple AI for target behaviors.",
+              text: "Got my hands dirty with basic game loops and collision detection.",
             },
             {
-              text: "Implemented shooting mechanics, including recoil patterns and weapon switching, to enhance gameplay depth and engagement.",
+              text: "Implemented simple shooting mechanics - needs refinement but works.",
             },
           ],
         },
         {
-          title: "Performance Optimization",
+          title: "Performance",
           points: [
             {
-              text: "Developed techniques to optimize React components and Three.js renders, ensuring smooth performance with complex visual effects.",
+              text: "Learned some basic React and Three.js optimization techniques.",
             },
             {
-              text: "Used profiling tools to identify and address performance bottlenecks, improving overall efficiency.",
+              text: "Started using dev tools to find major performance issues.",
             },
           ],
         },
         {
-          title: "Project Architecture",
+          title: "Code Structure",
           points: [
             {
-              text: "Designed a scalable and maintainable project architecture that effectively separates concerns and promotes modularity.",
+              text: "Attempted to keep code organized, though it needs cleanup.",
             },
             {
-              text: "Implemented reusable components and utility functions to streamline development and facilitate future expansions.",
+              text: "Made some reusable components, but could be more efficient.",
             },
           ],
         },
@@ -894,177 +843,154 @@ export const projectData: Project[] = [
     },
   },
   {
-    title: 'Next.js Template',
+    title: "Next.js Template",
     description:
-      'A comprehensive Next.js template with UI components, 3D capabilities, and example implementations',
-    imgUrl: '/images/temp1.png',
-    liveUrl: 'next-template-theta-ten.vercel.app',
-    repoUrl: 'https://github.com/JayRichh/next-template',
+      "A comprehensive Next.js template with UI components, 3D capabilities, and example implementations",
+    imgUrl: "/images/temp1.png",
+    liveUrl: "https://next-template-theta-ten.vercel.app",
+    repoUrl: "https://github.com/JayRichh/next-template",
     details: {
-      title: 'Modern Next.js Development Template',
+      title: "Modern Next.js Development Template",
       description:
-        'A feature-rich Next.js template that combines modern web technologies, UI components, and 3D capabilities to provide a solid foundation for web applications',
+        "A feature-rich Next.js template that combines modern web technologies, UI components, and 3D capabilities to provide a solid foundation for web applications",
       technologies: [
-        'Next.js',
-        'TypeScript',
-        'Tailwind CSS',
-        'Three.js',
-        'React',
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Three.js",
+        "React",
       ],
       features: [
         {
-          title: 'UI Component Library',
-          text: 'Extensive collection of reusable UI components including Accordion, Badge, Button, Card, Modal, Progress, Select, Slider, Spinner, Tabs, Toast, and Tooltip',
-          image: '/images/temp2.png',
+          title: "UI Component Library",
+          text: "Extensive collection of reusable UI components including Accordion, Badge, Button, Card, Modal, Progress, Select, Slider, Spinner, Tabs, Toast, and Tooltip",
+          image: "/images/temp2.png",
         },
         {
-          title: '3D Capabilities',
-          text: 'Integrated Three.js setup with example scenes, material examples, morph targets, and physics simulations',
-          image: '/images/temp3.png',
+          title: "3D Capabilities",
+          text: "Integrated Three.js setup with example scenes, material examples, morph targets, and physics simulations",
+          image: "/images/temp3.png",
         },
         {
-          title: 'Custom Hooks',
-          text: 'Utility hooks for animation controls, async operations, persistent state management, and resizable elements',
-          image: '',
+          title: "Custom Hooks",
+          text: "Utility hooks for animation controls, async operations, persistent state management, and resizable elements",
+          image: "",
         },
         {
-          title: 'Example Implementations',
-          text: 'Comprehensive examples showcasing UI components, data handling, Next.js features, and 3D capabilities',
-          image: '/images/temp4.png',
+          title: "Example Implementations",
+          text: "Comprehensive examples showcasing UI components, data handling, Next.js features, and 3D capabilities",
+          image: "/images/temp4.png",
         },
       ],
       challenges: [
         {
-          title: 'Component Organization',
-          text: 'Structured UI components into logical categories: data-display, effects, feedback, inputs, layout, and overlay',
+          title: "Component Organization",
+          text: "Structured UI components into logical categories: data-display, effects, feedback, inputs, layout, and overlay",
         },
         {
-          title: 'Type Safety',
-          text: 'Implemented comprehensive TypeScript types and interfaces for components, hooks, and services',
+          title: "Type Safety",
+          text: "Implemented comprehensive TypeScript types and interfaces for components, hooks, and services",
         },
         {
-          title: '3D Integration',
-          text: 'Seamlessly integrated Three.js with Next.js, including scene management and component lifecycle handling',
+          title: "3D Integration",
+          text: "Seamlessly integrated Three.js with Next.js, including scene management and component lifecycle handling",
         },
       ],
       learnings: [
         {
-          title: 'Next.js Architecture',
+          title: "Next.js Architecture",
           points: [
             {
-              text: 'Organized project structure following Next.js 13+ app directory conventions',
+              text: "Organized project structure following Next.js 13+ app directory conventions",
             },
             {
-              text: 'Implemented efficient routing and layout management',
+              text: "Implemented efficient routing and layout management",
             },
           ],
         },
         {
-          title: 'Component Design',
+          title: "Component Design",
           points: [
             {
-              text: 'Created modular and reusable UI components with consistent styling using Tailwind CSS',
+              text: "Created modular and reusable UI components with consistent styling using Tailwind CSS",
             },
             {
-              text: 'Implemented accessible and responsive design patterns',
+              text: "Implemented accessible and responsive design patterns",
             },
           ],
         },
         {
-          title: '3D Development',
+          title: "3D Development",
           points: [
             {
-              text: 'Integrated Three.js scenes and components within the Next.js framework',
+              text: "Integrated Three.js scenes and components within the Next.js framework",
             },
             {
-              text: 'Developed example implementations for materials, morphing, and physics',
+              text: "Developed example implementations for materials, morphing, and physics",
             },
           ],
         },
       ],
-      additionalImages: [
-        '/images/temp6.png',
-      ],
+      additionalImages: ["/images/temp6.png"],
     },
   },
   {
     title: "Off The Floor",
     description:
-      "A modern and dynamic business website created using Vue3 and TypeScript, featuring responsive design and tailored functionalities to promote aerial arts classes.",
+      "Simple business website built while learning Vue3 and TypeScript fundamentals",
     imgUrl: "/images/otf-vue1.png",
     repoUrl: "https://github.com/JayRichh/otf-vue",
     liveUrl: "http://otf-vue.vercel.app",
     details: {
-      title: "OffTheFloor",
+      title: "Off The Floor - Vue Learning Project",
       description:
-        "OffTheFloor is a custom business website showcasing services like aerial arts classes and sessions. It integrates advanced web technologies and dynamic content management to deliver a seamless user experience.",
-      technologies: [
-        "Vue3",
-        "TypeScript",
-        "CSS3",
-        "HTML5",
-        "Bootstrap",
-        "Vue Router",
-      ],
+        "A basic business website for an aerial arts studio. Built to practice Vue3, TypeScript, and responsive design.",
+      technologies: ["Vue3", "TypeScript", "Bootstrap", "Vue Router"],
       features: [
         {
-          title: "Dynamic Routing with Vue Router",
-          text: "Dynamic routing with Vue Router enabling seamless page transitions and state management without reloading the page.",
+          title: "Basic Routing",
+          text: "Simple page navigation using Vue Router. First time implementing route guards and transitions.",
           image: "/images/otf-vue3.png",
         },
         {
-          title: "Responsive Web Design",
-          text: "Responsive web design implemented using Bootstrap for consistent user experience across various devices and screen sizes.",
+          title: "Responsive Layout",
+          text: "Basic responsive design using Bootstrap. Learning mobile-first approach.",
           image: "/images/otf-vue4.png",
         },
         {
-          title: "Vue3 Composition API",
-          text: "Advanced use of Vue3 composition API for managing component logic and state in a more readable and maintainable way.",
+          title: "Content Sections",
+          text: "Simple content components using Vue3 composition API. Needs better component organization.",
           image: "/images/otf-vue1.png",
         },
         {
-          title: "Interactive Carousels",
-          text: "Interactive elements like carousels for testimonials and classes, implemented with Vue3-carousel and customized with detailed CSS for a unique look.",
+          title: "Image Sliders",
+          text: "Basic image carousels using Vue3-carousel. Still working on performance with larger images.",
           image: "/images/otf-vue2.png",
         },
       ],
       challenges: [
         {
-          title: "Cross-Browser and Cross-Device Compatibility",
-          text: "Ensuring cross-browser and cross-device compatibility, particularly with dynamic content and animations.",
-          image: "",
+          title: "TypeScript Learning",
+          text: "First time using TypeScript with Vue. Struggled with proper typing of props and events.",
         },
         {
-          title: "Performance Optimization",
-          text: "Optimizing the loading times and performance of high-quality images and video content without sacrificing the visual quality.",
-          image: "",
+          title: "Component Structure",
+          text: "Learning to organize components effectively. Current structure needs improvement.",
         },
         {
-          title: "Vue3 Carousel Plugin Integration",
-          text: "Integrating the Vue3 Carousel plugin with custom styling and responsive design parameters to display content effectively.",
-          image: "",
-        },
-        {
-          title: "Flexible Layout Development",
-          text: "Developing a flexible layout that adjusts perfectly on different devices while maintaining a high-quality user interface.",
-          image: "",
+          title: "Image Optimization",
+          text: "Working on better image loading strategies. Current implementation is basic.",
         },
       ],
       learnings: [
         {
-          title: "Vue3 Composition API",
+          title: "Vue3 Basics",
           points: [
             {
-              text: "Embraced the power of the Vue3 Composition API to create more flexible and reusable code by encapsulating related logic into composable functions.",
-              image: "",
+              text: "First project using Vue3 composition API",
             },
             {
-              text: "Leveraged Vue3's reactive and ref APIs to create dynamic and responsive data bindings, enabling real-time updates and seamless synchronization between components.",
-              image: "",
-            },
-            {
-              text: "Implemented watchers and computed properties using the Composition API to handle complex data dependencies and perform efficient calculations.",
-              image: "",
+              text: "Learning about reactive refs and computed properties",
             },
           ],
         },
@@ -1072,33 +998,21 @@ export const projectData: Project[] = [
           title: "TypeScript Integration",
           points: [
             {
-              text: "Integrated TypeScript into the Vue3 project to enhance code quality, maintainability, and scalability by adding static typing and type checking.",
-              image: "",
+              text: "Basic TypeScript usage in Vue components",
             },
             {
-              text: "Defined clear interfaces and types for component props, emits, and state to improve code readability and catch potential type-related bugs during development.",
-              image: "",
-            },
-            {
-              text: "Utilized TypeScript features like enums, type aliases, and type assertions to create more expressive and self-documenting code.",
-              image: "",
+              text: "Learning about interfaces and type definitions",
             },
           ],
         },
         {
-          title: "Responsive Web Design",
+          title: "CSS Framework Usage",
           points: [
             {
-              text: "Implemented responsive web design principles using CSS media queries and flexible layouts to ensure optimal viewing experience across various devices and screen sizes.",
-              image: "",
+              text: "First time using Bootstrap with Vue",
             },
             {
-              text: "Utilized Bootstrap's responsive grid system and utility classes to create a consistent and responsive layout structure throughout the website.",
-              image: "",
-            },
-            {
-              text: "Optimized images and assets for different device resolutions to minimize load times and enhance performance on mobile devices.",
-              image: "/images/otf-vue1.png",
+              text: "Learning about responsive breakpoints and grid system",
             },
           ],
         },
@@ -1459,215 +1373,170 @@ export const projectData: Project[] = [
   {
     title: "The Odin Project",
     description:
-      "A collection of projects and learnings from my journey through The Odin Project curriculum, showcasing my growth and skill development as a web developer.",
+      "Collection of learning projects completed through The Odin Project's full-stack curriculum. From basic HTML to full-stack applications.",
     imgUrl: "/images/top10.png",
     repoUrl: "https://github.com/JayRichh/the-odin-project",
     liveUrl: "",
     details: {
       title: "The Odin Project - Learning Journey",
       description:
-        "This project represents my learning journey through The Odin Project curriculum, encompassing a wide range of projects and exercises that have helped me develop my web development skills.",
+        "Projects and exercises completed while working through TOP's curriculum. Progressed from basic web fundamentals to full-stack development using JavaScript and Ruby.",
       technologies: [
-        "React",
+        "HTML/CSS",
         "JavaScript",
+        "React",
         "Node.js",
-        "HTML",
-        "CSS",
-        "Express",
-        "MongoDB",
-        "Firebase",
+        "Ruby",
+        "Rails",
+        "SQL",
+        "Git",
         "Jest",
         "Webpack",
       ],
       features: [
         {
-          title: "Todo App",
-          text: "A feature-rich todo application built with React and Firebase. Utilizes Firebase Realtime Database for data persistence and synchronization. Implements task creation, editing, deletion, and categorization. Includes user authentication and authorization using Firebase Authentication.",
+          title: "Foundations Projects",
+          text: "First HTML/CSS projects including recipes site, landing page, and rock-paper-scissors. Learned flexbox, grid, and basic DOM manipulation.",
           image: "/images/top3.png",
         },
         {
-          title: "Calculator App",
-          text: "A fully functional calculator application developed using HTML, CSS, and JavaScript. Supports basic arithmetic operations, decimal handling, and keyboard input. Implements a responsive design and follows accessibility best practices.",
+          title: "JavaScript Basics",
+          text: "Built calculator, etch-a-sketch, and basic library app. Learned core JS concepts like closures, prototypes, and event handling.",
           image: "/images/project-img5.png",
         },
         {
-          title: "Restaurant Website",
-          text: "A dynamic restaurant website built with HTML, CSS, and JavaScript. Features tabbed browsing for easy navigation and a responsive layout that adapts to different screen sizes. Incorporates interactive elements such as image sliders and smooth scrolling.",
+          title: "Advanced JavaScript",
+          text: "Todo list, restaurant page, and weather app. Focused on modules, async/await, APIs, and local storage.",
           image: "/images/project-img4.png",
         },
         {
-          title: "Tic-Tac-Toe Game",
-          text: "A classic tic-tac-toe game implemented using HTML, CSS, and JavaScript. Utilizes a modular architecture with separate files for game logic and UI rendering. Includes a responsive grid layout and supports both human vs. human and human vs. computer gameplay.",
+          title: "React Journey",
+          text: "CV application, memory game, and shopping cart. Learning React hooks, state management, and component lifecycle.",
           image: "/images/project-img10.png",
         },
         {
-          title: "Etch-a-Sketch",
-          text: "An interactive drawing application built with HTML, CSS, and JavaScript. Allows users to create pixelated art by hovering over a dynamically generated grid. Provides options for adjusting grid size, color, and eraser functionality. Utilizes DOM manipulation and event handling.",
+          title: "Backend Basics",
+          text: "Basic Express and Node.js projects including message board and inventory app. First steps with servers and databases.",
           image: "/images/top9.png",
-        },
-        {
-          title: "Elf Game",
-          text: "An interactive game built with Vue.js and Node.js, where players search for elves in a virtual environment. Utilizes MongoDB for real-time score updates and leaderboard management. Features a responsive game design that adapts to different screen sizes and devices.",
-          image: "",
-        },
-        {
-          title: "Blog Application",
-          text: "A full-stack blog application developed using React, Node.js, Express, and MongoDB. Implements CRUD functionality for blog posts and user management. Utilizes RESTful API architecture and JWT-based authentication. Incorporates rich text editing capabilities and markdown support.",
-          image: "/images/project-img7.png",
-        },
-        {
-          title: "CV Builder",
-          text: "A CV builder application built with React and TypeScript. Allows users to input their personal information, work experience, education, and skills. Generates a professional-looking CV in PDF format. Utilizes React hooks and context API for state management.",
-          image: "/images/top7.png",
-        },
-        {
-          title: "Weather App",
-          text: "A weather application developed using HTML, CSS, JavaScript, and the OpenWeatherMap API. Retrieves and displays real-time weather data based on user location or search input. Implements error handling and loading states. Utilizes Promises and Fetch API for asynchronous data fetching.",
-          image: "/images/top10.png",
         },
       ],
       challenges: [
         {
-          title: "State Management in React",
-          text: "Managing state efficiently in larger React applications, ensuring proper data flow and synchronization between components. Solved by utilizing state management libraries like Redux or the Context API.",
-          image: "",
+          title: "Learning Curve",
+          text: "Transitioning from HTML/CSS to JavaScript was challenging. Struggled particularly with asynchronous programming concepts.",
         },
         {
-          title: "Asynchronous Data Fetching",
-          text: "Handling asynchronous data fetching and managing loading states effectively. Addressed by using Promises, async/await, and libraries like Axios for making API requests.",
-          image: "",
+          title: "Git Workflow",
+          text: "Learning proper Git workflow was difficult. Made many mistakes with branching and merging before understanding proper practices.",
         },
         {
-          title: "CSS Layout and Responsiveness",
-          text: "Creating responsive layouts that adapt to different screen sizes and devices. Overcame by leveraging CSS flexbox, grid, and media queries, along with responsive design principles.",
-          image: "",
-        },
-        {
-          title: "Backend API Development",
-          text: "Designing and implementing robust backend APIs using Node.js and Express. Tackled by following RESTful principles, handling authentication and authorization, and utilizing middleware for request validation and error handling.",
-          image: "",
-        },
-        {
-          title: "Testing and Debugging",
-          text: "Writing comprehensive unit tests and debugging complex issues. Addressed by using testing frameworks like Jest and Mocha, and utilizing browser developer tools and debugging techniques.",
-          image: "",
+          title: "Testing Implementation",
+          text: "First exposure to testing with Jest was confusing. Still working on writing better test coverage.",
         },
       ],
       learnings: [
         {
-          title: "Front-end Development",
+          title: "Web Fundamentals",
           points: [
             {
-              text: "Mastered HTML5 semantic elements and accessibility best practices.",
-              image: "",
+              text: "HTML semantics and accessibility best practices",
             },
             {
-              text: "Gained proficiency in CSS3 layout techniques, responsive design, and CSS preprocessors like Sass.",
-              image: "",
+              text: "CSS flexbox, grid, and responsive design principles",
             },
             {
-              text: "Became skilled in JavaScript ES6+ features, DOM manipulation, and asynchronous programming.",
-              image: "",
-            },
-            {
-              text: "Acquired expertise in React, including component lifecycle, hooks, and state management.",
-              image: "",
+              text: "Browser dev tools and debugging techniques",
             },
           ],
         },
         {
-          title: "Back-end Development",
+          title: "JavaScript Core",
           points: [
             {
-              text: "Learned server-side development with Node.js and Express, creating RESTful APIs and handling database integration.",
-              image: "",
+              text: "ES6+ features including arrow functions, destructuring, and modules",
             },
             {
-              text: "Gained knowledge of database design, data modeling, and querying using MongoDB and Mongoose.",
-              image: "",
+              text: "Asynchronous programming with promises and async/await",
             },
             {
-              text: "Implemented authentication and authorization mechanisms, including JWT and session-based authentication.",
-              image: "",
-            },
-            {
-              text: "Acquired experience in server deployment, scaling, and performance optimization.",
-              image: "",
+              text: "DOM manipulation and event handling patterns",
             },
           ],
         },
         {
-          title: "Testing and Debugging",
+          title: "React Framework",
           points: [
             {
-              text: "Developed skills in writing unit tests using frameworks like Jest and Mocha.",
-              image: "",
+              text: "Component-based architecture and JSX syntax",
             },
             {
-              text: "Learned debugging techniques using browser developer tools and Node.js debugging tools.",
-              image: "",
+              text: "Hooks system including useState, useEffect, and custom hooks",
             },
             {
-              text: "Gained knowledge of test-driven development (TDD) and integration testing.",
-              image: "",
+              text: "React Router and basic state management",
             },
           ],
         },
         {
-          title: "Version Control and Collaboration",
+          title: "Backend Development",
           points: [
             {
-              text: "Mastered Git version control, including branching, merging, and resolving conflicts.",
-              image: "",
+              text: "Node.js and Express server basics",
             },
             {
-              text: "Collaborated with other developers using GitHub, participating in code reviews and pull requests.",
-              image: "",
+              text: "RESTful API design principles",
             },
             {
-              text: "Learned agile development methodologies and project management tools like Trello and Jira.",
-              image: "",
+              text: "Basic database operations with MongoDB",
             },
           ],
         },
         {
-          title: "Web Performance and Optimization",
+          title: "Development Practices",
           points: [
             {
-              text: "Acquired knowledge of web performance optimization techniques, including minification, bundling, and lazy loading.",
-              image: "",
+              text: "Git version control and GitHub collaboration",
             },
             {
-              text: "Learned about browser rendering optimization, critical rendering path, and performance metrics.",
-              image: "",
+              text: "Test-driven development basics with Jest",
             },
             {
-              text: "Implemented caching strategies and content delivery networks (CDNs) for faster content delivery.",
-              image: "",
+              text: "Webpack configuration and build processes",
             },
           ],
         },
         {
-          title: "Continuous Learning and Problem Solving",
+          title: "Computer Science",
           points: [
             {
-              text: "Developed a growth mindset and embraced continuous learning throughout the curriculum.",
-              image: "",
+              text: "Basic data structures and algorithms",
             },
             {
-              text: "Enhanced problem-solving skills by tackling complex coding challenges and seeking optimal solutions.",
-              image: "",
+              text: "Time complexity and code optimization",
             },
             {
-              text: "Learned to break down large problems into smaller, manageable tasks and iterate on solutions.",
-              image: "",
+              text: "Clean code principles and documentation",
+            },
+          ],
+        },
+        {
+          title: "Project Planning",
+          points: [
+            {
+              text: "Breaking down projects into manageable tasks",
+            },
+            {
+              text: "Using design patterns for better code organization",
+            },
+            {
+              text: "Reading documentation and solving problems independently",
             },
           ],
         },
       ],
       additionalImages: [
         "/images/top8.png",
-        "/images/afbuddy7.png",
+        "/images/top7.png",
         "/images/project-img4.png",
       ],
     },

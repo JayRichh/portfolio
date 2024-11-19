@@ -51,68 +51,67 @@ const Lightbox: React.FC<{
   onPrev: () => void;
   onNext: () => void;
 }> = ({ images, currentIndex, onClose, onPrev, onNext }) => {
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      e.stopPropagation();
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowLeft") onPrev();
       if (e.key === "ArrowRight") onNext();
-    },
-    [onClose, onPrev, onNext],
-  );
+    };
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose, onPrev, onNext]);
 
   if (typeof window === "undefined") return null;
 
   return createPortal(
-    <div
-      className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/90"
-      onClick={onClose}
-    >
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onClose();
-        }}
-        className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none"
-      >
-        <X size={24} />
-      </button>
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onPrev();
-        }}
-        className="absolute left-4 top-1/2 -translate-y-1/2 transform flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none"
-      >
-        &#10094;
-      </button>
-      <div
-        className="relative max-h-[90vh] max-w-[90vw]"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <ImageWithFallback
-          src={images[currentIndex].src}
-          alt={images[currentIndex].alt}
-          width={1200}
-          height={800}
-          className="h-auto w-auto object-contain"
-          priority
-        />
+    <div className="fixed inset-0" style={{ zIndex: 99999 }}>
+      <div className="absolute inset-0 bg-black/90" onClick={onClose} />
+      <div className="relative z-10 flex h-full items-center justify-center">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
+          className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none"
+          style={{ zIndex: 100000 }}
+        >
+          <X size={24} />
+        </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onPrev();
+          }}
+          className="absolute left-4 top-1/2 -translate-y-1/2 transform flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none"
+          style={{ zIndex: 100000 }}
+        >
+          &#10094;
+        </button>
+        <div 
+          className="relative max-h-[90vh] max-w-[90vw]"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <ImageWithFallback
+            src={images[currentIndex].src}
+            alt={images[currentIndex].alt}
+            width={1200}
+            height={800}
+            className="h-auto w-auto object-contain"
+            priority
+          />
+        </div>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onNext();
+          }}
+          className="absolute right-4 top-1/2 -translate-y-1/2 transform flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none"
+          style={{ zIndex: 100000 }}
+        >
+          &#10095;
+        </button>
       </div>
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onNext();
-        }}
-        className="absolute right-4 top-1/2 -translate-y-1/2 transform flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none"
-      >
-        &#10095;
-      </button>
     </div>,
     document.body,
   );
@@ -122,6 +121,7 @@ interface ProjectDetailDialogProps {
   project: Project;
   onClose: () => void;
 }
+
 const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
   project,
   onClose,
@@ -166,21 +166,21 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
     }
   };
 
-  const closeLightbox = (e?: MouseEvent) => {
-    if (e) {
-      e.stopPropagation();
-    }
+  const closeLightbox = useCallback(() => {
     setLightboxOpen(false);
-  };
+  }, []);
 
-  const prevImage = () =>
+  const prevImage = useCallback(() => {
     setCurrentImageIndex((prev) =>
       prev === 0 ? allImages.length - 1 : prev - 1,
     );
-  const nextImage = () =>
+  }, [allImages.length]);
+
+  const nextImage = useCallback(() => {
     setCurrentImageIndex((prev) =>
       prev === allImages.length - 1 ? 0 : prev + 1,
     );
+  }, [allImages.length]);
 
   // Calculate image indices
   const getFeatureImageIndex = (featureIndex: number) => {
@@ -206,22 +206,18 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
 
   return (
     <>
-      <Dialog
-        open
+      <Dialog 
+        open 
         onOpenChange={(open) => {
-          if (!lightboxOpen) {
+          if (!open && !lightboxOpen) {
             onClose();
           }
         }}
       >
-        <DialogContent
-          className={`max-h-[90vh] w-full max-w-6xl overflow-y-auto bg-white p-0 dark:bg-gray-900 ${
-            lightboxOpen ? "pointer-events-none" : ""
-          }`}
-        >
+        <DialogContent className="max-h-[90vh] w-full max-w-6xl overflow-y-auto bg-white p-0 dark:bg-gray-900">
           <DialogHeader className="relative mb-6">
             <div
-              className="relative h-48 w-full cursor-pointer overflow-hidden sm:h-64 md:h-72"
+              className="relative min-h-[50vh] w-full cursor-pointer overflow-hidden"
               onClick={() => openLightbox(0)}
             >
               {isImageLoading && (
