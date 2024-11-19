@@ -127,7 +127,7 @@ const techCategories: Record<string, string[]> = {
     "GLSL",
     "WGSL",
   ],
-  Databases: ["MongoDB", "PostgreSQL", "Redis", "Supabase"],
+  Databases: ["PostgreSQL", "Supabase", "Redis"],
   "UI Libraries": [
     "Bootstrap",
     "Tailwind CSS",
@@ -154,7 +154,6 @@ const techCategories: Record<string, string[]> = {
     "Web Audio API",
     "Mapbox GL JS",
   ],
-  Platforms: ["Vercel", "Vercel Analytics", "Netlify", "Heroku"],
   Others: [
     "Ionic",
     "Monaco Editor",
@@ -166,6 +165,7 @@ const techCategories: Record<string, string[]> = {
     "Chrome APIs",
     "Vue Router",
   ],
+  Platforms: ["Vercel"],
 };
 
 const CodePage: React.FC = () => {
