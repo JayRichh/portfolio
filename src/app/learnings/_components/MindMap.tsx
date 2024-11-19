@@ -22,9 +22,6 @@ interface LearningNode extends d3.SimulationNodeDatum {
   z?: number;
   projX?: number;
   projY?: number;
-  rotX?: number;
-  rotY?: number;
-  rotZ?: number;
 }
 
 interface LinkData extends d3.SimulationLinkDatum<LearningNode> {
@@ -46,18 +43,18 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
   const [activeBranchNodes, setActiveBranchNodes] = useState<Set<string>>(
     new Set(),
   );
-  const [rotationX, setRotationX] = useState(0);
-  const [rotationY, setRotationY] = useState(0);
+  const rotationX = useRef(0);
+  const rotationY = useRef(0);
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePosition, setLastMousePosition] = useState<{
     x: number;
     y: number;
   } | null>(null);
-  const [zoom, setZoom] = useState(1);
+  const zoom = useRef(1);
   const [touchStartDistance, setTouchStartDistance] = useState<number | null>(
     null,
   );
-  const [initialZoom, setInitialZoom] = useState<number>(1);
+  const initialZoom = useRef(1);
 
   const memoizedHighlightedGroups = useMemo(
     () => highlightedGroups?.map((group) => group.toLowerCase()) || [],
@@ -97,23 +94,59 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
     [dimensions],
   );
 
+  // Generate nodes with initial positions based on a radial layout
   const nodesWithZ = useMemo(() => {
-    return learnings.map((node) => ({
-      ...node,
-      x: (Math.random() - 0.5) * dimensions.width * 0.8,
-      y: (Math.random() - 0.5) * dimensions.height * 0.8,
-      z:
-        (Math.random() - 0.5) *
-        Math.min(dimensions.width, dimensions.height) *
-        0.8,
-      rotX: Math.random() * Math.PI * 2,
-      rotY: Math.random() * Math.PI * 2,
-      rotZ: Math.random() * Math.PI * 2,
-    }));
-  }, [learnings, dimensions.width, dimensions.height]);
+    const centralNode = learnings[0];
+    const groupedNodes: { [key: string]: LearningNode[] } = {};
+
+    // Group nodes by their group property
+    learnings.forEach((node) => {
+      const groupKey = node.group?.toLowerCase() || "ungrouped";
+      if (!groupedNodes[groupKey]) {
+        groupedNodes[groupKey] = [];
+      }
+      groupedNodes[groupKey]?.push(node);
+    });
+
+    const radiusIncrement = 200; // Adjust this to control spacing between layers
+    let currentRadius = radiusIncrement;
+
+    const nodesWithPositions: LearningNode[] = [];
+
+    // Position the central node at the center
+    nodesWithPositions.push({
+      ...centralNode,
+      x: 0,
+      y: 0,
+      z: 0,
+    });
+
+    // Position nodes in concentric circles based on their group
+    Object.entries(groupedNodes).forEach(([groupKey, groupNodes]) => {
+      if (groupNodes.includes(centralNode)) {
+        // Skip the central node's group since it's already added
+        return;
+      }
+
+      const angleIncrement = (2 * Math.PI) / groupNodes.length;
+      groupNodes.forEach((node, index) => {
+        const angle = index * angleIncrement;
+        nodesWithPositions.push({
+          ...node,
+          x: currentRadius * Math.cos(angle),
+          y: currentRadius * Math.sin(angle),
+          z: (Math.random() - 0.5) * 100, // Add slight variation in z-axis
+        });
+      });
+      currentRadius += radiusIncrement;
+    });
+
+    return nodesWithPositions;
+  }, [learnings]);
 
   const links = useMemo(() => generateLinks(nodesWithZ), [nodesWithZ]);
 
+  // Initialize the simulation once
   useEffect(() => {
     if (!svgRef.current || dimensions.width === 0 || dimensions.height === 0)
       return;
@@ -130,9 +163,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       .data(links)
       .enter()
       .append("line")
-      .attr("stroke", (d) =>
-        getLinkColor((d.source as LearningNode).group),
-      )
+      .attr("stroke", (d) => getLinkColor((d.source as LearningNode).group))
       .attr("stroke-opacity", 0.6)
       .attr("stroke-width", (d) =>
         1 +
@@ -163,14 +194,19 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       .data(nodesWithZ)
       .enter()
       .append("g")
+      .attr("class", "label-group")
       .style("pointer-events", "none");
+
+    // Fixed label background and text colors for better contrast
+    const labelBgColor = "rgba(0, 0, 0, 0.6)"; // Semi-transparent black
+    const labelTextColor = "#ffffff"; // White text
 
     label
       .append("rect")
       .attr("x", 0)
       .attr("y", -10)
       .attr("height", 20)
-      .attr("fill", "rgba(255, 255, 255, 0.8)")
+      .attr("fill", labelBgColor)
       .attr("stroke", "#ccc")
       .attr("rx", 5)
       .attr("ry", 5);
@@ -178,28 +214,25 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
     label
       .append("text")
       .text((d) => d.title)
+      .attr("fill", labelTextColor)
       .attr("font-size", () => {
         const minDimension = Math.min(dimensions.width, dimensions.height);
         const scaleFactor = minDimension / 800;
-        return `${10 * scaleFactor}px`;
+        return `${12 * scaleFactor}px`;
       })
       .attr("dx", 5)
-      .attr("dy", 5)
-      .attr("fill", "#333");
+      .attr("dy", 5);
 
+    // Tooltip with fixed colors for better contrast
     const tooltip = d3
       .select(containerRef.current)
       .append("div")
-      .attr("class", "tooltip")
-      .style("position", "absolute")
-      .style("pointer-events", "none")
-      .style("opacity", 0)
-      .style("background", "rgba(255, 255, 255, 0.9)")
-      .style("padding", "8px")
-      .style("border-radius", "4px")
-      .style("box-shadow", "0 0 5px rgba(0,0,0,0.3)")
-      .style("font-size", "12px")
-      .style("color", "#333");
+      .attr(
+        "class",
+        "tooltip absolute pointer-events-none opacity-0 p-2 rounded shadow-md text-sm"
+      )
+      .style("background-color", "rgba(0, 0, 0, 0.7)")
+      .style("color", "#ffffff");
 
     const simulation = d3
       .forceSimulation<LearningNode>()
@@ -209,79 +242,104 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         d3
           .forceLink<LearningNode, LinkData>(links)
           .id((d) => d.id)
-          .distance(
-            (d) =>
-              100 +
-              (learnings.find((n) => n.id === (d.source as LearningNode).id)
-                ?.importance || 0) *
-                20,
-          )
-          .strength(
-            (d) =>
-              0.1 +
-              Math.min(
-                learnings.find((n) => n.id === (d.source as LearningNode).id)
-                  ?.importance || 0,
-                learnings.find((n) => n.id === (d.target as LearningNode).id)
-                  ?.importance || 0,
-              ) *
-                0.02,
-          ),
+          .distance(100)
+          .strength(1),
       )
       .force(
         "charge",
         d3
           .forceManyBody<LearningNode>()
-          .strength((d) => -50 - (d.importance || 0) * 10),
+          .strength(-300)
+          .distanceMax(500),
       )
-      .force("center", (alpha: number) => {
-        nodesWithZ.forEach((node) => {
-          node.x! += (0 - node.x!) * alpha * 0.1;
-          node.y! += (0 - node.y!) * alpha * 0.1;
-          node.z! += (0 - node.z!) * alpha * 0.1;
-        });
-      })
-      .force(
-        "collision",
-        d3.forceCollide<LearningNode>().radius((d) => nodeRadius(d) + 5),
-      )
-      .stop();
+      .force("center", d3.forceCenter(0, 0));
 
     simulation.on("tick", () => {
-      const cosX = Math.cos(rotationX);
-      const sinX = Math.sin(rotationX);
-      const cosY = Math.cos(rotationY);
-      const sinY = Math.sin(rotationY);
+      // Initial positioning without rotation
+      nodesWithZ.forEach((node) => {
+        node.x = node.x!;
+        node.y = node.y!;
+      });
+    });
+
+    simulation.alpha(1).restart();
+
+    nodeSelection
+      .on("click", (event, d) => {
+        event.stopPropagation();
+        const newSelectedNode = d === selectedNode ? null : d;
+        setSelectedNode(newSelectedNode);
+
+        if (newSelectedNode) {
+          const connectedNodes = getConnectedNodes(newSelectedNode.id, links);
+          setActiveBranchNodes(connectedNodes);
+        } else {
+          setActiveBranchNodes(new Set());
+        }
+      })
+      .on("mousedown", (event) => {
+        event.stopPropagation();
+      })
+      .on("mouseover", function (event, d) {
+        d3.select(this).attr("stroke", "#000").attr("stroke-width", 2);
+
+        // Show tooltip at the cursor position
+        tooltip
+          .html(`<strong>${d.title}</strong><br/>${d.description || ""}`)
+          .style("left", `${event.pageX + 15}px`)
+          .style("top", `${event.pageY - 15}px`)
+          .classed("opacity-0", false)
+          .classed("opacity-100", true);
+      })
+      .on("mousemove", function (event) {
+        // Update tooltip position
+        tooltip
+          .style("left", `${event.pageX + 15}px`)
+          .style("top", `${event.pageY - 15}px`);
+      })
+      .on("mouseout", function () {
+        d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
+        // Hide tooltip
+        tooltip.classed("opacity-100", false).classed("opacity-0", true);
+      });
+
+    svg.on("click", () => {
+      setSelectedNode(null);
+      setActiveBranchNodes(new Set());
+    });
+
+    return () => {
+      simulation.stop();
+      tooltip.remove();
+    };
+  }, [
+    nodesWithZ,
+    dimensions.width,
+    dimensions.height,
+    nodeRadius,
+    links,
+    learnings,
+  ]);
+
+  // Continuous rendering with d3.timer
+  useEffect(() => {
+    if (!svgRef.current) return;
+
+    const svg = d3.select<SVGSVGElement, unknown>(svgRef.current);
+    const nodeSelection = svg.selectAll<SVGCircleElement, LearningNode>("circle");
+    const linkSelection = svg.selectAll<SVGLineElement, LinkData>("line");
+    const labelSelection = svg.selectAll<SVGGElement, LearningNode>(".labels g");
+
+    const timer = d3.timer(() => {
+      const cosX = Math.cos(rotationX.current);
+      const sinX = Math.sin(rotationX.current);
+      const cosY = Math.cos(rotationY.current);
+      const sinY = Math.sin(rotationY.current);
 
       nodesWithZ.forEach((node) => {
-        const cosNodeX = Math.cos(node.rotX!);
-        const sinNodeX = Math.sin(node.rotX!);
-        const cosNodeY = Math.cos(node.rotY!);
-        const sinNodeY = Math.sin(node.rotY!);
-        const cosNodeZ = Math.cos(node.rotZ!);
-        const sinNodeZ = Math.sin(node.rotZ!);
-
         let x = node.x!;
         let y = node.y!;
         let z = node.z!;
-
-        // Rotate around Z axis
-        let tempX = x * cosNodeZ - y * sinNodeZ;
-        let tempY = x * sinNodeZ + y * cosNodeZ;
-        x = tempX;
-        y = tempY;
-
-        // Rotate around Y axis
-        tempX = x * cosNodeY + z * sinNodeY;
-        let tempZ = -x * sinNodeY + z * cosNodeY;
-        x = tempX;
-        z = tempZ;
-
-        // Rotate around X axis
-        tempY = y * cosNodeX - z * sinNodeX;
-        tempZ = y * sinNodeX + z * cosNodeX;
-        y = tempY;
-        z = tempZ;
 
         // Apply global rotation
         const y1 = y * cosX - z * sinX;
@@ -291,8 +349,8 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
 
         const fov = 1000;
         const scale = fov / (fov + z2);
-        node.projX = x1 * scale * zoom + dimensions.width / 2;
-        node.projY = y1 * scale * zoom + dimensions.height / 2;
+        node.projX = x1 * scale * zoom.current + dimensions.width / 2;
+        node.projY = y1 * scale * zoom.current + dimensions.height / 2;
 
         node.projX = Math.max(
           nodeRadius(node),
@@ -304,7 +362,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         );
       });
 
-      link
+      linkSelection
         .attr("x1", (d) => (d.source as LearningNode).projX!)
         .attr("y1", (d) => (d.source as LearningNode).projY!)
         .attr("x2", (d) => (d.target as LearningNode).projX!)
@@ -341,9 +399,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         .attr("opacity", (d) => {
           const passesFilters =
             (memoizedHighlightedGroups.length === 0 ||
-              memoizedHighlightedGroups.includes(
-                d.group?.toLowerCase() || "",
-              )) &&
+              memoizedHighlightedGroups.includes(d.group?.toLowerCase() || "")) &&
             (memoizedHighlightedImportance.length === 0 ||
               memoizedHighlightedImportance.includes(d.importance || 0));
 
@@ -358,14 +414,12 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
           }
         });
 
-      label
+      labelSelection
         .attr("transform", (d) => `translate(${d.projX},${d.projY})`)
         .attr("display", (d) => {
           const passesFilters =
             (memoizedHighlightedGroups.length === 0 ||
-              memoizedHighlightedGroups.includes(
-                d.group?.toLowerCase() || "",
-              )) &&
+              memoizedHighlightedGroups.includes(d.group?.toLowerCase() || "")) &&
             (memoizedHighlightedImportance.length === 0 ||
               memoizedHighlightedImportance.includes(d.importance || 0));
 
@@ -379,82 +433,29 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
           }
 
           return "none";
+        })
+        .each(function (d) {
+          const textElement = d3.select(this).select("text");
+          const rectElement = d3.select(this).select("rect");
+
+          // Adjust rect width based on text width
+          const textWidth = textElement.node()?.getComputedTextLength() || 0;
+          rectElement.attr("width", textWidth + 10);
         });
-
-      label.select("rect").attr("width", (d) => {
-        const textWidth =
-          getTextWidth(
-            d.title,
-            `${
-              10 * (Math.min(dimensions.width, dimensions.height) / 800)
-            }px sans-serif`,
-          ) + 10;
-        return textWidth;
-      });
-    });
-
-    simulation.alpha(1).restart();
-
-    nodeSelection
-      .on("click", (event, d) => {
-        event.stopPropagation();
-        const newSelectedNode = d === selectedNode ? null : d;
-        setSelectedNode(newSelectedNode);
-
-        if (newSelectedNode) {
-          const connectedNodes = getConnectedNodes(newSelectedNode.id, links);
-          setActiveBranchNodes(connectedNodes);
-        } else {
-          setActiveBranchNodes(new Set());
-        }
-      })
-      .on("mouseover", function (event, d) {
-        d3.select(this).attr("stroke", "#000").attr("stroke-width", 2);
-
-        // Show tooltip at the cursor position
-        tooltip
-          .html(`<strong>${d.title}</strong><br/>${d.description || ""}`)
-          .style("left", `${event.pageX + 15}px`)
-          .style("top", `${event.pageY - 15}px`)
-          .transition()
-          .duration(200)
-          .style("opacity", 1);
-      })
-      .on("mousemove", function (event) {
-        // Update tooltip position
-        tooltip
-          .style("left", `${event.pageX + 15}px`)
-          .style("top", `${event.pageY - 15}px`);
-      })
-      .on("mouseout", function () {
-        d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
-        // Hide tooltip
-        tooltip.transition().duration(200).style("opacity", 0);
-      });
-
-    svg.on("click", () => {
-      setSelectedNode(null);
-      setActiveBranchNodes(new Set());
     });
 
     return () => {
-      simulation.stop();
-      tooltip.remove();
+      timer.stop();
     };
   }, [
     nodesWithZ,
     dimensions.width,
     dimensions.height,
-    rotationX,
-    rotationY,
-    zoom,
     nodeRadius,
-    links,
-    learnings,
     memoizedHighlightedGroups,
     memoizedHighlightedImportance,
-    selectedNode,
     activeBranchNodes,
+    selectedNode,
   ]);
 
   const handleMouseDown = (event: React.MouseEvent<SVGSVGElement>) => {
@@ -469,8 +470,8 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       const deltaX = event.clientX - lastMousePosition.x;
       const deltaY = event.clientY - lastMousePosition.y;
 
-      setRotationY((prev) => prev + deltaX * 0.01);
-      setRotationX((prev) => prev + deltaY * 0.01);
+      rotationY.current += deltaX * 0.0015;
+      rotationX.current += deltaY * 0.0015;
 
       setLastMousePosition({ x: event.clientX, y: event.clientY });
     }
@@ -485,9 +486,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
     event.preventDefault();
     const delta = event.deltaY;
     const zoomFactor = 0.001;
-    setZoom((prevZoom) =>
-      Math.max(0.1, Math.min(5, prevZoom - delta * zoomFactor)),
-    );
+    zoom.current = Math.max(0.1, Math.min(5, zoom.current - delta * zoomFactor));
   };
 
   const handleTouchStart = (event: React.TouchEvent<SVGSVGElement>) => {
@@ -507,7 +506,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         const distance = Math.sqrt(dx * dx + dy * dy);
         setTouchStartDistance(distance);
       }
-      setInitialZoom(zoom);
+      initialZoom.current = zoom.current;
     }
   };
 
@@ -520,8 +519,8 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         const deltaX = touch.clientX - lastMousePosition.x;
         const deltaY = touch.clientY - lastMousePosition.y;
 
-        setRotationY((prev) => prev + deltaX * 0.01);
-        setRotationX((prev) => prev + deltaY * 0.01);
+        rotationY.current += deltaX * 0.0015;
+        rotationX.current += deltaY * 0.0015;
 
         setLastMousePosition({ x: touch.clientX, y: touch.clientY });
       }
@@ -533,8 +532,8 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         const dy = touch2.clientY - touch1.clientY;
         const distance = Math.sqrt(dx * dx + dy * dy);
         const scaleFactor = distance / touchStartDistance;
-        const newZoom = initialZoom * scaleFactor;
-        setZoom(Math.max(0.1, Math.min(5, newZoom)));
+        const newZoom = initialZoom.current * scaleFactor;
+        zoom.current = Math.max(0.1, Math.min(5, newZoom));
       }
     }
   };
@@ -547,7 +546,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       setTouchStartDistance(null);
     } else if (touches.length === 1 && touches[0]) {
       setTouchStartDistance(null);
-      setInitialZoom(zoom);
+      initialZoom.current = zoom.current;
       const touch = touches[0];
       setIsDragging(true);
       setLastMousePosition({ x: touch.clientX, y: touch.clientY });
@@ -557,14 +556,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
   return (
     <div
       ref={containerRef}
-      className="no-text-select"
-      style={{
-        width: "100%",
-        height: "100%",
-        minHeight: "600px",
-        position: "relative",
-        overflow: "hidden",
-      }}
+      className="no-text-select w-full h-full min-h-[600px] relative overflow-hidden"
     >
       <svg
         ref={svgRef}
@@ -579,14 +571,21 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchEnd}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          cursor: isDragging ? "grabbing" : "grab",
-          touchAction: "none",
-        }}
+        className={`absolute top-0 left-0 ${
+          isDragging ? "cursor-grabbing" : "cursor-grab"
+        } touch-none`}
       />
+      {/* Interaction Instructions Overlay */}
+      <div
+        className="absolute bottom-2 right-2 bg-black bg-opacity-75 p-2 rounded text-sm text-white pointer-events-none"
+      >
+        <p className="m-0 font-semibold">Controls:</p>
+        <ul className="m-0 pl-4 list-disc">
+          <li>Click and drag to rotate</li>
+          <li>Scroll to zoom</li>
+          <li>Click on a node to select</li>
+        </ul>
+      </div>
     </div>
   );
 };
@@ -596,13 +595,11 @@ function generateLinks(nodes: LearningNode[]): LinkData[] {
   const groupedNodes: { [key: string]: LearningNode[] } = {};
 
   nodes.forEach((node) => {
-    if (node.group) {
-      const groupKey = node.group.toLowerCase();
-      if (!groupedNodes[groupKey]) {
-        groupedNodes[groupKey] = [];
-      }
-      groupedNodes[groupKey]?.push(node);
+    const groupKey = node.group?.toLowerCase() || "ungrouped";
+    if (!groupedNodes[groupKey]) {
+      groupedNodes[groupKey] = [];
     }
+    groupedNodes[groupKey]?.push(node);
   });
 
   const centralNode = nodes[0];
@@ -687,15 +684,6 @@ function getConnectedNodes(
   }
 
   return visited;
-}
-
-function getTextWidth(text: string, font: string): number {
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
-  if (!context) return 0;
-  context.font = font;
-  const metrics = context.measureText(text);
-  return metrics.width;
 }
 
 export default MindMap;
