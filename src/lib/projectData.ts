@@ -338,6 +338,98 @@ export const projectData: Project[] = [
     },
   },
   {
+    title: "Next.js Template",
+    description:
+      "A comprehensive Next.js template with UI components, 3D capabilities, and example implementations",
+    imgUrl: "/images/temp1.png",
+    liveUrl: "https://next-template-theta-ten.vercel.app",
+    repoUrl: "https://github.com/JayRichh/next-template",
+    details: {
+      title: "Modern Next.js Development Template",
+      description:
+        "A feature-rich Next.js template that combines modern web technologies, UI components, and 3D capabilities to provide a solid foundation for web applications",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Three.js",
+        "React",
+      ],
+      features: [
+        {
+          title: "UI Component Library",
+          text: "Extensive collection of reusable UI components including Accordion, Badge, Button, Card, Modal, Progress, Select, Slider, Spinner, Tabs, Toast, and Tooltip",
+          image: "/images/temp2.png",
+        },
+        {
+          title: "3D Capabilities",
+          text: "Integrated Three.js setup with example scenes, material examples, morph targets, and physics simulations",
+          image: "/images/temp3.png",
+        },
+        {
+          title: "Custom Hooks",
+          text: "Utility hooks for animation controls, async operations, persistent state management, and resizable elements",
+          image: "",
+        },
+        {
+          title: "Example Implementations",
+          text: "Comprehensive examples showcasing UI components, data handling, Next.js features, and 3D capabilities",
+          image: "/images/temp4.png",
+        },
+      ],
+      challenges: [
+        {
+          title: "Component Organization",
+          text: "Structured UI components into logical categories: data-display, effects, feedback, inputs, layout, and overlay",
+        },
+        {
+          title: "Type Safety",
+          text: "Implemented comprehensive TypeScript types and interfaces for components, hooks, and services",
+        },
+        {
+          title: "3D Integration",
+          text: "Seamlessly integrated Three.js with Next.js, including scene management and component lifecycle handling",
+        },
+      ],
+      learnings: [
+        {
+          title: "Next.js Architecture",
+          points: [
+            {
+              text: "Organized project structure following Next.js 13+ app directory conventions",
+            },
+            {
+              text: "Implemented efficient routing and layout management",
+            },
+          ],
+        },
+        {
+          title: "Component Design",
+          points: [
+            {
+              text: "Created modular and reusable UI components with consistent styling using Tailwind CSS",
+            },
+            {
+              text: "Implemented accessible and responsive design patterns",
+            },
+          ],
+        },
+        {
+          title: "3D Development",
+          points: [
+            {
+              text: "Integrated Three.js scenes and components within the Next.js framework",
+            },
+            {
+              text: "Developed example implementations for materials, morphing, and physics",
+            },
+          ],
+        },
+      ],
+      additionalImages: ["/images/temp6.png"],
+    },
+  },
+  {
     title: "Rack 'n' Bag",
     description:
       "Simple tournament tracker built while learning Next.js app router and TypeScript",
@@ -428,6 +520,108 @@ export const projectData: Project[] = [
         },
       ],
       additionalImages: ["/images/corn-logo.png", "/images/corn-mobile.png"],
+    },
+  },
+  {
+    title: "The Work Waka",
+    description:
+      "Job application and interview tracking platform with data visualization, built with Next.js and TypeScript. Features include calendar integration, dynamic forms, and Sankey diagram reports.",
+    imgUrl: "/images/workwaka.png",
+    repoUrl: "https://github.com/JayRichh/workwaka",
+    liveUrl: "https://workwaka.vercel.app",
+    details: {
+      title: "The Work Waka - Job Application Tracker",
+      description:
+        "A streamlined platform for managing job applications and interviews, featuring local storage for data persistence and D3.js visualizations for insights.",
+      technologies: [
+        "React",
+        "TypeScript",
+        "Next.js",
+        "Tailwind CSS",
+        "LocalStorage",
+        "D3.js",
+      ],
+      features: [
+        {
+          title: "Responsive Job List",
+          text: "Mobile-first job application management with advanced filtering, sorting, and search capabilities.",
+          image: "",
+        },
+        {
+          title: "Calendar Integration",
+          text: "ICS file generation for events and interviews, enabling easy addition to any calendar app.",
+          image: "",
+        },
+        {
+          title: "Dynamic Forms",
+          text: "Comprehensive forms for job applications, events, and interviews with real-time validation.",
+          image: "",
+        },
+        {
+          title: "Data Visualization",
+          text: "Sankey diagrams and reports showing application flow and status transitions.",
+          image: "",
+        },
+        {
+          title: "Offline Capability",
+          text: "Local storage integration for data persistence and offline access.",
+          image: "",
+        },
+      ],
+      challenges: [
+        {
+          title: "Data Management",
+          text: "Implementing efficient local storage patterns for large datasets while maintaining performance.",
+        },
+        {
+          title: "Complex Visualizations",
+          text: "Creating interactive D3.js visualizations that work seamlessly with React and TypeScript.",
+        },
+        {
+          title: "Form Architecture",
+          text: "Designing a flexible form system that handles various data types and validation requirements.",
+        },
+      ],
+      learnings: [
+        {
+          title: "State Management",
+          points: [
+            {
+              text: "Efficient local storage patterns for data persistence.",
+            },
+            {
+              text: "React context optimization for global state.",
+            },
+          ],
+        },
+        {
+          title: "Data Visualization",
+          points: [
+            {
+              text: "D3.js integration with React components.",
+            },
+            {
+              text: "Complex data transformations for Sankey diagrams.",
+            },
+          ],
+        },
+        {
+          title: "TypeScript Integration",
+          points: [
+            {
+              text: "Type-safe component development.",
+            },
+            {
+              text: "Advanced TypeScript patterns for form handling.",
+            },
+          ],
+        },
+      ],
+      additionalImages: [
+        "/images/workmain.webp",
+        "/images/workwaka.png",
+        "/images/moitsBoat.png",
+      ],
     },
   },
   {
@@ -935,98 +1129,7 @@ export const projectData: Project[] = [
       ],
     },
   },
-  {
-    title: "Next.js Template",
-    description:
-      "A comprehensive Next.js template with UI components, 3D capabilities, and example implementations",
-    imgUrl: "/images/temp1.png",
-    liveUrl: "https://next-template-theta-ten.vercel.app",
-    repoUrl: "https://github.com/JayRichh/next-template",
-    details: {
-      title: "Modern Next.js Development Template",
-      description:
-        "A feature-rich Next.js template that combines modern web technologies, UI components, and 3D capabilities to provide a solid foundation for web applications",
-      technologies: [
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "Three.js",
-        "React",
-      ],
-      features: [
-        {
-          title: "UI Component Library",
-          text: "Extensive collection of reusable UI components including Accordion, Badge, Button, Card, Modal, Progress, Select, Slider, Spinner, Tabs, Toast, and Tooltip",
-          image: "/images/temp2.png",
-        },
-        {
-          title: "3D Capabilities",
-          text: "Integrated Three.js setup with example scenes, material examples, morph targets, and physics simulations",
-          image: "/images/temp3.png",
-        },
-        {
-          title: "Custom Hooks",
-          text: "Utility hooks for animation controls, async operations, persistent state management, and resizable elements",
-          image: "",
-        },
-        {
-          title: "Example Implementations",
-          text: "Comprehensive examples showcasing UI components, data handling, Next.js features, and 3D capabilities",
-          image: "/images/temp4.png",
-        },
-      ],
-      challenges: [
-        {
-          title: "Component Organization",
-          text: "Structured UI components into logical categories: data-display, effects, feedback, inputs, layout, and overlay",
-        },
-        {
-          title: "Type Safety",
-          text: "Implemented comprehensive TypeScript types and interfaces for components, hooks, and services",
-        },
-        {
-          title: "3D Integration",
-          text: "Seamlessly integrated Three.js with Next.js, including scene management and component lifecycle handling",
-        },
-      ],
-      learnings: [
-        {
-          title: "Next.js Architecture",
-          points: [
-            {
-              text: "Organized project structure following Next.js 13+ app directory conventions",
-            },
-            {
-              text: "Implemented efficient routing and layout management",
-            },
-          ],
-        },
-        {
-          title: "Component Design",
-          points: [
-            {
-              text: "Created modular and reusable UI components with consistent styling using Tailwind CSS",
-            },
-            {
-              text: "Implemented accessible and responsive design patterns",
-            },
-          ],
-        },
-        {
-          title: "3D Development",
-          points: [
-            {
-              text: "Integrated Three.js scenes and components within the Next.js framework",
-            },
-            {
-              text: "Developed example implementations for materials, morphing, and physics",
-            },
-          ],
-        },
-      ],
-      additionalImages: ["/images/temp6.png"],
-    },
-  },
+
   {
     title: "Off The Floor",
     description:
@@ -1117,108 +1220,7 @@ export const projectData: Project[] = [
       ],
     },
   },
-  {
-    title: "The Work Waka",
-    description:
-      "Job application and interview tracking platform with data visualization, built with Next.js and TypeScript. Features include calendar integration, dynamic forms, and Sankey diagram reports.",
-    imgUrl: "/images/workwaka.png",
-    repoUrl: "https://github.com/JayRichh/workwaka",
-    liveUrl: "https://workwaka.vercel.app",
-    details: {
-      title: "The Work Waka - Job Application Tracker",
-      description:
-        "A streamlined platform for managing job applications and interviews, featuring local storage for data persistence and D3.js visualizations for insights.",
-      technologies: [
-        "React",
-        "TypeScript",
-        "Next.js",
-        "Tailwind CSS",
-        "LocalStorage",
-        "D3.js",
-      ],
-      features: [
-        {
-          title: "Responsive Job List",
-          text: "Mobile-first job application management with advanced filtering, sorting, and search capabilities.",
-          image: "",
-        },
-        {
-          title: "Calendar Integration",
-          text: "ICS file generation for events and interviews, enabling easy addition to any calendar app.",
-          image: "",
-        },
-        {
-          title: "Dynamic Forms",
-          text: "Comprehensive forms for job applications, events, and interviews with real-time validation.",
-          image: "",
-        },
-        {
-          title: "Data Visualization",
-          text: "Sankey diagrams and reports showing application flow and status transitions.",
-          image: "",
-        },
-        {
-          title: "Offline Capability",
-          text: "Local storage integration for data persistence and offline access.",
-          image: "",
-        },
-      ],
-      challenges: [
-        {
-          title: "Data Management",
-          text: "Implementing efficient local storage patterns for large datasets while maintaining performance.",
-        },
-        {
-          title: "Complex Visualizations",
-          text: "Creating interactive D3.js visualizations that work seamlessly with React and TypeScript.",
-        },
-        {
-          title: "Form Architecture",
-          text: "Designing a flexible form system that handles various data types and validation requirements.",
-        },
-      ],
-      learnings: [
-        {
-          title: "State Management",
-          points: [
-            {
-              text: "Efficient local storage patterns for data persistence.",
-            },
-            {
-              text: "React context optimization for global state.",
-            },
-          ],
-        },
-        {
-          title: "Data Visualization",
-          points: [
-            {
-              text: "D3.js integration with React components.",
-            },
-            {
-              text: "Complex data transformations for Sankey diagrams.",
-            },
-          ],
-        },
-        {
-          title: "TypeScript Integration",
-          points: [
-            {
-              text: "Type-safe component development.",
-            },
-            {
-              text: "Advanced TypeScript patterns for form handling.",
-            },
-          ],
-        },
-      ],
-      additionalImages: [
-        "/images/workmain.webp",
-        "/images/workwaka.png",
-        "/images/moitsBoat.png",
-      ],
-    },
-  },
+  
   {
     title: "AF Buddy",
     description:
