@@ -88,7 +88,7 @@ const Lightbox: React.FC<{
         >
           &#10094;
         </button>
-        <div 
+        <div
           className="relative max-h-[90vh] max-w-[90vw]"
           onClick={(e) => e.stopPropagation()}
         >
@@ -206,8 +206,8 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
 
   return (
     <>
-      <Dialog 
-        open 
+      <Dialog
+        open
         onOpenChange={(open) => {
           if (!open && !lightboxOpen) {
             onClose();

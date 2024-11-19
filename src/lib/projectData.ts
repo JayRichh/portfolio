@@ -1129,118 +1129,90 @@ export const projectData: Project[] = [
   {
     title: "AF Buddy",
     description:
-      "AF Buddy is a feature-rich Chrome extension that provides developers with tools like geolocation spoofing, user agent emulation, and JSON editing, enhancing the web development process.",
+      "Chrome DevTools extension for Appframe development. Built with Vue3 and Monaco editor.",
     imgUrl: "/images/afbuddy2.png",
     repoUrl: "https://github.com/JayRichh/afbuddy",
     liveUrl: "",
     details: {
-      title: "AF Buddy",
+      title: "AF Buddy - Appframe Dev Toolkit",
       description:
-        "AF Buddy integrates a suite of tools into a single Chrome extension to assist developers in testing and developing web applications. It features dynamic UI components built with Vue.js, leveraging Vuex for state management and GSAP for smooth animations.",
-      technologies: ["Vue3", "JavaScript", "CSS", "GSAP"],
+        "Chrome extension providing development tools for Appframe web development. Built with Vue3, TypeScript, and Chrome Extension APIs.",
+      technologies: [
+        "Vue3",
+        "TypeScript",
+        "Monaco Editor",
+        "Chrome APIs",
+        "GSAP",
+        "Vuex",
+        "Parcel",
+      ],
       features: [
         {
-          title: "Dynamic Navigation Bar",
-          text: "Dynamic navigation bar that allows users to switch between tools using GSAP-driven animations, enhancing the user experience with smooth transitions.",
+          title: "Code Management",
+          text: "Monaco-based code editor with theme support and auto-formatting. Includes snippet saving and history tracking.",
           image: "/images/afbuddy2.png",
         },
         {
-          title: "Code Snippet Management",
-          text: "Code snippet management which utilizes Vue's reactivity system to provide live search results as the user types, backed by local storage to persist data across sessions.",
+          title: "Tab Management",
+          text: "Chrome tab control with configurable limits and auto-close features. Supports tab exclusion and custom filters.",
           image: "/images/afbuddy4.png",
         },
         {
-          title: "Geolocation Spoofing",
-          text: "Geolocation spoofing implemented with a dedicated Vue component that binds input fields to Vuex store, enabling instant updates across the extension without page reloads.",
+          title: "Development Tools",
+          text: "Geolocation spoofing, user agent switching, and JSON editing with Monaco integration.",
           image: "/images/afbuddy7.png",
         },
         {
-          title: "User Agent Switching",
-          text: "User agent switching functionality that allows users to emulate different devices by selecting from a pre-populated list of user agents stored in Vuex state, facilitating quick testing of responsive designs.",
+          title: "UI Customization",
+          text: "Theme switching with 50+ Monaco themes, custom layouts, and font selection. GSAP-powered animations.",
           image: "/images/afbuddy5.png",
-        },
-        {
-          title: "JSON Editor",
-          text: "A robust JSON editor built with the Monaco editor integrated into a Vue component, offering features like syntax highlighting, auto-formatting, and error detection to facilitate easy manipulation of JSON data.",
-          image: "/images/afbuddy6.png",
-        },
-        {
-          title: "Theme Selector",
-          text: "Theme selector that applies selected themes dynamically to the Monaco editor and other parts of the UI, using CSS variables and Vuex for state management to ensure theme preferences are maintained across the extension.",
-          image: "/images/afbuddy3.png",
         },
       ],
       challenges: [
         {
-          title: "UI Responsiveness and Intuitiveness",
-          text: "Designing a user interface that remains responsive and intuitive despite the heavy feature set, requiring careful management of Vue components and Vuex state.",
-          image: "",
+          title: "Extension Architecture",
+          text: "Building multi-context extension with background scripts, content scripts, and devtools integration.",
         },
         {
-          title: "Monaco Editor Integration",
-          text: "Implementing a seamless integration of the Monaco editor within a Vue component, addressing challenges related to component lifecycle and editor instantiation.",
-          image: "",
+          title: "Build Process",
+          text: "Setting up Parcel bundling for multiple extension entry points while maintaining hot reload.",
         },
         {
-          title: "Efficient Data Binding and State Updates",
-          text: "Ensuring efficient data binding and state updates without performance degradation, particularly for features like the dynamic navigation bar and live search functionality in the code snippet manager.",
-          image: "",
-        },
-        {
-          title: "Extension Load Balancing",
-          text: "Balancing the load of the extension to prevent high memory usage, especially when handling large datasets in the JSON editor and maintaining a smooth user experience.",
-          image: "",
+          title: "Editor Integration",
+          text: "Integrating Monaco editor with Vue components and handling theme/font dynamic loading.",
         },
       ],
       learnings: [
         {
-          title: "Vue.js Mastery",
+          title: "Extension Development",
           points: [
             {
-              text: "Developed a deep understanding of Vue.js component design patterns and best practices for building scalable and maintainable applications.",
-              image: "",
+              text: "Chrome extension architecture and messaging systems",
             },
             {
-              text: "Mastered the use of Vuex for efficient state management, ensuring a single source of truth and predictable state mutations throughout the application.",
-              image: "",
-            },
-            {
-              text: "Leveraged Vue.js reactivity system to create dynamic and responsive user interfaces that update in real-time based on user interactions and data changes.",
-              image: "",
+              text: "DevTools panel integration and debugging protocols",
             },
           ],
         },
         {
-          title: "Browser Extension Development",
+          title: "Vue Patterns",
           points: [
             {
-              text: "Gained expertise in developing browser extensions, adhering to the specific requirements and constraints of the extension environment.",
-              image: "",
+              text: "Vuex store management across extension contexts",
             },
             {
-              text: "Implemented secure communication between the extension and web pages, ensuring data privacy and protection against cross-site scripting attacks.",
-              image: "",
-            },
-            {
-              text: "Utilized browser APIs effectively to access and manipulate web page content, storage, and user preferences.",
-              image: "",
+              text: "Component organization with lazy loading",
             },
           ],
         },
         {
-          title: "Performance Optimization",
+          title: "Build Systems",
           points: [
             {
-              text: "Implemented code splitting and lazy loading techniques to reduce initial bundle size and improve load times.",
-              image: "",
+              text: "Multi-target Parcel configuration for extension builds",
             },
             {
-              text: "Optimized Vue.js components and Vuex store to minimize unnecessary re-renders and computations, resulting in better performance.",
-              image: "",
-            },
-            {
-              text: "Conducted thorough performance profiling and applied memoization and caching strategies to eliminate performance bottlenecks.",
-              image: "/images/afbuddy1.png",
+              text: "Hot module replacement in extension context",
             },
           ],
         },
@@ -1249,125 +1221,101 @@ export const projectData: Project[] = [
         "/images/afbuddy1.png",
         "/images/afbuddy3.png",
         "/images/afbuddy4.png",
-        "/images/afbuddy5.png",
       ],
     },
   },
 
   {
-    title: "Chat with DALL-E Integration",
+    title: "Chat with DALL-E",
     description:
-      "Chat application that combines real-time messaging with the ability to generate and manipulate images directly in the chat using OpenAI's DALL-E.",
+      "Chat app with image generation features. Built to explore OpenAI's API and real-time messaging.",
     imgUrl: "/images/chat1.png",
     repoUrl: "https://github.com/JayRichh/chat",
     liveUrl: "https://jaychat.onrender.com/",
     details: {
-      title: "Chat with DALL-E Integration",
+      title: "Chat + DALL-E Integration",
       description:
-        "This application leverages the capabilities of OpenAI's DALL-E to provide a unique chat experience where users can not only communicate in real-time but also create, edit, and vary images based on textual prompts. It integrates cutting-edge AI technology into a seamless chat interface.",
+        "Real-time chat application with integrated image generation. Explores WebSocket communication and OpenAI API integration.",
       technologies: [
         "React",
         "Node.js",
         "Express",
-        "OpenAI",
+        "OpenAI API",
+        "WebSocket",
         "Styled-Components",
       ],
       features: [
         {
-          title: "Real-Time Chat",
-          text: "Allows users to send and receive messages instantaneously, enhancing interaction within the chat application.",
+          title: "Real-time Chat",
+          text: "WebSocket-based messaging with typing indicators and presence tracking.",
           image: "/images/chat2.png",
         },
         {
-          title: "DALL-E Image Generation",
-          text: "Integrates with OpenAI's DALL-E to generate images from textual descriptions provided by users in the chat.",
+          title: "Image Generation",
+          text: "Text-to-image generation using DALL-E API with prompt optimization.",
           image: "/images/chat1.png",
         },
         {
-          title: "Image Editing and Variation",
-          text: "Supports advanced image manipulation features, including editing specific parts of an image and generating variations of an existing image.",
-          image: "",
+          title: "Image Editing",
+          text: "Basic image manipulation using DALL-E's edit and variation endpoints.",
+          image: "/images/chat3.png",
         },
         {
-          title: "Responsive Design",
-          text: "Ensures that the chat application is accessible and functional on various devices, providing a consistent user experience across platforms.",
-          image: "",
-        },
-        {
-          title: "Seamless Mode Switching",
-          text: "Users can seamlessly switch between standard chat mode and DALL-E mode to generate or edit images, enhancing the interactive experience.",
-          image: "",
+          title: "Message History",
+          text: "Local storage-based chat history with image context preservation.",
+          image: "/images/chat4.png",
         },
       ],
       challenges: [
         {
-          title: "Integrating AI with Real-Time Systems",
-          text: "Balancing the load between real-time chat functionalities and computationally intensive AI operations for image generation.",
-          image: "",
+          title: "API Management",
+          text: "Handling rate limits and costs while maintaining responsive image generation.",
         },
         {
-          title: "API Rate Limiting",
-          text: "Managing API usage to stay within the rate limits imposed by OpenAI.",
-          image: "",
+          title: "Real-time Sync",
+          text: "Syncing message and image states across multiple clients reliably.",
         },
         {
-          title: "Data Privacy",
-          text: "Ensuring that all user data, especially the images generated and manipulated through DALL-E, are handled securely to protect user privacy.",
-          image: "",
-        },
-        {
-          title: "User Experience Design",
-          text: "Designing a user-friendly interface that accommodates both chat and advanced AI features without overwhelming the user.",
-          image: "",
+          title: "Error Handling",
+          text: "Graceful handling of API failures and network issues during generation.",
         },
       ],
       learnings: [
         {
-          title: "Real-Time Web Technologies",
+          title: "WebSocket Implementation",
           points: [
             {
-              text: "Gained profound knowledge in WebSocket and other real-time technologies that facilitate live, bidirectional communication between clients and servers.",
-              image: "",
+              text: "Real-time communication patterns and state synchronization",
             },
             {
-              text: "Learned to implement efficient message broadcasting to synchronize state across clients instantly.",
-              image: "",
+              text: "Connection management and reconnection strategies",
             },
           ],
         },
         {
-          title: "AI Integration in Web Applications",
+          title: "AI Integration",
           points: [
             {
-              text: "Acquired skills in integrating AI APIs, specifically OpenAI's DALL-E, into web applications to enhance functionality.",
-              image: "",
+              text: "OpenAI API usage patterns and error handling",
             },
             {
-              text: "Developed proficiency in handling AI-driven tasks such as image generation and editing within a real-time chat application context.",
-              image: "",
+              text: "Image generation optimization and prompt engineering",
             },
           ],
         },
         {
-          title: "Advanced Frontend Techniques",
+          title: "UX Patterns",
           points: [
             {
-              text: "Mastered advanced React patterns and state management strategies to handle complex stateful interactions in a scalable way.",
-              image: "",
+              text: "Loading state management for async operations",
             },
             {
-              text: "Enhanced skills in Styled-Components for dynamically generating CSS based on application state.",
-              image: "",
+              text: "Error feedback and recovery flows",
             },
           ],
         },
       ],
-      additionalImages: [
-        "/images/chat1.png",
-        "/images/chat2.png",
-        "/images/chat1.png",
-        "/images/chat2.png",
-      ],
+      additionalImages: ["/images/chat1.png", "/images/chat2.png"],
     },
   },
   {
@@ -1643,94 +1591,103 @@ export const projectData: Project[] = [
   },
 
   {
-    title: "New Portfolio Website",
+    title: "Portfolio Website",
     description:
-      "A modern, responsive portfolio website built with the latest Next.js 15 and TypeScript, featuring interactive visualizations, dark mode support, and dynamic animations. Showcases professional growth and technical expertise through an intuitive user interface.",
+      "Personal portfolio built with Next.js 15, featuring interactive mindmap visualization and dynamic project showcases",
     imgUrl: "/images/main1.png",
     repoUrl: "https://github.com/JayRichh/portfolio",
     liveUrl: "https://jayrich.dev",
     details: {
       title: "Portfolio Website",
       description:
-        "A comprehensive portfolio platform built using Next.js 15's app router and server components. Features include interactive data visualizations, dynamic animations, and responsive design. The site serves as both a showcase of work and a demonstration of modern web development practices.",
+        "Modern portfolio site showcasing development journey through interactive visualizations. Built with Next.js 15 app router and server components, featuring D3-based mindmap, dynamic filtering, and responsive design.",
       technologies: [
         "Next.js 15",
-        "React 19",
+        "React 18",
         "TypeScript",
-        "Tailwind CSS",
+        "D3.js",
         "Framer Motion",
         "Radix UI",
-        "D3.js",
-        "Recharts",
+        "Tailwind CSS",
+        "Vercel Analytics",
       ],
       features: [
         {
           title: "Interactive Learning Mindmap",
-          text: "Dynamic visualization of web development concepts using D3.js, providing an interactive way to explore technical knowledge and skills. The mindmap features smooth animations and responsive design, adapting to different screen sizes.",
+          text: "D3-based force-directed graph visualizing web development concepts and their relationships. Features dynamic node positioning, zoom interactions, and responsive layout.",
+          image: "/images/main2.png",
         },
         {
           title: "Project Showcase",
-          text: "Comprehensive project display system with filtering by technology, detailed project information, and interactive image galleries. Built using Radix UI components and Framer Motion animations for smooth transitions.",
+          text: "Dynamic project grid with technology-based filtering and detailed modal views. Uses Radix UI primitives with Framer Motion animations for smooth transitions.",
+          image: "/images/main3.png",
         },
         {
-          title: "Dynamic Experience Timeline",
-          text: "Animated timeline showcasing professional experience with scroll-based animations and responsive design. Implements Framer Motion for smooth transitions and intersection observers for scroll-based animations.",
+          title: "Advanced Image Handling",
+          text: "Custom image lightbox with keyboard navigation and touch support. Implements progressive loading, blur placeholders, and fallback states.",
+          image: "/images/main4.png",
         },
         {
-          title: "Technology Distribution Chart",
-          text: "Interactive pie chart built with Recharts showing technology usage distribution. Features custom animations, tooltips, and responsive design for optimal viewing across devices.",
+          title: "Responsive Design",
+          text: "Mobile-first approach using Tailwind CSS with dynamic layouts and optimized interactions. Includes dark mode support and system preference detection.",
+          image: "/images/main1.png",
         },
       ],
       challenges: [
         {
+          title: "D3 Integration",
+          text: "Implementing complex force-directed graph with React while maintaining smooth performance. Required careful state management and render optimization.",
+        },
+        {
+          title: "Type Safety",
+          text: "Maintaining strict TypeScript types across components, especially for project data structures and D3 visualization props.",
+        },
+        {
           title: "Performance Optimization",
-          text: "Implementing efficient data visualization and animations while maintaining smooth performance. Solved through careful optimization of D3.js renders, code splitting, and lazy loading of components.",
-        },
-        {
-          title: "Responsive Design Implementation",
-          text: "Creating a consistent experience across devices while maintaining complex interactive features. Addressed through mobile-first design approach and responsive breakpoints using Tailwind CSS.",
-        },
-        {
-          title: "Accessibility and SEO",
-          text: "Ensuring the site remains accessible while incorporating rich interactive features. Implemented proper ARIA attributes, semantic HTML, and SEO best practices while maintaining visual appeal.",
+          text: "Balancing rich interactions with performance, particularly for the mindmap visualization and image galleries. Implemented code splitting and lazy loading.",
         },
       ],
       learnings: [
         {
-          title: "Modern React Development",
-          points: [
-            {
-              text: "Mastered Next.js 13 app router and server components, implementing efficient rendering strategies and optimizing performance.",
-            },
-            {
-              text: "Developed expertise in TypeScript for type-safe development and improved code maintainability.",
-            },
-          ],
-        },
-        {
           title: "Data Visualization",
           points: [
             {
-              text: "Implemented complex data visualizations using D3.js and Recharts, creating interactive and informative user experiences.",
+              text: "D3.js integration with React for complex interactive visualizations",
             },
             {
-              text: "Optimized rendering performance for smooth animations and transitions in data-heavy visualizations.",
+              text: "Force-directed graph algorithms and physics simulations",
             },
           ],
         },
         {
-          title: "UI/UX Design",
+          title: "Modern React Patterns",
           points: [
             {
-              text: "Created an intuitive and accessible user interface using Radix UI primitives and custom components.",
+              text: "Server and client component architecture with Next.js 15",
             },
             {
-              text: "Implemented responsive design patterns and animations using Tailwind CSS and Framer Motion.",
+              text: "Advanced animation patterns using Framer Motion",
+            },
+          ],
+        },
+        {
+          title: "Component Design",
+          points: [
+            {
+              text: "Building accessible components with Radix UI primitives",
+            },
+            {
+              text: "Implementing compound components for complex features",
             },
           ],
         },
       ],
-      additionalImages: [],
+      additionalImages: [
+        "/images/main1.png",
+        "/images/main2.png",
+        "/images/main3.png",
+        "/images/main4.png",
+      ],
     },
   },
 ];
