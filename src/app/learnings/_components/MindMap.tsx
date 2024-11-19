@@ -43,7 +43,6 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [selectedNode, setSelectedNode] = useState<LearningNode | null>(null);
-  const [hoveredNode, setHoveredNode] = useState<LearningNode | null>(null);
   const [activeBranchNodes, setActiveBranchNodes] = useState<Set<string>>(
     new Set(),
   );
@@ -131,16 +130,17 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       .data(links)
       .enter()
       .append("line")
-      .attr("stroke", (d) => getColor((d.source as LearningNode).group))
-      .attr("stroke-opacity", 0.3)
+      .attr("stroke", (d) =>
+        getLinkColor((d.source as LearningNode).group),
+      )
+      .attr("stroke-opacity", 0.6)
       .attr("stroke-width", (d) =>
-        Math.max(
-          1,
-          Math.min(
-            (d.source as LearningNode).importance || 1,
-            (d.target as LearningNode).importance || 1,
-          ),
-        ),
+        1 +
+        Math.min(
+          (d.source as LearningNode).importance || 1,
+          (d.target as LearningNode).importance || 1,
+        ) *
+          0.5,
       );
 
     const nodeSelection = g
@@ -152,6 +152,8 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       .append("circle")
       .attr("r", (d) => nodeRadius(d))
       .attr("fill", (d) => getColor(d.group))
+      .attr("stroke", "#fff")
+      .attr("stroke-width", 1)
       .style("cursor", "pointer");
 
     const label = g
@@ -184,6 +186,20 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       .attr("dx", 5)
       .attr("dy", 5)
       .attr("fill", "#333");
+
+    const tooltip = d3
+      .select(containerRef.current)
+      .append("div")
+      .attr("class", "tooltip")
+      .style("position", "absolute")
+      .style("pointer-events", "none")
+      .style("opacity", 0)
+      .style("background", "rgba(255, 255, 255, 0.9)")
+      .style("padding", "8px")
+      .style("border-radius", "4px")
+      .style("box-shadow", "0 0 5px rgba(0,0,0,0.3)")
+      .style("font-size", "12px")
+      .style("color", "#333");
 
     const simulation = d3
       .forceSimulation<LearningNode>()
@@ -249,21 +265,25 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         let y = node.y!;
         let z = node.z!;
 
+        // Rotate around Z axis
         let tempX = x * cosNodeZ - y * sinNodeZ;
         let tempY = x * sinNodeZ + y * cosNodeZ;
         x = tempX;
         y = tempY;
 
+        // Rotate around Y axis
         tempX = x * cosNodeY + z * sinNodeY;
         let tempZ = -x * sinNodeY + z * cosNodeY;
         x = tempX;
         z = tempZ;
 
+        // Rotate around X axis
         tempY = y * cosNodeX - z * sinNodeX;
         tempZ = y * sinNodeX + z * cosNodeX;
         y = tempY;
         z = tempZ;
 
+        // Apply global rotation
         const y1 = y * cosX - z * sinX;
         const z1 = y * sinX + z * cosX;
         const x1 = x * cosY + z1 * sinY;
@@ -305,7 +325,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
           const bothPassFilters = sourceHighlighted && targetHighlighted;
 
           if (activeBranchNodes.size === 0) {
-            return bothPassFilters ? 0.3 : 0.1;
+            return bothPassFilters ? 0.6 : 0.1;
           } else {
             return activeBranchNodes.has(sourceId) &&
               activeBranchNodes.has(targetId) &&
@@ -326,10 +346,6 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
               )) &&
             (memoizedHighlightedImportance.length === 0 ||
               memoizedHighlightedImportance.includes(d.importance || 0));
-
-          if (d.id === hoveredNode?.id || d.id === selectedNode?.id) {
-            return 1;
-          }
 
           if (!passesFilters) {
             return 0.1;
@@ -353,14 +369,10 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
             (memoizedHighlightedImportance.length === 0 ||
               memoizedHighlightedImportance.includes(d.importance || 0));
 
-          if (d.id === hoveredNode?.id || d.id === selectedNode?.id) {
-            return "block";
-          }
-
           if (
-            selectedNode &&
             activeBranchNodes.has(d.id) &&
             passesFilters &&
+            selectedNode &&
             d.group?.toLowerCase() === selectedNode.group?.toLowerCase()
           ) {
             return "block";
@@ -373,7 +385,9 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         const textWidth =
           getTextWidth(
             d.title,
-            `${10 * (Math.min(dimensions.width, dimensions.height) / 800)}px sans-serif`,
+            `${
+              10 * (Math.min(dimensions.width, dimensions.height) / 800)
+            }px sans-serif`,
           ) + 10;
         return textWidth;
       });
@@ -394,8 +408,29 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
           setActiveBranchNodes(new Set());
         }
       })
-      .on("mouseover", (event, d) => setHoveredNode(d))
-      .on("mouseout", () => setHoveredNode(null));
+      .on("mouseover", function (event, d) {
+        d3.select(this).attr("stroke", "#000").attr("stroke-width", 2);
+
+        // Show tooltip at the cursor position
+        tooltip
+          .html(`<strong>${d.title}</strong><br/>${d.description || ""}`)
+          .style("left", `${event.pageX + 15}px`)
+          .style("top", `${event.pageY - 15}px`)
+          .transition()
+          .duration(200)
+          .style("opacity", 1);
+      })
+      .on("mousemove", function (event) {
+        // Update tooltip position
+        tooltip
+          .style("left", `${event.pageX + 15}px`)
+          .style("top", `${event.pageY - 15}px`);
+      })
+      .on("mouseout", function () {
+        d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
+        // Hide tooltip
+        tooltip.transition().duration(200).style("opacity", 0);
+      });
 
     svg.on("click", () => {
       setSelectedNode(null);
@@ -404,6 +439,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
 
     return () => {
       simulation.stop();
+      tooltip.remove();
     };
   }, [
     nodesWithZ,
@@ -418,19 +454,18 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
     memoizedHighlightedGroups,
     memoizedHighlightedImportance,
     selectedNode,
-    hoveredNode,
     activeBranchNodes,
   ]);
 
   const handleMouseDown = (event: React.MouseEvent<SVGSVGElement>) => {
-    event.preventDefault();
+    if (event.button !== 0) return; // Only respond to left-click
     setIsDragging(true);
     setLastMousePosition({ x: event.clientX, y: event.clientY });
   };
 
   const handleMouseMove = (event: React.MouseEvent<SVGSVGElement>) => {
-    event.preventDefault();
     if (isDragging && lastMousePosition) {
+      event.preventDefault();
       const deltaX = event.clientX - lastMousePosition.x;
       const deltaY = event.clientY - lastMousePosition.y;
 
@@ -449,14 +484,13 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
   const handleWheel = (event: React.WheelEvent<SVGSVGElement>) => {
     event.preventDefault();
     const delta = event.deltaY;
-    const zoomFactor = 0.1;
+    const zoomFactor = 0.001;
     setZoom((prevZoom) =>
-      Math.max(0.1, Math.min(5, prevZoom - delta * zoomFactor * 0.01)),
+      Math.max(0.1, Math.min(5, prevZoom - delta * zoomFactor)),
     );
   };
 
   const handleTouchStart = (event: React.TouchEvent<SVGSVGElement>) => {
-    event.preventDefault();
     const touches = Array.from(event.touches);
     if (touches.length === 1) {
       const touch = touches[0];
@@ -478,7 +512,6 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
   };
 
   const handleTouchMove = (event: React.TouchEvent<SVGSVGElement>) => {
-    event.preventDefault();
     const touches = Array.from(event.touches);
     if (touches.length === 1 && isDragging && lastMousePosition) {
       const touch = touches[0];
@@ -507,7 +540,6 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
   };
 
   const handleTouchEnd = (event: React.TouchEvent<SVGSVGElement>) => {
-    event.preventDefault();
     const touches = Array.from(event.touches);
     if (touches.length === 0) {
       setIsDragging(false);
@@ -618,6 +650,17 @@ function getColor(group?: string): string {
     activity: "#FFD700",
   };
   return colors[group?.toLowerCase() || ""] || "#B0C4DE";
+}
+
+function getLinkColor(group?: string): string {
+  const colors: { [key: string]: string } = {
+    language: "#FF69B4",
+    framework: "#1E90FF",
+    tool: "#32CD32",
+    concept: "#BA55D3",
+    activity: "#FFA500",
+  };
+  return colors[group?.toLowerCase() || ""] || "#A9A9A9";
 }
 
 function getConnectedNodes(
