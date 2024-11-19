@@ -20,6 +20,8 @@ import {
   Github,
   Pen,
   X,
+  Clock,
+  RotateCcw,
 } from "lucide-react";
 
 import { Button } from "../../components/ui/button";
@@ -30,6 +32,12 @@ import {
   CardHeader,
   CardTitle,
 } from "../../components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../../components/ui/tooltip";
 
 import { Project, projectData } from "../../lib/projectData";
 import { techIcons } from "../../lib/techIcons";
@@ -41,7 +49,8 @@ export const universalRelaxation = (tech: string): string => {
   const techMap: Record<string, string[]> = {
     "Vue.js": ["Vue", "Vue3", "Vue 3", "VueJS", "Vue 2"],
     React: ["React.js", "ReactJS", "React 18"],
-    "CSS Framework": ["CSS", "Tailwind CSS", "Bootstrap", "Styled-Components"],
+    "Next.js": ["NextJS", "Next.js", "Next.js 15"],
+    "Tailwind CSS": ["Tailwind CSS", "TailwindCSS"],
     JavaScript: ["JS", "JavaScript", "ECMAScript"],
     TypeScript: ["TS", "TypeScript"],
     "Node.js": ["Node", "NodeJS", "Node.js"],
@@ -49,21 +58,53 @@ export const universalRelaxation = (tech: string): string => {
     MongoDB: ["Mongo", "MongoDB", "Mongoose"],
     HTML5: ["HTML", "HTML5"],
     CSS3: ["CSS", "CSS3"],
-    "Next.js": ["NextJS", "Next.js"],
     GSAP: ["GSAP"],
     Firebase: ["Firebase"],
     Vuex: ["Vuex"],
     Bootstrap: ["Bootstrap"],
     "Three.js": ["ThreeJS", "Three.js"],
-    WebSockets: ["Socket.io", "WebSockets", "SocketIO"],
+    WebSockets: ["Socket.io", "WebSockets", "SocketIO", "WebSocket"],
     "Physics Engine": [
       "Rapier",
       "Rapier Physics Engine",
       "CANNON.js",
       "CannonJS",
+      "Rapier Physics",
     ],
-    AI: ["OpenAI", "Claude"],
+    AI: ["OpenAI", "OpenAI API", "Claude", "Stable Diffusion"],
     "Styled-Components": ["Styled-Components"],
+    "Chrome Extension API": ["Chrome Extension API", "Chrome APIs"],
+    "Vercel Analytics": ["Vercel Analytics"],
+    WebGL: ["WebGL"],
+    GLSL: ["GLSL"],
+    WGSL: ["WGSL"],
+    Ionic: ["Ionic"],
+    Redis: ["Redis"],
+    Supabase: ["Supabase"],
+    Mapbox: ["Mapbox", "Mapbox GL JS"],
+    jQuery: ["jQuery"],
+    "Framer Motion": ["Framer Motion"],
+    "Radix UI": ["Radix UI"],
+    "Local Storage": ["Local Storage", "LocalStorage"],
+    D3: ["D3.js", "D3"],
+    "Canvas API": ["Canvas API"],
+    "Web Audio API": ["Web Audio API"],
+    PostgreSQL: ["PostgreSQL"],
+    Recharts: ["Recharts"],
+    Vite: ["Vite"],
+    "Firefox Add-on API": ["Firefox Add-on API"],
+    "React Three Fiber": ["React Three Fiber"],
+    "Vue Router": ["Vue Router"],
+    "Monaco Editor": ["Monaco Editor"],
+    Ruby: ["Ruby"],
+    Rails: ["Rails"],
+    SQL: ["SQL"],
+    Git: ["Git"],
+    Jest: ["Jest"],
+    Webpack: ["Webpack"],
+    "p5.js": ["p5.js"],
+    Vercel: ["Vercel"],
+    "Adobe CS": ["Adobe CS"],
   };
 
   for (const [key, aliases] of Object.entries(techMap)) {
@@ -75,16 +116,64 @@ export const universalRelaxation = (tech: string): string => {
 };
 
 const techCategories: Record<string, string[]> = {
-  Frameworks: ["Vue.js", "TypeScript", "Node.js", "React", "Next.js"],
-  Other: ["Three.js", "CSS Framework", "Physics Engine", "AI"],
+  Frameworks: ["Vue.js", "React", "Next.js", "Node.js", "Express", "Rails"],
+  Languages: [
+    "TypeScript",
+    "JavaScript",
+    "HTML5",
+    "CSS3",
+    "Ruby",
+    "SQL",
+    "GLSL",
+    "WGSL",
+  ],
+  Databases: ["MongoDB", "PostgreSQL", "Redis", "Supabase"],
+  "UI Libraries": [
+    "Bootstrap",
+    "Tailwind CSS",
+    "Radix UI",
+    "Styled-Components",
+  ],
+  Tools: ["Git", "Webpack", "Vite", "Parcel", "Jest"],
+  "Animation Libraries": ["Framer Motion", "GSAP"],
+  Libraries: [
+    "jQuery",
+    "D3",
+    "Recharts",
+    "React Three Fiber",
+    "Three.js",
+    "p5.js",
+  ],
+  APIs: [
+    "OpenAI API",
+    "WebSocket",
+    "Chrome Extension API",
+    "Firefox Add-on API",
+    "WebGL",
+    "Canvas API",
+    "Web Audio API",
+    "Mapbox GL JS",
+  ],
+  Platforms: ["Vercel", "Vercel Analytics", "Netlify", "Heroku"],
+  Others: [
+    "Ionic",
+    "Monaco Editor",
+    "Adobe CS",
+    "Local Storage",
+    "Rapier Physics",
+    "Lemon Squeezy",
+    "Stable Diffusion",
+    "Chrome APIs",
+    "Vue Router",
+  ],
 };
 
 const CodePage: React.FC = () => {
   const [selectedTech, setSelectedTech] = useState<string[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [filteredProjects, setFilteredProjects] =
-    useState<Project[]>(projectData);
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>(projectData);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [sortByRecent, setSortByRecent] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -98,7 +187,7 @@ const CodePage: React.FC = () => {
   };
 
   const filterProjects = useCallback(() => {
-    const filtered = selectedTech.length
+    let filtered = selectedTech.length
       ? projectData.filter((project) =>
           selectedTech.every((tech) =>
             project.details.technologies
@@ -107,8 +196,15 @@ const CodePage: React.FC = () => {
           ),
         )
       : projectData;
+
+    if (sortByRecent) {
+      filtered = [...filtered].sort(
+        (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+      );
+    }
+
     setFilteredProjects(filtered);
-  }, [selectedTech]);
+  }, [selectedTech, sortByRecent]);
 
   useEffect(() => {
     filterProjects();
@@ -153,6 +249,7 @@ const CodePage: React.FC = () => {
       router.push("", { scroll: false });
     }
   }, [selectedProject, router]);
+
   const renderTechBadge = (
     tech: string,
     isActive: boolean = false,
@@ -200,7 +297,7 @@ const CodePage: React.FC = () => {
             Projects
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground sm:text-xl pb-8">
-            Here’s a look at the web development projects I’ve worked on, with a
+            Here's a look at the web development projects I've worked on, with a
             range of technologies and approaches.
           </p>
 
@@ -239,52 +336,107 @@ const CodePage: React.FC = () => {
         </div>
 
         <div className="mb-8 flex flex-wrap items-center justify-between">
-          <div className="relative mb-4 w-full sm:w-[22rem]" ref={dropdownRef}>
-            <Button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="hover:bg-primary-dark inline-flex w-full items-center justify-between bg-primary px-6 py-3 text-lg text-white transition-all duration-300"
-            >
-              <span className="flex items-center">
-                <Filter size={20} className="mr-2" />
-                Filter by Technology
-              </span>
-              {selectedTech.length > 0 && (
-                <span className="ml-2 rounded-full bg-white px-2 py-1 text-sm font-medium text-primary">
-                  {selectedTech.length}
+          <div className="flex w-full items-center gap-4">
+            <div className="relative w-full sm:w-[22rem]" ref={dropdownRef}>
+              <Button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="hover:bg-primary-dark inline-flex w-full items-center justify-between bg-primary px-6 py-3 text-lg text-white transition-all duration-300"
+              >
+                <span className="flex items-center">
+                  <Filter size={20} className="mr-2" />
+                  Filter by Technology
                 </span>
-              )}
-            </Button>
-            <AnimatePresence>
-              {isDropdownOpen && (
-                <motion.div
-                  className="absolute left-0 z-10 mt-2 w-full rounded-lg border border-primary/10 bg-background p-6 shadow-lg"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                >
-                  {Object.entries(techCategories).map(([category, techs]) => (
-                    <div key={category} className="mb-4">
-                      <h3 className="mb-2 text-sm font-semibold text-primary">
-                        {category}
-                      </h3>
-                      <div className="flex flex-wrap">
-                        {techs.map((tech) =>
-                          renderTechBadge(
-                            tech,
-                            selectedTech.includes(universalRelaxation(tech)),
-                          ),
-                        )}
-                      </div>
+                {selectedTech.length > 0 && (
+                  <span className="ml-2 rounded-full bg-white px-2 py-1 text-sm font-medium text-primary">
+                    {selectedTech.length}
+                  </span>
+                )}
+              </Button>
+              <AnimatePresence>
+                {isDropdownOpen && (
+                  <motion.div
+                    className="absolute left-0 z-10 mt-2 w-[calc(100vw-2rem)] rounded-lg border border-primary/10 bg-background shadow-lg sm:w-[60rem]"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                  >
+                    <div className="grid gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
+                      {Object.entries(techCategories).map(([category, techs]) => (
+                        <div key={category}>
+                          <h3 className="mb-3 text-sm font-semibold text-primary">
+                            {category}
+                          </h3>
+                          <div className="flex flex-col space-y-1">
+                            {techs.map((tech) => (
+                              <Button
+                                key={tech}
+                                onClick={() => toggleTechFilter(tech)}
+                                className={`group relative flex w-full items-center justify-start space-x-2 rounded-md px-3 py-1.5 text-sm transition-colors ${
+                                  selectedTech.includes(universalRelaxation(tech))
+                                    ? "dark:text-primary-light bg-primary/10 text-primary dark:bg-primary/20"
+                                    : "dark:hover:text-primary-light hover:bg-primary/5 hover:text-primary dark:hover:bg-primary/10"
+                                }`}
+                                variant="ghost"
+                              >
+                                {techIcons[tech]?.icon && (
+                                  <span className="flex h-4 w-4 items-center justify-center">
+                                    {React.createElement(techIcons[tech].icon, {
+                                      size: 14,
+                                    })}
+                                  </span>
+                                )}
+                                <span className="flex-1 text-left">{tech}</span>
+                                {selectedTech.includes(universalRelaxation(tech)) && (
+                                  <X
+                                    size={14}
+                                    className="text-red-500 opacity-0 transition-opacity group-hover:opacity-100"
+                                  />
+                                )}
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    onClick={() => setSortByRecent(!sortByRecent)}
+                    className={`inline-flex items-center justify-center px-4 py-2 ${
+                      sortByRecent
+                        ? "bg-primary text-white hover:bg-primary/90"
+                        : "bg-secondary hover:bg-secondary/80"
+                    }`}
+                    variant={sortByRecent ? "default" : "secondary"}
+                  >
+                    {sortByRecent ? (
+                      <RotateCcw size={20} className="mr-2" />
+                    ) : (
+                      <Clock size={20} className="mr-2" />
+                    )}
+                    {sortByRecent ? "Clear Sort" : "Sort Recent"}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Sort by recently updated projects</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
+
           {activeFilters.length > 0 && (
-            <div className="mt-4 flex flex-wrap sm:mt-0">{activeFilters}</div>
+            <div className="mt-4 flex w-full flex-wrap gap-2">
+              {activeFilters}
+            </div>
           )}
         </div>
+
         <motion.div
           className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
           layout

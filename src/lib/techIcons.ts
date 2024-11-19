@@ -1,24 +1,48 @@
 import { ReactNode } from "react";
-
 import {
+  Activity,
+  BarChart,
   Box,
   Brain,
+  Brush,
   CheckCircle,
   Chrome,
+  Cloud,
   Code,
   Cpu,
   CreditCard,
   Database,
-  Figma,
+  Edit,
+  ExternalLink,
   FileText,
   Flame,
+  Gem,
   GitBranch,
+  Grid,
+  HardDrive,
+  Hexagon,
+  Image,
+  Layers,
   Layout,
-  LucideIcon,
+  Map,
   Package,
   Paintbrush,
+  Pen,
+  PenTool,
+  PieChart,
+  Puzzle,
+  RefreshCw,
+  Route,
   Server,
+  ShoppingCart,
+  Sun,
+  Train,
+  Triangle,
+  Volume2,
   Wand,
+  Wifi,
+  Zap,
+  Phone,
 } from "lucide-react";
 
 export interface TechIcon {
@@ -32,19 +56,101 @@ export interface TechIcons {
 }
 
 export const techIcons: TechIcons = {
+  // Frameworks and Libraries
   "Vue.js": { icon: Code, color: "#4FC08D", docLink: "https://vuejs.org" },
   Vue3: { icon: Code, color: "#4FC08D", docLink: "https://vuejs.org" },
+  React: { icon: Code, color: "#61DAFB", docLink: "https://reactjs.org" },
+  "React 18": { icon: Code, color: "#61DAFB", docLink: "https://reactjs.org" },
+  "Next.js": { icon: Code, color: "#000000", docLink: "https://nextjs.org" },
+  "Next.js 15": { icon: Code, color: "#000000", docLink: "https://nextjs.org" },
+  "Node.js": { icon: Cpu, color: "#339933", docLink: "https://nodejs.org" },
+  Express: { icon: Server, color: "#000000", docLink: "https://expressjs.com" },
+  Rails: {
+    icon: Train,
+    color: "#CC0000",
+    docLink: "https://rubyonrails.org",
+  },
+  "Three.js": {
+    icon: Box,
+    color: "#000000",
+    docLink: "https://threejs.org",
+  },
+  "React Three Fiber": {
+    icon: Box,
+    color: "#000000",
+    docLink: "https://docs.pmnd.rs/react-three-fiber",
+  },
+  Vuex: {
+    icon: Layers,
+    color: "#41b883",
+    docLink: "https://vuex.vuejs.org",
+  },
+  "Vue Router": {
+    icon: Route,
+    color: "#42b883",
+    docLink: "https://router.vuejs.org",
+  },
+  jQuery: {
+    icon: Code,
+    color: "#0769AD",
+    docLink: "https://jquery.com",
+  },
+  Bootstrap: {
+    icon: Package,
+    color: "#7952B3",
+    docLink: "https://getbootstrap.com",
+  },
+  "Radix UI": {
+    icon: Grid,
+    color: "#000000",
+    docLink: "https://www.radix-ui.com/",
+  },
+  "Styled-Components": {
+    icon: Paintbrush,
+    color: "#DB7093",
+    docLink: "https://styled-components.com",
+  },
+  "Framer Motion": {
+    icon: Zap,
+    color: "#000000",
+    docLink: "https://www.framer.com/motion/",
+  },
+  GSAP: {
+    icon: RefreshCw,
+    color: "#88CE02",
+    docLink: "https://greensock.com/gsap/",
+  },
+  "Mapbox GL JS": {
+    icon: Map,
+    color: "#4264FB",
+    docLink: "https://www.mapbox.com/mapbox-gljs",
+  },
+  D3: {
+    icon: BarChart,
+    color: "#F9A03C",
+    docLink: "https://d3js.org",
+  },
+  Recharts: {
+    icon: PieChart,
+    color: "#00C49F",
+    docLink: "https://recharts.org",
+  },
+  "p5.js": {
+    icon: Pen,
+    color: "#ED225D",
+    docLink: "https://p5js.org",
+  },
+
+  // Languages
   TypeScript: {
     icon: Code,
     color: "#3178C6",
     docLink: "https://www.typescriptlang.org",
   },
-  "Node.js": { icon: Cpu, color: "#339933", docLink: "https://nodejs.org" },
-  Express: { icon: Server, color: "#000000", docLink: "https://expressjs.com" },
-  MongoDB: {
-    icon: Database,
-    color: "#47A248",
-    docLink: "https://www.mongodb.com",
+  JavaScript: {
+    icon: Code,
+    color: "#F7DF1E",
+    docLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
   },
   HTML5: {
     icon: FileText,
@@ -56,60 +162,170 @@ export const techIcons: TechIcons = {
     color: "#1572B6",
     docLink: "https://developer.mozilla.org/en-US/docs/Web/CSS",
   },
-  "Next.js": { icon: Code, color: "#000000", docLink: "https://nextjs.org" },
-  React: { icon: Code, color: "#61DAFB", docLink: "https://reactjs.org" },
+  Ruby: {
+    icon: Gem,
+    color: "#CC342D",
+    docLink: "https://www.ruby-lang.org",
+  },
+  SQL: {
+    icon: Database,
+    color: "#e38c00",
+    docLink: "https://en.wikipedia.org/wiki/SQL",
+  },
+  GLSL: {
+    icon: Sun,
+    color: "#000000",
+    docLink: "https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)",
+  },
+  WGSL: {
+    icon: Sun,
+    color: "#000000",
+    docLink: "https://gpuweb.github.io/gpuweb/wgsl.html",
+  },
+
+  // Databases and Backend Services
+  MongoDB: {
+    icon: Database,
+    color: "#47A248",
+    docLink: "https://www.mongodb.com",
+  },
+  PostgreSQL: {
+    icon: Database,
+    color: "#336791",
+    docLink: "https://www.postgresql.org",
+  },
+  Redis: {
+    icon: Layers,
+    color: "#DC382D",
+    docLink: "https://redis.io",
+  },
+  Supabase: {
+    icon: Cloud,
+    color: "#3ECF8E",
+    docLink: "https://supabase.io",
+  },
+
+  // UI Libraries and Styling
   "Tailwind CSS": {
     icon: Wand,
     color: "#38B2AC",
     docLink: "https://tailwindcss.com",
   },
-  Sass: {
-    icon: Paintbrush,
-    color: "#CC6699",
-    docLink: "https://sass-lang.com",
+  "Local Storage": {
+    icon: HardDrive,
+    color: "#FFA500",
+    docLink:
+      "https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage",
   },
-  JavaScript: {
-    icon: Code,
-    color: "#F7DF1E",
-    docLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-  },
+
+  // Tools and Platforms
   Git: { icon: GitBranch, color: "#F05032", docLink: "https://git-scm.com" },
-  "VS Code": {
-    icon: Code,
-    color: "#007ACC",
-    docLink: "https://code.visualstudio.com",
+  Webpack: {
+    icon: Hexagon,
+    color: "#8DD6F9",
+    docLink: "https://webpack.js.org",
   },
-  "Chrome DevTools": {
-    icon: Chrome,
-    color: "#4285F4",
-    docLink: "https://developer.chrome.com/docs/devtools/",
+  Vite: {
+    icon: Zap,
+    color: "#646CFF",
+    docLink: "https://vitejs.dev",
   },
-  Firebase: {
-    icon: Flame,
-    color: "#FFCA28",
-    docLink: "https://firebase.google.com",
-  },
-  Bootstrap: {
-    icon: Package,
-    color: "#7952B3",
-    docLink: "https://getbootstrap.com",
+  Parcel: {
+    icon: Box,
+    color: "#e07b24",
+    docLink: "https://parceljs.org",
   },
   Jest: { icon: CheckCircle, color: "#C21325", docLink: "https://jestjs.io/" },
-  Stripe: {
-    icon: CreditCard,
-    color: "#008CDD",
-    docLink: "https://stripe.com/",
+  "Chrome Extension API": {
+    icon: Puzzle,
+    color: "#4285F4",
+    docLink: "https://developer.chrome.com/docs/extensions/",
   },
-  Figma: { icon: Figma, color: "#F24E1E", docLink: "https://www.figma.com/" },
+  "Firefox Add-on API": {
+    icon: Puzzle,
+    color: "#FF7139",
+    docLink: "https://extensionworkshop.com/",
+  },
+  Vercel: {
+    icon: Triangle,
+    color: "#000000",
+    docLink: "https://vercel.com",
+  },
+  "Vercel Analytics": {
+    icon: BarChart,
+    color: "#000000",
+    docLink: "https://vercel.com/analytics",
+  },
+  Netlify: {
+    icon: Triangle,
+    color: "#00C7B7",
+    docLink: "https://www.netlify.com",
+  },
+  Heroku: {
+    icon: Cloud,
+    color: "#430098",
+    docLink: "https://www.heroku.com",
+  },
+  "Adobe CS": {
+    icon: PenTool,
+    color: "#FF0000",
+    docLink: "https://www.adobe.com/creativecloud.html",
+  },
+  "Lemon Squeezy": {
+    icon: ShoppingCart,
+    color: "#FFDD00",
+    docLink: "https://www.lemonsqueezy.com",
+  },
+
+  // APIs and Services
+  "OpenAI API": { icon: Brain, color: "#412991", docLink: "https://openai.com" },
+  "Stable Diffusion": {
+    icon: Image,
+    color: "#000000",
+    docLink: "https://stability.ai",
+  },
+  WebSocket: {
+    icon: Wifi,
+    color: "#000000",
+    docLink:
+      "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API",
+  },
   WebGL: {
     icon: Box,
     color: "#990000",
     docLink: "https://www.khronos.org/webgl/",
   },
-  OpenAI: { icon: Brain, color: "#412991", docLink: "https://openai.com" },
-  "Styled-Components": {
-    icon: Paintbrush,
-    color: "#DB7093",
-    docLink: "https://styled-components.com",
+  "Canvas API": {
+    icon: Brush,
+    color: "#000000",
+    docLink: "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API",
+  },
+  "Web Audio API": {
+    icon: Volume2,
+    color: "#000000",
+    docLink: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API",
+  },
+  "Chrome APIs": {
+    icon: Chrome,
+    color: "#4285F4",
+    docLink: "https://developer.chrome.com/docs/extensions/reference/",
+  },
+  "Monaco Editor": {
+    icon: Edit,
+    color: "#0E70C0",
+    docLink: "https://microsoft.github.io/monaco-editor/",
+  },
+
+  // Others
+  Ionic: {
+    icon: Phone,
+    color: "#3880FF",
+    docLink: "https://ionicframework.com",
+  },
+  "Rapier Physics": {
+    icon: Activity,
+    color: "#FF6D00",
+    docLink: "https://rapier.rs",
   },
 };
+

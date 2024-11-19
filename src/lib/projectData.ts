@@ -28,6 +28,7 @@ export interface ProjectDetail {
   challenges: ChallengeDetail[];
   learnings: LearningDetail[];
   additionalImages: string[];
+
 }
 
 export interface Project {
@@ -37,6 +38,7 @@ export interface Project {
   repoUrl: string;
   liveUrl: string;
   details: ProjectDetail;
+  updatedAt: string;
 }
 
 export const projectData: Project[] = [
@@ -47,6 +49,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/encompass-hero.png",
     repoUrl: "https://github.com/JayRichh",
     liveUrl: "https://encompasstours.co.nz",
+    updatedAt: "2024-11-19",
     details: {
       title: "Encompass Tours",
       description:
@@ -153,6 +156,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/restyled-logo.png",
     repoUrl: "https://github.com/JayRichh/",
     liveUrl: "https://restyled.app",
+    updatedAt: "2024-10-13",
     details: {
       title: "Restyled 2.0 - AI and Auth Learning Project",
       description:
@@ -251,6 +255,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/map3.png",
     repoUrl: "https://codepen.io/JayRichh/pen/xxNRWpK",
     liveUrl: "https://codepen.io/JayRichh/full/xxNRWpK",
+    updatedAt: "2024-11-17",
     details: {
       title: "Interactive Destination Map",
       description:
@@ -344,6 +349,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/temp1.png",
     liveUrl: "https://next-template-theta-ten.vercel.app",
     repoUrl: "https://github.com/JayRichh/next-template",
+    updatedAt: "2024-11-19",
     details: {
       title: "Modern Next.js Development Template",
       description:
@@ -436,6 +442,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/corn-main.png",
     repoUrl: "https://github.com/JayRichh/rack-n-bag",
     liveUrl: "https://rack-n-bag.vercel.app",
+    updatedAt: "2024-11-17",
     details: {
       title: "Rack 'n' Bag - Tournament Manager",
       description:
@@ -529,6 +536,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/workwaka.png",
     repoUrl: "https://github.com/JayRichh/workwaka",
     liveUrl: "https://workwaka.vercel.app",
+    updatedAt: "2024-11-10",
     details: {
       title: "The Work Waka - Job Application Tracker",
       description:
@@ -631,6 +639,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/v2.webp",
     repoUrl: "https://github.com/JayRichh/v-2",
     liveUrl: "",
+    updatedAt: "2024-09-10",
     details: {
       title: "V2 - Audio Visualization Testing",
       description:
@@ -723,6 +732,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/devmap-logo.webp",
     repoUrl: "",
     liveUrl: "https://devmap.me",
+    updatedAt: "2024-08-10",
     details: {
       title: "DevMap - Time Tracking Tool",
       description:
@@ -820,6 +830,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/pomodev-logo.png",
     repoUrl: "https://github.com/JayRichh/pomodev",
     liveUrl: "",
+    updatedAt: "2024-09-01",
     details: {
       title: "PomoDev - Pomodoro Timer Extension",
       description:
@@ -917,6 +928,7 @@ export const projectData: Project[] = [
     repoUrl: "https://github.com/JayRichh/axiom",
     imgUrl: "/images/axiom-1.png",
     liveUrl: "",
+    updatedAt: "2024-11-15",
     details: {
       title: "Axiom - Dev Testing Ground",
       description:
@@ -1008,6 +1020,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/a11.png",
     repoUrl: "https://github.com/JayRichh/aimtrainer",
     liveUrl: "https://aimtrainer-zeta.vercel.app/",
+    updatedAt: "2024-09-27",
     details: {
       title: "FPS Aim Trainer",
       description:
@@ -1137,6 +1150,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/otf-vue1.png",
     repoUrl: "https://github.com/JayRichh/otf-vue",
     liveUrl: "http://otf-vue.vercel.app",
+    updatedAt: "2024-01-25",
     details: {
       title: "Off The Floor - Vue Learning Project",
       description:
@@ -1227,6 +1241,7 @@ export const projectData: Project[] = [
       "Chrome DevTools extension for Appframe development. Built with Vue3 and Monaco editor.",
     imgUrl: "/images/afbuddy2.png",
     repoUrl: "https://github.com/JayRichh/afbuddy",
+    updatedAt: "2023-09-14",
     liveUrl: "",
     details: {
       title: "AF Buddy - Appframe Dev Toolkit",
@@ -1327,6 +1342,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/chat1.png",
     repoUrl: "https://github.com/JayRichh/chat",
     liveUrl: "https://jaychat.onrender.com/",
+     updatedAt: "2023-07-15",
     details: {
       title: "Chat + DALL-E Integration",
       description:
@@ -1420,6 +1436,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/top10.png",
     repoUrl: "https://github.com/JayRichh/the-odin-project",
     liveUrl: "",
+    updatedAt: "2023-01-01",
     details: {
       title: "The Odin Project - Learning Journey",
       description:
@@ -1591,6 +1608,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/fib.png",
     repoUrl: "https://codepen.io/jayrichh",
     liveUrl: "https://codepen.io/JayRichh/pen/QWRvEQd",
+    updatedAt: "2024-11-01",
     details: {
       title: "CodePen Visualizations",
       description:
@@ -1692,6 +1710,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/main1.png",
     repoUrl: "https://github.com/JayRichh/portfolio",
     liveUrl: "https://jayrich.dev",
+    updatedAt: "2024-11-18",
     details: {
       title: "Portfolio Website",
       description:
