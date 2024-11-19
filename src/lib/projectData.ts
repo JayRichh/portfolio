@@ -245,6 +245,99 @@ export const projectData: Project[] = [
     },
   },
   {
+    title: "Holiday House Map",
+    description:
+      "Interactive map visualization of holiday houses using Mapbox GL and custom UI components",
+    imgUrl: "/images/map3.png",
+    repoUrl: "https://codepen.io/JayRichh/pen/xxNRWpK",
+    liveUrl: "https://codepen.io/JayRichh/full/xxNRWpK",
+    details: {
+      title: "Interactive Destination Map",
+      description:
+        "Global visualization tool for Omega's holiday properties. Built with Mapbox GL JS and custom components for location browsing.",
+      technologies: [
+        "Mapbox GL JS",
+        "JavaScript",
+        "Bootstrap",
+        "CSS3",
+        "HTML5",
+        "jQuery",
+      ],
+      features: [
+        {
+          title: "Interactive Globe",
+          text: "3D globe visualization with custom fog effects and satellite imagery. Includes smooth camera transitions and custom markers.",
+          image: "/images/map2.png",
+        },
+        {
+          title: "Location Browser",
+          text: "Collapsible sidebar with country-based categorization. Features lazy-loaded images and responsive layout adaptation.",
+          image: "/images/map3.png",
+        },
+        {
+          title: "Custom Markers",
+          text: "Dynamic markers using location images with custom popups. Implements error checking for coordinate validation.",
+          image: "/images/map-markers.png",
+        },
+        {
+          title: "Responsive Design",
+          text: "Adaptive layout with collapsible sidebar and dynamic map resizing. Uses CSS variables for consistent theming.",
+          image: "/images/map-responsive.png",
+        },
+      ],
+      challenges: [
+        {
+          title: "Map Performance",
+          text: "Optimizing marker rendering and image loading for smooth globe interaction. Implemented lazy loading and marker clustering.",
+        },
+        {
+          title: "Responsive Layout",
+          text: "Managing map resizing and sidebar transitions across devices. Built custom resize handler for map reflow.",
+        },
+        {
+          title: "Data Validation",
+          text: "Implementing robust coordinate validation and error handling for location data. Added bounds checking and type validation.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Mapbox Integration",
+          points: [
+            {
+              text: "Globe projection setup and custom fog configuration",
+            },
+            {
+              text: "Custom marker implementation with image integration",
+            },
+          ],
+        },
+        {
+          title: "UI Architecture",
+          points: [
+            {
+              text: "Responsive sidebar design with dynamic content loading",
+            },
+            {
+              text: "CSS variable system for consistent theming",
+            },
+          ],
+        },
+        {
+          title: "Performance Optimization",
+          points: [
+            {
+              text: "Image lazy loading and marker clustering strategies",
+            },
+            {
+              text: "Efficient DOM updates for location filtering",
+            },
+          ],
+        },
+      ],
+      additionalImages: ["/images/map-locations.png", "/images/map-mobile.png"],
+    },
+  },
+  {
     title: "Rack 'n' Bag",
     description:
       "Simple tournament tracker built while learning Next.js app router and TypeScript",

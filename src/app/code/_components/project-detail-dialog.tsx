@@ -18,10 +18,10 @@ interface ImageWithFallbackProps {
   width?: number;
   height?: number;
   layout?: "fill" | "fixed" | "intrinsic" | "responsive";
-  objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
   className?: string;
   priority?: boolean;
   onLoadingComplete?: () => void;
+  style?: React.CSSProperties;
 }
 
 const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
@@ -229,7 +229,7 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
                 src={project.imgUrl}
                 alt={project.title}
                 layout="fill"
-                objectFit="cover"
+                style={{ objectFit: "cover" }}
                 className={`transition-opacity duration-500 ${
                   isImageLoading ? "opacity-0" : "opacity-100"
                 }`}
@@ -396,7 +396,7 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
                           src={imageSrc}
                           alt={`${project.title} Gallery Image ${index + 1}`}
                           layout="fill"
-                          objectFit="cover"
+                          style={{ objectFit: "cover" }}
                           className="transform transition-transform duration-300 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
