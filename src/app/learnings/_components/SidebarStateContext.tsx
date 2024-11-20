@@ -49,9 +49,10 @@ export const SidebarStateProvider: React.FC<React.PropsWithChildren> = ({
   // Existing state
   const [isCollapsed, setIsCollapsed] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("sidebarCollapsed") === "true";
+      const savedState = localStorage.getItem("sidebarCollapsed");
+      return savedState === null ? true : savedState === "true";
     }
-    return false;
+    return true;
   });
   const [collapsedSections, setCollapsedSections] = useState<
     Record<string, boolean>
