@@ -335,12 +335,13 @@ const CodePage: React.FC = () => {
           </div>
         </div>
 
-        <div className="mb-8 flex flex-wrap items-center justify-between">
-          <div className="flex w-full items-center gap-4">
-            <div className="relative w-full sm:w-[22rem]" ref={dropdownRef}>
+        <div className="mb-8 flex flex-col space-y-4">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="relative flex-1 min-w-[280px] " ref={dropdownRef}>
               <Button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="hover:bg-primary-dark inline-flex w-full items-center justify-between bg-primary px-6 py-3 text-lg text-white transition-all duration-300"
+                className="hover:bg-primary-dark inline-flex w-[280px] items-center justify-between bg-primary px-6 py-3 text-lg text-white transition-all duration-300"
+
               >
                 <span className="flex items-center">
                   <Filter size={20} className="mr-2" />
@@ -431,7 +432,7 @@ const CodePage: React.FC = () => {
           </div>
 
           {activeFilters.length > 0 && (
-            <div className="mt-4 flex w-full flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2">
               {activeFilters}
             </div>
           )}
