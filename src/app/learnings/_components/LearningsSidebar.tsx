@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
 import {
   AnimatePresence,
   motion,
@@ -10,7 +9,6 @@ import {
   useTransform,
 } from "framer-motion";
 import { ChevronLeft, ChevronRight, Layers, Pencil, Star } from "lucide-react";
-
 import { Button } from "../../../components/ui/button";
 import { useSidebarState } from "./SidebarStateContext";
 
@@ -127,7 +125,7 @@ export const LearningsSidebar: React.FC = () => {
         width: isCollapsed ? 60 : 250,
       }}
       transition={{ duration: 0.3 }}
-      className="fixed left-0 top-0 z-50 flex h-[calc(100vh-0rem)] flex-col border-r border-border bg-background text-foreground"
+      className="fixed left-0 top-16 z-40 flex h-[calc(100vh-4rem)] flex-col border-r border-border bg-background text-foreground"
     >
       <div className="flex h-16 flex-shrink-0 items-center justify-between border-b border-border px-4">
         <SpinningPen />

@@ -1,51 +1,54 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
 import React from "react";
+import { Metadata } from "next";
 import { ThemeProvider } from "../components/theme-provider";
+import { RouteTransition } from "../components/route-transition";
+import { PageContainer } from "../components/page-container";
 import { SiteHeader } from "../components/site-header";
-import { Analytics } from "@vercel/analytics/react";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-  display: "swap",
-  preload: true,
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-  display: "swap",
-  preload: true,
-});
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Jayden Richardson | Web Developer",
-  description:
-    "Portfolio of Jayden Richardson, showcasing expertise in TypeScript, React, Vue.js, and modern web solutions.",
+  title: {
+    default: "Jayden Richardson | Full Stack Developer",
+    template: "%s | Jayden Richardson",
+  },
+  description: "Full Stack Web Developer with a background in Industrial Electrical Engineering",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background font-sans antialiased`}
-      >
-        <ThemeProvider>
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/GeistMonoVF.woff"
+          as="font"
+          type="font/woff"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1">
+              <RouteTransition>
+                <PageContainer>
+                  {children}
+                </PageContainer>
+              </RouteTransition>
+            </main>
           </div>
         </ThemeProvider>
       </body>
-      <Analytics />
     </html>
   );
 }

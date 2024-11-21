@@ -5,56 +5,48 @@
 @layer base {
   :root {
     --background: 200 20% 98%;
-    --foreground: 200 40% 15%;
+    --foreground: 200 50% 10%;
     --card: 200 20% 98%;
-    --card-foreground: 200 40% 15%;
+    --card-foreground: 200 50% 10%;
     --popover: 200 20% 98%;
-    --popover-foreground: 200 40% 15%;
-    --primary: 160 85% 30%;
-    --primary-foreground: 150 80% 97%;
+    --popover-foreground: 200 50% 10%;
+    --primary: 160 85% 25%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 180 35% 85%;
-    --secondary-foreground: 180 40% 20%;
+    --secondary-foreground: 180 50% 15%;
     --muted: 210 30% 92%;
-    --muted-foreground: 215 25% 35%;
-    --accent: 160 75% 30%;
-    --accent-foreground: 160 80% 97%;
+    --muted-foreground: 215 35% 25%;
+    --accent: 160 75% 25%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 45%;
     --destructive-foreground: 0 0% 98%;
     --border: 200 30% 85%;
     --input: 200 30% 85%;
-    --ring: 160 85% 30%;
+    --ring: 160 85% 25%;
     --radius: 0.5rem;
   }
 
   .dark {
     --background: 200 50% 10%;
-    --foreground: 200 30% 85%;
+    --foreground: 200 30% 98%;
     --card: 200 40% 15%;
-    --card-foreground: 200 30% 85%;
+    --card-foreground: 200 30% 98%;
     --popover: 200 45% 9%;
-    --popover-foreground: 200 30% 85%;
-    --primary: 160 75% 45%;
-    --primary-foreground: 150 80% 97%;
+    --popover-foreground: 200 30% 98%;
+    --primary: 160 75% 50%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 180 20% 35%;
     --secondary-foreground: 180 50% 95%;
     --muted: 210 25% 27%;
-    --muted-foreground: 215 30% 60%;
-    --accent: 160 65% 40%;
-    --accent-foreground: 160 80% 97%;
+    --muted-foreground: 215 40% 80%;
+    --accent: 160 65% 50%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 70% 45%;
     --destructive-foreground: 0 0% 98%;
     --border: 200 30% 27%;
     --input: 200 30% 27%;
-    --ring: 160 75% 45%;
+    --ring: 160 75% 50%;
   }
-}
-
-.invert-text {
-  filter: invert(1);
-}
-.text-dynamic {
-  mix-blend-mode: difference;
-  color: white; /* Default color that blends */
 }
 
 @layer base {
@@ -63,10 +55,6 @@
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
-  }
-
-  .invert-text {
-    filter: invert(1);
   }
 
   html {
@@ -101,7 +89,7 @@
   }
 
   a:hover {
-    color: var(--primary-foreground);
+    color: var(--accent);
   }
 
   code {
@@ -154,21 +142,15 @@
   .no-text-select {
     user-select: none;
   }
-  @keyframes blip {
-    0% {
-      opacity: 0;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.5;
-      transform: scale(1.2);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(1.4);
-    }
-  }
-  .blip {
-    animation: blip 2s infinite;
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 }
