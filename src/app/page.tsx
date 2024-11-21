@@ -48,8 +48,8 @@ export default function HomePage() {
           </div>
 
           <p className="mx-auto mt-4 max-w-2xl text-lg text-foreground sm:text-xl md:text-2xl">
-            Full Stack Web Developer with a background in Industrial
-            Electrical Engineering
+            Full Stack Web Developer with a background in Industrial Electrical
+            Engineering
           </p>
           <p className="mt-2 text-lg text-foreground sm:text-xl md:text-2xl">
             Kiwi innovating in the UK

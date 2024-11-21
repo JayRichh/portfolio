@@ -11,7 +11,8 @@ export const metadata: Metadata = {
     default: "Jayden Richardson | Full Stack Developer",
     template: "%s | Jayden Richardson",
   },
-  description: "Full Stack Web Developer with a background in Industrial Electrical Engineering",
+  description:
+    "Full Stack Web Developer with a background in Industrial Electrical Engineering",
 };
 
 interface RootLayoutProps {
@@ -41,9 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <SiteHeader />
             <main className="flex-1">
               <RouteTransition>
-                <PageContainer>
-                  {children}
-                </PageContainer>
+                <PageContainer>{children}</PageContainer>
               </RouteTransition>
             </main>
           </div>

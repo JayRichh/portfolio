@@ -14,7 +14,11 @@ import ProjectDetailDialog from "./_components/project-detail-dialog";
 import { ImagePreloader } from "./_components/image-preloader";
 import { useProjectFiltering } from "./_hooks/useProjectFiltering";
 import { EXTERNAL_LINKS } from "./_constants";
-import { PageSection, PageTitle, PageDescription } from "../../components/page-container";
+import {
+  PageSection,
+  PageTitle,
+  PageDescription,
+} from "../../components/page-container";
 
 const CodePage: React.FC = () => {
   const [mounted, setMounted] = useState(false);
@@ -35,8 +39,8 @@ const CodePage: React.FC = () => {
   useEffect(() => {
     setMounted(true);
     // Prefetch about and learnings pages
-    router.prefetch('/about');
-    router.prefetch('/learnings');
+    router.prefetch("/about");
+    router.prefetch("/learnings");
   }, [router]);
 
   useEffect(() => {
@@ -74,8 +78,8 @@ const CodePage: React.FC = () => {
           <div className="mb-12">
             <PageTitle>Projects</PageTitle>
             <PageDescription>
-              Here's a look at the web development projects I've worked on, with a
-              range of technologies and approaches.
+              Here's a look at the web development projects I've worked on, with
+              a range of technologies and approaches.
             </PageDescription>
           </div>
         </div>
@@ -85,7 +89,10 @@ const CodePage: React.FC = () => {
 
   return (
     <PageSection>
-      <ImagePreloader projects={projectData} onLoadComplete={() => setIsLoading(false)} />
+      <ImagePreloader
+        projects={projectData}
+        onLoadComplete={() => setIsLoading(false)}
+      />
       <div className="container mx-auto max-w-7xl">
         <div className="mb-12">
           <PageTitle>Projects</PageTitle>

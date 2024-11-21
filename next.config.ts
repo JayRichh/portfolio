@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
@@ -21,27 +21,27 @@ const nextConfig: NextConfig = {
       },
     },
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: ["lucide-react", "framer-motion"],
   },
   headers: async () => {
     return [
       {
-        source: '/:all*(svg|jpg|png|webp|avif|woff)',
+        source: "/:all*(svg|jpg|png|webp|avif|woff)",
         locale: false,
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
       {
-        source: '/:all*(js|css)',
+        source: "/:all*(js|css)",
         locale: false,
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
@@ -53,7 +53,7 @@ const nextConfig: NextConfig = {
         ...config.optimization,
         minimize: true,
         splitChunks: {
-          chunks: 'all',
+          chunks: "all",
           minSize: 20000,
           maxSize: 244000,
           minChunks: 1,

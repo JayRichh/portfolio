@@ -28,7 +28,6 @@ export interface ProjectDetail {
   challenges: ChallengeDetail[];
   learnings: LearningDetail[];
   additionalImages: string[];
-
 }
 
 export interface Project {
@@ -1234,7 +1233,7 @@ export const projectData: Project[] = [
       ],
     },
   },
-  
+
   {
     title: "AF Buddy",
     description:
@@ -1342,7 +1341,7 @@ export const projectData: Project[] = [
     imgUrl: "/images/chat1.png",
     repoUrl: "https://github.com/JayRichh/chat",
     liveUrl: "https://jaychat.onrender.com/",
-     updatedAt: "2023-07-15",
+    updatedAt: "2023-07-15",
     details: {
       title: "Chat + DALL-E Integration",
       description:

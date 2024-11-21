@@ -12,7 +12,10 @@ interface SiteNavigationItemProps {
   children: React.ReactNode;
 }
 
-export function SiteNavigationItem({ path, children }: SiteNavigationItemProps) {
+export function SiteNavigationItem({
+  path,
+  children,
+}: SiteNavigationItemProps) {
   const currentPathName = usePathname();
   const router = useRouter();
   const isActive = isRouteActive(path, currentPathName);
@@ -37,7 +40,7 @@ export function SiteNavigationItem({ path, children }: SiteNavigationItemProps) 
           'after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 after:transition-transform after:duration-300':
             !isActive,
           "hover:after:scale-x-100": !isActive,
-        }
+        },
       )}
     >
       <motion.span

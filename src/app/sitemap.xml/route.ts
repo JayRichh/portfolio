@@ -1,30 +1,30 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://jayrich.dev',
+      url: "https://jayrich.dev",
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: "daily",
       priority: 1,
     },
     {
-      url: 'https://jayrich.dev/code',
+      url: "https://jayrich.dev/code",
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: 'https://jayrich.dev/about',
+      url: "https://jayrich.dev/about",
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: 'https://jayrich.dev/learnings',
+      url: "https://jayrich.dev/learnings",
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: "weekly",
       priority: 0.8,
     },
-  ]
+  ];
 }

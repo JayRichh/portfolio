@@ -28,11 +28,13 @@ export function SiteHeader() {
         ease: "easeOut",
       }}
     >
-      <div className={cn(
-        "container flex h-16 items-center justify-between",
-        "px-4 md:px-6 lg:px-8",
-        "transition-all duration-200 ease-in-out"
-      )}>
+      <div
+        className={cn(
+          "container flex h-16 items-center justify-between",
+          "px-4 md:px-6 lg:px-8",
+          "transition-all duration-200 ease-in-out",
+        )}
+      >
         <nav className="flex items-center space-x-1">
           {NAVIGATION_ITEMS.map(({ href, label }) => (
             <SiteNavigationItem key={href} path={href}>

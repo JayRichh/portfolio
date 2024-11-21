@@ -9,7 +9,9 @@ interface RouteTransitionProps {
   children: React.ReactNode;
 }
 
-export const RouteTransition: React.FC<RouteTransitionProps> = ({ children }) => {
+export const RouteTransition: React.FC<RouteTransitionProps> = ({
+  children,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -34,44 +36,45 @@ interface PageTransitionLinkProps {
   onClick?: (e: React.MouseEvent) => void;
 }
 
-export const PageTransitionLink = React.forwardRef<HTMLAnchorElement, PageTransitionLinkProps>(
-  ({ href, children, className, asChild = false, onClick, ...props }, ref) => {
-    const router = useRouter();
-    const pathname = usePathname();
+export const PageTransitionLink = React.forwardRef<
+  HTMLAnchorElement,
+  PageTransitionLinkProps
+>(({ href, children, className, asChild = false, onClick, ...props }, ref) => {
+  const router = useRouter();
+  const pathname = usePathname();
 
-    const handleClick = (e: React.MouseEvent) => {
-      e.preventDefault();
-      if (pathname === href) return;
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (pathname === href) return;
 
-      if (onClick) {
-        onClick(e);
-      }
-
-      router.push(href);
-    };
-
-    if (asChild) {
-      const child = React.Children.only(children) as React.ReactElement;
-      return React.cloneElement(child, {
-        onClick: handleClick,
-        className: cn(child.props.className, className),
-        ref,
-        ...props,
-      });
+    if (onClick) {
+      onClick(e);
     }
 
-    return (
-      <Link
-        href={href}
-        onClick={handleClick}
-        className={className}
-        ref={ref}
-        {...props}
-      >
-        {children}
-      </Link>
-    );
+    router.push(href);
+  };
+
+  if (asChild) {
+    const child = React.Children.only(children) as React.ReactElement;
+    return React.cloneElement(child, {
+      onClick: handleClick,
+      className: cn(child.props.className, className),
+      ref,
+      ...props,
+    });
   }
-);
+
+  return (
+    <Link
+      href={href}
+      onClick={handleClick}
+      className={className}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </Link>
+  );
+});
 
 PageTransitionLink.displayName = "PageTransitionLink";

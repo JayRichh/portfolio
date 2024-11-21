@@ -1,6 +1,5 @@
 "use client";
 
-
 import React, {
   useCallback,
   useEffect,
@@ -41,13 +40,20 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [selectedNode, setSelectedNode] = useState<LearningNode | null>(null);
   const [hoveredNode, setHoveredNode] = useState<LearningNode | null>(null);
-  const [activeBranchNodes, setActiveBranchNodes] = useState<Set<string>>(new Set());
+  const [activeBranchNodes, setActiveBranchNodes] = useState<Set<string>>(
+    new Set(),
+  );
   const rotationX = useRef(0);
   const rotationY = useRef(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [lastMousePosition, setLastMousePosition] = useState<{x: number; y: number} | null>(null);
+  const [lastMousePosition, setLastMousePosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
   const zoom = useRef(1);
-  const [touchStartDistance, setTouchStartDistance] = useState<number | null>(null);
+  const [touchStartDistance, setTouchStartDistance] = useState<number | null>(
+    null,
+  );
   const initialZoom = useRef(1);
 
   const memoizedHighlightedGroups = useMemo(
@@ -64,7 +70,8 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
     () =>
       debounce(() => {
         if (containerRef.current) {
-          const { width, height } = containerRef.current.getBoundingClientRect();
+          const { width, height } =
+            containerRef.current.getBoundingClientRect();
           setDimensions({ width, height: Math.max(600, height) });
         }
       }, 300),
@@ -135,7 +142,8 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
   const links = useMemo(() => generateLinks(nodesWithZ), [nodesWithZ]);
 
   useEffect(() => {
-    if (!svgRef.current || dimensions.width === 0 || dimensions.height === 0) return;
+    if (!svgRef.current || dimensions.width === 0 || dimensions.height === 0)
+      return;
 
     const svg = d3.select<SVGSVGElement, unknown>(svgRef.current);
     svg.selectAll("*").remove();
@@ -151,13 +159,15 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       .append("line")
       .attr("stroke", (d) => getLinkColor((d.source as LearningNode).group))
       .attr("stroke-opacity", 0.4) // Reduced default opacity
-      .attr("stroke-width", (d) =>
-        1 +
-        Math.min(
-          (d.source as LearningNode).importance || 1,
-          (d.target as LearningNode).importance || 1,
-        ) *
-          0.5,
+      .attr(
+        "stroke-width",
+        (d) =>
+          1 +
+          Math.min(
+            (d.source as LearningNode).importance || 1,
+            (d.target as LearningNode).importance || 1,
+          ) *
+            0.5,
       );
 
     const nodeSelection = g
@@ -215,7 +225,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       .append("div")
       .attr(
         "class",
-        "tooltip absolute pointer-events-none opacity-0 p-2 rounded shadow-md text-sm max-w-xs"
+        "tooltip absolute pointer-events-none opacity-0 p-2 rounded shadow-md text-sm max-w-xs",
       )
       .style("background-color", "rgba(0, 0, 0, 0.9)")
       .style("color", "#ffffff")
@@ -234,10 +244,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       )
       .force(
         "charge",
-        d3
-          .forceManyBody<LearningNode>()
-          .strength(-300)
-          .distanceMax(500),
+        d3.forceManyBody<LearningNode>().strength(-300).distanceMax(500),
       )
       .force("center", d3.forceCenter(0, 0));
 
@@ -277,7 +284,7 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
           .html(
             `<strong>${d.title}</strong>${
               d.description ? `<br/><br/>${d.description}` : ""
-            }`
+            }`,
           )
           .style("left", `${event.pageX + 15}px`)
           .style("top", `${event.pageY - 15}px`)
@@ -306,15 +313,26 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
       simulation.stop();
       tooltip.remove();
     };
-  }, [nodesWithZ, dimensions.width, dimensions.height, nodeRadius, links, learnings]);
+  }, [
+    nodesWithZ,
+    dimensions.width,
+    dimensions.height,
+    nodeRadius,
+    links,
+    learnings,
+  ]);
 
   useEffect(() => {
     if (!svgRef.current) return;
 
     const svg = d3.select<SVGSVGElement, unknown>(svgRef.current);
-    const nodeSelection = svg.selectAll<SVGCircleElement, LearningNode>("circle");
+    const nodeSelection = svg.selectAll<SVGCircleElement, LearningNode>(
+      "circle",
+    );
     const linkSelection = svg.selectAll<SVGLineElement, LinkData>("line");
-    const labelSelection = svg.selectAll<SVGGElement, LearningNode>(".labels g");
+    const labelSelection = svg.selectAll<SVGGElement, LearningNode>(
+      ".labels g",
+    );
 
     const timer = d3.timer(() => {
       const cosX = Math.cos(rotationX.current);
@@ -368,7 +386,10 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
           const bothPassFilters = sourceHighlighted && targetHighlighted;
 
           // Highlight connections for hovered node
-          if (hoveredNode && (sourceId === hoveredNode.id || targetId === hoveredNode.id)) {
+          if (
+            hoveredNode &&
+            (sourceId === hoveredNode.id || targetId === hoveredNode.id)
+          ) {
             return 0.8;
           }
 
@@ -391,7 +412,9 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         .attr("opacity", (d) => {
           const passesFilters =
             (memoizedHighlightedGroups.length === 0 ||
-              memoizedHighlightedGroups.includes(d.group?.toLowerCase() || "")) &&
+              memoizedHighlightedGroups.includes(
+                d.group?.toLowerCase() || "",
+              )) &&
             (memoizedHighlightedImportance.length === 0 ||
               memoizedHighlightedImportance.includes(d.importance || 0));
 
@@ -420,7 +443,9 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
         .style("opacity", (d) => {
           const passesFilters =
             (memoizedHighlightedGroups.length === 0 ||
-              memoizedHighlightedGroups.includes(d.group?.toLowerCase() || "")) &&
+              memoizedHighlightedGroups.includes(
+                d.group?.toLowerCase() || "",
+              )) &&
             (memoizedHighlightedImportance.length === 0 ||
               memoizedHighlightedImportance.includes(d.importance || 0));
 
@@ -488,7 +513,10 @@ const MindMap: React.FC<MindMapProps> = ({ learnings }) => {
     event.preventDefault();
     const delta = event.deltaY;
     const zoomFactor = 0.001;
-    zoom.current = Math.max(0.1, Math.min(5, zoom.current - delta * zoomFactor));
+    zoom.current = Math.max(
+      0.1,
+      Math.min(5, zoom.current - delta * zoomFactor),
+    );
   };
 
   const handleTouchStart = (event: React.TouchEvent<SVGSVGElement>) => {

@@ -37,10 +37,12 @@ export const TechBadge: React.FC<TechBadgeProps> = ({
         {
           "w-full text-left": !isActive,
           "inline-flex": isActive,
-          "dark:text-primary-light bg-primary/10 text-primary dark:bg-primary/20": isActive,
-          "dark:hover:text-primary-light hover:bg-primary/5 hover:text-primary dark:hover:bg-primary/10": !isActive,
+          "dark:text-primary-light bg-primary/10 text-primary dark:bg-primary/20":
+            isActive,
+          "dark:hover:text-primary-light hover:bg-primary/5 hover:text-primary dark:hover:bg-primary/10":
+            !isActive,
           "cursor-default": !isClickable,
-        }
+        },
       )}
       variant={isActive ? "secondary" : "ghost"}
       disabled={!isClickable}

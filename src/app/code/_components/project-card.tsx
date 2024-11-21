@@ -43,8 +43,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             sizes={IMAGE_CONFIG.SIZES}
             className={`
               object-cover transition-transform duration-300
-              ${imageLoaded ? 'opacity-100' : 'opacity-0'}
-              ${imageLoaded ? 'group-hover:scale-105' : ''}
+              ${imageLoaded ? "opacity-100" : "opacity-0"}
+              ${imageLoaded ? "group-hover:scale-105" : ""}
             `}
             quality={IMAGE_CONFIG.QUALITY}
             onLoadingComplete={() => setImageLoaded(true)}
@@ -62,11 +62,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           {project.details.technologies
             .slice(0, TECH_DISPLAY_LIMIT)
             .map((tech) => (
-              <TechBadge
-                key={tech}
-                tech={tech}
-                isClickable={false}
-              />
+              <TechBadge key={tech} tech={tech} isClickable={false} />
             ))}
         </div>
       </CardContent>

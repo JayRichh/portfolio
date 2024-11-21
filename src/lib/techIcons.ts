@@ -278,7 +278,11 @@ export const techIcons: TechIcons = {
   },
 
   // APIs and Services
-  "OpenAI API": { icon: Brain, color: "#412991", docLink: "https://openai.com" },
+  "OpenAI API": {
+    icon: Brain,
+    color: "#412991",
+    docLink: "https://openai.com",
+  },
   "Stable Diffusion": {
     icon: Image,
     color: "#000000",
@@ -287,8 +291,7 @@ export const techIcons: TechIcons = {
   WebSocket: {
     icon: Wifi,
     color: "#000000",
-    docLink:
-      "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API",
+    docLink: "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API",
   },
   WebGL: {
     icon: Box,
@@ -328,4 +331,3 @@ export const techIcons: TechIcons = {
     docLink: "https://rapier.rs",
   },
 };
-

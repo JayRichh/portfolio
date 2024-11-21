@@ -34,7 +34,7 @@ export const ImagePreloader: React.FC<ImagePreloaderProps> = ({
       try {
         await Promise.all(imagePromises);
       } catch (error) {
-        console.error('Error preloading images:', error);
+        console.error("Error preloading images:", error);
       } finally {
         // Add a small delay to ensure smooth transition
         setTimeout(onLoadComplete, 300);

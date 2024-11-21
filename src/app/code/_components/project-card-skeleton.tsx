@@ -17,10 +17,7 @@ export const ProjectCardSkeleton: React.FC = () => {
         </div>
         <div className="mb-4 flex flex-wrap gap-2">
           {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className="h-6 w-16 bg-muted animate-pulse rounded"
-            />
+            <div key={i} className="h-6 w-16 bg-muted animate-pulse rounded" />
           ))}
         </div>
       </div>

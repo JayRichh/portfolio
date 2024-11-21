@@ -63,7 +63,10 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
   return (
     <div className="mb-8 flex flex-col space-y-4">
       <div className="flex flex-wrap items-center gap-4">
-        <div className="relative flex-1 min-w-[280px] max-w-[280px]" ref={dropdownRef}>
+        <div
+          className="relative flex-1 min-w-[280px] max-w-[280px]"
+          ref={dropdownRef}
+        >
           <Button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="hover:bg-primary-dark inline-flex w-full items-center justify-between bg-primary px-6 py-3 text-lg text-white transition-all duration-300"

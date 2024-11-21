@@ -70,25 +70,28 @@ export const universalRelaxation = (tech: string): string => {
 
 export const sortProjectsByDate = <T extends { updatedAt: string }>(
   projects: T[],
-  ascending: boolean = false
+  ascending: boolean = false,
 ): T[] => {
   return [...projects].sort((a, b) => {
-    const comparison = new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    const comparison =
+      new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
     return ascending ? -comparison : comparison;
   });
 };
 
-export const filterProjectsByTech = <T extends { details: { technologies: string[] } }>(
+export const filterProjectsByTech = <
+  T extends { details: { technologies: string[] } },
+>(
   projects: T[],
-  selectedTech: string[]
+  selectedTech: string[],
 ): T[] => {
   if (!selectedTech.length) return projects;
-  
+
   return projects.filter((project) =>
     selectedTech.every((tech) =>
       project.details.technologies
         .map(universalRelaxation)
-        .includes(universalRelaxation(tech))
-    )
+        .includes(universalRelaxation(tech)),
+    ),
   );
 };

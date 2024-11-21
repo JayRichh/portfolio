@@ -48,7 +48,9 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <h3 className="text-xl font-semibold text-primary">No Projects Found</h3>
+          <h3 className="text-xl font-semibold text-primary">
+            No Projects Found
+          </h3>
           <p className="mt-2 text-muted-foreground">
             Try adjusting your filters to find more projects.
           </p>
@@ -64,7 +66,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
               exit={{ opacity: 0 }}
               transition={{
                 opacity: { duration: 0.2 },
-                layout: { duration: 0.3 }
+                layout: { duration: 0.3 },
               }}
             >
               <ProjectCard

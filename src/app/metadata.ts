@@ -5,7 +5,8 @@ export const metadata: Metadata = {
     default: "Jayden Richardson | Full Stack Developer",
     template: "%s | Jayden Richardson",
   },
-  description: "Full Stack Web Developer with a background in Industrial Electrical Engineering",
+  description:
+    "Full Stack Web Developer with a background in Industrial Electrical Engineering",
   keywords: [
     "Full Stack Developer",
     "Web Development",
@@ -26,13 +27,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://jayrich.dev",
     title: "Jayden Richardson | Full Stack Developer",
-    description: "Full Stack Web Developer with a background in Industrial Electrical Engineering",
+    description:
+      "Full Stack Web Developer with a background in Industrial Electrical Engineering",
     siteName: "Jayden Richardson Portfolio",
   },
   twitter: {
     card: "summary_large_image",
     title: "Jayden Richardson | Full Stack Developer",
-    description: "Full Stack Web Developer with a background in Industrial Electrical Engineering",
+    description:
+      "Full Stack Web Developer with a background in Industrial Electrical Engineering",
   },
   robots: {
     index: true,

@@ -16,7 +16,8 @@ export const GRID_BREAKPOINTS = {
 
 export const PAGE_METADATA = {
   TITLE: "Projects | Jayden Richardson",
-  DESCRIPTION: "Web development projects showcasing various technologies and approaches",
+  DESCRIPTION:
+    "Web development projects showcasing various technologies and approaches",
 } as const;
 
 export const TECH_DISPLAY_LIMIT = 5;
