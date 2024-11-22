@@ -19,13 +19,13 @@ export const ImagePreloader: React.FC<ImagePreloaderProps> = ({
         .slice(0, 3) // Reduced from 6 to 3 for better initial load
         .map((project) => {
           return new Promise((resolve, reject) => {
-            const img = document.createElement('img');
+            const img = document.createElement("img");
             img.onload = resolve;
             img.onerror = reject;
             img.src = project.imgUrl;
             // Use fetchpriority for the first image
             if (projects.indexOf(project) === 0) {
-              img.setAttribute('fetchpriority', 'high');
+              img.setAttribute("fetchpriority", "high");
             }
           });
         });
@@ -56,7 +56,9 @@ export const ImagePreloader: React.FC<ImagePreloaderProps> = ({
         />
       ))}
       {/* Add image size hints for the browser */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         @media (min-width: 640px) {
           img {
             width: 640px;
@@ -65,7 +67,9 @@ export const ImagePreloader: React.FC<ImagePreloaderProps> = ({
             contain: size layout;
           }
         }
-      `}} />
+      `,
+        }}
+      />
     </>
   );
 };

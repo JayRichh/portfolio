@@ -46,7 +46,7 @@ const nextConfig: NextConfig = {
           {
             key: "Link",
             value: '<https://vercel.live>; rel="preconnect"',
-          }
+          },
         ],
       },
       {
@@ -61,7 +61,7 @@ const nextConfig: NextConfig = {
           {
             key: "Priority",
             value: "high",
-          }
+          },
         ],
       },
     ];

@@ -33,9 +33,9 @@ export const PageSection: React.FC<PageContainerProps> = ({
         className,
       )}
     >
-      <div 
+      <div
         className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8"
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
       >
         {children}
       </div>
@@ -47,9 +47,7 @@ export const PageTitle: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <h1 
-      className="mb-4 mt-16 text-4xl font-extrabold text-primary sm:text-5xl md:text-6xl"
-    >
+    <h1 className="mb-4 mt-16 text-4xl font-extrabold text-primary sm:text-5xl md:text-6xl">
       {children}
     </h1>
   );
@@ -59,9 +57,7 @@ export const PageDescription: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <p 
-      className="mt-4 max-w-2xl text-lg text-muted-foreground sm:text-xl pb-8"
-    >
+    <p className="mt-4 max-w-2xl text-lg text-muted-foreground sm:text-xl pb-8">
       {children}
     </p>
   );

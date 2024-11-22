@@ -26,7 +26,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         {/* Add preconnect hints */}
         <link rel="preconnect" href="https://vercel.live" />
         <link rel="dns-prefetch" href="https://vercel.live" />
-        
+
         {/* Preload critical fonts */}
         <link
           rel="preload"
@@ -37,13 +37,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 
         {/* Add display=optional to prevent layout shifts from custom fonts */}
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
           @font-face {
             font-family: 'GeistMono';
             src: url('/fonts/GeistMonoVF.woff') format('woff');
             font-display: optional;
           }
-        `}} />
+        `,
+          }}
+        />
       </head>
       <body>
         <ThemeProvider
