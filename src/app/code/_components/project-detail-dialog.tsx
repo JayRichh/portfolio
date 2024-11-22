@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useCallback, MouseEvent } from "react";
-import Image from "next/legacy/image";
-import { ExternalLink, Github, X, ImageIcon } from "lucide-react";
-import { createPortal } from "react-dom";
+import React, { useState, useCallback } from "react";
+import Image from "next/image";
+import { ExternalLink, Github, ImageIcon } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import {
   Dialog,
@@ -11,22 +10,20 @@ import {
 } from "../../../components/ui/dialog";
 import { LoadingOverlay } from "../../../components/ui/loading-overlay";
 import { Project } from "../../../lib/projectData";
+import { Lightbox } from "./lightbox";
 
 interface ImageWithFallbackProps {
   src: string;
   alt: string;
-  width?: number;
-  height?: number;
-  layout?: "fill" | "fixed" | "intrinsic" | "responsive";
   className?: string;
   priority?: boolean;
   onLoadingComplete?: () => void;
-  style?: React.CSSProperties;
 }
 
 const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   src,
   alt,
+  className = "",
   ...props
 }) => {
   const [error, setError] = useState(false);
@@ -40,80 +37,17 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   }
 
   return (
-    <Image src={src} alt={alt} onError={() => setError(true)} {...props} />
-  );
-};
-
-const Lightbox: React.FC<{
-  images: { src: string; alt: string }[];
-  currentIndex: number;
-  onClose: () => void;
-  onPrev: () => void;
-  onNext: () => void;
-}> = ({ images, currentIndex, onClose, onPrev, onNext }) => {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") onPrev();
-      if (e.key === "ArrowRight") onNext();
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onClose, onPrev, onNext]);
-
-  if (typeof window === "undefined") return null;
-
-  return createPortal(
-    <div className="fixed inset-0" style={{ zIndex: 99999 }}>
-      <div className="absolute inset-0 bg-black/90" onClick={onClose} />
-      <div className="relative z-10 flex h-full items-center justify-center">
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onClose();
-          }}
-          className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none"
-          style={{ zIndex: 100000 }}
-        >
-          <X size={24} />
-        </button>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onPrev();
-          }}
-          className="absolute left-4 top-1/2 -translate-y-1/2 transform flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none"
-          style={{ zIndex: 100000 }}
-        >
-          &#10094;
-        </button>
-        <div
-          className="relative max-h-[90vh] max-w-[90vw]"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <ImageWithFallback
-            src={images[currentIndex].src}
-            alt={images[currentIndex].alt}
-            width={1200}
-            height={800}
-            className="h-auto w-auto object-contain"
-            priority
-          />
-        </div>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onNext();
-          }}
-          className="absolute right-4 top-1/2 -translate-y-1/2 transform flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none"
-          style={{ zIndex: 100000 }}
-        >
-          &#10095;
-        </button>
-      </div>
-    </div>,
-    document.body,
+    <div className={`relative aspect-video w-full overflow-hidden ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        className="object-cover"
+        onError={() => setError(true)}
+        {...props}
+      />
+    </div>
   );
 };
 
@@ -130,107 +64,44 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Collect all valid images from the project
+  // Collect all images
   const allImages = [
-    // Hero image
     { src: project.imgUrl, alt: project.title },
-    // Feature images
     ...project.details.features
-      .filter((feature) => feature.image && typeof feature.image === "string")
-      .map((feature) => ({
-        src: feature.image!,
-        alt: feature.title,
-      })),
-    // Challenge images
+      .filter(f => f.image)
+      .map(f => ({ src: f.image!, alt: f.title })),
     ...(project.details.challenges || [])
-      .filter(
-        (challenge) => challenge.image && typeof challenge.image === "string",
-      )
-      .map((challenge) => ({
-        src: challenge.image!,
-        alt: challenge.title,
-      })),
-    // Additional images
+      .filter(c => c.image)
+      .map(c => ({ src: c.image!, alt: c.title })),
     ...(project.details.additionalImages || [])
-      .filter((src) => src && typeof src === "string")
-      .map((src) => ({
-        src,
-        alt: `${project.title} Additional Image`,
-      })),
-  ].filter((img) => img && img.src);
+      .map(src => ({ src, alt: `${project.title} Gallery Image` }))
+  ].filter(img => img.src);
 
-  const openLightbox = (index: number) => {
-    if (index >= 0 && index < allImages.length) {
-      setCurrentImageIndex(index);
-      setLightboxOpen(true);
-    }
-  };
-
-  const closeLightbox = useCallback(() => {
-    setLightboxOpen(false);
+  const handleImageClick = useCallback((index: number) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
   }, []);
-
-  const prevImage = useCallback(() => {
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? allImages.length - 1 : prev - 1,
-    );
-  }, [allImages.length]);
-
-  const nextImage = useCallback(() => {
-    setCurrentImageIndex((prev) =>
-      prev === allImages.length - 1 ? 0 : prev + 1,
-    );
-  }, [allImages.length]);
-
-  // Calculate image indices
-  const getFeatureImageIndex = (featureIndex: number) => {
-    return 1 + featureIndex; // Offset by 1 for hero image
-  };
-
-  const getChallengeImageIndex = (challengeIndex: number) => {
-    const featureImagesCount = project.details.features.filter(
-      (f) => f.image,
-    ).length;
-    return 1 + featureImagesCount + challengeIndex;
-  };
-
-  const getGalleryImageIndex = (galleryIndex: number) => {
-    const featureImagesCount = project.details.features.filter(
-      (f) => f.image,
-    ).length;
-    const challengeImagesCount = (project.details.challenges || []).filter(
-      (c) => c.image,
-    ).length;
-    return 1 + featureImagesCount + challengeImagesCount + galleryIndex;
-  };
 
   return (
     <>
-      <Dialog
-        open
-        onOpenChange={(open) => {
-          if (!open && !lightboxOpen) {
-            onClose();
-          }
-        }}
-      >
+      <Dialog open onOpenChange={(open) => !open && onClose()}>
         <DialogContent className="max-h-[90vh] w-full max-w-6xl overflow-y-auto bg-white p-0 dark:bg-gray-900">
           <DialogHeader className="relative mb-6">
             <div
-              className="relative min-h-[50vh] w-full cursor-pointer overflow-hidden"
-              onClick={() => openLightbox(0)}
+              className="relative aspect-video w-full cursor-pointer overflow-hidden"
+              onClick={() => handleImageClick(0)}
             >
               {isImageLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
                   <LoadingOverlay fullPage={false} displayLogo={false} />
                 </div>
               )}
-              <ImageWithFallback
+              <Image
                 src={project.imgUrl}
                 alt={project.title}
-                layout="fill"
-                style={{ objectFit: "cover" }}
-                className={`transition-opacity duration-500 ${
+                fill
+                sizes="100vw"
+                className={`object-cover transition-opacity duration-500 ${
                   isImageLoading ? "opacity-0" : "opacity-100"
                 }`}
                 onLoadingComplete={() => setIsImageLoading(false)}
@@ -286,16 +157,12 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
                     </p>
                     {feature.image && (
                       <div
-                        className="relative mt-4 cursor-pointer overflow-hidden rounded-lg"
-                        onClick={() =>
-                          openLightbox(getFeatureImageIndex(index))
-                        }
+                        className="cursor-pointer overflow-hidden rounded-lg"
+                        onClick={() => handleImageClick(index + 1)}
                       >
                         <ImageWithFallback
                           src={feature.image}
                           alt={feature.title}
-                          width={600}
-                          height={340}
                           className="transform transition-transform duration-300 hover:scale-105"
                         />
                       </div>
@@ -305,14 +172,15 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
               </div>
             </section>
 
-            {project.details.challenges &&
-              project.details.challenges.length > 0 && (
-                <section className="rounded-xl bg-gray-50 p-6 dark:bg-gray-800/50">
-                  <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-                    Challenges Encountered
-                  </h3>
-                  <div className="space-y-6">
-                    {project.details.challenges.map((challenge, index) => (
+            {project.details.challenges?.length > 0 && (
+              <section className="rounded-xl bg-gray-50 p-6 dark:bg-gray-800/50">
+                <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
+                  Challenges Encountered
+                </h3>
+                <div className="space-y-6">
+                  {project.details.challenges.map((challenge, index) => {
+                    const imageIndex = project.details.features.filter(f => f.image).length + index + 1;
+                    return (
                       <div
                         key={index}
                         className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
@@ -325,86 +193,85 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
                         </p>
                         {challenge.image && (
                           <div
-                            className="relative mt-4 cursor-pointer overflow-hidden rounded-lg"
-                            onClick={() =>
-                              openLightbox(getChallengeImageIndex(index))
-                            }
+                            className="mt-4 cursor-pointer overflow-hidden rounded-lg"
+                            onClick={() => handleImageClick(imageIndex)}
                           >
                             <ImageWithFallback
                               src={challenge.image}
                               alt={challenge.title}
-                              width={600}
-                              height={340}
                               className="transform transition-transform duration-300 hover:scale-105"
                             />
                           </div>
                         )}
                       </div>
-                    ))}
-                  </div>
-                </section>
-              )}
+                    );
+                  })}
+                </div>
+              </section>
+            )}
 
-            {project.details.learnings &&
-              project.details.learnings.length > 0 && (
-                <section className="rounded-xl bg-gray-50 p-6 dark:bg-gray-800/50">
-                  <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-                    Key Learnings
-                  </h3>
-                  <div className="grid gap-6 sm:grid-cols-2">
-                    {project.details.learnings.map((learning, index) => (
-                      <div
-                        key={index}
-                        className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
-                      >
-                        <h4 className="mb-4 text-lg font-bold text-gray-900 dark:text-white">
-                          {learning.title}
-                        </h4>
-                        <ul className="space-y-3">
-                          {learning.points.map((point, pointIndex) => (
-                            <li
-                              key={pointIndex}
-                              className="flex items-start space-x-2 text-gray-600 dark:text-gray-400"
-                            >
-                              <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-500" />
-                              <span>{point.text}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              )}
+            {project.details.learnings?.length > 0 && (
+              <section className="rounded-xl bg-gray-50 p-6 dark:bg-gray-800/50">
+                <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
+                  Key Learnings
+                </h3>
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {project.details.learnings.map((learning, index) => (
+                    <div
+                      key={index}
+                      className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
+                    >
+                      <h4 className="mb-4 text-lg font-bold text-gray-900 dark:text-white">
+                        {learning.title}
+                      </h4>
+                      <ul className="space-y-3">
+                        {learning.points.map((point, pointIndex) => (
+                          <li
+                            key={pointIndex}
+                            className="flex items-start space-x-2 text-gray-600 dark:text-gray-400"
+                          >
+                            <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-500" />
+                            <span>{point.text}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
 
-            {project.details.additionalImages &&
-              project.details.additionalImages.length > 0 && (
-                <section>
-                  <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-                    Project Gallery
-                  </h3>
-                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-                    {project.details.additionalImages.map((imageSrc, index) => (
+            {project.details.additionalImages?.length > 0 && (
+              <section>
+                <h3 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
+                  Project Gallery
+                </h3>
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                  {project.details.additionalImages.map((imageSrc, index) => {
+                    const galleryIndex = 1 + 
+                      project.details.features.filter(f => f.image).length + 
+                      (project.details.challenges?.filter(c => c.image).length || 0) + 
+                      index;
+                    return (
                       <button
                         key={index}
-                        onClick={() =>
-                          openLightbox(getGalleryImageIndex(index))
-                        }
+                        onClick={() => handleImageClick(galleryIndex)}
                         className="group relative aspect-video overflow-hidden rounded-lg"
                       >
-                        <ImageWithFallback
+                        <Image
                           src={imageSrc}
                           alt={`${project.title} Gallery Image ${index + 1}`}
-                          layout="fill"
-                          style={{ objectFit: "cover" }}
-                          className="transform transition-transform duration-300 group-hover:scale-110"
+                          fill
+                          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                          className="object-cover transition-transform duration-300 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
                       </button>
-                    ))}
-                  </div>
-                </section>
-              )}
+                    );
+                  })}
+                </div>
+              </section>
+            )}
 
             <div className="flex flex-col justify-end space-y-4 pb-6 sm:flex-row sm:space-x-4 sm:space-y-0">
               {project.liveUrl && (
@@ -448,9 +315,13 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
         <Lightbox
           images={allImages}
           currentIndex={currentImageIndex}
-          onClose={closeLightbox}
-          onPrev={prevImage}
-          onNext={nextImage}
+          onClose={() => setLightboxOpen(false)}
+          onPrev={() => setCurrentImageIndex(prev => 
+            prev === 0 ? allImages.length - 1 : prev - 1
+          )}
+          onNext={() => setCurrentImageIndex(prev => 
+            prev === allImages.length - 1 ? 0 : prev + 1
+          )}
         />
       )}
     </>

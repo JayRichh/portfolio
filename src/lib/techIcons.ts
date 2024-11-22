@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import {
   Activity,
+  Atom,
   BarChart,
   Box,
   Brain,
@@ -16,6 +17,7 @@ import {
   ExternalLink,
   FileText,
   Flame,
+  Gamepad,
   Gem,
   GitBranch,
   Grid,
@@ -35,6 +37,7 @@ import {
   Route,
   Server,
   ShoppingCart,
+  Square,
   Sun,
   Train,
   Triangle,
@@ -43,6 +46,7 @@ import {
   Wifi,
   Zap,
   Phone,
+  Scissors,
 } from "lucide-react";
 
 export interface TechIcon {
@@ -59,10 +63,10 @@ export const techIcons: TechIcons = {
   // Frameworks and Libraries
   "Vue.js": { icon: Code, color: "#4FC08D", docLink: "https://vuejs.org" },
   Vue3: { icon: Code, color: "#4FC08D", docLink: "https://vuejs.org" },
-  React: { icon: Code, color: "#61DAFB", docLink: "https://reactjs.org" },
-  "React 18": { icon: Code, color: "#61DAFB", docLink: "https://reactjs.org" },
-  "Next.js": { icon: Code, color: "#000000", docLink: "https://nextjs.org" },
-  "Next.js 15": { icon: Code, color: "#000000", docLink: "https://nextjs.org" },
+  React: { icon: Atom, color: "#61DAFB", docLink: "https://reactjs.org" },
+  "React 18": { icon: Atom, color: "#61DAFB", docLink: "https://reactjs.org" },
+  "Next.js": { icon: Triangle, color: "#000000", docLink: "https://nextjs.org" },
+  "Next.js 15": { icon: Triangle, color: "#000000", docLink: "https://nextjs.org" },
   "Node.js": { icon: Cpu, color: "#339933", docLink: "https://nodejs.org" },
   Express: { icon: Server, color: "#000000", docLink: "https://expressjs.com" },
   Rails: {
@@ -139,6 +143,11 @@ export const techIcons: TechIcons = {
     icon: Pen,
     color: "#ED225D",
     docLink: "https://p5js.org",
+  },
+  "Fabric.js": {
+    icon: Scissors,
+    color: "#ff5722",
+    docLink: "http://fabricjs.com/",
   },
 
   // Languages
@@ -282,6 +291,11 @@ export const techIcons: TechIcons = {
     icon: Brain,
     color: "#412991",
     docLink: "https://openai.com",
+  },
+  "Steam Web API": {
+    icon: Gamepad,
+    color: "#1b2838",
+    docLink: "https://partner.steamgames.com/doc/webapi",
   },
   "Stable Diffusion": {
     icon: Image,

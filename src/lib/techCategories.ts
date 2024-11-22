@@ -36,6 +36,7 @@ export const techCategories: Record<string, string[]> = {
     "Canvas API",
     "Web Audio API",
     "Mapbox GL JS",
+    "Steam Web API",
   ],
   Others: [
     "Ionic",

@@ -147,7 +147,104 @@ export const projectData: Project[] = [
       ],
     },
   },
-
+  {
+    title: "SteamShare",
+    description: "Steam screenshot management platform with integrated gallery organization and canvas editing. Features seamless Steam authentication, real-time data fetch, and collage creation tools.",
+    imgUrl: "/images/steam4.png",
+    repoUrl: "https://github.com/JayRichh/steamshare",
+    liveUrl: "https://steamshare.net",
+    updatedAt: "2024-11-22",
+    details: {
+      title: "SteamShare - Steam Screenshot Platform",
+      description: "A comprehensive platform for managing and editing Steam screenshots, featuring seamless Steam integration, real-time friend activity tracking, and a professional-grade canvas editor for creating gaming collages.",
+      technologies: [
+        "Next.js",
+        "React 18",
+        "TypeScript",
+        "Fabric.js",
+        "Tailwind CSS",
+        "Steam Web API",
+        "Framer Motion",
+        "Vercel"
+      ],
+      features: [
+        {
+          title: "Steam Integration",
+          text: "Seamless Steam authentication and real-time data synchronization. Features secure session management and friend activity tracking.",
+          image: "/images/steam2.png"
+        },
+        {
+          title: "Screenshot Gallery",
+          text: "Advanced screenshot management with filtering, pagination, and friend view capabilities. Supports real-time updates and efficient image loading.",
+          image: "/images/steam3.png"
+        },
+        {
+          title: "Canvas Editor",
+          text: "Professional-grade editing tools powered by Fabric.js. Includes drawing tools, filters, and advanced image manipulation features for creating gaming collages.",
+          image: "/images/steam4.png"
+        },
+        {
+          title: "Friend System",
+          text: "Real-time friend activity tracking and screenshot sharing. Includes friend status updates and screenshot privacy controls.",
+          image: "/images/steam5.png"
+        }
+      ],
+      challenges: [
+        {
+          title: "Steam Authentication",
+          text: "Implementing secure Steam authentication with proper session management and API key handling across development and production environments."
+        },
+        {
+          title: "Real-time Updates",
+          text: "Managing real-time friend status updates and screenshot synchronization while maintaining performance and data consistency."
+        },
+        {
+          title: "Canvas Performance",
+          text: "Optimizing canvas operations for large images and complex editing features while ensuring smooth user experience."
+        }
+      ],
+      learnings: [
+        {
+          title: "Authentication Patterns",
+          points: [
+            {
+              text: "Steam OpenID authentication implementation and session management"
+            },
+            {
+              text: "Secure API key handling and environment-specific configurations"
+            }
+          ]
+        },
+        {
+          title: "Image Processing",
+          points: [
+            {
+              text: "Efficient image loading and processing strategies using Fabric.js"
+            },
+            {
+              text: "Canvas-based editing tools and filter implementations"
+            }
+          ]
+        },
+        {
+          title: "API Integration",
+          points: [
+            {
+              text: "Steam Web API integration patterns and rate limiting"
+            },
+            {
+              text: "Real-time data synchronization and state management"
+            }
+          ]
+        }
+      ],
+      additionalImages: [
+        "/images/steam6.png",
+        "/images/steam7.png",
+        "/images/steam8.png"
+      ]
+    }
+  },
   {
     title: "Restyled 2.0",
     description:
