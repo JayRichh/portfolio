@@ -158,13 +158,13 @@ export const projectData: Project[] = [
       title: "SteamShare - Steam Screenshot Platform",
       description: "A comprehensive platform for managing and editing Steam screenshots, featuring seamless Steam integration, real-time friend activity tracking, and a professional-grade canvas editor for creating gaming collages.",
       technologies: [
-        "Next.js",
+        "Steam Web API",
         "React 18",
         "TypeScript",
         "Fabric.js",
         "Tailwind CSS",
-        "Steam Web API",
         "Framer Motion",
+        "Next.js",
         "Vercel"
       ],
       features: [
