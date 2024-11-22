@@ -443,7 +443,7 @@ export const projectData: Project[] = [
     description:
       "A comprehensive Next.js template with UI components, 3D capabilities, and example implementations",
     imgUrl: "/images/temp1.png",
-    liveUrl: "hhttps://next-temploot.vercel.app/",
+    liveUrl: "https://next-temploot.vercel.app/",
     repoUrl: "https://github.com/JayRichh/next-temploot",
     updatedAt: "2024-11-19",
     details: {
