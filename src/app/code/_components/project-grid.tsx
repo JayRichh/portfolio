@@ -27,7 +27,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
   // Show loading skeleton during SSR and initial mount
   if (!mounted || isLoading) {
     return (
-      <div className="grid min-h-[800px] grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {[...Array(GRID_BREAKPOINTS.DESKTOP * 2)].map((_, index) => (
           <ProjectCardSkeleton key={index} />
         ))}
@@ -37,12 +37,12 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
 
   return (
     <motion.div
-      className="grid min-h-[800px] grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+      className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
       layout
     >
       {filteredProjects.length === 0 ? (
         <motion.div
-          className="col-span-full flex flex-col items-center justify-center"
+          className="col-span-full flex flex-col items-center justify-center py-16"
           layout
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

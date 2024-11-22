@@ -14,8 +14,7 @@ export const PageContainer: React.FC<PageContainerProps> = ({
 }) => {
   return (
     <div
-      className={`relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-background via-background/95 to-background/90 text-foreground pt-16 ${className}`}
-      style={{ contain: 'content' }}
+      className={`relative w-full bg-gradient-to-br from-background via-background/95 to-background/90 text-foreground pt-16 ${className}`}
     >
       <div className="bg-gradient-radial absolute inset-0 from-transparent to-background/20 dark:to-background/40" />
       <div className="relative z-10 w-full">{children}</div>
@@ -30,19 +29,13 @@ export const PageSection: React.FC<PageContainerProps> = ({
   return (
     <section
       className={cn(
-        "m-0 flex min-h-[calc(100vh-4rem)] w-full flex-col items-center justify-center p-0",
+        "m-0 flex w-full flex-col items-center justify-start p-0",
         className,
       )}
-      style={{ contain: 'layout size' }}
     >
       <div 
-        className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-        style={{ 
-          minHeight: 'inherit',
-          width: '100%',
-          contain: 'layout style',
-          contentVisibility: 'auto'
-        }}
+        className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8"
+        style={{ width: '100%' }}
       >
         {children}
       </div>
@@ -56,7 +49,6 @@ export const PageTitle: React.FC<{ children: React.ReactNode }> = ({
   return (
     <h1 
       className="mb-4 mt-16 text-4xl font-extrabold text-primary sm:text-5xl md:text-6xl"
-      style={{ contain: 'layout paint' }}
     >
       {children}
     </h1>
@@ -69,7 +61,6 @@ export const PageDescription: React.FC<{ children: React.ReactNode }> = ({
   return (
     <p 
       className="mt-4 max-w-2xl text-lg text-muted-foreground sm:text-xl pb-8"
-      style={{ contain: 'content' }}
     >
       {children}
     </p>
