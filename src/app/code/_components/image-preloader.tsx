@@ -14,20 +14,19 @@ export const ImagePreloader: React.FC<ImagePreloaderProps> = ({
 }) => {
   useEffect(() => {
     const preloadImages = async () => {
+      // Only preload images that are likely to be in the viewport
       const imagePromises = projects
-        .slice(0, 6) // Preload first 6 images
+        .slice(0, 3) // Reduced from 6 to 3 for better initial load
         .map((project) => {
           return new Promise((resolve, reject) => {
-            const img = new Image();
+            const img = document.createElement('img');
             img.onload = resolve;
             img.onerror = reject;
             img.src = project.imgUrl;
-            // Force browser to start loading image
-            img.style.position = "absolute";
-            img.style.opacity = "0";
-            img.style.pointerEvents = "none";
-            document.body.appendChild(img);
-            setTimeout(() => document.body.removeChild(img), 0);
+            // Use fetchpriority for the first image
+            if (projects.indexOf(project) === 0) {
+              img.setAttribute('fetchpriority', 'high');
+            }
           });
         });
 
@@ -36,8 +35,7 @@ export const ImagePreloader: React.FC<ImagePreloaderProps> = ({
       } catch (error) {
         console.error("Error preloading images:", error);
       } finally {
-        // Add a small delay to ensure smooth transition
-        setTimeout(onLoadComplete, 300);
+        onLoadComplete();
       }
     };
 
@@ -46,16 +44,28 @@ export const ImagePreloader: React.FC<ImagePreloaderProps> = ({
 
   return (
     <>
-      {/* Preload first 6 project images */}
-      {projects.slice(0, 6).map((project) => (
+      {/* Preload first 3 project images with optimized loading strategy */}
+      {projects.slice(0, 3).map((project, index) => (
         <link
           key={project.imgUrl}
           rel="preload"
           as="image"
           href={project.imgUrl}
+          fetchPriority={index === 0 ? "high" : "auto"}
           crossOrigin="anonymous"
         />
       ))}
+      {/* Add image size hints for the browser */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media (min-width: 640px) {
+          img {
+            width: 640px;
+            height: auto;
+            aspect-ratio: 16/9;
+            contain: size layout;
+          }
+        }
+      `}} />
     </>
   );
 };
