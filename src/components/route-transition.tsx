@@ -17,7 +17,7 @@ export const RouteTransition: React.FC<RouteTransitionProps> = ({
 
   // Prefetch all routes
   useEffect(() => {
-    const routes = ["/", "/code", "/about", "/learnings"];
+    const routes = ["/", "/code", "/about", "/wordmap", "/learnings"];
     routes.forEach((route) => {
       if (route !== pathname) {
         router.prefetch(route);

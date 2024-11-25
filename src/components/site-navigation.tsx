@@ -1,12 +1,13 @@
+'use client';
+
 import React from "react";
-
 import dynamic from "next/dynamic";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
+import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Code, LucideProps, Menu } from "lucide-react";
-
+import { Menu } from "lucide-react";
+import { cn } from "../utils";
+import { isRouteActive } from "../utils/is-route-active";
+import { PageTransitionLink } from "./route-transition";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,28 +24,27 @@ const ModeToggle = dynamic(
   { ssr: false },
 );
 
-type NavLink = {
-  label: string;
-  path: string;
-  icon?: React.ComponentType<LucideProps>;
-};
-
-const links: NavLink[] = [
+const links = [
   { label: "Home", path: "/" },
-  { label: "Code", path: "/code", icon: Code },
+  { label: "Code", path: "/code" },
   { label: "About", path: "/about" },
-  { label: "Learnings", path: "/learnings" },
+  { label: "Resources", path: "/resources" },
 ];
 
-const NavItem: React.FC<NavLink & { isActive: boolean }> = ({
+const NavItem: React.FC<{ label: string; path: string }> = ({
   label,
   path,
-  icon: Icon,
-  isActive,
 }) => {
-  const isCode = path === "/code";
   const pathname = usePathname();
-  const showIcon = isCode && pathname === "/";
+  const router = useRouter();
+  const isActive = isRouteActive(path, pathname);
+
+  // Prefetch the route
+  React.useEffect(() => {
+    if (!isActive) {
+      router.prefetch(path);
+    }
+  }, [router, path, isActive]);
 
   return (
     <motion.div
@@ -55,137 +55,95 @@ const NavItem: React.FC<NavLink & { isActive: boolean }> = ({
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="relative"
     >
-      <Link
+      <PageTransitionLink
         href={path}
-        className={`flex items-center rounded-md px-4 py-3 text-sm font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/20 ${
-          isActive
-            ? "bg-primary/10 text-primary"
-            : "text-foreground hover:bg-primary/5 hover:text-primary"
-        }`}
-      >
-        {showIcon && Icon && (
-          <Icon
-            className="mr-2 h-5 w-5 transition-all duration-300 ease-in-out"
-            color={isActive ? "hsl(var(--primary))" : "currentColor"}
-            style={{
-              stroke: isActive ? "hsl(var(--primary))" : "currentColor",
-            }}
-            size={20}
-          />
+        className={cn(
+          "text-sm font-medium transition-colors",
+          "inline-flex w-max items-center rounded-md px-3 py-2",
+          "hover:text-primary hover:bg-primary/5",
+          {
+            "text-primary bg-primary/10": isActive,
+            "text-foreground": !isActive,
+          },
         )}
-        <span className="font-semibold tracking-wide">{label}</span>
-      </Link>
-    </motion.div>
-  );
-};
-
-const LastNavItem: React.FC = () => {
-  return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: -5 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -5 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="relative"
-    >
-      <ModeToggle className="rounded-md px-4 py-3 text-sm font-medium text-foreground transition-all duration-300 ease-in-out hover:bg-primary/5 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/20" />
+      >
+        <motion.span
+          initial={false}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 10,
+          }}
+        >
+          {label}
+        </motion.span>
+      </PageTransitionLink>
     </motion.div>
   );
 };
 
 export function SiteNavigation(): JSX.Element {
   const pathname = usePathname();
-  const filteredLinks =
-    pathname === "/" ? links.filter((link) => link.path !== "/") : links;
 
   return (
-    <>
-      <div className="hidden items-center justify-center md:flex">
+    <div className="flex w-full items-center justify-between">
+      <div className="hidden md:block">
         <NavigationMenu>
           <NavigationMenuList className="flex items-center space-x-1">
             <AnimatePresence initial={false}>
-              {filteredLinks.map((item) => (
-                <NavItem
-                  key={item.path}
-                  {...item}
-                  isActive={pathname === item.path}
-                />
+              {links.map((item) => (
+                <NavItem key={item.path} {...item} />
               ))}
-              <LastNavItem />
             </AnimatePresence>
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-      <div className="flex justify-end sm:items-center md:hidden">
-        <MobileDropdown currentPath={pathname} />
+      
+      <div className="flex md:hidden">
+        <MobileMenu currentPath={pathname} />
       </div>
-    </>
+
+      <div className="ml-auto">
+        <ModeToggle />
+      </div>
+    </div>
   );
 }
 
-type MobileDropdownProps = {
-  currentPath: string;
-};
-
-function MobileDropdown({ currentPath }: MobileDropdownProps): JSX.Element {
-  const filteredLinks =
-    currentPath === "/" ? links.filter((link) => link.path !== "/") : links;
-
+function MobileMenu({ currentPath }: { currentPath: string }): JSX.Element {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
         aria-label="Open Menu"
-        className="rounded-md text-foreground transition-all duration-300 ease-in-out hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+        className="rounded-md p-2 text-foreground transition-colors hover:bg-primary/5 hover:text-primary"
       >
-        <Menu className="h-6 w-6" />
+        <Menu className="h-5 w-5" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 rounded-lg border border-primary/10 bg-background shadow-lg transition-all duration-300 ease-in-out">
-        <AnimatePresence initial={false}>
-          {filteredLinks.map((item) => (
-            <motion.div
-              key={item.path}
-              layout
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <DropdownMenuItem asChild>
-                <Link
-                  className={`flex w-full items-center px-4 py-3 text-sm transition-all duration-300 ease-in-out ${
-                    currentPath === item.path
-                      ? "bg-primary/10 text-primary"
-                      : "text-foreground hover:bg-primary/5 hover:text-primary"
-                  }`}
-                  href={item.path}
-                >
-                  {item.icon &&
-                    item.path === "/code" &&
-                    currentPath === "/" && (
-                      <item.icon
-                        className="mr-2 h-5 w-5 transition-all duration-300 ease-in-out"
-                        color="currentColor"
-                        style={{
-                          stroke: "currentColor",
-                          fill: "none",
-                        }}
-                        size={20}
-                      />
-                    )}
-                  <span className="font-semibold tracking-wide">
-                    {item.label}
-                  </span>
-                </Link>
-              </DropdownMenuItem>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-        <DropdownMenuItem asChild>
-          <div className="px-4 py-3">
-            <ModeToggle className="w-full text-sm transition-all duration-300 ease-in-out hover:text-primary" />
-          </div>
-        </DropdownMenuItem>
+      <DropdownMenuContent 
+        align="start"
+        className="w-48 rounded-lg bg-background"
+      >
+        {links.map((item) => {
+          const isActive = isRouteActive(item.path, currentPath);
+          return (
+            <DropdownMenuItem key={item.path} asChild>
+              <PageTransitionLink
+                href={item.path}
+                className={cn(
+                  "flex w-full items-center px-3 py-2 text-sm transition-colors",
+                  {
+                    "bg-primary/10 text-primary": isActive,
+                    "text-foreground hover:bg-primary/5 hover:text-primary": !isActive,
+                  }
+                )}
+              >
+                {item.label}
+              </PageTransitionLink>
+            </DropdownMenuItem>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );
