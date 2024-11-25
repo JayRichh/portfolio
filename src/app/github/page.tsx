@@ -174,7 +174,7 @@ export default function GitHubPage() {
 
           <div className="mt-8 text-sm text-muted-foreground">
             <p>
-              Note: This visualization shows contributions to public repositories and includes commits, pull requests, and issues.
+              Note: This visualization shows contributions to both public and private repositories and includes commits, pull requests, and issues.
             </p>
           </div>
         </motion.div>
