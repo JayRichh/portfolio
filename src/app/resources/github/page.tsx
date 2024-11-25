@@ -27,7 +27,6 @@ export default function GitHubPage() {
 
     const loadData = async () => {
       try {
-        // Check for cached data first
         if (cachedData && mounted) {
           console.log("Using cached data");
           setYearData(cachedData);
@@ -36,7 +35,6 @@ export default function GitHubPage() {
           return;
         }
 
-        // If no cached data, fetch new data
         console.log("Fetching GitHub data...");
         const contributions = await fetchGitHubContributions();
 
@@ -54,12 +52,10 @@ export default function GitHubPage() {
       }
     };
 
-    // Only reset and fetch if we don't have cached data
     if (!cachedData) {
       reset();
       loadData();
     } else {
-      // If we have cached data, use it immediately
       setYearData(cachedData);
       setLoading(false);
       setShowContent(true);
@@ -70,7 +66,6 @@ export default function GitHubPage() {
     };
   }, [reset, cachedData]);
 
-  // Early return while loading with progress indicator
   if (loading) {
     return (
       <div className="flex h-[calc(100vh-112px)] items-center justify-center">
@@ -87,7 +82,6 @@ export default function GitHubPage() {
     );
   }
 
-  // Handle no data case
   if (!yearData.length) {
     return (
       <div className="container mx-auto px-4 py-16">
@@ -107,9 +101,55 @@ export default function GitHubPage() {
   const fromDate = `${selectedYear.year}-01-01`;
   const toDate = `${selectedYear.year}-12-31`;
 
-  // GitHub's exact color schemes
   const lightColors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
   const darkColors = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
+
+  const YearTabs = () => (
+    <div className="mb-4 flex flex-wrap gap-2 md:hidden">
+      {yearData.map((year, index) => (
+        <button
+          key={year.year}
+          onClick={() => setSelectedYearIndex(index)}
+          className={`rounded-md px-4 py-2 text-sm transition-colors ${
+            selectedYearIndex === index
+              ? "bg-primary text-primary-foreground"
+              : "bg-muted hover:bg-muted/80"
+          }`}
+        >
+          {year.year}
+        </button>
+      ))}
+    </div>
+  );
+
+  const DesktopYearNavigation = () => (
+    <div className="hidden md:flex gap-2">
+      <button
+        onClick={() => setSelectedYearIndex((prev) => Math.min(prev + 1, yearData.length - 1))}
+        disabled={selectedYearIndex === yearData.length - 1}
+        className={`rounded-md px-3 py-1 ${
+          selectedYearIndex === yearData.length - 1
+            ? "cursor-not-allowed opacity-50"
+            : "hover:bg-gray-100 dark:hover:bg-gray-800"
+        }`}
+        aria-label="Previous year"
+      >
+        ←
+      </button>
+      <button
+        onClick={() => setSelectedYearIndex((prev) => Math.max(prev - 1, 0))}
+        disabled={selectedYearIndex === 0}
+        className={`rounded-md px-3 py-1 ${
+          selectedYearIndex === 0
+            ? "cursor-not-allowed opacity-50"
+            : "hover:bg-gray-100 dark:hover:bg-gray-800"
+        }`}
+        aria-label="Next year"
+      >
+        →
+      </button>
+    </div>
+  );
 
   return (
     <AnimatePresence>
@@ -136,60 +176,32 @@ export default function GitHubPage() {
               {selectedYear.totalContributions.toLocaleString()} contributions
               in {selectedYear.year}
             </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() =>
-                  setSelectedYearIndex((prev) =>
-                    Math.min(prev + 1, yearData.length - 1),
-                  )
-                }
-                disabled={selectedYearIndex === yearData.length - 1}
-                className={`rounded-md px-3 py-1 ${
-                  selectedYearIndex === yearData.length - 1
-                    ? "cursor-not-allowed opacity-50"
-                    : "hover:bg-gray-100 dark:hover:bg-gray-800"
-                }`}
-                aria-label="Previous year"
-              >
-                ←
-              </button>
-              <button
-                onClick={() =>
-                  setSelectedYearIndex((prev) => Math.max(prev - 1, 0))
-                }
-                disabled={selectedYearIndex === 0}
-                className={`rounded-md px-3 py-1 ${
-                  selectedYearIndex === 0
-                    ? "cursor-not-allowed opacity-50"
-                    : "hover:bg-gray-100 dark:hover:bg-gray-800"
-                }`}
-                aria-label="Next year"
-              >
-                →
-              </button>
-            </div>
+            <DesktopYearNavigation />
           </div>
+
+          <YearTabs />
 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="rounded-xl border border-border/50 bg-background/30 backdrop-blur-sm p-8"
+            className="rounded-xl border border-border/50 bg-background/30 backdrop-blur-sm p-4 md:p-8"
           >
-            <div className="h-[500px] w-full">
+            <div className="h-[600px] md:h-[500px] w-full">
               <ResponsiveCalendarCanvas
                 data={selectedYear.contributions}
                 from={fromDate}
                 to={toDate}
                 emptyColor={isDark ? "#161b22" : "#ebedf0"}
                 colors={isDark ? darkColors.slice(1) : lightColors.slice(1)}
-                margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+                margin={{ top: 40, right: 20, bottom: 40, left: 20 }}
                 monthBorderColor={isDark ? "#30363d" : "#d0d7de"}
                 dayBorderWidth={1}
                 dayBorderColor={isDark ? "#1b1f23" : "#fff"}
+                direction="vertical"
                 legends={[
                   {
-                    anchor: "bottom-right",
+                    anchor: "bottom",
                     direction: "row",
                     translateY: 36,
                     itemCount: 4,
