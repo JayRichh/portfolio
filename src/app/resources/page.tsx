@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { cn } from "../../utils/cn";
 import { WordMapPreview } from "./_components/WordMapPreview";
 import { MindMapPreview } from "./_components/MindMapPreview";
+import { GitHubPreview } from "./_components/GitHubPreview";
 
 const Card = ({ href, title, description, PreviewComponent }: { 
   href: string; 
@@ -61,7 +62,7 @@ export default function ResourcesPage() {
   return (
     <div className="relative">
       <div className="container relative mx-auto h-full px-4 py-16">
-        <div className="grid h-full place-items-center gap-8 md:grid-cols-2">
+        <div className="grid h-full place-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
           <Card 
             href="/resources/wordmap"
             title="Tech Stack Visualization"
@@ -73,6 +74,12 @@ export default function ResourcesPage() {
             title="Learning Journey"
             description="Structured overview of my programming knowledge, organized as an interactive mindmap with different categories and importance levels"
             PreviewComponent={MindMapPreview}
+          />
+          <Card 
+            href="/github"
+            title="GitHub Activity"
+            description="Visual representation of my GitHub contribution activity, showing commit frequency and development patterns over time"
+            PreviewComponent={GitHubPreview}
           />
         </div>
       </div>
