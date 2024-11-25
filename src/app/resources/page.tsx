@@ -81,7 +81,7 @@ export default function ResourcesPage() {
   return (
     <PageSection>
       <div className="container mx-auto min-w-full">
-        <div className="mb-12 -mt-12">
+        <div className="mb-12">
           <PageTitle>Resources</PageTitle>
           <PageDescription>
             Explore interactive visualizations of my tech journey, built while
