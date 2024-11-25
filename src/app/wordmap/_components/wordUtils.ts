@@ -199,15 +199,15 @@ export function generateDatasetStats() {
 
   const totalFeatures = projectData.reduce(
     (sum, p) => sum + p.details.features.length,
-    0
+    0,
   );
   const totalChallenges = projectData.reduce(
     (sum, p) => sum + p.details.challenges.length,
-    0
+    0,
   );
   const totalLearnings = projectData.reduce(
     (sum, p) => sum + p.details.learnings.length,
-    0
+    0,
   );
 
   const fileBreakdown: FileBreakdown = {
@@ -268,7 +268,7 @@ function determineCategory(word: string): keyof typeof CATEGORIES {
 function calculateImportance(
   frequency: number,
   projectImpact: number,
-  method: keyof typeof SAMPLING_METHODS = "balanced"
+  method: keyof typeof SAMPLING_METHODS = "balanced",
 ): number {
   let importance: number;
 
@@ -300,7 +300,7 @@ function calculateImportance(
 }
 
 export function processWords(
-  samplingMethod: keyof typeof SAMPLING_METHODS = "balanced"
+  samplingMethod: keyof typeof SAMPLING_METHODS = "balanced",
 ) {
   const wordMap = new Map<
     string,
@@ -328,7 +328,10 @@ export function processWords(
       const existing = wordMap.get(word);
       if (existing) {
         existing.frequency += 3;
-        existing.projectImpact = Math.max(existing.projectImpact, projectImpact);
+        existing.projectImpact = Math.max(
+          existing.projectImpact,
+          projectImpact,
+        );
       } else {
         wordMap.set(word, {
           text: tech,
@@ -357,7 +360,7 @@ export function processWords(
           !STOP_WORDS.has(word) &&
           !/^\d+$/.test(word) &&
           word.length < 20 &&
-          !/[^a-z0-9\-\.]/i.test(word)
+          !/[^a-z0-9\-\.]/i.test(word),
       );
 
     words.forEach((word) => {
@@ -366,7 +369,7 @@ export function processWords(
         existing.frequency += 1;
         existing.projectImpact = Math.max(
           existing.projectImpact,
-          projectImpact * 0.8
+          projectImpact * 0.8,
         );
       } else {
         wordMap.set(word, {
@@ -392,7 +395,7 @@ export function processWords(
           !STOP_WORDS.has(word) &&
           !/^\d+$/.test(word) &&
           word.length < 20 &&
-          !/[^a-z0-9\-\.]/i.test(word)
+          !/[^a-z0-9\-\.]/i.test(word),
       );
 
     words.forEach((word) => {
@@ -419,7 +422,7 @@ export function processWords(
       importance: calculateImportance(
         addRandomJitter(word.frequency),
         addRandomJitter(word.projectImpact),
-        samplingMethod
+        samplingMethod,
       ),
     }))
     .filter((word) => word.importance >= 2.5)
@@ -433,7 +436,7 @@ export function processWords(
   words.forEach((word) => {
     if (
       !filteredWords.some((existing) =>
-        areSimilar(existing.text.toLowerCase(), word.text.toLowerCase())
+        areSimilar(existing.text.toLowerCase(), word.text.toLowerCase()),
       )
     ) {
       filteredWords.push(word);

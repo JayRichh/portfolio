@@ -6,11 +6,14 @@ import { ErrorBoundary } from "../../../app/wordmap/_components/ErrorBoundary";
 
 // Import WordMapContainer dynamically with no SSR
 const WordMapContainer = dynamic(
-  () => import("../../../app/wordmap/_components").then(mod => mod.WordMapContainer),
-  { 
+  () =>
+    import("../../../app/wordmap/_components").then(
+      (mod) => mod.WordMapContainer,
+    ),
+  {
     ssr: false,
-    loading: () => <LoadingSpinner />
-  }
+    loading: () => <LoadingSpinner />,
+  },
 );
 
 function LoadingSpinner() {

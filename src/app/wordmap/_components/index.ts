@@ -1,2 +1,2 @@
-export { WordMapContainer } from './WordMapContainer';
-export type { Position } from './WordMapContainer';
+export { WordMapContainer } from "./WordMapContainer";
+export type { Position } from "./WordMapContainer";

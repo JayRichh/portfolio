@@ -4,7 +4,12 @@ import React, { useEffect, useState } from "react";
 import { ResponsiveCalendarCanvas } from "@nivo/calendar";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { fetchGitHubContributions, useGitHubStore, useContributions, YearContributions } from "../../../lib/github";
+import {
+  fetchGitHubContributions,
+  useGitHubStore,
+  useContributions,
+  YearContributions,
+} from "../../../lib/github";
 import { ProgressLoader } from "../../../components/ui/progress-loader";
 
 export function GitHubPreview() {
@@ -23,7 +28,7 @@ export function GitHubPreview() {
       try {
         // Check for cached data first
         if (cachedData && mounted) {
-          console.log('Preview: Using cached data');
+          console.log("Preview: Using cached data");
           setYearData(cachedData);
           setLoading(false);
           setShowContent(true);
@@ -31,11 +36,11 @@ export function GitHubPreview() {
         }
 
         // If no cached data, fetch new data
-        console.log('Preview: Fetching GitHub data...');
+        console.log("Preview: Fetching GitHub data...");
         const contributions = await fetchGitHubContributions();
-        
+
         if (mounted && contributions.length > 0) {
-          console.log('Preview: Setting new contributions data');
+          console.log("Preview: Setting new contributions data");
           setYearData(contributions);
           setLoading(false);
           setShowContent(true);
@@ -68,7 +73,7 @@ export function GitHubPreview() {
   if (loading) {
     return (
       <div className="flex h-full items-center justify-center">
-        <ProgressLoader 
+        <ProgressLoader
           onComplete={() => {
             if (yearData.length > 0) {
               setLoading(false);
@@ -83,7 +88,7 @@ export function GitHubPreview() {
   }
 
   if (!yearData.length) {
-    console.log('Preview: No year data available');
+    console.log("Preview: No year data available");
     return null;
   }
 
@@ -95,18 +100,21 @@ export function GitHubPreview() {
   const fromDate = new Date(
     currentDate.getFullYear(),
     currentDate.getMonth() - 5,
-    1
-  ).toISOString().split("T")[0];
+    1,
+  )
+    .toISOString()
+    .split("T")[0];
   const toDate = currentDate.toISOString().split("T")[0];
 
   // Filter contributions to only show the last 6 months
   const previewContributions = mostRecentYear.contributions.filter(
-    contribution => contribution.day >= fromDate && contribution.day <= toDate
+    (contribution) =>
+      contribution.day >= fromDate && contribution.day <= toDate,
   );
 
   // GitHub's exact color schemes
-  const lightColors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
-  const darkColors = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
+  const lightColors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
+  const darkColors = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
 
   return (
     <AnimatePresence>
@@ -131,7 +139,7 @@ export function GitHubPreview() {
             theme={{
               text: {
                 fontSize: 10,
-                fill: isDark ? "#7d8590" : "#57606a"
+                fill: isDark ? "#7d8590" : "#57606a",
               },
               tooltip: {
                 container: {
@@ -139,9 +147,9 @@ export function GitHubPreview() {
                   color: isDark ? "#7d8590" : "#57606a",
                   fontSize: "12px",
                   borderRadius: "6px",
-                  boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-                }
-              }
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                },
+              },
             }}
           />
         </motion.div>

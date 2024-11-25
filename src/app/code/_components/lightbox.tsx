@@ -49,11 +49,8 @@ export const Lightbox: React.FC<LightboxProps> = ({
   };
 
   return createPortal(
-    <div 
-      className="fixed inset-0 z-[999] bg-black/90"
-      onClick={onClose}
-    >
-      <div 
+    <div className="fixed inset-0 z-[999] bg-black/90" onClick={onClose}>
+      <div
         className="absolute inset-0 flex items-center justify-center p-4"
         onClick={stopPropagation}
       >
@@ -103,6 +100,6 @@ export const Lightbox: React.FC<LightboxProps> = ({
         </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 };

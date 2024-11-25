@@ -4,7 +4,12 @@ import React, { useEffect, useState } from "react";
 import { ResponsiveCalendarCanvas } from "@nivo/calendar";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { fetchGitHubContributions, useGitHubStore, useContributions, YearContributions } from "../../../lib/github";
+import {
+  fetchGitHubContributions,
+  useGitHubStore,
+  useContributions,
+  YearContributions,
+} from "../../../lib/github";
 import { ProgressLoader } from "../../../components/ui/progress-loader";
 
 export default function GitHubPage() {
@@ -24,7 +29,7 @@ export default function GitHubPage() {
       try {
         // Check for cached data first
         if (cachedData && mounted) {
-          console.log('Using cached data');
+          console.log("Using cached data");
           setYearData(cachedData);
           setLoading(false);
           setShowContent(true);
@@ -32,11 +37,11 @@ export default function GitHubPage() {
         }
 
         // If no cached data, fetch new data
-        console.log('Fetching GitHub data...');
+        console.log("Fetching GitHub data...");
         const contributions = await fetchGitHubContributions();
-        
+
         if (mounted && contributions.length > 0) {
-          console.log('Setting new contributions data');
+          console.log("Setting new contributions data");
           setYearData(contributions);
           setLoading(false);
           setShowContent(true);
@@ -69,7 +74,7 @@ export default function GitHubPage() {
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <ProgressLoader 
+        <ProgressLoader
           onComplete={() => {
             if (yearData.length > 0) {
               setLoading(false);
@@ -87,8 +92,12 @@ export default function GitHubPage() {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-primary mb-4">No GitHub Data Available</h1>
-          <p className="text-muted-foreground">Unable to load GitHub contribution data. Please try again later.</p>
+          <h1 className="text-2xl font-bold text-primary mb-4">
+            No GitHub Data Available
+          </h1>
+          <p className="text-muted-foreground">
+            Unable to load GitHub contribution data. Please try again later.
+          </p>
         </div>
       </div>
     );
@@ -99,8 +108,8 @@ export default function GitHubPage() {
   const toDate = `${selectedYear.year}-12-31`;
 
   // GitHub's exact color schemes
-  const lightColors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
-  const darkColors = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
+  const lightColors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
+  const darkColors = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
 
   return (
     <AnimatePresence>
@@ -113,19 +122,27 @@ export default function GitHubPage() {
           className="container mx-auto px-4 py-16"
         >
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-primary mb-4">GitHub Activity</h1>
+            <h1 className="text-4xl font-bold text-primary mb-4">
+              GitHub Activity
+            </h1>
             <p className="text-lg text-muted-foreground">
-              A visualization of my GitHub contribution activity, showing commit frequency and development patterns.
+              A visualization of my GitHub contribution activity, showing commit
+              frequency and development patterns.
             </p>
           </div>
 
           <div className="mb-6 flex items-center justify-between">
             <div className="text-xl font-semibold">
-              {selectedYear.totalContributions.toLocaleString()} contributions in {selectedYear.year}
+              {selectedYear.totalContributions.toLocaleString()} contributions
+              in {selectedYear.year}
             </div>
             <div className="flex gap-2">
               <button
-                onClick={() => setSelectedYearIndex(prev => Math.min(prev + 1, yearData.length - 1))}
+                onClick={() =>
+                  setSelectedYearIndex((prev) =>
+                    Math.min(prev + 1, yearData.length - 1),
+                  )
+                }
                 disabled={selectedYearIndex === yearData.length - 1}
                 className={`px-3 py-1 rounded-md ${
                   selectedYearIndex === yearData.length - 1
@@ -137,7 +154,9 @@ export default function GitHubPage() {
                 ←
               </button>
               <button
-                onClick={() => setSelectedYearIndex(prev => Math.max(prev - 1, 0))}
+                onClick={() =>
+                  setSelectedYearIndex((prev) => Math.max(prev - 1, 0))
+                }
                 disabled={selectedYearIndex === 0}
                 className={`px-3 py-1 rounded-md ${
                   selectedYearIndex === 0
@@ -150,7 +169,7 @@ export default function GitHubPage() {
               </button>
             </div>
           </div>
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -178,13 +197,13 @@ export default function GitHubPage() {
                     itemHeight: 36,
                     itemsSpacing: 14,
                     itemDirection: "right-to-left",
-                    itemTextColor: isDark ? "#7d8590" : "#57606a"
-                  }
+                    itemTextColor: isDark ? "#7d8590" : "#57606a",
+                  },
                 ]}
                 theme={{
                   text: {
                     fontSize: 12,
-                    fill: isDark ? "#7d8590" : "#57606a"
+                    fill: isDark ? "#7d8590" : "#57606a",
                   },
                   tooltip: {
                     container: {
@@ -192,9 +211,9 @@ export default function GitHubPage() {
                       color: isDark ? "#7d8590" : "#57606a",
                       fontSize: "12px",
                       borderRadius: "6px",
-                      boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-                    }
-                  }
+                      boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                    },
+                  },
                 }}
               />
             </div>
@@ -202,7 +221,9 @@ export default function GitHubPage() {
 
           <div className="mt-8 text-sm text-muted-foreground">
             <p>
-              Note: This visualization shows contributions to both public and private repositories and includes commits, pull requests, and issues.
+              Note: This visualization shows contributions to both public and
+              private repositories and includes commits, pull requests, and
+              issues.
             </p>
           </div>
         </motion.div>

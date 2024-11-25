@@ -56,7 +56,7 @@ const NavItem = ({ label, path }: { label: string; path: string }) => {
 
 export function ResourcesHeader() {
   const pathname = usePathname();
-  
+
   // Hide the header on the root resources page
   if (pathname === "/resources") {
     return null;

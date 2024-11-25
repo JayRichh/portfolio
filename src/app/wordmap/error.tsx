@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Button } from '../../components/ui/button';
+import React from "react";
+import { Button } from "../../components/ui/button";
 
 export default function WordMapError({
   error,
@@ -15,7 +15,7 @@ export default function WordMapError({
       <div className="max-w-xl space-y-4 text-center">
         <h2 className="text-2xl font-bold">Something went wrong!</h2>
         <p className="text-muted-foreground">
-          {error.message || 'An error occurred while loading the word map.'}
+          {error.message || "An error occurred while loading the word map."}
         </p>
         {error.digest && (
           <p className="text-sm text-muted-foreground">

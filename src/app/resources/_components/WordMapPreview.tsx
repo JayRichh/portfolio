@@ -35,7 +35,7 @@ export function WordMapPreview() {
       0,
       width / 2,
       height / 2,
-      Math.max(width, height) / 1.6
+      Math.max(width, height) / 1.6,
     );
 
     if (isDark) {
@@ -50,7 +50,9 @@ export function WordMapPreview() {
     ctx.fillRect(0, 0, width, height);
 
     // Get words and sort by importance
-    const words = processWords("balanced").slice(0, 15).sort((a, b) => b.importance - a.importance);
+    const words = processWords("balanced")
+      .slice(0, 15)
+      .sort((a, b) => b.importance - a.importance);
 
     // Calculate positions for words
     const usedPositions: Array<{ x: number; y: number; radius: number }> = [];
@@ -67,18 +69,25 @@ export function WordMapPreview() {
       while (attempts < maxAttempts) {
         // More important words are placed closer to center
         const angle = Math.random() * Math.PI * 2;
-        const distance = (1 - word.importance / 10) * Math.min(width, height) / 3;
+        const distance =
+          ((1 - word.importance / 10) * Math.min(width, height)) / 3;
         x = centerX + Math.cos(angle) * distance;
         y = centerY + Math.sin(angle) * distance;
 
         // Check for overlap
-        const overlap = usedPositions.some(pos => {
+        const overlap = usedPositions.some((pos) => {
           const dx = pos.x - x;
           const dy = pos.y - y;
-          return Math.sqrt(dx * dx + dy * dy) < (pos.radius + size);
+          return Math.sqrt(dx * dx + dy * dy) < pos.radius + size;
         });
 
-        if (!overlap && x > size && x < width - size && y > size && y < height - size) {
+        if (
+          !overlap &&
+          x > size &&
+          x < width - size &&
+          y > size &&
+          y < height - size
+        ) {
           usedPositions.push({ x, y, radius: size });
           break;
         }
@@ -97,10 +106,12 @@ export function WordMapPreview() {
           framework: { color: "rgba(16, 185, 129, 0.85)" },
           tool: { color: "rgba(239, 68, 68, 0.85)" },
           concept: { color: "rgba(59, 130, 246, 0.85)" },
-          project: { color: "rgba(168, 85, 247, 0.85)" }
+          project: { color: "rgba(168, 85, 247, 0.85)" },
         };
 
-        const category = colors[word.group] || { color: "rgba(107, 114, 128, 0.85)" };
+        const category = colors[word.group] || {
+          color: "rgba(107, 114, 128, 0.85)",
+        };
 
         // Draw text with glow for important words
         if (word.importance > 4) {
@@ -118,7 +129,6 @@ export function WordMapPreview() {
         ctx.fillText(word.text, x!, y!);
       }
     });
-
   }, [isDark]);
 
   return (

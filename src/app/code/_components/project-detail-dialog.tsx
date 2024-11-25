@@ -37,7 +37,9 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   }
 
   return (
-    <div className={`relative aspect-video w-full overflow-hidden ${className}`}>
+    <div
+      className={`relative aspect-video w-full overflow-hidden ${className}`}
+    >
       <Image
         src={src}
         alt={alt}
@@ -68,14 +70,16 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
   const allImages = [
     { src: project.imgUrl, alt: project.title },
     ...project.details.features
-      .filter(f => f.image)
-      .map(f => ({ src: f.image!, alt: f.title })),
+      .filter((f) => f.image)
+      .map((f) => ({ src: f.image!, alt: f.title })),
     ...(project.details.challenges || [])
-      .filter(c => c.image)
-      .map(c => ({ src: c.image!, alt: c.title })),
-    ...(project.details.additionalImages || [])
-      .map(src => ({ src, alt: `${project.title} Gallery Image` }))
-  ].filter(img => img.src);
+      .filter((c) => c.image)
+      .map((c) => ({ src: c.image!, alt: c.title })),
+    ...(project.details.additionalImages || []).map((src) => ({
+      src,
+      alt: `${project.title} Gallery Image`,
+    })),
+  ].filter((img) => img.src);
 
   const handleImageClick = useCallback((index: number) => {
     setCurrentImageIndex(index);
@@ -179,7 +183,10 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
                 </h3>
                 <div className="space-y-6">
                   {project.details.challenges.map((challenge, index) => {
-                    const imageIndex = project.details.features.filter(f => f.image).length + index + 1;
+                    const imageIndex =
+                      project.details.features.filter((f) => f.image).length +
+                      index +
+                      1;
                     return (
                       <div
                         key={index}
@@ -248,9 +255,11 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
                 </h3>
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                   {project.details.additionalImages.map((imageSrc, index) => {
-                    const galleryIndex = 1 + 
-                      project.details.features.filter(f => f.image).length + 
-                      (project.details.challenges?.filter(c => c.image).length || 0) + 
+                    const galleryIndex =
+                      1 +
+                      project.details.features.filter((f) => f.image).length +
+                      (project.details.challenges?.filter((c) => c.image)
+                        .length || 0) +
                       index;
                     return (
                       <button
@@ -316,12 +325,16 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
           images={allImages}
           currentIndex={currentImageIndex}
           onClose={() => setLightboxOpen(false)}
-          onPrev={() => setCurrentImageIndex(prev => 
-            prev === 0 ? allImages.length - 1 : prev - 1
-          )}
-          onNext={() => setCurrentImageIndex(prev => 
-            prev === allImages.length - 1 ? 0 : prev + 1
-          )}
+          onPrev={() =>
+            setCurrentImageIndex((prev) =>
+              prev === 0 ? allImages.length - 1 : prev - 1,
+            )
+          }
+          onNext={() =>
+            setCurrentImageIndex((prev) =>
+              prev === allImages.length - 1 ? 0 : prev + 1,
+            )
+          }
         />
       )}
     </>

@@ -11,7 +11,11 @@ interface ProgressLoaderProps {
   isDataReady?: boolean;
 }
 
-export function ProgressLoader({ onComplete, className, isDataReady }: ProgressLoaderProps) {
+export function ProgressLoader({
+  onComplete,
+  className,
+  isDataReady,
+}: ProgressLoaderProps) {
   const progress = useProgress();
 
   useEffect(() => {
@@ -23,7 +27,12 @@ export function ProgressLoader({ onComplete, className, isDataReady }: ProgressL
   }, [progress, onComplete]);
 
   return (
-    <div className={cn("flex flex-col items-center justify-center gap-4", className)}>
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center gap-4",
+        className,
+      )}
+    >
       <div className="relative h-2 w-64 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
         <motion.div
           className="absolute inset-y-0 left-0 bg-primary"

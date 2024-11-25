@@ -21,7 +21,7 @@ export function SiteHeader() {
         className={cn(
           "container flex h-16 items-center",
           "px-4 md:px-6 lg:px-8",
-          "transition-all duration-200 ease-in-out"
+          "transition-all duration-200 ease-in-out",
         )}
       >
         <SiteNavigation />

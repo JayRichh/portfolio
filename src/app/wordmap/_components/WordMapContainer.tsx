@@ -51,9 +51,8 @@ export function WordMapContainer() {
     }
     return true;
   });
-  const [samplingMethod, setSamplingMethod] = useState<
-    keyof typeof SAMPLING_METHODS
-  >("balanced");
+  const [samplingMethod, setSamplingMethod] =
+    useState<keyof typeof SAMPLING_METHODS>("balanced");
   const [key, setKey] = useState(0);
   const [stats] = useState(generateDatasetStats());
   const [words, setWords] = useState(() => processWords(samplingMethod));
@@ -110,7 +109,7 @@ export function WordMapContainer() {
       importance: number,
       usedPositions: Position[],
       width: number,
-      height: number
+      height: number,
     ) => {
       const margin = size;
       const centerX = width / 2;
@@ -119,12 +118,9 @@ export function WordMapContainer() {
         // Generate positions with higher probability towards the center for more important words
         const randX = Math.random();
         const randY = Math.random();
-        const x =
-          centerX +
-          (randX - 0.5) * width * (1 - importance / 10) * 0.8;
+        const x = centerX + (randX - 0.5) * width * (1 - importance / 10) * 0.8;
         const y =
-          centerY +
-          (randY - 0.5) * height * (1 - importance / 10) * 0.8;
+          centerY + (randY - 0.5) * height * (1 - importance / 10) * 0.8;
 
         const overlap = usedPositions.some((pos) => {
           const dx = pos.x - x;
@@ -146,7 +142,7 @@ export function WordMapContainer() {
       // If we cannot find a position after many attempts, return null
       return null;
     },
-    []
+    [],
   );
 
   useEffect(() => {
@@ -177,7 +173,7 @@ export function WordMapContainer() {
         0,
         width / 2,
         height / 2,
-        Math.max(width, height) / 1.6
+        Math.max(width, height) / 1.6,
       );
 
       if (isDark) {
@@ -218,7 +214,7 @@ export function WordMapContainer() {
       words.forEach((word) => {
         const size = Math.max(
           16,
-          Math.min(90, Math.pow(word.importance, 1.6) * 12)
+          Math.min(90, Math.pow(word.importance, 1.6) * 12),
         );
 
         const position = calculateRandomPosition(
@@ -226,7 +222,7 @@ export function WordMapContainer() {
           word.importance,
           usedPositions,
           width,
-          height
+          height,
         );
 
         if (position) {
@@ -316,7 +312,7 @@ export function WordMapContainer() {
         "relative h-full w-full",
         isDark
           ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
-          : "bg-gradient-to-br from-white via-gray-50 to-white"
+          : "bg-gradient-to-br from-white via-gray-50 to-white",
       )}
       ref={containerRef}
     >
@@ -333,7 +329,7 @@ export function WordMapContainer() {
               "absolute left-6 top-6 z-10 max-w-sm rounded-xl border shadow-lg backdrop-blur-sm p-4",
               isDark
                 ? "border-gray-800 bg-gray-900/95"
-                : "border-gray-200/50 bg-white/95"
+                : "border-gray-200/50 bg-white/95",
             )}
           >
             <div className="flex items-start justify-between">
@@ -341,7 +337,7 @@ export function WordMapContainer() {
                 <h3
                   className={cn(
                     "text-lg font-semibold",
-                    isDark ? "text-gray-100" : "text-gray-900"
+                    isDark ? "text-gray-100" : "text-gray-900",
                   )}
                 >
                   Tech Stack Visualization
@@ -349,7 +345,7 @@ export function WordMapContainer() {
                 <p
                   className={cn(
                     "mt-2 text-sm",
-                    isDark ? "text-gray-400" : "text-gray-600"
+                    isDark ? "text-gray-400" : "text-gray-600",
                   )}
                 >
                   An interactive visualization of technologies and concepts from
@@ -358,7 +354,7 @@ export function WordMapContainer() {
                 <div
                   className={cn(
                     "mt-3 space-y-3 border-t pt-3",
-                    isDark ? "border-gray-800" : "border-gray-100"
+                    isDark ? "border-gray-800" : "border-gray-100",
                   )}
                 >
                   <div className="grid grid-cols-2 gap-3 text-sm">
@@ -366,7 +362,7 @@ export function WordMapContainer() {
                       <div
                         className={cn(
                           "text-xs font-medium",
-                          isDark ? "text-gray-500" : "text-gray-500"
+                          isDark ? "text-gray-500" : "text-gray-500",
                         )}
                       >
                         Projects Analyzed
@@ -374,7 +370,7 @@ export function WordMapContainer() {
                       <div
                         className={cn(
                           "mt-1 font-semibold",
-                          isDark ? "text-gray-100" : "text-gray-900"
+                          isDark ? "text-gray-100" : "text-gray-900",
                         )}
                       >
                         {stats.projectCount}
@@ -384,7 +380,7 @@ export function WordMapContainer() {
                       <div
                         className={cn(
                           "text-xs font-medium",
-                          isDark ? "text-gray-500" : "text-gray-500"
+                          isDark ? "text-gray-500" : "text-gray-500",
                         )}
                       >
                         Learning Entries
@@ -392,7 +388,7 @@ export function WordMapContainer() {
                       <div
                         className={cn(
                           "mt-1 font-semibold",
-                          isDark ? "text-gray-100" : "text-gray-900"
+                          isDark ? "text-gray-100" : "text-gray-900",
                         )}
                       >
                         {stats.learningCount}
@@ -409,7 +405,7 @@ export function WordMapContainer() {
                         <div
                           className={cn(
                             "flex items-center gap-1.5 text-xs font-medium",
-                            isDark ? "text-gray-500" : "text-gray-500"
+                            isDark ? "text-gray-500" : "text-gray-500",
                           )}
                         >
                           <FileIcon className="h-3.5 w-3.5" />
@@ -418,7 +414,7 @@ export function WordMapContainer() {
                         <div
                           className={cn(
                             "mt-1 font-semibold",
-                            isDark ? "text-gray-100" : "text-gray-900"
+                            isDark ? "text-gray-100" : "text-gray-900",
                           )}
                         >
                           {formatNumber(stats.filesAnalyzed)}
@@ -428,14 +424,14 @@ export function WordMapContainer() {
                         <ChevronUpIcon
                           className={cn(
                             "h-4 w-4",
-                            isDark ? "text-gray-600" : "text-gray-400"
+                            isDark ? "text-gray-600" : "text-gray-400",
                           )}
                         />
                       ) : (
                         <ChevronDownIcon
                           className={cn(
                             "h-4 w-4",
-                            isDark ? "text-gray-600" : "text-gray-400"
+                            isDark ? "text-gray-600" : "text-gray-400",
                           )}
                         />
                       )}
@@ -453,15 +449,13 @@ export function WordMapContainer() {
                           <div
                             className={cn(
                               "space-y-1.5 rounded-lg p-2 text-sm",
-                              isDark
-                                ? "bg-gray-800/50"
-                                : "bg-gray-50/50"
+                              isDark ? "bg-gray-800/50" : "bg-gray-50/50",
                             )}
                           >
                             {(
-                              Object.keys(
-                                stats.fileBreakdown
-                              ) as Array<keyof FileBreakdown>
+                              Object.keys(stats.fileBreakdown) as Array<
+                                keyof FileBreakdown
+                              >
                             ).map((type) => {
                               const Icon = fileTypeIcons[type];
                               return (
@@ -475,7 +469,7 @@ export function WordMapContainer() {
                                         "h-3.5 w-3.5",
                                         isDark
                                           ? "text-gray-400"
-                                          : "text-gray-500"
+                                          : "text-gray-500",
                                       )}
                                     />
                                     <span
@@ -483,7 +477,7 @@ export function WordMapContainer() {
                                         "text-xs",
                                         isDark
                                           ? "text-gray-400"
-                                          : "text-gray-600"
+                                          : "text-gray-600",
                                       )}
                                     >
                                       {fileTypeLabels[type]}
@@ -494,7 +488,7 @@ export function WordMapContainer() {
                                       "text-xs font-medium",
                                       isDark
                                         ? "text-gray-300"
-                                        : "text-gray-700"
+                                        : "text-gray-700",
                                     )}
                                   >
                                     {stats.fileBreakdown[type]}
@@ -512,7 +506,7 @@ export function WordMapContainer() {
                     <div
                       className={cn(
                         "text-xs font-medium",
-                        isDark ? "text-gray-500" : "text-gray-500"
+                        isDark ? "text-gray-500" : "text-gray-500",
                       )}
                     >
                       Lines of Code
@@ -520,7 +514,7 @@ export function WordMapContainer() {
                     <div
                       className={cn(
                         "mt-1 font-semibold",
-                        isDark ? "text-gray-100" : "text-gray-900"
+                        isDark ? "text-gray-100" : "text-gray-900",
                       )}
                     >
                       {formatNumber(stats.linesOfCode)}
@@ -536,7 +530,7 @@ export function WordMapContainer() {
                   "ml-2 p-1 transition-colors",
                   isDark
                     ? "text-gray-600 hover:text-gray-400"
-                    : "text-gray-400 hover:text-gray-600"
+                    : "text-gray-400 hover:text-gray-600",
                 )}
               >
                 <FilterIcon className="h-4 w-4" />
@@ -554,13 +548,13 @@ export function WordMapContainer() {
                     "absolute right-0 top-8 z-50 w-72 rounded-lg border shadow-lg backdrop-blur-sm p-3",
                     isDark
                       ? "border-gray-800 bg-gray-900/95"
-                      : "border-gray-200/50 bg-white/95"
+                      : "border-gray-200/50 bg-white/95",
                   )}
                 >
                   <p
                     className={cn(
                       "text-xs font-medium mb-2",
-                      isDark ? "text-gray-500" : "text-gray-400"
+                      isDark ? "text-gray-500" : "text-gray-400",
                     )}
                   >
                     Filtered Common Words:
@@ -570,7 +564,7 @@ export function WordMapContainer() {
                       className={cn(
                         "absolute inset-x-0 top-0 h-4 bg-gradient-to-b z-10",
                         isDark ? "from-gray-900/95" : "from-white/95",
-                        "to-transparent"
+                        "to-transparent",
                       )}
                     />
                     <motion.div
@@ -589,7 +583,7 @@ export function WordMapContainer() {
                             "inline-flex items-center rounded-full px-2 py-0.5 text-xs",
                             isDark
                               ? "bg-gray-800/50 text-gray-400"
-                              : "bg-gray-100/50 text-gray-400"
+                              : "bg-gray-100/50 text-gray-400",
                           )}
                         >
                           {word}
@@ -600,7 +594,7 @@ export function WordMapContainer() {
                       className={cn(
                         "absolute inset-x-0 bottom-0 h-4 bg-gradient-to-t z-10",
                         isDark ? "from-gray-900/95" : "from-white/95",
-                        "to-transparent"
+                        "to-transparent",
                       )}
                     />
                   </div>
@@ -621,7 +615,7 @@ export function WordMapContainer() {
             "border",
             isDark
               ? "bg-gray-900/90 hover:bg-gray-800 border-gray-800"
-              : "bg-white/90 hover:bg-white border-gray-200/50"
+              : "bg-white/90 hover:bg-white border-gray-200/50",
           )}
         >
           {showInfo ? "Hide Info" : "Show Info"}
@@ -632,9 +626,9 @@ export function WordMapContainer() {
             onMouseEnter={() => setShowSamplingTooltip(true)}
             onMouseLeave={() => setShowSamplingTooltip(false)}
             onClick={() => {
-              const methods = Object.keys(
-                SAMPLING_METHODS
-              ) as Array<keyof typeof SAMPLING_METHODS>;
+              const methods = Object.keys(SAMPLING_METHODS) as Array<
+                keyof typeof SAMPLING_METHODS
+              >;
               const currentIndex = methods.indexOf(samplingMethod);
               const nextIndex = (currentIndex + 1) % methods.length;
               setSamplingMethod(methods[nextIndex]);
@@ -647,15 +641,15 @@ export function WordMapContainer() {
               "border flex items-center gap-2",
               isDark
                 ? "bg-gray-900/90 hover:bg-gray-800 border-gray-800"
-                : "bg-white/90 hover:bg-white border-gray-200/50"
+                : "bg-white/90 hover:bg-white border-gray-200/50",
             )}
           >
             <BarChart3Icon className="h-4 w-4" />
             {samplingMethod === "balanced"
               ? "Balanced"
               : samplingMethod === "frequency"
-              ? "Frequency"
-              : "Impact"}
+                ? "Frequency"
+                : "Impact"}
           </button>
           <AnimatePresence>
             {showSamplingTooltip && (
@@ -669,7 +663,7 @@ export function WordMapContainer() {
                   "shadow-sm backdrop-blur-sm whitespace-nowrap",
                   isDark
                     ? "bg-gray-900/95 text-gray-300"
-                    : "bg-white/95 text-gray-600"
+                    : "bg-white/95 text-gray-600",
                 )}
               >
                 {SAMPLING_METHODS[samplingMethod]}
@@ -690,7 +684,7 @@ export function WordMapContainer() {
               "border flex items-center gap-2",
               isDark
                 ? "bg-gray-900/90 hover:bg-gray-800 border-gray-800"
-                : "bg-white/90 hover:bg-white border-gray-200/50"
+                : "bg-white/90 hover:bg-white border-gray-200/50",
             )}
           >
             <RefreshCwIcon className="h-4 w-4" />
@@ -708,7 +702,7 @@ export function WordMapContainer() {
                   "shadow-sm backdrop-blur-sm whitespace-nowrap",
                   isDark
                     ? "bg-gray-900/95 text-gray-300"
-                    : "bg-white/95 text-gray-600"
+                    : "bg-white/95 text-gray-600",
                 )}
               >
                 Reshuffle with slight randomness in filter calculations.
@@ -730,13 +724,13 @@ export function WordMapContainer() {
               "w-64 rounded-xl border shadow-lg backdrop-blur-sm p-4",
               isDark
                 ? "border-gray-800 bg-gray-900/95"
-                : "border-gray-200/50 bg-white/95"
+                : "border-gray-200/50 bg-white/95",
             )}
           >
             <h3
               className={cn(
                 "text-sm font-semibold mb-2",
-                isDark ? "text-gray-100" : "text-gray-900"
+                isDark ? "text-gray-100" : "text-gray-900",
               )}
             >
               Categories
@@ -751,7 +745,7 @@ export function WordMapContainer() {
                   <span
                     className={cn(
                       "text-sm",
-                      isDark ? "text-gray-400" : "text-gray-600"
+                      isDark ? "text-gray-400" : "text-gray-600",
                     )}
                   >
                     {name}
@@ -762,7 +756,7 @@ export function WordMapContainer() {
             <p
               className={cn(
                 "mt-3 text-xs",
-                isDark ? "text-gray-500" : "text-gray-500"
+                isDark ? "text-gray-500" : "text-gray-500",
               )}
             >
               Size indicates frequency and importance across projects and

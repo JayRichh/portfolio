@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import dynamic from "next/dynamic";
@@ -31,11 +31,11 @@ const links = [
   { label: "Resources", path: "/resources", matchSubpaths: true },
 ];
 
-const NavItem: React.FC<{ label: string; path: string; matchSubpaths?: boolean }> = ({
-  label,
-  path,
-  matchSubpaths,
-}) => {
+const NavItem: React.FC<{
+  label: string;
+  path: string;
+  matchSubpaths?: boolean;
+}> = ({ label, path, matchSubpaths }) => {
   const pathname = usePathname();
   const router = useRouter();
   const isActive = isRouteActive(path, pathname, !matchSubpaths);
@@ -101,7 +101,7 @@ export function SiteNavigation(): JSX.Element {
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-      
+
       <div className="flex md:hidden">
         <MobileMenu currentPath={pathname} />
       </div>
@@ -122,12 +122,16 @@ function MobileMenu({ currentPath }: { currentPath: string }): JSX.Element {
       >
         <Menu className="h-5 w-5" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent 
+      <DropdownMenuContent
         align="start"
         className="w-48 rounded-lg bg-background"
       >
         {links.map((item) => {
-          const isActive = isRouteActive(item.path, currentPath, !item.matchSubpaths);
+          const isActive = isRouteActive(
+            item.path,
+            currentPath,
+            !item.matchSubpaths,
+          );
           return (
             <DropdownMenuItem key={item.path} asChild>
               <PageTransitionLink
@@ -136,8 +140,9 @@ function MobileMenu({ currentPath }: { currentPath: string }): JSX.Element {
                   "flex w-full items-center px-3 py-2 text-sm transition-colors",
                   {
                     "bg-primary/10 text-primary": isActive,
-                    "text-foreground hover:bg-primary/5 hover:text-primary": !isActive,
-                  }
+                    "text-foreground hover:bg-primary/5 hover:text-primary":
+                      !isActive,
+                  },
                 )}
               >
                 {item.label}

@@ -21,13 +21,7 @@ import {
   Server,
   Zap,
 } from "lucide-react";
-import {
-  Cell,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Sector,
-} from "recharts";
+import { Cell, Pie, PieChart, ResponsiveContainer, Sector } from "recharts";
 
 import { Button } from "../../components/ui/button";
 import HobbiesSection from "./_components/about-hobbies";

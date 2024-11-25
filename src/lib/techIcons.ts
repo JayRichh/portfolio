@@ -65,8 +65,16 @@ export const techIcons: TechIcons = {
   Vue3: { icon: Code, color: "#4FC08D", docLink: "https://vuejs.org" },
   React: { icon: Atom, color: "#61DAFB", docLink: "https://reactjs.org" },
   "React 18": { icon: Atom, color: "#61DAFB", docLink: "https://reactjs.org" },
-  "Next.js": { icon: Triangle, color: "#000000", docLink: "https://nextjs.org" },
-  "Next.js 15": { icon: Triangle, color: "#000000", docLink: "https://nextjs.org" },
+  "Next.js": {
+    icon: Triangle,
+    color: "#000000",
+    docLink: "https://nextjs.org",
+  },
+  "Next.js 15": {
+    icon: Triangle,
+    color: "#000000",
+    docLink: "https://nextjs.org",
+  },
   "Node.js": { icon: Cpu, color: "#339933", docLink: "https://nodejs.org" },
   Express: { icon: Server, color: "#000000", docLink: "https://expressjs.com" },
   Rails: {
