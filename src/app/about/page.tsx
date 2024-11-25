@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-
 import dynamic from "next/dynamic";
 import Link from "next/link";
-
 import {
   motion,
   useAnimation,
@@ -29,13 +27,9 @@ import {
   PieChart,
   ResponsiveContainer,
   Sector,
-  Tooltip,
 } from "recharts";
-import { PieSectorDataItem } from "recharts/types/polar/Pie";
-import { ActiveShape } from "recharts/types/util/types";
 
 import { Button } from "../../components/ui/button";
-
 import HobbiesSection from "./_components/about-hobbies";
 
 const ScrollDownIndicator = dynamic(
@@ -164,20 +158,7 @@ const renderActiveShape = (props: any) => {
     startAngle,
     endAngle,
     fill,
-    payload,
-    percent,
-    value,
   } = props;
-  const RADIAN = Math.PI / 180;
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const sx = cx + (outerRadius + 10) * cos;
-  const sy = cy + (outerRadius + 10) * sin;
-  const mx = cx + (outerRadius + 30) * cos;
-  const my = cy + (outerRadius + 30) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-  const ey = my;
-  const textAnchor = cos >= 0 ? "start" : "end";
 
   return (
     <g>
@@ -217,18 +198,19 @@ const TopSection: React.FC = () => {
   const onPieEnter = (_: any, index: number) => {
     setActiveIndex(index);
   };
+
   return (
     <div className="flex min-h-[50vh] flex-col items-center justify-center overflow-visible px-4 md:px-8">
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
         className="w-full max-w-screen-xl"
       >
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
           className="mb-8 pt-24 text-center text-4xl font-extrabold text-primary sm:text-5xl md:text-6xl"
         >
           Technology
@@ -236,7 +218,7 @@ const TopSection: React.FC = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.3 }}
           className="mb-8 w-full overflow-visible"
         >
           {isMobile ? (
@@ -292,9 +274,9 @@ const TopSection: React.FC = () => {
 
 const SocialLinks: React.FC = () => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    transition={{ duration: 0.3 }}
     className="mt-12 flex justify-center space-x-6"
   >
     <motion.a
@@ -396,21 +378,16 @@ const TimelineCard: React.FC<{ item: any; index: number; total: number }> = ({
   index,
 }) => {
   const cardRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "center center"],
-  });
+  const isInView = useInView(cardRef, { once: true, amount: 0.3 });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["100px", "0px"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 1]);
+  // Optimize animations by using simpler transforms and shorter durations
   return (
     <motion.div
       ref={cardRef}
-      style={{ y, opacity }}
       className={`flex ${index % 2 === 0 ? "justify-end md:justify-start" : "justify-start md:justify-end"} relative mb-12 w-full items-center`}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.3 }}
     >
       <div
         className={`w-full rounded-lg bg-card p-6 text-left text-card-foreground shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:bg-card dark:text-card-foreground md:w-5/12 ${index % 2 === 0 ? "border-r-2 md:text-right" : "border-l-2 md:text-left"} border-primary`}
@@ -438,8 +415,8 @@ const TimelineCard: React.FC<{ item: any; index: number; total: number }> = ({
         <motion.div
           className="absolute flex h-16 w-16 transform items-center justify-center rounded-full bg-card shadow-lg dark:bg-card dark:shadow-primary/20"
           initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true }}
+          animate={isInView ? { scale: 1 } : {}}
+          transition={{ duration: 0.3 }}
         >
           <item.icon className="h-8 w-8 text-primary dark:text-primary" />
         </motion.div>
@@ -450,10 +427,6 @@ const TimelineCard: React.FC<{ item: any; index: number; total: number }> = ({
 
 const AboutPage: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: ["start start", "end start"],
-  });
 
   return (
     <div
@@ -468,13 +441,13 @@ const AboutPage: React.FC = () => {
         <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.3 }}
           className="relative flex-grow"
         >
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
             className="mb-40 text-center text-4xl font-extrabold text-primary sm:text-5xl md:text-6xl"
           >
             Experience
@@ -483,9 +456,9 @@ const AboutPage: React.FC = () => {
         </motion.section>
         <section className="relative z-10 mt-40 flex flex-col items-center justify-start">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
             viewport={{ once: true }}
             className="mb-60 text-center"
           >

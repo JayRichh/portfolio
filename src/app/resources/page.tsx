@@ -73,8 +73,8 @@ const Card = ({ href, title, description, PreviewComponent }: {
 export default function ResourcesPage() {
   return (
     <PageSection>
-      <div className="container mx-auto max-w-7xl">
-        <div className="mb-12">
+      <div className="container mx-auto min-w-full">
+        <div className="mb-12 -mt-12">
           <PageTitle>Resources</PageTitle>
           <PageDescription>
             Explore interactive visualizations of my tech journey, built while learning various APIs and libraries. These tools provide insights into my development progress and tech preferences.

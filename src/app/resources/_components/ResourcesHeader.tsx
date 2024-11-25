@@ -65,7 +65,7 @@ export function ResourcesHeader() {
   return (
     <div className="w-full">
       <motion.header
-        className="fixed top-16 z-40 w-full border-b bg-background/80 backdrop-blur-sm"
+        className="sticky top-16 z-40 w-full border-b bg-background/80 backdrop-blur-sm"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{
@@ -73,8 +73,8 @@ export function ResourcesHeader() {
           ease: "easeOut",
         }}
       >
-        <nav className="container flex h-12 items-center px-4 md:px-6 lg:px-8">
-          <div className="flex items-center space-x-1 ml-0">
+        <nav className="container flex h-12 items-center">
+          <div className="flex items-center space-x-1">
             {links.map((item) => (
               <NavItem key={item.path} {...item} />
             ))}

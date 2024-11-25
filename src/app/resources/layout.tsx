@@ -9,11 +9,9 @@ export default function ResourcesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <main>
       <ResourcesHeader />
-      <main className="pt-12">
-        {children}
-      </main>
-    </>
+      {children}
+    </main>
   );
 }
