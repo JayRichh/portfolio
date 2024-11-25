@@ -11,9 +11,7 @@ export default function ResourcesLayout({
   return (
     <main className="relative flex flex-col">
       <ResourcesHeader />
-      <div className="flex-1 overflow-hidden pt-14">
-        {children}
-      </div>
+      <div className="flex-1 overflow-hidden pt-14">{children}</div>
     </main>
   );
 }

@@ -220,11 +220,11 @@ export default function GitHubPage() {
           </motion.div>
 
           <div className="mt-8 text-sm text-muted-foreground">
-            <p>
-              Note: This visualization shows contributions to both public and
-              private repositories and includes commits, pull requests, and
-              issues.
-            </p>
+            <i>
+              Note: This visualization reflects daily contributions across
+              distinct repositories, including public and private work through
+              commits, pull requests, and issues.
+            </i>
           </div>
         </motion.div>
       )}

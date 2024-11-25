@@ -84,8 +84,8 @@ export default function ResourcesPage() {
         <PageTitle>Resources</PageTitle>
         <PageDescription>
           Explore interactive visualizations of my tech journey, built while
-          learning various APIs and libraries. These tools provide insights
-          into my development progress and tech preferences.
+          learning various APIs and libraries. These tools provide insights into
+          my development progress and tech preferences.
         </PageDescription>
       </div>
 
