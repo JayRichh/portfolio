@@ -9,9 +9,11 @@ export default function ResourcesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main>
+    <main className="relative flex flex-col">
       <ResourcesHeader />
-      {children}
+      <div className="flex-1 overflow-hidden pt-14">
+        {children}
+      </div>
     </main>
   );
 }

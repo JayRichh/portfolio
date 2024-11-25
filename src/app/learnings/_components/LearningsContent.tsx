@@ -775,12 +775,12 @@ export const LearningsContent: React.FC = () => {
     localStorage.setItem("contentCollapsed", newState.toString());
   };
   return (
-    <div className="relative h-screen w-full">
+    <div className="relative w-full">
       <div className="fixed inset-0 z-0">
         <MindMap learnings={learnings} />
       </div>
 
-      <div className="relative w-auto z-10 flex flex-col items-center px-4">
+      <div className="relative w-auto z-10 flex flex-col items-center px-4 py-4 pb-16">
         <motion.div
           initial={false}
           animate={{ height: isContentCollapsed ? "auto" : "auto" }}
@@ -792,7 +792,7 @@ export const LearningsContent: React.FC = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="mx-auto mt-10 max-w-3xl transform rounded-2xl bg-card p-8 shadow-2xl transition-transform duration-300 hover:scale-105"
+                className="mx-auto mt-2 max-w-3xl transform rounded-2xl bg-card p-8 shadow-2xl transition-transform duration-300 hover:scale-105"
               >
                 <h2 className="mb-6 text-4xl font-extrabold text-primary">
                   Mindmap

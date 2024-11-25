@@ -18,7 +18,7 @@ const WordMapContainer = dynamic(
 
 function LoadingSpinner() {
   return (
-    <div className="flex h-[calc(100vh-64px)] w-full items-center justify-center">
+    <div className="flex h-[calc(100vh-112px)] w-full items-center justify-center">
       <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
     </div>
   );
@@ -26,7 +26,7 @@ function LoadingSpinner() {
 
 export default function WordMapPage() {
   return (
-    <main className="relative h-[calc(100vh-64px)] w-full overflow-hidden">
+    <main className="relative h-[calc(100vh-112px)] w-full overflow-hidden">
       <ErrorBoundary>
         <Suspense fallback={<LoadingSpinner />}>
           <WordMapContainer />

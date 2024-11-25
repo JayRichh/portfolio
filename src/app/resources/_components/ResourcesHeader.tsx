@@ -63,24 +63,24 @@ export function ResourcesHeader() {
   }
 
   return (
-    <div className="w-full">
-      <motion.header
-        className="sticky top-16 z-40 w-full border-b bg-background/80 backdrop-blur-sm"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{
-          duration: 0.3,
-          ease: "easeOut",
-        }}
-      >
-        <nav className="container flex h-12 items-center">
+    <motion.header
+      className="sticky top-16 z-40 w-full border-b bg-background/80 backdrop-blur-sm -mb-16"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{
+        duration: 0.3,
+        ease: "easeOut",
+      }}
+    >
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <nav className="flex h-12 items-center">
           <div className="flex items-center space-x-1">
             {links.map((item) => (
               <NavItem key={item.path} {...item} />
             ))}
           </div>
         </nav>
-      </motion.header>
-    </div>
+      </div>
+    </motion.header>
   );
 }

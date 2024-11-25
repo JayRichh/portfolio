@@ -52,7 +52,7 @@ const Card = ({
       prefetch={true}
     >
       {PreviewComponent && (
-        <div className="h-[300px] w-full relative overflow-hidden border-b border-border/50">
+        <div className="relative h-[300px] w-full overflow-hidden border-b border-border/50">
           <PreviewComponent />
         </div>
       )}
@@ -80,36 +80,34 @@ const Card = ({
 export default function ResourcesPage() {
   return (
     <PageSection>
-      <div className="container mx-auto min-w-full">
-        <div className="mb-12">
-          <PageTitle>Resources</PageTitle>
-          <PageDescription>
-            Explore interactive visualizations of my tech journey, built while
-            learning various APIs and libraries. These tools provide insights
-            into my development progress and tech preferences.
-          </PageDescription>
-        </div>
+      <div className="">
+        <PageTitle>Resources</PageTitle>
+        <PageDescription>
+          Explore interactive visualizations of my tech journey, built while
+          learning various APIs and libraries. These tools provide insights
+          into my development progress and tech preferences.
+        </PageDescription>
+      </div>
 
-        <div className="grid h-full place-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <Card
-            href="/resources/wordmap"
-            title="Tech Stack Visualization"
-            description="Interactive word cloud visualization of my tech stack, with size indicating usage frequency and colors representing different categories"
-            PreviewComponent={WordMapPreview}
-          />
-          <Card
-            href="/resources/learnings"
-            title="Learning Journey"
-            description="Structured overview of my programming knowledge, organized as an interactive mindmap with different categories and importance levels"
-            PreviewComponent={MindMapPreview}
-          />
-          <Card
-            href="/resources/github"
-            title="GitHub Activity"
-            description="Visual representation of my GitHub contribution activity, showing commit frequency and development patterns over time"
-            PreviewComponent={GitHubPreview}
-          />
-        </div>
+      <div className="grid h-full place-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <Card
+          href="/resources/wordmap"
+          title="Tech Stack Visualization"
+          description="Interactive word cloud visualization of my tech stack, with size indicating usage frequency and colors representing different categories"
+          PreviewComponent={WordMapPreview}
+        />
+        <Card
+          href="/resources/learnings"
+          title="Learning Journey"
+          description="Structured overview of my programming knowledge, organized as an interactive mindmap with different categories and importance levels"
+          PreviewComponent={MindMapPreview}
+        />
+        <Card
+          href="/resources/github"
+          title="GitHub Activity"
+          description="Visual representation of my GitHub contribution activity, showing commit frequency and development patterns over time"
+          PreviewComponent={GitHubPreview}
+        />
       </div>
     </PageSection>
   );

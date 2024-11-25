@@ -73,7 +73,7 @@ export default function GitHubPage() {
   // Early return while loading with progress indicator
   if (loading) {
     return (
-      <div className="flex h-screen items-center justify-center">
+      <div className="flex h-[calc(100vh-112px)] items-center justify-center">
         <ProgressLoader
           onComplete={() => {
             if (yearData.length > 0) {
@@ -92,7 +92,7 @@ export default function GitHubPage() {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-primary mb-4">
+          <h1 className="mb-4 text-2xl font-bold text-primary">
             No GitHub Data Available
           </h1>
           <p className="text-muted-foreground">
@@ -122,7 +122,7 @@ export default function GitHubPage() {
           className="container mx-auto px-4 py-16"
         >
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-primary mb-4">
+            <h1 className="mb-4 text-4xl font-bold text-primary">
               GitHub Activity
             </h1>
             <p className="text-lg text-muted-foreground">
@@ -144,9 +144,9 @@ export default function GitHubPage() {
                   )
                 }
                 disabled={selectedYearIndex === yearData.length - 1}
-                className={`px-3 py-1 rounded-md ${
+                className={`rounded-md px-3 py-1 ${
                   selectedYearIndex === yearData.length - 1
-                    ? "opacity-50 cursor-not-allowed"
+                    ? "cursor-not-allowed opacity-50"
                     : "hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`}
                 aria-label="Previous year"
@@ -158,9 +158,9 @@ export default function GitHubPage() {
                   setSelectedYearIndex((prev) => Math.max(prev - 1, 0))
                 }
                 disabled={selectedYearIndex === 0}
-                className={`px-3 py-1 rounded-md ${
+                className={`rounded-md px-3 py-1 ${
                   selectedYearIndex === 0
-                    ? "opacity-50 cursor-not-allowed"
+                    ? "cursor-not-allowed opacity-50"
                     : "hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`}
                 aria-label="Next year"
