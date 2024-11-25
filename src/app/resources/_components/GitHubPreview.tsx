@@ -17,10 +17,12 @@ export function GitHubPreview() {
   const isDark = theme === "dark";
 
   useEffect(() => {
+    let mounted = true;
+
     const loadData = async () => {
       try {
-        console.log('Preview: Fetching GitHub data...');
-        if (cachedData) {
+        // Check for cached data first
+        if (cachedData && mounted) {
           console.log('Preview: Using cached data');
           setYearData(cachedData);
           setLoading(false);
@@ -28,18 +30,38 @@ export function GitHubPreview() {
           return;
         }
 
+        // If no cached data, fetch new data
+        console.log('Preview: Fetching GitHub data...');
         const contributions = await fetchGitHubContributions();
-        console.log('Preview: Received contributions:', contributions);
-        if (contributions.length > 0) {
+        
+        if (mounted && contributions.length > 0) {
+          console.log('Preview: Setting new contributions data');
           setYearData(contributions);
+          setLoading(false);
+          setShowContent(true);
         }
       } catch (error) {
         console.error("Preview: Error fetching GitHub data:", error);
+        if (mounted) {
+          setLoading(false);
+        }
       }
     };
 
-    reset();
-    loadData();
+    // Only reset and fetch if we don't have cached data
+    if (!cachedData) {
+      reset();
+      loadData();
+    } else {
+      // If we have cached data, use it immediately
+      setYearData(cachedData);
+      setLoading(false);
+      setShowContent(true);
+    }
+
+    return () => {
+      mounted = false;
+    };
   }, [reset, cachedData]);
 
   // Show loader until data is ready
@@ -48,7 +70,6 @@ export function GitHubPreview() {
       <div className="flex h-full items-center justify-center">
         <ProgressLoader 
           onComplete={() => {
-            console.log('Preview: Progress complete, showing content');
             if (yearData.length > 0) {
               setLoading(false);
               setShowContent(true);
@@ -68,8 +89,8 @@ export function GitHubPreview() {
 
   // Use most recent year's data for preview
   const mostRecentYear = yearData[0];
-  console.log('Preview: Rendering year:', mostRecentYear);
 
+  // Calculate date range for preview (last 6 months)
   const currentDate = new Date();
   const fromDate = new Date(
     currentDate.getFullYear(),
@@ -77,6 +98,11 @@ export function GitHubPreview() {
     1
   ).toISOString().split("T")[0];
   const toDate = currentDate.toISOString().split("T")[0];
+
+  // Filter contributions to only show the last 6 months
+  const previewContributions = mostRecentYear.contributions.filter(
+    contribution => contribution.day >= fromDate && contribution.day <= toDate
+  );
 
   // GitHub's exact color schemes
   const lightColors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
@@ -93,7 +119,7 @@ export function GitHubPreview() {
           className="h-full w-full"
         >
           <ResponsiveCalendarCanvas
-            data={mostRecentYear.contributions}
+            data={previewContributions}
             from={fromDate}
             to={toDate}
             emptyColor={isDark ? "#161b22" : "#ebedf0"}

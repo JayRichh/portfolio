@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import { ResponsiveCalendarCanvas } from "@nivo/calendar";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { fetchGitHubContributions, useGitHubStore, useContributions, YearContributions } from "../../lib/github";
-import { ProgressLoader } from "../../components/ui/progress-loader";
+import { fetchGitHubContributions, useGitHubStore, useContributions, YearContributions } from "../../../lib/github";
+import { ProgressLoader } from "../../../components/ui/progress-loader";
 
 export default function GitHubPage() {
   const [yearData, setYearData] = useState<YearContributions[]>([]);
@@ -18,10 +18,12 @@ export default function GitHubPage() {
   const isDark = theme === "dark";
 
   useEffect(() => {
+    let mounted = true;
+
     const loadData = async () => {
       try {
-        console.log('Fetching GitHub data...');
-        if (cachedData) {
+        // Check for cached data first
+        if (cachedData && mounted) {
           console.log('Using cached data');
           setYearData(cachedData);
           setLoading(false);
@@ -29,27 +31,46 @@ export default function GitHubPage() {
           return;
         }
 
+        // If no cached data, fetch new data
+        console.log('Fetching GitHub data...');
         const contributions = await fetchGitHubContributions();
-        console.log('Received contributions:', contributions);
-        if (contributions.length > 0) {
+        
+        if (mounted && contributions.length > 0) {
+          console.log('Setting new contributions data');
           setYearData(contributions);
+          setLoading(false);
+          setShowContent(true);
         }
       } catch (error) {
         console.error("Error fetching GitHub data:", error);
+        if (mounted) {
+          setLoading(false);
+        }
       }
     };
 
-    reset();
-    loadData();
+    // Only reset and fetch if we don't have cached data
+    if (!cachedData) {
+      reset();
+      loadData();
+    } else {
+      // If we have cached data, use it immediately
+      setYearData(cachedData);
+      setLoading(false);
+      setShowContent(true);
+    }
+
+    return () => {
+      mounted = false;
+    };
   }, [reset, cachedData]);
 
-  // Show loader until data is ready
+  // Early return while loading with progress indicator
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
         <ProgressLoader 
           onComplete={() => {
-            console.log('Progress complete, showing content');
             if (yearData.length > 0) {
               setLoading(false);
               setShowContent(true);
@@ -61,14 +82,19 @@ export default function GitHubPage() {
     );
   }
 
+  // Handle no data case
   if (!yearData.length) {
-    console.log('No year data available');
-    return null;
+    return (
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-primary mb-4">No GitHub Data Available</h1>
+          <p className="text-muted-foreground">Unable to load GitHub contribution data. Please try again later.</p>
+        </div>
+      </div>
+    );
   }
 
   const selectedYear = yearData[selectedYearIndex];
-  console.log('Rendering year:', selectedYear);
-
   const fromDate = `${selectedYear.year}-01-01`;
   const toDate = `${selectedYear.year}-12-31`;
 
@@ -106,6 +132,7 @@ export default function GitHubPage() {
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`}
+                aria-label="Previous year"
               >
                 ←
               </button>
@@ -117,6 +144,7 @@ export default function GitHubPage() {
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`}
+                aria-label="Next year"
               >
                 →
               </button>

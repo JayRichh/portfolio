@@ -28,16 +28,17 @@ const links = [
   { label: "Home", path: "/" },
   { label: "Code", path: "/code" },
   { label: "About", path: "/about" },
-  { label: "Resources", path: "/resources" },
+  { label: "Resources", path: "/resources", matchSubpaths: true },
 ];
 
-const NavItem: React.FC<{ label: string; path: string }> = ({
+const NavItem: React.FC<{ label: string; path: string; matchSubpaths?: boolean }> = ({
   label,
   path,
+  matchSubpaths,
 }) => {
   const pathname = usePathname();
   const router = useRouter();
-  const isActive = isRouteActive(path, pathname);
+  const isActive = isRouteActive(path, pathname, !matchSubpaths);
 
   // Prefetch the route
   React.useEffect(() => {
@@ -126,7 +127,7 @@ function MobileMenu({ currentPath }: { currentPath: string }): JSX.Element {
         className="w-48 rounded-lg bg-background"
       >
         {links.map((item) => {
-          const isActive = isRouteActive(item.path, currentPath);
+          const isActive = isRouteActive(item.path, currentPath, !item.matchSubpaths);
           return (
             <DropdownMenuItem key={item.path} asChild>
               <PageTransitionLink

@@ -8,6 +8,7 @@ import { cn } from "../../utils/cn";
 import { WordMapPreview } from "./_components/WordMapPreview";
 import { MindMapPreview } from "./_components/MindMapPreview";
 import { GitHubPreview } from "./_components/GitHubPreview";
+import { fetchGitHubContributions } from "../../lib/github";
 
 const Card = ({ href, title, description, PreviewComponent }: { 
   href: string; 
@@ -20,7 +21,12 @@ const Card = ({ href, title, description, PreviewComponent }: {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    
+    // If it's the GitHub card, prefetch the contributions data
+    if (href === '/resources/github') {
+      fetchGitHubContributions().catch(console.error);
+    }
+  }, [href]);
 
   return (
     <Link 
@@ -33,6 +39,7 @@ const Card = ({ href, title, description, PreviewComponent }: {
         "hover:border-primary/50 hover:bg-background/50",
         "flex flex-col"
       )}
+      prefetch={true}
     >
       {PreviewComponent && (
         <div className="h-[300px] w-full relative overflow-hidden border-b border-border/50">
@@ -61,7 +68,7 @@ const Card = ({ href, title, description, PreviewComponent }: {
 export default function ResourcesPage() {
   return (
     <div className="relative">
-      <div className="container relative mx-auto h-full px-4 py-16">
+      <div className="container relative mx-auto h-full px-4 pt-8">
         <div className="grid h-full place-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
           <Card 
             href="/resources/wordmap"
@@ -76,7 +83,7 @@ export default function ResourcesPage() {
             PreviewComponent={MindMapPreview}
           />
           <Card 
-            href="/github"
+            href="/resources/github"
             title="GitHub Activity"
             description="Visual representation of my GitHub contribution activity, showing commit frequency and development patterns over time"
             PreviewComponent={GitHubPreview}
