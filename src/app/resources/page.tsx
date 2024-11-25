@@ -9,6 +9,11 @@ import { WordMapPreview } from "./_components/WordMapPreview";
 import { MindMapPreview } from "./_components/MindMapPreview";
 import { GitHubPreview } from "./_components/GitHubPreview";
 import { fetchGitHubContributions } from "../../lib/github";
+import {
+  PageSection,
+  PageTitle,
+  PageDescription,
+} from "../../components/page-container";
 
 const Card = ({ href, title, description, PreviewComponent }: { 
   href: string; 
@@ -67,8 +72,15 @@ const Card = ({ href, title, description, PreviewComponent }: {
 
 export default function ResourcesPage() {
   return (
-    <div className="relative">
-      <div className="container relative mx-auto h-full px-4 pt-8">
+    <PageSection>
+      <div className="container mx-auto max-w-7xl">
+        <div className="mb-12">
+          <PageTitle>Resources</PageTitle>
+          <PageDescription>
+            Explore interactive visualizations of my tech journey, built while learning various APIs and libraries. These tools provide insights into my development progress and tech preferences.
+          </PageDescription>
+        </div>
+
         <div className="grid h-full place-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
           <Card 
             href="/resources/wordmap"
@@ -90,6 +102,6 @@ export default function ResourcesPage() {
           />
         </div>
       </div>
-    </div>
+    </PageSection>
   );
 }
