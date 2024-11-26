@@ -6,12 +6,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
-    // Optimize device sizes for common breakpoints
     deviceSizes: [320, 480, 640, 750, 828, 1080, 1200],
-    // Adjust image sizes for thumbnails and previews
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
-    minimumCacheTTL: 60 * 60 * 24, // 24 hours
-    // Disable blur placeholder for better CLS
+    minimumCacheTTL: 60 * 60 * 24,
     disableStaticImages: true,
   },
   experimental: {
@@ -37,12 +34,10 @@ const nextConfig: NextConfig = {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
           },
-          // Add priority hints for images
           {
             key: "Priority",
             value: "high",
           },
-          // Add resource hints
           {
             key: "Link",
             value: '<https://vercel.live>; rel="preconnect"',
@@ -57,10 +52,29 @@ const nextConfig: NextConfig = {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
           },
-          // Add priority hints for critical resources
           {
             key: "Priority",
             value: "high",
+          },
+          {
+            key: "Content-Security-Policy",
+            value: "default-src 'self'; script-src 'self'; style-src 'self';",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "Cross-Origin-Resource-Policy",
+            value: "same-origin",
           },
         ],
       },
