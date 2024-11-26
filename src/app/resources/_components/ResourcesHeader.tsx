@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -11,6 +11,24 @@ const links = [
   { label: "Learning Journey", path: "/resources/learnings" },
   { label: "GitHub Activity", path: "/resources/github" },
 ];
+
+const useScreenSize = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const updateSize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    updateSize(); 
+    window.addEventListener("resize", updateSize);
+
+    return () => {
+      window.removeEventListener("resize", updateSize);
+    };
+  }, []);
+
+  return isMobile;
+};
 
 const NavItem = ({ label, path }: { label: string; path: string }) => {
   const pathname = usePathname();
@@ -34,7 +52,7 @@ const NavItem = ({ label, path }: { label: string; path: string }) => {
           {
             "text-primary/80 bg-primary/5": isActive,
             "text-muted-foreground": !isActive,
-          },
+          }
         )}
       >
         <motion.span
@@ -56,8 +74,8 @@ const NavItem = ({ label, path }: { label: string; path: string }) => {
 
 export function ResourcesHeader() {
   const pathname = usePathname();
+  const isMobile = useScreenSize();
 
-  // Hide the header on the root resources page
   if (pathname === "/resources") {
     return null;
   }
@@ -75,9 +93,11 @@ export function ResourcesHeader() {
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav className="flex h-12 items-center">
           <div className="flex items-center space-x-1">
-            {links.map((item) => (
-              <NavItem key={item.path} {...item} />
-            ))}
+            {links
+              .filter((item, index) => !isMobile || index === 2)
+              .map((item) => (
+                <NavItem key={item.path} {...item} />
+              ))}
           </div>
         </nav>
       </div>

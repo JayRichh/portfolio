@@ -15,16 +15,36 @@ import {
   PageDescription,
 } from "../../components/page-container";
 
+const useScreenSize = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const updateSize = () => {
+      setIsMobile(window.innerWidth < 640); // Matches Tailwind's `sm` breakpoint
+    };
+    updateSize(); // Check initial size
+    window.addEventListener("resize", updateSize);
+
+    return () => {
+      window.removeEventListener("resize", updateSize);
+    };
+  }, []);
+
+  return isMobile;
+};
+
 const Card = ({
   href,
   title,
   description,
   PreviewComponent,
+  className,
 }: {
   href: string;
   title: string;
   description: string;
   PreviewComponent?: React.ComponentType;
+  className?: string;
 }) => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -32,7 +52,7 @@ const Card = ({
   useEffect(() => {
     setMounted(true);
 
-    // If it's the GitHub card, prefetch the contributions data
+    // Prefetch GitHub contributions if the card is for the GitHub route
     if (href === "/resources/github") {
       fetchGitHubContributions().catch(console.error);
     }
@@ -42,12 +62,13 @@ const Card = ({
     <Link
       href={href}
       className={cn(
+        className || "",
         "group relative overflow-hidden rounded-xl",
         "border border-border/50",
         "bg-background/30 backdrop-blur-sm",
         "transition-all duration-300 hover:scale-[1.02]",
         "hover:border-primary/50 hover:bg-background/50",
-        "flex flex-col",
+        "flex flex-col"
       )}
       prefetch={true}
     >
@@ -66,7 +87,7 @@ const Card = ({
           <p
             className={cn(
               "text-lg",
-              mounted && (theme === "dark" ? "text-gray-300" : "text-gray-600"),
+              mounted && (theme === "dark" ? "text-gray-300" : "text-gray-600")
             )}
           >
             {description}
@@ -78,6 +99,8 @@ const Card = ({
 };
 
 export default function ResourcesPage() {
+  const isMobile = useScreenSize();
+
   return (
     <PageSection>
       <div className="">
@@ -90,18 +113,23 @@ export default function ResourcesPage() {
       </div>
 
       <div className="grid h-full place-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <Card
-          href="/resources/wordmap"
-          title="Tech Stack Visualization"
-          description="Interactive word cloud visualization of my tech stack, with size indicating usage frequency and colors representing different categories"
-          PreviewComponent={WordMapPreview}
-        />
-        <Card
-          href="/resources/learnings"
-          title="Learning Journey"
-          description="Structured overview of my programming knowledge, organized as an interactive mindmap with different categories and importance levels"
-          PreviewComponent={MindMapPreview}
-        />
+        {!isMobile && ( // Render these cards only if the screen size is not mobile
+          <>
+            <Card
+              href="/resources/wordmap"
+              title="Tech Stack Visualization"
+              description="Interactive word cloud visualization of my tech stack, with size indicating usage frequency and colors representing different categories"
+              PreviewComponent={WordMapPreview}
+            />
+            <Card
+              href="/resources/learnings"
+              title="Learning Journey"
+              description="Structured overview of my programming knowledge, organized as an interactive mindmap with different categories and importance levels"
+              PreviewComponent={MindMapPreview}
+            />
+          </>
+        )}
+        {/* Always show this card */}
         <Card
           href="/resources/github"
           title="GitHub Activity"
