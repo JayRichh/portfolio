@@ -104,51 +104,81 @@ export default function GitHubPage() {
   const lightColors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
   const darkColors = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
 
-  const YearTabs = () => (
-    <div className="mb-4 flex flex-wrap gap-2 md:hidden">
-      {yearData.map((year, index) => (
-        <button
-          key={year.year}
-          onClick={() => setSelectedYearIndex(index)}
-          className={`rounded-md px-4 py-2 text-sm transition-colors ${
-            selectedYearIndex === index
-              ? "bg-primary text-primary-foreground"
-              : "bg-muted hover:bg-muted/80"
-          }`}
-        >
-          {year.year}
-        </button>
-      ))}
-    </div>
-  );
-
-  const DesktopYearNavigation = () => (
-    <div className="hidden md:flex gap-2">
-      <button
-        onClick={() => setSelectedYearIndex((prev) => Math.min(prev + 1, yearData.length - 1))}
-        disabled={selectedYearIndex === yearData.length - 1}
-        className={`rounded-md px-3 py-1 ${
-          selectedYearIndex === yearData.length - 1
-            ? "cursor-not-allowed opacity-50"
-            : "hover:bg-gray-100 dark:hover:bg-gray-800"
-        }`}
-        aria-label="Previous year"
-      >
-        ←
-      </button>
+  const YearNavigation = () => (
+    <div className="flex items-center justify-center gap-4 mb-6">
       <button
         onClick={() => setSelectedYearIndex((prev) => Math.max(prev - 1, 0))}
         disabled={selectedYearIndex === 0}
-        className={`rounded-md px-3 py-1 ${
+        className={`rounded-md px-4 py-2 transition-colors ${
           selectedYearIndex === 0
             ? "cursor-not-allowed opacity-50"
-            : "hover:bg-gray-100 dark:hover:bg-gray-800"
+            : "bg-muted hover:bg-muted/80"
+        }`}
+        aria-label="Previous year"
+      >
+        Previous Year
+      </button>
+      <span className="text-lg font-semibold">{selectedYear.year}</span>
+      <button
+        onClick={() => setSelectedYearIndex((prev) => Math.min(prev + 1, yearData.length - 1))}
+        disabled={selectedYearIndex === yearData.length - 1}
+        className={`rounded-md px-4 py-2 transition-colors ${
+          selectedYearIndex === yearData.length - 1
+            ? "cursor-not-allowed opacity-50"
+            : "bg-muted hover:bg-muted/80"
         }`}
         aria-label="Next year"
       >
-        →
+        Next Year
       </button>
     </div>
+  );
+
+  const Calendar = ({ direction }: { direction: "vertical" | "horizontal" }) => (
+    <ResponsiveCalendarCanvas
+      data={selectedYear.contributions}
+      from={fromDate}
+      to={toDate}
+      emptyColor={isDark ? "#161b22" : "#ebedf0"}
+      colors={isDark ? darkColors.slice(1) : lightColors.slice(1)}
+      margin={
+        direction === "vertical"
+          ? { top: 40, right: 20, bottom: 40, left: 20 }
+          : { top: 40, right: 40, bottom: 40, left: 40 }
+      }
+      monthBorderColor={isDark ? "#30363d" : "#d0d7de"}
+      dayBorderWidth={1}
+      dayBorderColor={isDark ? "#1b1f23" : "#fff"}
+      direction={direction}
+      legends={[
+        {
+          anchor: direction === "vertical" ? "bottom" : "bottom-right",
+          direction: "row",
+          translateY: 36,
+          itemCount: 4,
+          itemWidth: 42,
+          itemHeight: 36,
+          itemsSpacing: 14,
+          itemDirection: "right-to-left",
+          itemTextColor: isDark ? "#7d8590" : "#57606a",
+        },
+      ]}
+      theme={{
+        text: {
+          fontSize: 12,
+          fill: isDark ? "#7d8590" : "#57606a",
+        },
+        tooltip: {
+          container: {
+            background: isDark ? "#161b22" : "#ffffff",
+            color: isDark ? "#7d8590" : "#57606a",
+            fontSize: "12px",
+            borderRadius: "6px",
+            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+          },
+        },
+      }}
+    />
   );
 
   return (
@@ -171,63 +201,29 @@ export default function GitHubPage() {
             </p>
           </div>
 
-          <div className="mb-6 flex items-center justify-between">
-            <div className="text-xl font-semibold">
-              {selectedYear.totalContributions.toLocaleString()} contributions
-              in {selectedYear.year}
-            </div>
-            <DesktopYearNavigation />
+          <div className="mb-6 text-xl font-semibold text-center">
+            {selectedYear.totalContributions.toLocaleString()} contributions
+            in {selectedYear.year}
           </div>
 
-          <YearTabs />
+          <YearNavigation />
 
           <motion.div
+            key={selectedYear.year}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.3 }}
             className="rounded-xl border border-border/50 bg-background/30 backdrop-blur-sm p-4 md:p-8"
           >
-            <div className="h-[600px] md:h-[500px] w-full">
-              <ResponsiveCalendarCanvas
-                data={selectedYear.contributions}
-                from={fromDate}
-                to={toDate}
-                emptyColor={isDark ? "#161b22" : "#ebedf0"}
-                colors={isDark ? darkColors.slice(1) : lightColors.slice(1)}
-                margin={{ top: 40, right: 20, bottom: 40, left: 20 }}
-                monthBorderColor={isDark ? "#30363d" : "#d0d7de"}
-                dayBorderWidth={1}
-                dayBorderColor={isDark ? "#1b1f23" : "#fff"}
-                direction="vertical"
-                legends={[
-                  {
-                    anchor: "bottom",
-                    direction: "row",
-                    translateY: 36,
-                    itemCount: 4,
-                    itemWidth: 42,
-                    itemHeight: 36,
-                    itemsSpacing: 14,
-                    itemDirection: "right-to-left",
-                    itemTextColor: isDark ? "#7d8590" : "#57606a",
-                  },
-                ]}
-                theme={{
-                  text: {
-                    fontSize: 12,
-                    fill: isDark ? "#7d8590" : "#57606a",
-                  },
-                  tooltip: {
-                    container: {
-                      background: isDark ? "#161b22" : "#ffffff",
-                      color: isDark ? "#7d8590" : "#57606a",
-                      fontSize: "12px",
-                      borderRadius: "6px",
-                      boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-                    },
-                  },
-                }}
-              />
+            {/* Mobile View - Vertical Calendar */}
+            <div className="h-[600px] md:hidden">
+              <Calendar direction="vertical" />
+            </div>
+
+            {/* Desktop View - Horizontal Calendar */}
+            <div className="hidden md:block h-[300px]">
+              <Calendar direction="horizontal" />
             </div>
           </motion.div>
 
