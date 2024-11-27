@@ -68,7 +68,7 @@ const Card = ({
         "bg-background/30 backdrop-blur-sm",
         "transition-all duration-300 hover:scale-[1.02]",
         "hover:border-primary/50 hover:bg-background/50",
-        "flex flex-col"
+        "flex flex-col",
       )}
       prefetch={true}
     >
@@ -87,7 +87,7 @@ const Card = ({
           <p
             className={cn(
               "text-lg",
-              mounted && (theme === "dark" ? "text-gray-300" : "text-gray-600")
+              mounted && (theme === "dark" ? "text-gray-300" : "text-gray-600"),
             )}
           >
             {description}

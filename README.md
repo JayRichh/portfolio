@@ -42,4 +42,4 @@ Showcases expertise in:
 - **Email**: [jayrich.dev@gmail.com](mailto:jayrich.dev@gmail.com)
 - **GitHub**: [JayRichh](https://github.com/JayRichh)
 - **LinkedIn**: [Jayden Richardson](https://linkedin.com/in/jaydenrichardson)
-https://github.com/user-attachments/assets/91cac9d9-8e29-4080-a4c8-a0355ce1d834
+  https://github.com/user-attachments/assets/91cac9d9-8e29-4080-a4c8-a0355ce1d834

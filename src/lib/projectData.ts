@@ -347,6 +347,101 @@ export const projectData: Project[] = [
     },
   },
   {
+    title: "CSS Battle",
+    description:
+      "A full-featured web app for recreating CSS battles. Test your Web Dev skills by replicating target designs using HTML/CSS, with real-time previews, scoring based on accuracy and code efficiency, and interactive comparison tools.",
+    imgUrl:
+      "https://github.com/user-attachments/assets/0c62c6c8-963b-4223-9a58-22204c93919c",
+    repoUrl: "https://github.com/JayRichh/cssbattle",
+    liveUrl: "https://cssbattle.dev",
+    updatedAt: "2024-01-25",
+    details: {
+      title: "CSS Battle - Web Development Challenge Platform",
+      description:
+        "A comprehensive platform for testing and improving CSS skills through creative challenges. Features include real-time preview, pixel-perfect comparison tools, and detailed scoring analytics.",
+      technologies: [
+        "Next.js 15.0.3",
+        "TypeScript 5",
+        "Tailwind CSS 3.4.1",
+        "Framer Motion 11",
+        "Monaco Editor",
+        "html2canvas",
+      ],
+      features: [
+        {
+          title: "Code Editor Integration",
+          text: "Professional-grade Monaco editor with syntax highlighting, autocomplete, and real-time error detection. Includes custom CSS snippets and live validation.",
+          image: "/images/editor.png",
+        },
+        {
+          title: "Real-time Preview",
+          text: "Instant visual feedback with split-screen preview showing your output alongside the target design. Features pixel-perfect comparison tools and difference highlighting.",
+          image: "/images/compare.png",
+        },
+        {
+          title: "Advanced Scoring System",
+          text: "Sophisticated scoring algorithm considering both code efficiency and visual accuracy. Includes character count optimization and pixel-perfect matching with anti-aliasing tolerance.",
+          image: "/images/stats.png",
+        },
+        {
+          title: "Interactive Comparison",
+          text: "Dynamic comparison slider with x-ray mode for precise visual debugging. Helps identify pixel-level differences between your solution and the target.",
+          image: "/images/challenges.png",
+        },
+      ],
+      challenges: [
+        {
+          title: "Visual Comparison Engine",
+          text: "Implementing accurate pixel-by-pixel comparison with tolerance for anti-aliasing and browser rendering differences.",
+        },
+        {
+          title: "Real-time Performance",
+          text: "Optimizing preview updates and score calculations for smooth user experience with complex CSS.",
+        },
+        {
+          title: "Code Analysis",
+          text: "Developing efficient algorithms for analyzing and scoring CSS code while accounting for various optimization techniques.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Frontend Architecture",
+          points: [
+            {
+              text: "Building scalable Next.js applications with TypeScript and modern React patterns",
+            },
+            {
+              text: "Implementing efficient state management for real-time updates",
+            },
+          ],
+        },
+        {
+          title: "Visual Processing",
+          points: [
+            {
+              text: "Advanced image comparison techniques using canvas and pixel data",
+            },
+            {
+              text: "Handling browser-specific rendering variations",
+            },
+          ],
+        },
+        {
+          title: "Performance Optimization",
+          points: [
+            {
+              text: "Optimizing real-time preview and comparison operations",
+            },
+            {
+              text: "Implementing efficient code analysis and scoring algorithms",
+            },
+          ],
+        },
+      ],
+      additionalImages: ["/images/editor.png"],
+    },
+  },
+  {
     title: "Holiday House Map",
     description:
       "Interactive map visualization of holiday houses using Mapbox GL and custom UI components",

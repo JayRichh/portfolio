@@ -19,7 +19,7 @@ const useScreenSize = () => {
     const updateSize = () => {
       setIsMobile(window.innerWidth < 640);
     };
-    updateSize(); 
+    updateSize();
     window.addEventListener("resize", updateSize);
 
     return () => {
@@ -52,7 +52,7 @@ const NavItem = ({ label, path }: { label: string; path: string }) => {
           {
             "text-primary/80 bg-primary/5": isActive,
             "text-muted-foreground": !isActive,
-          }
+          },
         )}
       >
         <motion.span

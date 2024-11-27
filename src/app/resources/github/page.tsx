@@ -120,7 +120,11 @@ export default function GitHubPage() {
       </button>
       <span className="text-lg font-semibold">{selectedYear.year}</span>
       <button
-        onClick={() => setSelectedYearIndex((prev) => Math.min(prev + 1, yearData.length - 1))}
+        onClick={() =>
+          setSelectedYearIndex((prev) =>
+            Math.min(prev + 1, yearData.length - 1),
+          )
+        }
         disabled={selectedYearIndex === yearData.length - 1}
         className={`rounded-md px-4 py-2 transition-colors ${
           selectedYearIndex === yearData.length - 1
@@ -134,7 +138,11 @@ export default function GitHubPage() {
     </div>
   );
 
-  const Calendar = ({ direction }: { direction: "vertical" | "horizontal" }) => (
+  const Calendar = ({
+    direction,
+  }: {
+    direction: "vertical" | "horizontal";
+  }) => (
     <ResponsiveCalendarCanvas
       data={selectedYear.contributions}
       from={fromDate}
@@ -202,8 +210,8 @@ export default function GitHubPage() {
           </div>
 
           <div className="mb-6 text-xl font-semibold text-center">
-            {selectedYear.totalContributions.toLocaleString()} contributions
-            in {selectedYear.year}
+            {selectedYear.totalContributions.toLocaleString()} contributions in{" "}
+            {selectedYear.year}
           </div>
 
           <YearNavigation />
