@@ -105,6 +105,7 @@ export default function ShowcasePage() {
       <ScrollProgress />
       <ScrollToTop />
 
+      {/* Combined Hero and Resources Section */}
       <section className="relative w-full overflow-x-hidden bg-gradient-to-b from-background via-background/95 to-background py-16 sm:py-24 md:py-32">
         {/* Hero Content */}
         <div className="relative h-[50vh] flex items-center justify-center px-4 md:px-6">
@@ -135,8 +136,8 @@ export default function ShowcasePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Dive into a collection of projects where creativity meets
-              functionality.
+              Take a look at some of the projects I've developed, each
+              reflecting unique facets of web development.
             </motion.p>
             <motion.div
               initial={{ opacity: 0 }}
@@ -502,19 +503,19 @@ export default function ShowcasePage() {
                 className="lg:col-span-7 space-y-6 md:space-y-8 order-2 lg:order-1"
               >
                 <Spotlight
-                  src="/images/a11.png"
-                  alt="Aim Trainer Main"
+                  src="/images/workwaka.png"
+                  alt="Work Waka Main"
                   className="h-[30vh] sm:h-[35vh] md:h-[45vh] rounded-2xl md:rounded-3xl shadow-2xl bg-background/5 backdrop-blur-sm"
                 />
                 <div className="grid grid-cols-2 gap-4 md:gap-8">
                   <Spotlight
-                    src="/images/a12.png"
-                    alt="Aim Trainer Gameplay"
+                    src="/images/workmain.webp"
+                    alt="Work Waka Dashboard"
                     className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
                   />
                   <Spotlight
-                    src="/images/a7.png"
-                    alt="Aim Trainer Features"
+                    src="/images/moitsBoat.png"
+                    alt="Work Waka Features"
                     className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
                   />
                 </div>
@@ -526,7 +527,7 @@ export default function ShowcasePage() {
                   transition={{ duration: 0.6 }}
                   className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-zinc-200 dark:text-zinc-200"
                 >
-                  Aim Trainer
+                  The Work Waka
                 </motion.h2>
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
@@ -535,20 +536,20 @@ export default function ShowcasePage() {
                   className="space-y-4 md:space-y-6"
                 >
                   <p className="text-base sm:text-lg md:text-2xl text-zinc-300 dark:text-zinc-300 leading-relaxed">
-                    A 3D FPS training application built with Three.js and React.
-                    Features weapon mechanics, moving targets, and performance
-                    tracking in an immersive environment.
+                    Job application and interview tracking platform with data
+                    visualization, calendar integration, dynamic forms, and
+                    Sankey diagram reports.
                   </p>
                   <div className="flex flex-wrap">
-                    <TechTag>Next.js</TechTag>
-                    <TechTag>Three.js</TechTag>
                     <TechTag>React</TechTag>
                     <TechTag>TypeScript</TechTag>
-                    <TechTag>WebGL</TechTag>
+                    <TechTag>Next.js</TechTag>
+                    <TechTag>D3.js</TechTag>
+                    <TechTag>Tailwind CSS</TechTag>
                   </div>
                   <ProjectButtons
-                    liveUrl="https://aimtrainer-zeta.vercel.app/"
-                    codeUrl="https://github.com/JayRichh/aimtrainer"
+                    liveUrl="https://workwaka.vercel.app"
+                    codeUrl="https://github.com/JayRichh/workwaka"
                   />
                 </motion.div>
               </div>

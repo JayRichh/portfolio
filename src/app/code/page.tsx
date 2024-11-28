@@ -78,7 +78,8 @@ const CodePage: React.FC = () => {
           <div className="mb-12">
             <PageTitle>Projects</PageTitle>
             <PageDescription>
-              From interactive web applications to browser extensions, discover how ideas evolve into impactful digital solutions.
+              From interactive web applications to browser extensions, discover
+              how ideas evolve into impactful digital solutions.
             </PageDescription>
           </div>
         </div>
@@ -96,7 +97,8 @@ const CodePage: React.FC = () => {
         <div className="mb-12">
           <PageTitle>Projects</PageTitle>
           <PageDescription>
-            From interactive web applications to browser extensions, discover how ideas evolve into impactful digital solutions.
+            From interactive web applications to browser extensions, discover
+            how ideas evolve into impactful digital solutions.
           </PageDescription>
 
           <div className="mt-8 flex flex-wrap gap-4">
