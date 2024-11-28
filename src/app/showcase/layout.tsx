@@ -11,7 +11,7 @@ export default function ShowcaseLayout({
   return (
     <main className="relative flex flex-col">
       <ShowcasesHeader />
-      <div className="flex-1 overflow-hidden pt-14">{children}</div>
+      <div className="flex-1 overflow-hidden">{children}</div>
     </main>
   );
 }

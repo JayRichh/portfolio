@@ -25,25 +25,44 @@ export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHoveringScroll, setIsHoveringScroll] = useState(false);
   const [isHoveringProjects, setIsHoveringProjects] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
+    let scrollTimeout: NodeJS.Timeout;
+    
     const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
+      // Only show button after scrolling down 500px
+      if (window.pageYOffset > 500) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
       }
+
+      // Set scrolling state
+      setIsScrolling(true);
+      clearTimeout(scrollTimeout);
+      
+      // Clear scrolling state after scrolling stops
+      scrollTimeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 150);
     };
 
     window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+      clearTimeout(scrollTimeout);
+    };
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    // Don't trigger if already scrolling from navigation
+    if (!isScrolling) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
