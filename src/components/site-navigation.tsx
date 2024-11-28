@@ -40,9 +40,9 @@ const AnimatePresenceComponent = dynamic(
 
 const links = [
   { label: "Home", path: "/" },
-  { label: "Showcase", path: "/showcase", matchSubpaths: true },
-  { label: "Code", path: "/code" },
   { label: "About", path: "/about" },
+  { label: "Code", path: "/code" },
+  { label: "Showcase", path: "/showcase", matchSubpaths: true },
 ];
 
 const NavItem: React.FC<{
