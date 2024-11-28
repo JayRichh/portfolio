@@ -1,18 +1,25 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { PageSection } from "../../components/page-container";
 import { ScrollProgress } from "../../components/ui/scroll-progress";
 import { ScrollToTop } from "../../components/ui/scroll-to-top";
 import { ProjectButtons } from "../../components/ui/project-buttons";
+import { Spotlight } from "../../components/ui/spotlight";
 
 const TechTag = ({ children }: { children: React.ReactNode }) => (
   <span className="inline-block px-2.5 sm:px-3 md:px-4 py-1 md:py-1.5 rounded-full text-xs sm:text-sm font-medium bg-primary/5 dark:bg-primary/10 text-primary hover:bg-primary/10 dark:hover:bg-primary/20 mr-1.5 mb-1.5 md:mr-2 md:mb-2 transition-all border border-primary/10 dark:border-primary/20">
     {children}
   </span>
 );
+
+const handleClick = () => {
+  window.scroll({
+    top: window.innerHeight,
+    behavior: "smooth"
+  });
+};
 
 export default function ShowcasePage() {
   return (
@@ -55,7 +62,8 @@ export default function ShowcasePage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="animate-bounce mt-12 sm:mt-16 md:mt-24"
+            className="animate-bounce mt-12 sm:mt-16 md:mt-24 cursor-pointer"
+            onClick={handleClick}
           >
             <span className="text-sm sm:text-base md:text-lg text-muted-foreground">Scroll to explore</span>
             <div className="w-6 h-10 md:w-8 md:h-12 border-2 border-primary/50 dark:border-primary rounded-full mx-auto mt-2 md:mt-3 relative">
@@ -84,31 +92,22 @@ export default function ShowcasePage() {
                 transition={{ duration: 0.8 }}
                 className="lg:col-span-7 space-y-6 md:space-y-8 order-2 lg:order-1"
               >
-                <div className="relative h-[30vh] sm:h-[35vh] md:h-[45vh] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                  <Image
-                    src="/images/steam4.png"
-                    alt="SteamShare Main"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                <Spotlight
+                  src="/images/steam4.png"
+                  alt="SteamShare Main"
+                  className="h-[30vh] sm:h-[35vh] md:h-[45vh] rounded-2xl md:rounded-3xl shadow-2xl bg-background/5 backdrop-blur-sm"
+                />
                 <div className="grid grid-cols-2 gap-4 md:gap-8">
-                  <div className="relative h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                    <Image
-                      src="/images/steam2.png"
-                      alt="SteamShare Gallery"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="relative h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                    <Image
-                      src="/images/steam3.png"
-                      alt="SteamShare Editor"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+                  <Spotlight
+                    src="/images/steam2.png"
+                    alt="SteamShare Gallery"
+                    className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
+                  />
+                  <Spotlight
+                    src="/images/steam3.png"
+                    alt="SteamShare Editor"
+                    className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
+                  />
                 </div>
               </motion.div>
               <div className="lg:col-span-5 space-y-6 sm:space-y-8 md:space-y-10 order-1 lg:order-2">
@@ -194,38 +193,27 @@ export default function ShowcasePage() {
                 transition={{ duration: 0.8 }}
                 className="lg:col-span-7 space-y-6 md:space-y-8"
               >
-                <div className="relative h-[30vh] sm:h-[35vh] md:h-[45vh] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                  <Image
-                    src="/images/editor.png"
-                    alt="CSS Battle Editor"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                <Spotlight
+                  src="/images/editor.png"
+                  alt="CSS Battle Editor"
+                  className="h-[30vh] sm:h-[35vh] md:h-[45vh] rounded-2xl md:rounded-3xl shadow-2xl bg-background/5 backdrop-blur-sm"
+                />
                 <div className="grid grid-cols-2 gap-4 md:gap-8">
-                  <div className="relative h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                    <Image
-                      src="/images/compare.png"
-                      alt="CSS Battle Comparison"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="relative h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                    <Image
-                      src="/images/challenges.png"
-                      alt="CSS Battle Challenges"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+                  <Spotlight
+                    src="/images/compare.png"
+                    alt="CSS Battle Comparison"
+                    className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
+                  />
+                  <Spotlight
+                    src="/images/challenges.png"
+                    alt="CSS Battle Challenges"
+                    className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
+                  />
                 </div>
               </motion.div>
             </div>
           </motion.div>
         </PageSection>
-
-
 
         {/* Encompass Tours Section */}
         <PageSection className="min-h-screen py-16 sm:py-24 md:py-32 flex items-center bg-gradient-to-b from-emerald-950 to-background dark:from-emerald-950 dark:to-background relative">
@@ -275,31 +263,22 @@ export default function ShowcasePage() {
                 transition={{ duration: 0.8 }}
                 className="lg:col-span-7 space-y-6 md:space-y-8"
               >
-                <div className="relative h-[30vh] sm:h-[35vh] md:h-[45vh] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                  <Image
-                    src="/images/encompass-hero.png"
-                    alt="Encompass Tours Hero"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                <Spotlight
+                  src="/images/encompass-hero.png"
+                  alt="Encompass Tours Hero"
+                  className="h-[30vh] sm:h-[35vh] md:h-[45vh] rounded-2xl md:rounded-3xl shadow-2xl bg-background/5 backdrop-blur-sm"
+                />
                 <div className="grid grid-cols-2 gap-4 md:gap-8">
-                  <div className="relative h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                    <Image
-                      src="/images/encompass-about.png"
-                      alt="Encompass Tours About"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="relative h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                    <Image
-                      src="/images/encompass-contact.png"
-                      alt="Encompass Tours Contact"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+                  <Spotlight
+                    src="/images/encompass-about.png"
+                    alt="Encompass Tours About"
+                    className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
+                  />
+                  <Spotlight
+                    src="/images/encompass-contact.png"
+                    alt="Encompass Tours Contact"
+                    className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
+                  />
                 </div>
               </motion.div>
             </div>
@@ -323,31 +302,22 @@ export default function ShowcasePage() {
                 transition={{ duration: 0.8 }}
                 className="lg:col-span-7 space-y-6 md:space-y-8 order-2 lg:order-1"
               >
-                <div className="relative h-[30vh] sm:h-[35vh] md:h-[45vh] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-zinc-900 transition-transform hover:scale-[1.02]">
-                  <Image
-                    src="/images/pomodev-logo.png"
-                    alt="PomoDev Logo"
-                    fill
-                    className="object-contain p-8 md:p-12"
-                  />
-                </div>
+                <Spotlight
+                  src="/images/pomodev-logo.png"
+                  alt="PomoDev Logo"
+                  className="h-[30vh] sm:h-[35vh] md:h-[45vh] rounded-2xl md:rounded-3xl shadow-2xl bg-zinc-900 p-8 md:p-12"
+                />
                 <div className="grid grid-cols-2 gap-4 md:gap-8">
-                  <div className="relative h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                    <Image
-                      src="/images/pomodev1.png"
-                      alt="PomoDev Timer"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="relative h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                    <Image
-                      src="/images/pomodev3.png"
-                      alt="PomoDev Tasks"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+                  <Spotlight
+                    src="/images/pomodev1.png"
+                    alt="PomoDev Timer"
+                    className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
+                  />
+                  <Spotlight
+                    src="/images/pomodev3.png"
+                    alt="PomoDev Tasks"
+                    className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
+                  />
                 </div>
               </motion.div>
               <div className="lg:col-span-5 space-y-6 sm:space-y-8 md:space-y-10 order-1 lg:order-2">
@@ -384,8 +354,8 @@ export default function ShowcasePage() {
           </motion.div>
         </PageSection>
 
-                {/* Aim Trainer Section */}
-                <PageSection className="min-h-screen py-16 sm:py-24 md:py-32 flex items-center bg-gradient-to-b from-zinc-900 to-background dark:from-zinc-900 dark:to-background relative">
+        {/* Aim Trainer Section */}
+        <PageSection className="min-h-screen py-16 sm:py-24 md:py-32 flex items-center bg-gradient-to-b from-zinc-900 to-background dark:from-zinc-900 dark:to-background relative">
           <div className="absolute inset-0 bg-gradient-to-b from-background to-transparent opacity-10 dark:opacity-0" />
           <motion.div
             initial={{ opacity: 0 }}
@@ -401,31 +371,22 @@ export default function ShowcasePage() {
                 transition={{ duration: 0.8 }}
                 className="lg:col-span-7 space-y-6 md:space-y-8 order-2 lg:order-1"
               >
-                <div className="relative h-[30vh] sm:h-[35vh] md:h-[45vh] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                  <Image
-                    src="/images/a11.png"
-                    alt="Aim Trainer Main"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                <Spotlight
+                  src="/images/a11.png"
+                  alt="Aim Trainer Main"
+                  className="h-[30vh] sm:h-[35vh] md:h-[45vh] rounded-2xl md:rounded-3xl shadow-2xl bg-background/5 backdrop-blur-sm"
+                />
                 <div className="grid grid-cols-2 gap-4 md:gap-8">
-                  <div className="relative h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                    <Image
-                      src="/images/a12.png"
-                      alt="Aim Trainer Gameplay"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="relative h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform hover:scale-[1.02] bg-background/5 backdrop-blur-sm">
-                    <Image
-                      src="/images/a7.png"
-                      alt="Aim Trainer Features"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+                  <Spotlight
+                    src="/images/a12.png"
+                    alt="Aim Trainer Gameplay"
+                    className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
+                  />
+                  <Spotlight
+                    src="/images/a7.png"
+                    alt="Aim Trainer Features"
+                    className="h-[15vh] sm:h-[18vh] md:h-[22vh] rounded-xl md:rounded-2xl shadow-xl bg-background/5 backdrop-blur-sm"
+                  />
                 </div>
               </motion.div>
               <div className="lg:col-span-5 space-y-6 sm:space-y-8 md:space-y-10 order-1 lg:order-2">
@@ -463,7 +424,6 @@ export default function ShowcasePage() {
           </motion.div>
         </PageSection>
       </div>
-
     </div>
   );
 }
