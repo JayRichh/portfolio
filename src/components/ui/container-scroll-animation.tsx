@@ -34,7 +34,11 @@ export const ContainerScroll = ({
   const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
   const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0.3, 1, 1, 0.3]);
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.6, 1],
+    [0.3, 1, 1, 0.3],
+  );
 
   return (
     <motion.div

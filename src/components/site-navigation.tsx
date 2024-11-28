@@ -25,25 +25,24 @@ const ModeToggle = dynamic(
 
 const MotionDiv = dynamic(
   () => import("framer-motion").then((mod) => mod.motion.div),
-  { ssr: false }
+  { ssr: false },
 );
 
 const MotionSpan = dynamic(
   () => import("framer-motion").then((mod) => mod.motion.span),
-  { ssr: false }
+  { ssr: false },
 );
 
 const AnimatePresenceComponent = dynamic(
   () => import("framer-motion").then((mod) => mod.AnimatePresence),
-  { ssr: false }
+  { ssr: false },
 );
 
 const links = [
   { label: "Home", path: "/" },
-  { label: "Showcase", path: "/showcase" },
+  { label: "Showcase", path: "/showcase", matchSubpaths: true },
   { label: "Code", path: "/code" },
   { label: "About", path: "/about" },
-  { label: "Resources", path: "/resources", matchSubpaths: true },
 ];
 
 const NavItem: React.FC<{

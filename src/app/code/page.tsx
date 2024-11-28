@@ -78,8 +78,7 @@ const CodePage: React.FC = () => {
           <div className="mb-12">
             <PageTitle>Projects</PageTitle>
             <PageDescription>
-              Here's a look at the web development projects I've worked on, with
-              a range of technologies and approaches.
+              From interactive web applications to browser extensions, discover how ideas evolve into impactful digital solutions.
             </PageDescription>
           </div>
         </div>
@@ -97,8 +96,7 @@ const CodePage: React.FC = () => {
         <div className="mb-12">
           <PageTitle>Projects</PageTitle>
           <PageDescription>
-            Here's a look at the web development projects I've worked on, with a
-            range of technologies and approaches.
+            From interactive web applications to browser extensions, discover how ideas evolve into impactful digital solutions.
           </PageDescription>
 
           <div className="mt-8 flex flex-wrap gap-4">

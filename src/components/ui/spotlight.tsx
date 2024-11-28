@@ -10,7 +10,15 @@ interface SpotlightProps {
   className?: string;
 }
 
-const SpotlightModal = ({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) => {
+const SpotlightModal = ({
+  src,
+  alt,
+  onClose,
+}: {
+  src: string;
+  alt: string;
+  onClose: () => void;
+}) => {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -121,7 +129,9 @@ export function Spotlight({ src, alt, className = "" }: SpotlightProps) {
             isHovered ? "scale-105" : "scale-100"
           }`}
         />
-        <div className={`absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ${isHovered ? "opacity-100" : ""}`}>
+        <div
+          className={`absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ${isHovered ? "opacity-100" : ""}`}
+        >
           <div className="p-2 rounded-full bg-background/20 backdrop-blur-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"

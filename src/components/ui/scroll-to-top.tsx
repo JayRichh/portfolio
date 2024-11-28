@@ -62,20 +62,20 @@ export function ScrollToTop() {
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <ArrowUp 
-                size={24} 
-                className="text-foreground transition-transform duration-300 transform group-hover:translate-y-[-2px]" 
+              <ArrowUp
+                size={24}
+                className="text-foreground transition-transform duration-300 transform group-hover:translate-y-[-2px]"
               />
-                {isHoveringScroll && (
-                  <Tooltip isVisible={isHoveringScroll} className="mr-3">
-                    Scroll to top
-                  </Tooltip>
-                )}
+              {isHoveringScroll && (
+                <Tooltip isVisible={isHoveringScroll} className="mr-3">
+                  Scroll to top
+                </Tooltip>
+              )}
             </motion.button>
           </div>
         )}
       </AnimatePresence>
-      
+
       <div className="relative group">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -91,11 +91,11 @@ export function ScrollToTop() {
               className="px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-background/80 hover:bg-background text-foreground border border-border font-medium shadow-lg text-sm sm:text-base backdrop-blur-sm transition-all duration-300"
             >
               View All Projects
-                  {isHoveringProjects && (
-                    <Tooltip isVisible={isHoveringProjects} className="ml-3">
-                      View all projects
-                    </Tooltip>
-                  )}
+              {isHoveringProjects && (
+                <Tooltip isVisible={isHoveringProjects} className="ml-3">
+                  View all projects
+                </Tooltip>
+              )}
             </motion.button>
           </Link>
         </motion.div>

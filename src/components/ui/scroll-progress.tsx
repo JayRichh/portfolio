@@ -33,9 +33,7 @@ export function ScrollProgress() {
         }}
       >
         {/* Glow layer */}
-        <div
-          className="absolute inset-0 h-full bg-gradient-to-r from-primary via-primary/80 to-primary/50 blur-md opacity-60"
-        ></div>
+        <div className="absolute inset-0 h-full bg-gradient-to-r from-primary via-primary/80 to-primary/50 blur-md opacity-60"></div>
       </motion.div>
     </>
   );
