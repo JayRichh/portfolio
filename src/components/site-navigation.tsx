@@ -3,7 +3,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { usePathname, useRouter } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
 import { Menu } from "lucide-react";
 import { cn } from "../utils";
 import { isRouteActive } from "../utils/is-route-active";
@@ -24,8 +23,24 @@ const ModeToggle = dynamic(
   { ssr: false },
 );
 
+const MotionDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.div),
+  { ssr: false }
+);
+
+const MotionSpan = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.span),
+  { ssr: false }
+);
+
+const AnimatePresenceComponent = dynamic(
+  () => import("framer-motion").then((mod) => mod.AnimatePresence),
+  { ssr: false }
+);
+
 const links = [
   { label: "Home", path: "/" },
+  { label: "Showcase", path: "/showcase" },
   { label: "Code", path: "/code" },
   { label: "About", path: "/about" },
   { label: "Resources", path: "/resources", matchSubpaths: true },
@@ -40,7 +55,6 @@ const NavItem: React.FC<{
   const router = useRouter();
   const isActive = isRouteActive(path, pathname, !matchSubpaths);
 
-  // Prefetch the route
   React.useEffect(() => {
     if (!isActive) {
       router.prefetch(path);
@@ -48,7 +62,7 @@ const NavItem: React.FC<{
   }, [router, path, isActive]);
 
   return (
-    <motion.div
+    <MotionDiv
       layout
       initial={{ opacity: 0, y: -5 }}
       animate={{ opacity: 1, y: 0 }}
@@ -68,7 +82,7 @@ const NavItem: React.FC<{
           },
         )}
       >
-        <motion.span
+        <MotionSpan
           initial={false}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -79,9 +93,9 @@ const NavItem: React.FC<{
           }}
         >
           {label}
-        </motion.span>
+        </MotionSpan>
       </PageTransitionLink>
-    </motion.div>
+    </MotionDiv>
   );
 };
 
@@ -93,11 +107,11 @@ export function SiteNavigation(): JSX.Element {
       <div className="hidden md:block">
         <NavigationMenu>
           <NavigationMenuList className="flex items-center space-x-1">
-            <AnimatePresence initial={false}>
+            <AnimatePresenceComponent initial={false}>
               {links.map((item) => (
                 <NavItem key={item.path} {...item} />
               ))}
-            </AnimatePresence>
+            </AnimatePresenceComponent>
           </NavigationMenuList>
         </NavigationMenu>
       </div>

@@ -352,18 +352,18 @@ export const projectData: Project[] = [
       "A full-featured web app for recreating CSS battles. Test your Web Dev skills by replicating target designs using HTML/CSS, with real-time previews, scoring based on accuracy and code efficiency, and interactive comparison tools.",
     imgUrl:
       "https://github.com/user-attachments/assets/0c62c6c8-963b-4223-9a58-22204c93919c",
-    repoUrl: "https://github.com/JayRichh/cssbattle",
-    liveUrl: "https://cssbattle.dev",
-    updatedAt: "2024-01-25",
+    repoUrl: "https://github.com/JayRichh/domination",
+    liveUrl: "https://domination.vercel.app",
+    updatedAt: "2024-11-28",
     details: {
       title: "CSS Battle - Web Development Challenge Platform",
       description:
         "A comprehensive platform for testing and improving CSS skills through creative challenges. Features include real-time preview, pixel-perfect comparison tools, and detailed scoring analytics.",
       technologies: [
-        "Next.js 15.0.3",
-        "TypeScript 5",
-        "Tailwind CSS 3.4.1",
-        "Framer Motion 11",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
         "Monaco Editor",
         "html2canvas",
       ],
