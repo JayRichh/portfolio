@@ -74,7 +74,7 @@ export function EnhancedDropdown({
         store={menu}
         className={cn(
           "inline-flex items-center justify-center rounded-md p-3 text-foreground transition-colors",
-          "hover:bg-primary/5 hover:text-primary active:bg-primary/10",
+          "hover:bg-primary/5 hover:text-primary",
           "touch-manipulation select-none",
           "md:p-2",
           className
@@ -117,8 +117,7 @@ export function EnhancedDropdown({
                   <MenuItem
                     className={cn(
                       "relative flex w-full cursor-default select-none items-center rounded-md px-3 py-2.5 text-base outline-none",
-                      "transition-colors focus:bg-accent focus:text-accent-foreground",
-                      "active:bg-accent active:text-accent-foreground",
+                      "transition-colors hover:bg-primary/5 hover:text-primary",
                       "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
                       "touch-manipulation",
                       "md:rounded-sm md:px-2 md:py-1.5 md:text-sm",

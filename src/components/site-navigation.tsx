@@ -151,9 +151,9 @@ function MobileMenu({ currentPath }: { currentPath: string }): JSX.Element {
             key={item.path}
             href={item.path}
             className={cn(
-              "flex w-full items-center transition-colors",
+              "flex w-full items-center transition-colors hover:text-primary hover:bg-primary/5",
               {
-                "text-primary": isActive,
+                "text-primary bg-primary/10": isActive,
                 "text-foreground": !isActive,
               },
             )}

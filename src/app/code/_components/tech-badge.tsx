@@ -32,19 +32,16 @@ export const TechBadge: React.FC<TechBadgeProps> = ({
     <Button
       onClick={handleClick}
       className={cn(
-        "group relative h-7 items-center justify-start rounded-md px-3 py-1 text-sm transition-colors",
-        "hover:shadow-sm",
+        "group relative h-7 items-center justify-start rounded-full px-3 py-1 text-xs font-medium transition-all",
+        "bg-primary/5 dark:bg-primary/10 text-primary border border-primary/10 dark:border-primary/20",
+        "hover:bg-primary/10 dark:hover:bg-primary/20 hover:border-primary/20 dark:hover:border-primary/30",
         {
           "w-full text-left": !isActive,
           "inline-flex": isActive,
-          "dark:text-primary-light bg-primary/10 text-primary dark:bg-primary/20":
-            isActive,
-          "dark:hover:text-primary-light hover:bg-primary/5 hover:text-primary dark:hover:bg-primary/10":
-            !isActive,
           "cursor-default": !isClickable,
-        },
+        }
       )}
-      variant={isActive ? "secondary" : "ghost"}
+      variant="ghost"
       disabled={!isClickable}
     >
       <motion.span
@@ -57,7 +54,7 @@ export const TechBadge: React.FC<TechBadgeProps> = ({
       >
         {Icon && (
           <span className="flex-shrink-0">
-            <Icon size={14} />
+            <Icon size={12} />
           </span>
         )}
         <span className="truncate">{tech}</span>

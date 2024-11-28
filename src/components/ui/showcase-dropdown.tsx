@@ -33,9 +33,9 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
           variant="ghost"
           onClick={() => router.push("/showcase")}
           className={cn(
-            "justify-start px-2 font-normal",
+            "justify-start px-2 font-normal transition-colors hover:text-primary hover:bg-primary/5",
             {
-              "text-primary": isActive,
+              "text-primary bg-primary/10": isActive,
               "text-foreground": !isActive,
             }
           )}
@@ -47,7 +47,7 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
             key={item.path}
             variant="ghost"
             onClick={() => router.push(item.path)}
-            className="justify-start pl-4 font-normal text-foreground"
+            className="justify-start pl-4 font-normal text-foreground transition-colors hover:text-primary hover:bg-primary/5"
           >
             {item.label}
           </Button>
@@ -62,7 +62,7 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
         variant="ghost"
         onClick={() => router.push("/showcase")}
         className={cn(
-          "rounded-r-none px-3 py-2",
+          "rounded-r-none px-3 py-2 transition-colors hover:text-primary hover:bg-primary/5",
           {
             "text-primary bg-primary/10": isActive,
             "text-foreground": !isActive,
@@ -76,7 +76,7 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
           <Button
             variant="ghost"
             className={cn(
-              "rounded-l-none border-l border-transparent px-2 py-2",
+              "rounded-l-none border-l border-transparent px-2 py-2 transition-colors hover:text-primary hover:bg-primary/5",
               {
                 "text-primary border-l-primary/10": isActive,
                 "text-foreground hover:border-l-primary/10": !isActive,
@@ -91,6 +91,7 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
             <DropdownMenuItem
               key={item.path}
               onClick={() => router.push(item.path)}
+              className="transition-colors hover:text-primary hover:bg-primary/5"
             >
               {item.label}
             </DropdownMenuItem>

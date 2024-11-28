@@ -14,7 +14,7 @@ import { useTheme } from "next-themes";
 import { cn } from "../../utils/cn";
 
 const TechTag = ({ children }) => (
-  <span className="inline-block px-2.5 sm:px-3 md:px-4 py-1 md:py-1.5 rounded-full text-xs sm:text-sm font-medium bg-primary/5 dark:bg-primary/10 text-primary hover:bg-primary/10 dark:hover:bg-primary/20 mr-1.5 mb-1.5 md:mr-2 md:mb-2 transition-all border border-primary/10 dark:border-primary/20">
+  <span className="inline-block px-2.5 sm:px-3 md:px-4 py-1 md:py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-white/10 dark:bg-white/15 text-white/90 dark:text-white/95 hover:bg-white/20 dark:hover:bg-white/25 mr-1.5 mb-1.5 md:mr-2 md:mb-2 transition-all border border-white/20 dark:border-white/30 backdrop-blur-sm">
     {children}
   </span>
 );
@@ -62,16 +62,17 @@ const Card = ({ href, title, description, PreviewComponent, className }) => {
       className={cn(
         className || "",
         "group relative overflow-hidden rounded-xl",
-        "border border-border/50",
-        "bg-background/30 backdrop-blur-sm",
+        "border border-white/20 dark:border-white/10",
+        "bg-white/5 dark:bg-white/5 backdrop-blur-sm",
         "transition-all duration-300 hover:scale-[1.02]",
-        "hover:border-primary/50 hover:bg-background/50",
-        "flex flex-col",
+        "hover:border-white/30 dark:hover:border-white/20",
+        "hover:bg-white/10 dark:hover:bg-white/10",
+        "flex flex-col"
       )}
       prefetch={true}
     >
       {PreviewComponent && (
-        <div className="relative h-[300px] w-full overflow-hidden border-b border-border/50">
+        <div className="relative h-[300px] w-full overflow-hidden border-b border-white/10 dark:border-white/5">
           <PreviewComponent />
         </div>
       )}
@@ -81,13 +82,13 @@ const Card = ({ href, title, description, PreviewComponent, className }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="mb-4 text-2xl font-bold text-primary">{title}</h2>
-          <p
-            className={cn(
-              "text-lg",
-              mounted && (theme === "dark" ? "text-gray-300" : "text-gray-600"),
-            )}
-          >
+          <h2 className="mb-4 text-2xl font-bold text-white/95 dark:text-white/95">
+            {title}
+          </h2>
+          <p className={cn(
+            "text-lg",
+            mounted && (theme === "dark" ? "text-white/80" : "text-white/85")
+          )}>
             {description}
           </p>
         </motion.div>
@@ -112,7 +113,7 @@ export default function ShowcasePage() {
           className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 text-center"
         >
           <motion.span
-            className="text-lg sm:text-xl md:text-2xl text-primary mb-4 md:mb-6 block font-medium"
+            className="text-lg sm:text-xl md:text-2xl text-white/90 dark:text-white/90 mb-4 md:mb-6 block font-medium"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -120,7 +121,7 @@ export default function ShowcasePage() {
             Welcome to my
           </motion.span>
           <motion.h1
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-6 md:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary/50"
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-bold mb-6 md:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/80"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -128,7 +129,7 @@ export default function ShowcasePage() {
             Project Showcase
           </motion.h1>
           <motion.p
-            className="text-base sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed"
+            className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white/80 dark:text-white/85 mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
