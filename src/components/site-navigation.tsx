@@ -7,12 +7,8 @@ import { Menu } from "lucide-react";
 import { cn } from "../utils";
 import { isRouteActive } from "../utils/is-route-active";
 import { PageTransitionLink } from "./route-transition";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../components/ui/dropdown-menu";
+import { EnhancedDropdown } from "./ui/enhanced-dropdown";
+import { ShowcaseDropdown } from "./ui/showcase-dropdown";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -42,7 +38,6 @@ const links = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
   { label: "Code", path: "/code" },
-  { label: "Showcase", path: "/showcase", matchSubpaths: true },
 ];
 
 const NavItem: React.FC<{
@@ -100,6 +95,7 @@ const NavItem: React.FC<{
 
 export function SiteNavigation(): JSX.Element {
   const pathname = usePathname();
+  const isShowcaseActive = isRouteActive("/showcase", pathname, false);
 
   return (
     <div className="flex w-full items-center justify-between">
@@ -110,6 +106,16 @@ export function SiteNavigation(): JSX.Element {
               {links.map((item) => (
                 <NavItem key={item.path} {...item} />
               ))}
+              <MotionDiv
+                layout
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="relative"
+              >
+                <ShowcaseDropdown isActive={isShowcaseActive} />
+              </MotionDiv>
             </AnimatePresenceComponent>
           </NavigationMenuList>
         </NavigationMenu>
@@ -127,43 +133,36 @@ export function SiteNavigation(): JSX.Element {
 }
 
 function MobileMenu({ currentPath }: { currentPath: string }): JSX.Element {
+  const isShowcaseActive = isRouteActive("/showcase", currentPath, false);
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        aria-label="Open Menu"
-        className="rounded-md p-2 text-foreground transition-colors hover:bg-primary/5 hover:text-primary"
-      >
-        <Menu className="h-5 w-5" />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align="start"
-        className="w-48 rounded-lg bg-background"
-      >
-        {links.map((item) => {
-          const isActive = isRouteActive(
-            item.path,
-            currentPath,
-            !item.matchSubpaths,
-          );
-          return (
-            <DropdownMenuItem key={item.path} asChild>
-              <PageTransitionLink
-                href={item.path}
-                className={cn(
-                  "flex w-full items-center px-3 py-2 text-sm transition-colors",
-                  {
-                    "bg-primary/10 text-primary": isActive,
-                    "text-foreground hover:bg-primary/5 hover:text-primary":
-                      !isActive,
-                  },
-                )}
-              >
-                {item.label}
-              </PageTransitionLink>
-            </DropdownMenuItem>
-          );
-        })}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <EnhancedDropdown
+      trigger={<Menu className="h-6 w-6" />}
+      align="start"
+    >
+      {links.map((item) => {
+        const isActive = isRouteActive(
+          item.path,
+          currentPath,
+          true,
+        );
+        return (
+          <PageTransitionLink
+            key={item.path}
+            href={item.path}
+            className={cn(
+              "flex w-full items-center transition-colors",
+              {
+                "text-primary": isActive,
+                "text-foreground": !isActive,
+              },
+            )}
+          >
+            {item.label}
+          </PageTransitionLink>
+        );
+      })}
+      <ShowcaseDropdown isActive={isShowcaseActive} isMobile />
+    </EnhancedDropdown>
   );
 }

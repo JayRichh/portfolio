@@ -15,9 +15,19 @@ export const RouteTransition: React.FC<RouteTransitionProps> = ({
   const router = useRouter();
   const pathname = usePathname();
 
-  // Prefetch all routes
+  // Prefetch all routes including showcase routes
   useEffect(() => {
-    const routes = ["/", "/code", "/about", "/wordmap", "/learnings"];
+    const routes = [
+      "/",
+      "/code",
+      "/about",
+      "/wordmap",
+      "/learnings",
+      "/showcase",
+      "/showcase/github",
+      "/showcase/wordmap",
+      "/showcase/learnings"
+    ];
     routes.forEach((route) => {
       if (route !== pathname) {
         router.prefetch(route);
@@ -41,17 +51,20 @@ export const PageTransitionLink = React.forwardRef<
   PageTransitionLinkProps
 >(({ href, children, className, asChild = false, onClick, ...props }, ref) => {
   const router = useRouter();
-  const pathname = usePathname();
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (pathname === href) return;
 
     if (onClick) {
       onClick(e);
     }
 
-    router.push(href);
+    // Always attempt to navigate
+    try {
+      await router.push(href);
+    } catch (error) {
+      console.error('Navigation failed:', error);
+    }
   };
 
   if (asChild) {

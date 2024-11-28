@@ -30,11 +30,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <Card
-      className="group relative flex h-full cursor-pointer flex-col overflow-hidden transition-shadow duration-300 hover:shadow-lg"
+      className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border-[1px] border-border/40 bg-card/50 transition-all duration-300 hover:scale-[1.02] hover:border-primary hover:shadow-lg hover:shadow-primary/5"
       onClick={() => onSelect(project)}
     >
       <CardHeader className="p-0">
-        <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-xl bg-muted">
           <Image
             src={project.imgUrl}
             alt={project.title}
@@ -42,23 +42,23 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             priority={index < 6}
             sizes={IMAGE_CONFIG.SIZES}
             className={`
-              object-cover transition-transform duration-300
+              object-cover transition-all duration-500 ease-in-out
               ${imageLoaded ? "opacity-100" : "opacity-0"}
-              ${imageLoaded ? "group-hover:scale-105" : ""}
+              ${imageLoaded ? "group-hover:scale-110" : ""}
             `}
             quality={IMAGE_CONFIG.QUALITY}
             onLoadingComplete={() => setImageLoaded(true)}
           />
         </div>
       </CardHeader>
-      <CardContent className="flex-grow p-6">
-        <CardTitle className="mb-2 text-2xl line-clamp-1">
+      <CardContent className="flex flex-grow flex-col p-6">
+        <CardTitle className="mb-3 text-2xl line-clamp-1">
           {project.title}
         </CardTitle>
-        <p className="mb-4 text-sm text-muted-foreground line-clamp-2">
+        <p className="mb-4 text-sm text-muted-foreground/90 line-clamp-2">
           {project.description}
         </p>
-        <div className="mb-4 flex flex-wrap gap-2">
+        <div className="mt-auto flex flex-wrap gap-2">
           {project.details.technologies
             .slice(0, TECH_DISPLAY_LIMIT)
             .map((tech) => (
@@ -66,10 +66,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             ))}
         </div>
       </CardContent>
-      <div className="absolute bottom-0 left-0 right-0 bg-muted/80 p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <div className="flex justify-between">
+      <div className="absolute bottom-0 left-0 right-0 bg-background/95 p-4 backdrop-blur-sm opacity-0 transition-all duration-300 group-hover:opacity-100">
+        <div className="flex justify-between gap-2">
           {project.liveUrl && (
-            <Button variant="outline" size="sm" asChild>
+            <Button variant="secondary" size="sm" className="flex-1" asChild>
               <Link
                 href={project.liveUrl}
                 target="_blank"
@@ -82,7 +82,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </Button>
           )}
           {project.repoUrl && (
-            <Button variant="outline" size="sm" asChild>
+            <Button variant="secondary" size="sm" className="flex-1" asChild>
               <Link
                 href={project.repoUrl}
                 target="_blank"
@@ -94,7 +94,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               </Link>
             </Button>
           )}
-          <Button variant="outline" size="sm">
+          <Button variant="secondary" size="sm" className="flex-1">
             <CodeIcon size={16} className="mr-2" />
             Details
           </Button>

@@ -90,7 +90,7 @@ export function ResourcesHeader() {
         ease: "easeOut",
       }}
     >
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-10xl px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
         <nav className="flex h-12 items-center">
           <div className="flex items-center space-x-1">
             {links

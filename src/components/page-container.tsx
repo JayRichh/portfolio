@@ -34,8 +34,7 @@ export const PageSection: React.FC<PageContainerProps> = ({
       )}
     >
       <div
-        className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8"
-        style={{ width: "100%" }}
+        className="mx-auto max-w-[90rem] w-full px-4 sm:px-6 lg:px-8 py-8"
       >
         {children}
       </div>
