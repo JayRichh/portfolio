@@ -9,7 +9,13 @@ import { cn } from "../utils";
 export function SiteHeader() {
   return (
     <motion.header
-      className="fixed top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm"
+      className={cn(
+        "fixed top-0 z-[100] w-full",
+        "border-b border-border/40",
+        "bg-background/80 backdrop-blur-md",
+        "shadow-sm shadow-foreground/5",
+        "supports-[backdrop-filter]:bg-background/60"
+      )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{

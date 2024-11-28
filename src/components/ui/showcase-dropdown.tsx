@@ -2,9 +2,11 @@
 
 import * as React from "react";
 import { ChevronDown } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Button } from "./button";
 import { cn } from "../../utils/cn";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ShowcaseDropdownProps {
   isActive: boolean;
@@ -34,8 +36,30 @@ const showcaseItems = [
 
 export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
+  const [pendingScroll, setPendingScroll] = React.useState<string | null>(null);
+
+  // Handle scroll to element after navigation
+  React.useEffect(() => {
+    if (pendingScroll && pathname === '/showcase') {
+      const scrollToElement = () => {
+        const element = document.getElementById(pendingScroll);
+        if (element) {
+          window.scrollTo({
+            top: element.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+        setPendingScroll(null);
+      };
+
+      // Wait for page content to be fully rendered
+      const timer = setTimeout(scrollToElement, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [pathname, pendingScroll]);
 
   const handleNavigation = async (path: string) => {
     setIsOpen(false);
@@ -43,8 +67,7 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
     if (path.includes('#')) {
       const id = path.split('#')[1];
       
-      // If we're already on the showcase page
-      if (window.location.pathname === '/showcase') {
+      if (pathname === '/showcase') {
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({
@@ -53,96 +76,171 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
           });
         }
       } else {
-        // If we're navigating from a different page
-        await router.push('/showcase');
-        // Wait for page to load and then scroll
-        setTimeout(() => {
-          const element = document.getElementById(id);
-          if (element) {
-            window.scrollTo({
-              top: element.offsetTop - 80, // Account for header height
-              behavior: 'smooth'
-            });
-          }
-        }, 100);
+        setPendingScroll(id);
+        router.push('/showcase');
       }
     } else {
       router.push(path);
     }
   };
 
+  // Close dropdown on route change
+  React.useEffect(() => {
+    const handleRouteChange = () => setIsOpen(false);
+    window.addEventListener('popstate', handleRouteChange);
+    return () => window.removeEventListener('popstate', handleRouteChange);
+  }, []);
+
+  // Close dropdown on click outside
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+
+    const handleScroll = () => {
+      if (isOpen) setIsOpen(false);
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      window.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isOpen]);
+
+  // Close dropdown on escape key
+  React.useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsOpen(false);
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen]);
 
   if (isMobile) {
     return (
       <div className="w-full">
-        {showcaseItems.map((section) => (
-          <div key={section.label} className="space-y-1">
-            <div className="px-3 py-2 text-sm font-medium text-muted-foreground">
-              {section.label}
-            </div>
-            {section.items.map((item) => (
-              <Button
-                key={item.path}
-                variant="ghost"
-                onClick={() => handleNavigation(item.path)}
-                className="w-full justify-start px-6 py-2 font-normal text-foreground hover:text-primary hover:bg-primary/5"
-              >
-                {item.label}
-              </Button>
-            ))}
-          </div>
-        ))}
+        <Link href="/showcase">
+          <Button
+            variant="ghost"
+            className={cn(
+              "w-full justify-start px-3 py-2 text-sm font-medium transition-colors hover:text-primary hover:bg-primary/5",
+              {
+                "text-primary bg-primary/10": isActive,
+                "text-foreground": !isActive,
+              }
+            )}
+          >
+            Showcase
+          </Button>
+        </Link>
+        <AnimatePresence>
+          {showcaseItems.map((section) => (
+            <motion.div
+              key={section.label}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="space-y-1 pl-3 overflow-hidden"
+            >
+              <div className="px-3 py-2 text-sm font-medium text-muted-foreground">
+                {section.label}
+              </div>
+              {section.items.map((item) => (
+                <Button
+                  key={item.path}
+                  variant="ghost"
+                  onClick={() => handleNavigation(item.path)}
+                  className="w-full justify-start px-6 py-2 font-normal text-foreground hover:text-primary hover:bg-primary/5"
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     );
   }
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative flex items-center" ref={dropdownRef}>
+      <Link href="/showcase">
+        <Button
+          variant="ghost"
+          className={cn(
+            "px-3 py-2 text-sm font-medium transition-colors hover:text-primary hover:bg-primary/5",
+            {
+              "text-primary bg-primary/10": isActive,
+              "text-foreground": !isActive,
+            }
+          )}
+        >
+          Showcase
+        </Button>
+      </Link>
+      
       <Button
         variant="ghost"
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "inline-flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors hover:text-primary hover:bg-primary/5",
+          "inline-flex items-center px-1.5 py-2 text-sm font-medium transition-colors hover:text-primary hover:bg-primary/5 ",
           {
-            "text-primary bg-primary/10": isActive,
-            "text-foreground": !isActive,
+            "text-primary bg-primary/10": isActive && isOpen,
+            "text-foreground": !isActive || !isOpen,
           }
         )}
       >
-        Showcase
-        <ChevronDown className={cn("h-4 w-4", isOpen ? "rotate-180" : "")} />
+        <ChevronDown 
+          className={cn(
+            "h-4 w-8 transition-transform duration-200",
+            isOpen ? "rotate-180" : ""
+          )} 
+        />
       </Button>
       
-      {isOpen && (
-        <div className="absolute right-0 top-full z-50 mt-1 w-[200px] rounded-md border bg-background p-1 shadow-md">
-          {showcaseItems.map((section, index) => (
-            <div key={section.label}>
-              {index > 0 && <div className="my-1 h-px bg-border" />}
-              <div className="px-2 py-1.5 text-sm font-medium text-muted-foreground">
-                {section.label}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.15 }}
+            className="absolute right-0 top-full z-50 mt-1 w-[200px] rounded-md border bg-background/95 backdrop-blur-sm p-1 shadow-md"
+          >
+            {showcaseItems.map((section, index) => (
+              <div key={section.label}>
+                {index > 0 && <div className="my-1 h-px bg-border" />}
+                <div className="px-2 py-1.5 text-sm font-medium text-muted-foreground">
+                  {section.label}
+                </div>
+                {section.items.map((item) => (
+                  <motion.button
+                    key={item.path}
+                    onClick={() => handleNavigation(item.path)}
+                    className="w-full rounded-sm px-2 py-1.5 text-left text-sm hover:text-primary hover:bg-primary/5"
+                    whileHover={{ x: 2 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {item.label}
+                  </motion.button>
+                ))}
               </div>
-              {section.items.map((item) => (
-                <button
-                  key={item.path}
-                  onClick={() => handleNavigation(item.path)}
-                  className="w-full rounded-sm px-2 py-1.5 text-left text-sm hover:text-primary hover:bg-primary/5"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
