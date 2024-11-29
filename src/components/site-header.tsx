@@ -2,11 +2,18 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { ANIMATION_CONFIG } from "../app/code/_constants";
 import { SiteNavigation } from "./site-navigation";
 import { cn } from "../utils";
+import { useDialogStore } from "../lib/dialog-store";
 
 export function SiteHeader() {
+  const pathname = usePathname();
+  const isDialogOpen = useDialogStore((state) => state.isOpen);
+  const isCodeRoute = pathname?.startsWith("/code");
+  const shouldHide = isCodeRoute && isDialogOpen;
+
   return (
     <motion.header
       className={cn(
@@ -14,7 +21,8 @@ export function SiteHeader() {
         "border-b border-border/40",
         "bg-background/80 backdrop-blur-md",
         "shadow-sm shadow-foreground/5",
-        "supports-[backdrop-filter]:bg-background/60"
+        "supports-[backdrop-filter]:bg-background/60",
+        shouldHide && "hidden"
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}

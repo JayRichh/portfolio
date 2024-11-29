@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { ExternalLink, Github, ImageIcon } from "lucide-react";
 import { Button } from "../../../components/ui/button";
@@ -11,6 +11,7 @@ import {
 import { LoadingOverlay } from "../../../components/ui/loading-overlay";
 import { Project } from "../../../lib/projectData";
 import { Lightbox } from "./lightbox";
+import { useDialogStore } from "../../../lib/dialog-store";
 
 interface ImageWithFallbackProps {
   src: string;
@@ -65,6 +66,12 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const setIsDialogOpen = useDialogStore((state) => state.setIsOpen);
+
+  useEffect(() => {
+    setIsDialogOpen(true);
+    return () => setIsDialogOpen(false);
+  }, [setIsDialogOpen]);
 
   // Collect all images
   const allImages = [
@@ -86,9 +93,16 @@ const ProjectDetailDialog: React.FC<ProjectDetailDialogProps> = ({
     setLightboxOpen(true);
   }, []);
 
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      setIsDialogOpen(false);
+      onClose();
+    }
+  };
+
   return (
     <>
-      <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <Dialog open onOpenChange={handleOpenChange}>
         <DialogContent className="max-h-[90vh] w-full max-w-6xl overflow-y-auto bg-white p-0 dark:bg-gray-900">
           <DialogHeader className="relative mb-6">
             <div
