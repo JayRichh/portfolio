@@ -6,6 +6,7 @@ import { cn } from "../../../utils/cn";
 import { WordMapPreview } from "../../resources/_components/WordMapPreview";
 import { MindMapPreview } from "../../resources/_components/MindMapPreview";
 import { GitHubPreview } from "../../resources/_components/GitHubPreview";
+import { PageTitle, PageDescription } from "../../../components/page-container";
 
 interface CardProps {
   href: string;
@@ -73,8 +74,21 @@ interface ResourcesSectionProps {
 
 export function ResourcesSection({ isMobile }: ResourcesSectionProps) {
   return (
-    <div className="w-full bg-gray-50 dark:bg-gray-900 -mt-16 ">
-      <div className="relative mx-auto max-w-[90rem] py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-8">
+    <div className="w-full bg-gray-50 dark:bg-gray-900 -mt-24 mb-12">
+      <div className="relative mx-auto max-w-[90rem] py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-8 text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-16 text-left"
+        >
+          <PageTitle>Resources</PageTitle>
+          <PageDescription>
+            Interactive visualizations and insights into my development journey
+          </PageDescription>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
