@@ -204,8 +204,7 @@ export default function GitHubPage() {
               GitHub Activity
             </h1>
             <p className="text-lg text-muted-foreground">
-              A visualization of my GitHub contribution activity, showing commit
-              frequency and development patterns.
+              A visualization of my repository activity, showing the frequency of contributions across different projects and development patterns over time.
             </p>
           </div>
 
@@ -237,9 +236,7 @@ export default function GitHubPage() {
 
           <div className="mt-8 text-sm text-muted-foreground">
             <i>
-              Note: This visualization reflects daily contributions across
-              distinct repositories, including public and private work through
-              commits, pull requests, and issues.
+              Note: This visualization reflects daily activity across distinct repositories, including public and private work through commits, pull requests, and issues.
             </i>
           </div>
         </motion.div>

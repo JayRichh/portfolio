@@ -133,7 +133,7 @@ export default function ResourcesPage() {
         <Card
           href="/resources/github"
           title="GitHub Activity"
-          description="Visual representation of my GitHub contribution activity, showing commit frequency and development patterns over time"
+          description="Visual representation of my repository activity, showing the frequency of contributions across different projects and development patterns over time"
           PreviewComponent={GitHubPreview}
         />
       </div>
