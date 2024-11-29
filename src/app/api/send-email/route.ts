@@ -34,23 +34,12 @@ function validateEmail(email: string): boolean {
   return re.test(email);
 }
 
-export async function OPTIONS() {
-  return NextResponse.json(
-    {},
-    {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-    }
-  );
-}
-
 export async function POST(req: NextRequest) {
+  console.log('Starting email send process...');
   const ip = req.headers.get('x-forwarded-for') || 'unknown';
 
   if (!rateLimitCheck(ip)) {
+    console.log('Rate limit exceeded for IP:', ip);
     return NextResponse.json(
       { error: 'Rate limit exceeded. Please try again later.' },
       { status: 429 },
@@ -59,8 +48,10 @@ export async function POST(req: NextRequest) {
 
   try {
     const { name, email, message, drawing } = await req.json();
+    console.log('Received request data:', { name, email, message, hasDrawing: !!drawing });
 
     if (!name || !email || !message) {
+      console.log('Missing required fields');
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 },
@@ -68,6 +59,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (!validateEmail(email)) {
+      console.log('Invalid email:', email);
       return NextResponse.json(
         { error: 'Invalid email address' },
         { status: 400 },
@@ -75,9 +67,8 @@ export async function POST(req: NextRequest) {
     }
 
     const apiKey = process.env.NEXT_SMTP_KEY;
-
     if (!apiKey) {
-      console.error('Missing NEXT_SMTP_KEY environment variable');
+      console.error('NEXT_SMTP_KEY is not set in environment variables');
       return NextResponse.json(
         {
           error: 'Server configuration error',
@@ -87,11 +78,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const emailBody = `
-      Name: ${name}
-      Email: ${email}
-      Message: ${message}
-      ${drawing ? 'Drawing: [Attached]' : ''}
+    // Format the email body with HTML
+    const htmlBody = `
+      <h2>New Contact Form Submission</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Message:</strong></p>
+      <p>${message}</p>
+      ${drawing ? '<p>Drawing attached below</p>' : ''}
     `;
 
     const attachments: EmailAttachment[] = [];
@@ -105,14 +99,28 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    // Structure the payload according to SMTP2GO's API requirements
     const payload = {
       api_key: apiKey,
       to: [RECIPIENT_EMAIL],
       sender: RECIPIENT_EMAIL,
-      subject: 'New Contact Form Submission',
-      text_body: emailBody,
-      attachments: attachments,
+      subject: `New Contact Form Submission from ${name}`,
+      html_body: htmlBody,
+      custom_headers: [
+        {
+          header: 'Reply-To',
+          value: email
+        }
+      ],
+      attachments: attachments.length > 0 ? attachments : undefined
     };
+
+    console.log('Preparing to send request to SMTP2GO...', {
+      to: payload.to,
+      sender: payload.sender,
+      subject: payload.subject,
+      hasAttachments: !!payload.attachments
+    });
 
     const response = await fetch(SMTP2GO_API_URL, {
       method: 'POST',
@@ -122,31 +130,31 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(payload),
     });
 
+    const responseData = await response.json();
+    console.log('SMTP2GO API response:', responseData);
+
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error('SMTP2GO API error:', errorData);
+      console.error('SMTP2GO API error response:', {
+        status: response.status,
+        statusText: response.statusText,
+        data: responseData
+      });
       return NextResponse.json(
         {
           error: 'Failed to send email. Please try again later.',
-          details: JSON.stringify(errorData),
+          details: JSON.stringify(responseData),
         },
         { status: 500 },
       );
     }
 
+    console.log('Email sent successfully');
     return NextResponse.json(
       { message: 'Email sent successfully' },
-      { 
-        status: 200,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        }
-      },
+      { status: 200 },
     );
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Unexpected error in email sending:', error);
     return NextResponse.json(
       {
         error: 'Internal server error. Please try again later.',
