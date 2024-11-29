@@ -4,6 +4,7 @@ import { ThemeProvider } from "../components/theme-provider";
 import { RouteTransition } from "../components/route-transition";
 import { PageContainer } from "../components/page-container";
 import { SiteHeader } from "../components/site-header";
+import { Analytics } from '@vercel/analytics/next';
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </main>
           </div>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
