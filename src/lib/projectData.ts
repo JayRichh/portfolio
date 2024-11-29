@@ -67,27 +67,25 @@ export const projectData: Project[] = [
         {
           title: "Supabase Integration",
           text: "Full auth system with email/social login, role-based access, and secure session management. Uses Supabase tables with RLS policies for tour data, bookings and user profiles.",
-          image: "/images/encompass-responsive.png",
+          image: "/images/encompass-about.png",
         },
         {
           title: "Server-side Caching",
           text: "Implemented Redis caching layer for tour data and static content. Significantly reduced database loads and improved response times from ~800ms to <100ms.",
-          image: "/images/encompass-tour-showcase.png",
         },
         {
           title: "Tour Management",
           text: "Dynamic tour catalog with real-time availability, booking system, and admin dashboard for managing schedules and capacity.",
-          image: "/images/encompass-branding.png",
+          image: "/images/encompass.webp",
         },
         {
           title: "Content Pipeline",
           text: "Image optimization pipeline using Sharp.js, automated WebP conversion, and CDN delivery. Lazy loading and progressive enhancement for fast initial loads.",
-          image: "/images/encompass-cms.png",
+          image: "/images/encompass-contact.png",
         },
         {
           title: "Interactive Maps",
           text: "Tour route visualization using Mapbox GL JS with custom styling. Cached route data and vector tiles for offline support.",
-          image: "/images/encompass-maps.png",
         },
       ],
       challenges: [
@@ -140,10 +138,8 @@ export const projectData: Project[] = [
         },
       ],
       additionalImages: [
-        "/images/encompass-home.png",
-        "/images/encompass-tours.png",
+        "/images/encLogoNewColorsAndStars.png",
         "/images/encompass-about.png",
-        "/images/encompass-blog.png",
       ],
     },
   },
@@ -247,105 +243,7 @@ export const projectData: Project[] = [
       ],
     },
   },
-  {
-    title: "Restyled 2.0",
-    description:
-      "Wardrobe management app exploring AI integration and multi-tenant architecture",
-    imgUrl: "/images/restyled-logo.png",
-    repoUrl: "https://github.com/JayRichh/",
-    liveUrl: "https://restyled.app",
-    updatedAt: "2024-10-13",
-    details: {
-      title: "Restyled 2.0 - AI and Auth Learning Project",
-      description:
-        "Practice project combining Supabase Auth, AI integration, and payment processing. Focus on security patterns and multi-tenant architecture.",
-      technologies: [
-        "Next.js",
-        "Supabase",
-        "Lemon Squeezy",
-        "TypeScript",
-        "OpenAI API",
-        "Stable Diffusion",
-      ],
-      features: [
-        {
-          title: "Auth System",
-          text: "Supabase authentication with social logins and MFA. Focused on security patterns and session management.",
-          image: "/images/restyled-auth.png",
-        },
-        {
-          title: "Multi-tenant System",
-          text: "Organization management using Supabase RLS policies. Implemented role-based access and data isolation.",
-          image: "/images/restyled-accounts.png",
-        },
-        {
-          title: "Subscription Handling",
-          text: "Basic payment processing with Lemon Squeezy. Includes webhook handling and usage tracking.",
-          image: "/images/restyled-billing.png",
-        },
-        {
-          title: "AI Integration",
-          text: "Simple outfit visualization using Stable Diffusion. Implemented request queuing and basic caching.",
-          image: "/images/restyled-ai-recommendations.png",
-        },
-      ],
-      challenges: [
-        {
-          title: "Multi-tenant Data",
-          text: "Building efficient data isolation while maintaining good query performance. Implemented row-level security.",
-        },
-        {
-          title: "Payment Processing",
-          text: "Managing subscription states and usage limits across organizations. Added webhook validation.",
-        },
-        {
-          title: "AI Performance",
-          text: "Balancing image quality with generation speed. Working on better request batching.",
-        },
-      ],
-      learnings: [
-        {
-          title: "Auth Patterns",
-          points: [
-            {
-              text: "Multi-tenant authentication patterns and security practices",
-            },
-            {
-              text: "Session management and access control implementation",
-            },
-          ],
-        },
-        {
-          title: "Database Design",
-          points: [
-            {
-              text: "Efficient data modeling for multi-tenant applications",
-            },
-            {
-              text: "Row-level security and query optimization",
-            },
-          ],
-        },
-        {
-          title: "API Integration",
-          points: [
-            {
-              text: "Payment provider integration and webhook handling",
-            },
-            {
-              text: "AI service queuing and response caching",
-            },
-          ],
-        },
-      ],
-      additionalImages: [
-        "/images/restyled-dashboard.png",
-        "/images/restyled-ai-engine.png",
-        "/images/restyled-organization-view.png",
-        "/images/restyled-mobile-app.png",
-      ],
-    },
-  },
+ 
   {
     title: "DOMination (CSS Battle)",
     description:
@@ -438,7 +336,7 @@ export const projectData: Project[] = [
           ],
         },
       ],
-      additionalImages: ["/images/editor.png", "https://github.com/user-attachments/assets/0c62c6c8-963b-4223-9a58-22204c93919c","/images/domination.png"],
+      additionalImages: ["/images/editor.png", "/images/domination.png"],
     },
   },
   {
@@ -470,17 +368,15 @@ export const projectData: Project[] = [
         {
           title: "Location Browser",
           text: "Collapsible sidebar with country-based categorization. Features lazy-loaded images and responsive layout adaptation.",
-          image: "/images/map3.png",
+          image: "/images/map1.png",
         },
         {
           title: "Custom Markers",
           text: "Dynamic markers using location images with custom popups. Implements error checking for coordinate validation.",
-          image: "/images/map-markers.png",
         },
         {
           title: "Responsive Design",
           text: "Adaptive layout with collapsible sidebar and dynamic map resizing. Uses CSS variables for consistent theming.",
-          image: "/images/map-responsive.png",
         },
       ],
       challenges: [
@@ -532,7 +428,98 @@ export const projectData: Project[] = [
           ],
         },
       ],
-      additionalImages: ["/images/map-locations.png", "/images/map-mobile.png"],
+      additionalImages: [],
+    },
+  },
+  {
+    title: "Off The Floor",
+    description:
+      "Simple business website built while learning Vue3 and TypeScript fundamentals",
+    imgUrl: "/images/otf-vue1.png",
+    repoUrl: "https://github.com/JayRichh/otf-vue",
+    liveUrl: "http://otf-vue.vercel.app",
+    updatedAt: "2024-01-25",
+    details: {
+      title: "Off The Floor - Vue Learning Project",
+      description:
+        "A basic business website for an aerial arts studio. Built to practice Vue3, TypeScript, and responsive design.",
+      technologies: ["Vue3", "TypeScript", "Bootstrap", "Vue Router"],
+      features: [
+        {
+          title: "Basic Routing",
+          text: "Simple page navigation using Vue Router. First time implementing route guards and transitions.",
+          image: "/images/otf-vue3.png",
+        },
+        {
+          title: "Responsive Layout",
+          text: "Basic responsive design using Bootstrap. Learning mobile-first approach.",
+          image: "/images/otf-vue4.png",
+        },
+        {
+          title: "Content Sections",
+          text: "Simple content components using Vue3 composition API. Needs better component organization.",
+          image: "/images/otf-vue1.png",
+        },
+        {
+          title: "Image Sliders",
+          text: "Basic image carousels using Vue3-carousel. Still working on performance with larger images.",
+          image: "/images/otf-vue2.png",
+        },
+      ],
+      challenges: [
+        {
+          title: "TypeScript Learning",
+          text: "First time using TypeScript with Vue. Struggled with proper typing of props and events.",
+        },
+        {
+          title: "Component Structure",
+          text: "Learning to organize components effectively. Current structure needs improvement.",
+        },
+        {
+          title: "Image Optimization",
+          text: "Working on better image loading strategies. Current implementation is basic.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Vue3 Basics",
+          points: [
+            {
+              text: "First project using Vue3 composition API",
+            },
+            {
+              text: "Learning about reactive refs and computed properties",
+            },
+          ],
+        },
+        {
+          title: "TypeScript Integration",
+          points: [
+            {
+              text: "Basic TypeScript usage in Vue components",
+            },
+            {
+              text: "Learning about interfaces and type definitions",
+            },
+          ],
+        },
+        {
+          title: "CSS Framework Usage",
+          points: [
+            {
+              text: "First time using Bootstrap with Vue",
+            },
+            {
+              text: "Learning about responsive breakpoints and grid system",
+            },
+          ],
+        },
+      ],
+      additionalImages: [
+        "/images/otf-vue1.png",
+        "/images/otf-vue2.png",
+        "/images/otf-vue3.png",
+      ],
     },
   },
   {
@@ -826,6 +813,102 @@ export const projectData: Project[] = [
     },
   },
   {
+    title: "Restyled 2.0",
+    description:
+      "Wardrobe management app exploring AI integration and multi-tenant architecture",
+    imgUrl: "/images/restyled1.png",
+    repoUrl: "https://github.com/JayRichh/",
+    liveUrl: "https://restyled.app",
+    updatedAt: "2024-10-13",
+    details: {
+      title: "Restyled 2.0 - AI and Auth Learning Project",
+      description:
+        "Practice project combining Supabase Auth, AI integration, and payment processing. Focus on security patterns and multi-tenant architecture.",
+      technologies: [
+        "Next.js",
+        "Supabase",
+        "Lemon Squeezy",
+        "TypeScript",
+        "OpenAI API",
+        "Tailwind CSS",
+      ],
+      features: [
+        {
+          title: "Auth System",
+          text: "Supabase authentication with social logins and MFA. Focused on security patterns and session management.",
+          image: "/images/restyled-logo.png",
+        },
+        {
+          title: "Multi-tenant System",
+          text: "Organization management using Supabase RLS policies. Implemented role-based access and data isolation.",
+        },
+        {
+          title: "Subscription Handling",
+          text: "Basic payment processing with Lemon Squeezy. Includes webhook handling and usage tracking.",
+        },
+        {
+          title: "AI Integration",
+          text: "Simple outfit visualization using Stable Diffusion. Implemented request queuing and basic caching.",
+        },
+      ],
+      challenges: [
+        {
+          title: "Multi-tenant Data",
+          text: "Building efficient data isolation while maintaining good query performance. Implemented row-level security.",
+        },
+        {
+          title: "Payment Processing",
+          text: "Managing subscription states and usage limits across organizations. Added webhook validation.",
+        },
+        {
+          title: "AI Performance",
+          text: "Balancing image quality with generation speed. Working on better request batching.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Auth Patterns",
+          points: [
+            {
+              text: "Multi-tenant authentication patterns and security practices",
+            },
+            {
+              text: "Session management and access control implementation",
+            },
+          ],
+        },
+        {
+          title: "Database Design",
+          points: [
+            {
+              text: "Efficient data modeling for multi-tenant applications",
+            },
+            {
+              text: "Row-level security and query optimization",
+            },
+          ],
+        },
+        {
+          title: "API Integration",
+          points: [
+            {
+              text: "Payment provider integration and webhook handling",
+            },
+            {
+              text: "AI service queuing and response caching",
+            },
+          ],
+        },
+      ],
+      additionalImages: [
+        "/images/restyled1.png",
+        "/images/restyled2.png",
+        "/images/restyled3.png",
+        "/images/restyled4.png",
+      ],
+    },
+  },
+  {
     title: "V2 - Audio Visualizer",
     description:
       "Basic audio visualization experiments built while learning Web Audio API and Vue3",
@@ -915,6 +998,105 @@ export const projectData: Project[] = [
         "/images/test1.png",
         "/images/test2.png",
         "/images/test3.png",
+      ],
+    },
+  },
+
+  {
+    title: "PomoDev",
+    description:
+      "A Pomodoro Timer Chrome Extension built with React, TypeScript, and Vite to help manage time effectively. Featuring customizable timers, task management, and theme options.",
+    imgUrl: "/images/pomodev-logo.png",
+    repoUrl: "https://github.com/JayRichh/pomodev",
+    liveUrl: "",
+    updatedAt: "2024-09-01",
+    details: {
+      title: "PomoDev - Pomodoro Timer Extension",
+      description:
+        "PomoDev is a Chrome extension designed to boost productivity using the Pomodoro Technique. It offers a customizable timer, task management, and theme customization, all built with modern web technologies.",
+      technologies: [
+        "React",
+        "TypeScript",
+        "Vite",
+        "TailwindCSS",
+        "Chrome Extension API",
+        "Firefox Add-on API",
+      ],
+      features: [
+        {
+          title: "Customizable Pomodoro Timer",
+          text: "Allows users to start, stop, and reset the timer. Time can be customized by clicking on the display.",
+          image: "/images/pomodev-timer.png",
+        },
+        {
+          title: "Task Management",
+          text: "Users can add, complete, and delete tasks. All tasks persist in local storage for continuity across sessions.",
+          image: "/images/pomodev-tasks.png",
+        },
+        {
+          title: "Theme Customization",
+          text: "Offers both light and dark themes to suit user preferences and reduce eye strain.",
+          image: "/images/pomodev-themes.png",
+        },
+        {
+          title: "Cross-Browser Compatibility",
+          text: "Designed to work seamlessly on both Chrome and Firefox browsers.",
+          image: "/images/pomodev-browsers.png",
+        },
+      ],
+      challenges: [
+        {
+          title: "Browser Extension Development",
+          text: "Adapting to the specific requirements and limitations of browser extension development, including manifest v3 for Chrome.",
+        },
+        {
+          title: "Cross-Browser Compatibility",
+          text: "Ensuring the extension works consistently across different browsers, particularly Chrome and Firefox.",
+        },
+        {
+          title: "State Persistence",
+          text: "Implementing persistent storage to maintain timer state and tasks across browser sessions.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Modern Web Development Stack",
+          points: [
+            {
+              text: "Gained hands-on experience with React 18, TypeScript, and Vite for building efficient and type-safe applications.",
+            },
+            {
+              text: "Learned to leverage TailwindCSS for rapid UI development and consistent styling.",
+            },
+          ],
+        },
+        {
+          title: "Browser Extension Development",
+          points: [
+            {
+              text: "Mastered the intricacies of developing extensions for Chrome and Firefox, including manifest differences and API usage.",
+            },
+            {
+              text: "Implemented persistent storage solutions specific to browser extensions.",
+            },
+          ],
+        },
+        {
+          title: "Project Structure and Build Process",
+          points: [
+            {
+              text: "Developed a clean and maintainable project structure suitable for browser extension development.",
+            },
+            {
+              text: "Set up an efficient build process using Vite, including custom plugins for Hot Module Replacement in extension context.",
+            },
+          ],
+        },
+      ],
+      additionalImages: [
+        "/images/pomodev-overview.png",
+        "/images/pomodev-settings.png",
+        "/images/pomodev-mobile.png",
       ],
     },
   },
@@ -1013,104 +1195,6 @@ export const projectData: Project[] = [
         "/images/devmap-dashboard.png",
         "/images/devmap-project-view.png",
         "/images/devmap-analytics.png",
-      ],
-    },
-  },
-  {
-    title: "PomoDev",
-    description:
-      "A Pomodoro Timer Chrome Extension built with React, TypeScript, and Vite to help manage time effectively. Featuring customizable timers, task management, and theme options.",
-    imgUrl: "/images/pomodev-logo.png",
-    repoUrl: "https://github.com/JayRichh/pomodev",
-    liveUrl: "",
-    updatedAt: "2024-09-01",
-    details: {
-      title: "PomoDev - Pomodoro Timer Extension",
-      description:
-        "PomoDev is a Chrome extension designed to boost productivity using the Pomodoro Technique. It offers a customizable timer, task management, and theme customization, all built with modern web technologies.",
-      technologies: [
-        "React",
-        "TypeScript",
-        "Vite",
-        "TailwindCSS",
-        "Chrome Extension API",
-        "Firefox Add-on API",
-      ],
-      features: [
-        {
-          title: "Customizable Pomodoro Timer",
-          text: "Allows users to start, stop, and reset the timer. Time can be customized by clicking on the display.",
-          image: "/images/pomodev-timer.png",
-        },
-        {
-          title: "Task Management",
-          text: "Users can add, complete, and delete tasks. All tasks persist in local storage for continuity across sessions.",
-          image: "/images/pomodev-tasks.png",
-        },
-        {
-          title: "Theme Customization",
-          text: "Offers both light and dark themes to suit user preferences and reduce eye strain.",
-          image: "/images/pomodev-themes.png",
-        },
-        {
-          title: "Cross-Browser Compatibility",
-          text: "Designed to work seamlessly on both Chrome and Firefox browsers.",
-          image: "/images/pomodev-browsers.png",
-        },
-      ],
-      challenges: [
-        {
-          title: "Browser Extension Development",
-          text: "Adapting to the specific requirements and limitations of browser extension development, including manifest v3 for Chrome.",
-        },
-        {
-          title: "Cross-Browser Compatibility",
-          text: "Ensuring the extension works consistently across different browsers, particularly Chrome and Firefox.",
-        },
-        {
-          title: "State Persistence",
-          text: "Implementing persistent storage to maintain timer state and tasks across browser sessions.",
-        },
-      ],
-      learnings: [
-        {
-          title: "Modern Web Development Stack",
-          points: [
-            {
-              text: "Gained hands-on experience with React 18, TypeScript, and Vite for building efficient and type-safe applications.",
-            },
-            {
-              text: "Learned to leverage TailwindCSS for rapid UI development and consistent styling.",
-            },
-          ],
-        },
-        {
-          title: "Browser Extension Development",
-          points: [
-            {
-              text: "Mastered the intricacies of developing extensions for Chrome and Firefox, including manifest differences and API usage.",
-            },
-            {
-              text: "Implemented persistent storage solutions specific to browser extensions.",
-            },
-          ],
-        },
-        {
-          title: "Project Structure and Build Process",
-          points: [
-            {
-              text: "Developed a clean and maintainable project structure suitable for browser extension development.",
-            },
-            {
-              text: "Set up an efficient build process using Vite, including custom plugins for Hot Module Replacement in extension context.",
-            },
-          ],
-        },
-      ],
-      additionalImages: [
-        "/images/pomodev-overview.png",
-        "/images/pomodev-settings.png",
-        "/images/pomodev-mobile.png",
       ],
     },
   },
@@ -1336,97 +1420,7 @@ export const projectData: Project[] = [
     },
   },
 
-  {
-    title: "Off The Floor",
-    description:
-      "Simple business website built while learning Vue3 and TypeScript fundamentals",
-    imgUrl: "/images/otf-vue1.png",
-    repoUrl: "https://github.com/JayRichh/otf-vue",
-    liveUrl: "http://otf-vue.vercel.app",
-    updatedAt: "2024-01-25",
-    details: {
-      title: "Off The Floor - Vue Learning Project",
-      description:
-        "A basic business website for an aerial arts studio. Built to practice Vue3, TypeScript, and responsive design.",
-      technologies: ["Vue3", "TypeScript", "Bootstrap", "Vue Router"],
-      features: [
-        {
-          title: "Basic Routing",
-          text: "Simple page navigation using Vue Router. First time implementing route guards and transitions.",
-          image: "/images/otf-vue3.png",
-        },
-        {
-          title: "Responsive Layout",
-          text: "Basic responsive design using Bootstrap. Learning mobile-first approach.",
-          image: "/images/otf-vue4.png",
-        },
-        {
-          title: "Content Sections",
-          text: "Simple content components using Vue3 composition API. Needs better component organization.",
-          image: "/images/otf-vue1.png",
-        },
-        {
-          title: "Image Sliders",
-          text: "Basic image carousels using Vue3-carousel. Still working on performance with larger images.",
-          image: "/images/otf-vue2.png",
-        },
-      ],
-      challenges: [
-        {
-          title: "TypeScript Learning",
-          text: "First time using TypeScript with Vue. Struggled with proper typing of props and events.",
-        },
-        {
-          title: "Component Structure",
-          text: "Learning to organize components effectively. Current structure needs improvement.",
-        },
-        {
-          title: "Image Optimization",
-          text: "Working on better image loading strategies. Current implementation is basic.",
-        },
-      ],
-      learnings: [
-        {
-          title: "Vue3 Basics",
-          points: [
-            {
-              text: "First project using Vue3 composition API",
-            },
-            {
-              text: "Learning about reactive refs and computed properties",
-            },
-          ],
-        },
-        {
-          title: "TypeScript Integration",
-          points: [
-            {
-              text: "Basic TypeScript usage in Vue components",
-            },
-            {
-              text: "Learning about interfaces and type definitions",
-            },
-          ],
-        },
-        {
-          title: "CSS Framework Usage",
-          points: [
-            {
-              text: "First time using Bootstrap with Vue",
-            },
-            {
-              text: "Learning about responsive breakpoints and grid system",
-            },
-          ],
-        },
-      ],
-      additionalImages: [
-        "/images/otf-vue1.png",
-        "/images/otf-vue2.png",
-        "/images/otf-vue3.png",
-      ],
-    },
-  },
+
 
   {
     title: "AF Buddy",
