@@ -179,13 +179,13 @@ export default function ShowcasePage() {
       <ScrollToTop />
 
       <HeroSection onScrollClick={handleScroll} />
-      <ResourcesSection isMobile={isMobile} />
 
       <div className="w-full">
         {projectsData.map((project, index) => (
           <ProjectCard key={index} {...project} />
         ))}
       </div>
+      <ResourcesSection isMobile={isMobile} />
     </div>
   );
 }

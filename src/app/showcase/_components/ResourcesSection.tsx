@@ -73,7 +73,7 @@ interface ResourcesSectionProps {
 
 export function ResourcesSection({ isMobile }: ResourcesSectionProps) {
   return (
-    <div className="w-full bg-gray-50 dark:bg-gray-900">
+    <div className="w-full bg-gray-50 dark:bg-gray-900 -mt-16 ">
       <div className="relative mx-auto max-w-[90rem] py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
