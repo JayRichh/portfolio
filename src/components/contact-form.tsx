@@ -129,9 +129,7 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
           onPointerMove={(e) =>
             e.currentTarget.hasPointerCapture(e.pointerId) && handleDrag(e)
           }
-          onPointerUp={(e) =>
-            e.currentTarget.releasePointerCapture(e.pointerId)
-          }
+          onPointerUp={(e) => e.currentTarget.releasePointerCapture(e.pointerId)}
         />
       </div>
       <button
@@ -575,23 +573,19 @@ const StreamlinedContactForm: React.FC = () => {
                 required
               />
               <div className="flex items-center">
-                <div className="flex items-center text-gray-600">
+                <div className="flex items-center text-foreground">
                   <span className="mr-2">Verification:</span>
                   <span className="font-medium">{challenge}</span>
                   <span className="mx-2">=</span>
                 </div>
+                {/* Updated Input Field */}
                 <Input
                   id="challenge"
                   type="number"
                   placeholder="?"
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
-                  className="w-24 h-10 text-center bg-white border-gray-200 text-lg 
-             [appearance:auto] 
-             [&::-webkit-inner-spin-button]:h-8 
-             [&::-webkit-inner-spin-button]:w-8 
-             [&::-webkit-inner-spin-button]:scale-125 
-             [&::-webkit-inner-spin-button]:cursor-pointer"
+                  className="w-24 h-10 text-center bg-white text-black border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white dark:border-gray-600"
                   min="0"
                   max="100"
                   aria-label="Verification Answer"
@@ -792,7 +786,9 @@ const StreamlinedContactForm: React.FC = () => {
 
           {status && (
             <div
-              className={`mt-4 text-center ${status.success ? "text-green-600" : "text-red-600"}`}
+              className={`mt-4 text-center ${
+                status.success ? "text-green-600" : "text-red-600"
+              }`}
             >
               {status.message}
             </div>
