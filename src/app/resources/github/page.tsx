@@ -256,7 +256,7 @@ export default function GitHubPage() {
     }));
 
     return (
-      <div className="mt-12">
+      <div className="mt-16">
         <h2 className="text-2xl font-bold text-primary mb-6">Language Distribution</h2>
         <div className="rounded-xl border border-border/50 bg-background/30 backdrop-blur-sm p-4 md:p-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -391,7 +391,7 @@ export default function GitHubPage() {
 
           <div className="mt-12 text-sm text-muted-foreground border-t border-border/50 pt-4 w-full">
             <p className="text-center w-full mx-auto">
-              Data sourced from GitHub's GraphQL API. Contribution data includes commits, issues, pull requests, and code reviews. Language statistics are calculated from all public repositories.
+              Data sourced from GitHub's GraphQL API. Contribution data includes commits, issues, pull requests, and code reviews. Language statistics are calculated from all public and private repositories.
             </p>
           </div>
         </motion.div>

@@ -13,10 +13,9 @@ import {
 import { ProgressLoader } from "../../../components/ui/progress-loader";
 
 export function GitHubPreview() {
-  const [yearData, setYearData] = useState<YearContributions[]>([]);
+  const { yearData: storeYearData, setYearData } = useGitHubStore();
   const [loading, setLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
-  const reset = useGitHubStore((state) => state.reset);
   const cachedData = useContributions();
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -26,21 +25,15 @@ export function GitHubPreview() {
 
     const loadData = async () => {
       try {
-        // Check for cached data first
         if (cachedData && mounted) {
-          console.log("Preview: Using cached data");
           setYearData(cachedData);
           setLoading(false);
           setShowContent(true);
           return;
         }
 
-        // If no cached data, fetch new data
-        console.log("Preview: Fetching GitHub data...");
         const contributions = await fetchGitHubContributions();
-
         if (mounted && contributions.length > 0) {
-          console.log("Preview: Setting new contributions data");
           setYearData(contributions);
           setLoading(false);
           setShowContent(true);
@@ -53,13 +46,9 @@ export function GitHubPreview() {
       }
     };
 
-    // Only reset and fetch if we don't have cached data
-    if (!cachedData) {
-      reset();
+    if (!storeYearData.length) {
       loadData();
     } else {
-      // If we have cached data, use it immediately
-      setYearData(cachedData);
       setLoading(false);
       setShowContent(true);
     }
@@ -67,52 +56,34 @@ export function GitHubPreview() {
     return () => {
       mounted = false;
     };
-  }, [reset, cachedData]);
+  }, [cachedData, setYearData, storeYearData]);
 
-  // Show loader until data is ready
   if (loading) {
     return (
       <div className="flex h-full items-center justify-center">
         <ProgressLoader
           onComplete={() => {
-            if (yearData.length > 0) {
-              setLoading(false);
+            if (storeYearData.length > 0) {
               setShowContent(true);
             }
           }}
-          isDataReady={yearData.length > 0}
+          isDataReady={storeYearData.length > 0}
           className="scale-75"
         />
       </div>
     );
   }
 
-  if (!yearData.length) {
-    console.log("Preview: No year data available");
+  if (!storeYearData.length) {
     return null;
   }
 
-  // Use most recent year's data for preview
-  const mostRecentYear = yearData[0];
+  const currentYear = storeYearData[0];
+  const fromDate = `${currentYear.year}-01-01`;
+  const toDate = `${currentYear.year}-12-31`;
 
-  // Calculate date range for preview (last 6 months)
-  const currentDate = new Date();
-  const fromDate = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth() - 5,
-    1,
-  )
-    .toISOString()
-    .split("T")[0];
-  const toDate = currentDate.toISOString().split("T")[0];
+  const contributionData = currentYear.contributions.filter(c => c.value > 0);
 
-  // Filter contributions to only show the last 6 months
-  const previewContributions = mostRecentYear.contributions.filter(
-    (contribution) =>
-      contribution.day >= fromDate && contribution.day <= toDate,
-  );
-
-  // GitHub's exact color schemes
   const lightColors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
   const darkColors = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
 
@@ -126,8 +97,11 @@ export function GitHubPreview() {
           transition={{ duration: 0.5 }}
           className="h-full w-full"
         >
+          <div className="text-center text-sm text-muted-foreground mb-2">
+            {currentYear.totalContributions.toLocaleString()} contributions in {currentYear.year}
+          </div>
           <ResponsiveCalendarCanvas
-            data={previewContributions}
+            data={contributionData}
             from={fromDate}
             to={toDate}
             emptyColor={isDark ? "#161b22" : "#ebedf0"}
