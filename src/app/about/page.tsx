@@ -21,33 +21,17 @@ import {
   Server,
   Zap,
 } from "lucide-react";
-import { Cell, Pie, PieChart, ResponsiveContainer, Sector } from "recharts";
+import { ResponsivePie } from "@nivo/pie";
+import { useTheme } from "next-themes";
 
 import { Button } from "../../components/ui/button";
 import HobbiesSection from "./_components/about-hobbies";
+import { useGitHubStore } from "../../lib/github";
 
 const ScrollDownIndicator = dynamic(
   () => import("./_components/scroll-down-indicator"),
   { ssr: false },
 );
-
-const distributionData = [
-  { name: "TypeScript", value: 69.56 },
-  { name: "JavaScript", value: 15.36 },
-  { name: "Vue", value: 8.93 },
-  { name: "CSS", value: 3.61 },
-  { name: "HTML", value: 1.77 },
-  { name: "SCSS", value: 0.76 },
-];
-
-const COLORS = [
-  "#A3B1F7",
-  "#FDBBA9",
-  "#C1E5D7",
-  "#F2E1C1",
-  "#F7D6E0",
-  "#B9C0DA",
-];
 
 const timelineData = [
   {
@@ -94,93 +78,11 @@ const timelineData = [
   },
 ];
 
-interface CustomLabelProps {
-  cx: number;
-  cy: number;
-  midAngle: number;
-  innerRadius: number;
-  outerRadius: number;
-  name: string;
-  value: number;
-}
-
-const CustomLabel: React.FC<CustomLabelProps> = ({
-  cx,
-  cy,
-  midAngle,
-  outerRadius,
-  name,
-  value,
-}) => {
-  const RADIAN = Math.PI / 180;
-  const radius = outerRadius + 60;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-  const textAnchor = x > cx ? "start" : "end";
-
-  return (
-    <g>
-      <text
-        x={x}
-        y={y}
-        textAnchor={textAnchor}
-        dominantBaseline="central"
-        className="fill-foreground text-2xl font-semibold dark:fill-foreground"
-      >
-        {name}
-      </text>
-      <text
-        x={x}
-        y={y + 20}
-        textAnchor={textAnchor}
-        dominantBaseline="central"
-        className="fill-muted-foreground text-base text-xl dark:fill-muted-foreground"
-      >
-        {`${value.toFixed(1)}%`}
-      </text>
-    </g>
-  );
-};
-
-const renderActiveShape = (props: any) => {
-  const {
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    startAngle,
-    endAngle,
-    fill,
-  } = props;
-
-  return (
-    <g>
-      <Sector
-        cx={cx}
-        cy={cy}
-        innerRadius={innerRadius}
-        outerRadius={outerRadius}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        fill={fill}
-      />
-      <Sector
-        cx={cx}
-        cy={cy}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        innerRadius={outerRadius + 6}
-        outerRadius={outerRadius + 10}
-        fill={fill}
-      />
-    </g>
-  );
-};
-
 const TopSection: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const { languageData } = useGitHubStore();
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -189,9 +91,12 @@ const TopSection: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const onPieEnter = (_: any, index: number) => {
-    setActiveIndex(index);
-  };
+  const pieData = languageData?.languages.map(({ name, percentage, color }) => ({
+    id: name,
+    label: name,
+    value: percentage,
+    color: color || "#666",
+  })) || [];
 
   return (
     <div className="flex min-h-[50vh] flex-col items-center justify-center overflow-visible px-4 md:px-8">
@@ -217,48 +122,61 @@ const TopSection: React.FC = () => {
         >
           {isMobile ? (
             <div className="space-y-4">
-              {distributionData.map((entry, index) => (
-                <div key={`bar-${index}`} className="flex items-center">
+              {pieData.map((entry) => (
+                <div key={entry.id} className="flex items-center">
                   <div
                     className="h-12"
                     style={{
                       width: `${entry.value}%`,
-                      backgroundColor: COLORS[index % COLORS.length],
+                      backgroundColor: entry.color,
                     }}
                   />
-                  <span className="ml-4 text-lg font-semibold text-foreground dark:text-foreground">
-                    {entry.name}: {entry.value.toFixed(1)}%
+                  <span className="ml-4 text-lg font-semibold text-foreground">
+                    {entry.label}: {entry.value.toFixed(1)}%
                   </span>
                 </div>
               ))}
             </div>
           ) : (
-            <ResponsiveContainer width="100%" height={600}>
-              <PieChart>
-                <Pie
-                  activeIndex={activeIndex}
-                  activeShape={renderActiveShape}
-                  data={distributionData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius="30%"
-                  outerRadius="50%"
-                  fill="#8884d8"
-                  dataKey="value"
-                  isAnimationActive={false}
-                  onMouseEnter={onPieEnter}
-                  label={CustomLabel}
-                  labelLine={false}
-                >
-                  {distributionData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
+            <div className="h-[600px] w-full">
+              <ResponsivePie
+  data={pieData}
+  margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+  innerRadius={0.6}
+  padAngle={0.5}
+  cornerRadius={4}
+  activeOuterRadiusOffset={8}
+  colors={{ datum: 'data.color' }}
+  borderWidth={1}
+  borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
+  enableArcLinkLabels={true}
+  arcLinkLabelsSkipAngle={10}
+  arcLinkLabelsTextColor={isDark ? "#7d8590" : "#57606a"}
+  arcLinkLabelsThickness={2}
+  arcLinkLabelsColor={{ from: "color" }}
+  arcLabelsSkipAngle={10}
+  arcLabelsTextColor="#ffffff"
+  motionConfig="gentle"
+  transitionMode="pushIn"
+  theme={{
+    labels: {
+      text: {
+        fontSize: 16, 
+        fontWeight: 600, 
+      },
+    },
+    tooltip: {
+      container: {
+        background: isDark ? "#161b22" : "#ffffff",
+        color: isDark ? "#7d8590" : "#57606a",
+        fontSize: "14px", 
+        borderRadius: "6px",
+        boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+      },
+    },
+  }}
+/>
+            </div>
           )}
         </motion.div>
       </motion.section>
@@ -374,7 +292,6 @@ const TimelineCard: React.FC<{ item: any; index: number; total: number }> = ({
   const cardRef = useRef(null);
   const isInView = useInView(cardRef, { once: true, amount: 0.3 });
 
-  // Optimize animations by using simpler transforms and shorter durations
   return (
     <motion.div
       ref={cardRef}
