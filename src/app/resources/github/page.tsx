@@ -391,7 +391,7 @@ export default function GitHubPage() {
 
           <div className="mt-12 text-sm text-muted-foreground border-t border-border/50 pt-4 w-full">
             <p className="text-center w-full mx-auto">
-              Data sourced from GitHub's GraphQL API. Contribution data includes commits, issues, pull requests, and code reviews. Language statistics are calculated from all public and private repositories.
+              Data sourced from GitHub's GraphQL API. Contribution data includes commits, issues, pull requests, and code reviews to distinct repositories. Language statistics are calculated from all public and private repositories.
             </p>
           </div>
         </motion.div>
