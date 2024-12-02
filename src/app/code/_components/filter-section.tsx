@@ -4,12 +4,6 @@ import React, { useRef, useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Clock, Filter, RotateCcw } from "lucide-react";
 import { Button } from "../../../components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../../../components/ui/tooltip";
 import { techCategories } from "../../../lib/techCategories";
 import { TechBadge } from "./tech-badge";
 import { ANIMATION_CONFIG } from "../_constants";
@@ -64,7 +58,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
     <div className="mb-8 flex flex-col space-y-4">
       <div className="flex flex-wrap items-center gap-4">
         <div
-          className="relative flex-1 min-w-[280px] max-w-[280px]"
+          className="relative w-full sm:w-auto sm:flex-1 sm:min-w-[100px] sm:max-w-[280px]"
           ref={dropdownRef}
         >
           <Button
@@ -117,31 +111,22 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
           </AnimatePresence>
         </div>
 
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                onClick={() => setSortByRecent(!sortByRecent)}
-                className={`inline-flex items-center justify-center ${
-                  sortByRecent
-                    ? "bg-primary text-white hover:bg-primary/90"
-                    : "bg-secondary hover:bg-secondary/80"
-                }`}
-                variant={sortByRecent ? "default" : "secondary"}
-              >
-                {sortByRecent ? (
-                  <RotateCcw size={20} className="mr-2" />
-                ) : (
-                  <Clock size={20} className="mr-2" />
-                )}
-                {sortByRecent ? "Clear Sort" : "Sort Recent"}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Sort by recently updated projects</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Button
+          onClick={() => setSortByRecent(!sortByRecent)}
+          className={`inline-flex w-full sm:w-auto items-center justify-center ${
+            sortByRecent
+              ? "bg-primary text-white hover:bg-primary/90"
+              : "bg-secondary hover:bg-secondary/80"
+          }`}
+          variant={sortByRecent ? "default" : "secondary"}
+        >
+          {sortByRecent ? (
+            <RotateCcw size={20} className="mr-2" />
+          ) : (
+            <Clock size={20} className="mr-2" />
+          )}
+          {sortByRecent ? "Clear Sort" : "Sort Recent"}
+        </Button>
       </div>
 
       <AnimatePresence>

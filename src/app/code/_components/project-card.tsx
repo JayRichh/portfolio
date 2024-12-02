@@ -51,14 +51,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           />
         </div>
       </CardHeader>
-      <CardContent className="flex flex-grow flex-col p-6">
-        <CardTitle className="mb-3 text-2xl line-clamp-1">
+      <CardContent className="flex flex-grow flex-col p-6 xs:p-4">
+        <CardTitle className="mb-3 text-2xl xs:text-xl line-clamp-1">
           {project.title}
         </CardTitle>
-        <p className="mb-4 text-sm text-muted-foreground/90 line-clamp-2">
+        <p className="mb-4 text-sm xs:text-xs text-muted-foreground/90 line-clamp-2">
           {project.description}
         </p>
-        <div className="mt-auto flex flex-wrap gap-2">
+        <div className="mt-auto flex flex-wrap gap-1.5">
           {project.details.technologies
             .slice(0, TECH_DISPLAY_LIMIT)
             .map((tech) => (
@@ -66,8 +66,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             ))}
         </div>
       </CardContent>
-      <div className="absolute bottom-0 left-0 right-0 bg-background/95 p-4 backdrop-blur-sm opacity-0 transition-all duration-300 group-hover:opacity-100">
-        <div className="flex justify-between gap-2">
+      <div className="absolute bottom-0 left-0 right-0 bg-background/95 p-4 xs:p-2 backdrop-blur-sm opacity-0 transition-all duration-300 group-hover:opacity-100">
+        <div className="flex justify-between gap-2 xs:gap-1">
           {project.liveUrl && (
             <Button variant="secondary" size="sm" className="flex-1" asChild>
               <Link
@@ -76,8 +76,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
               >
-                <ExternalLink size={16} className="mr-2" />
-                Live Demo
+                <ExternalLink size={16} className="mr-2 xs:mr-0" />
+                <span className="xs:hidden">Live Demo</span>
               </Link>
             </Button>
           )}
@@ -89,14 +89,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
               >
-                <Github size={16} className="mr-2" />
-                Repository
+                <Github size={16} className="mr-2 xs:mr-0" />
+                <span className="xs:hidden">Repository</span>
               </Link>
             </Button>
           )}
           <Button variant="secondary" size="sm" className="flex-1">
-            <CodeIcon size={16} className="mr-2" />
-            Details
+            <CodeIcon size={16} className="mr-2 xs:mr-0" />
+            <span className="xs:hidden">Details</span>
           </Button>
         </div>
       </div>

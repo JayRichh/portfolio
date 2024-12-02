@@ -22,12 +22,21 @@ import {
   Server,
   Zap,
 } from "lucide-react";
-import { ResponsivePie } from "@nivo/pie";
 import { useTheme } from "next-themes";
 
 import { Button } from "../../components/ui/button";
 import HobbiesSection from "./_components/about-hobbies";
 import { useGitHubStore } from "../../lib/github";
+import { ProgressLoader } from "../../components/ui/progress-loader";
+
+const ResponsivePie = dynamic(() => import("@nivo/pie").then(mod => mod.ResponsivePie), {
+  ssr: false,
+  loading: () => (
+    <div className="flex min-h-[50vh] items-center justify-center">
+      <ProgressLoader isDataReady={false} />
+    </div>
+  ),
+});
 
 const ScrollDownIndicator = dynamic(
   () => import("./_components/scroll-down-indicator"),
@@ -80,17 +89,36 @@ const timelineData = [
 ];
 
 const TopSection: React.FC = () => {
-  const [isMobile, setIsMobile] = useState<boolean>(false);
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const { languageData } = useGitHubStore();
+  const { languageData, isLoading, error } = useGitHubStore();
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    setIsMounted(true);
   }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
+  if (isLoading || (!languageData && !error)) {
+    return (
+      <div className="flex min-h-[50vh] items-center justify-center">
+        <ProgressLoader isDataReady={false} />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex min-h-[50vh] items-center justify-center">
+        <div className="rounded-xl border border-destructive/50 bg-destructive/10 p-6 text-center">
+          <p className="text-muted-foreground">Unable to load GitHub data</p>
+        </div>
+      </div>
+    );
+  }
 
   const pieData =
     languageData?.languages.map(({ name, percentage, color }) => ({
@@ -99,6 +127,8 @@ const TopSection: React.FC = () => {
       value: percentage,
       color: color || "#666",
     })) || [];
+
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
     <div className="flex min-h-[50vh] flex-col items-center justify-center overflow-visible px-4 md:px-8">

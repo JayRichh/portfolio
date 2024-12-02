@@ -102,7 +102,7 @@ export function ResourcesSection({ isMobile }: ResourcesSectionProps) {
           transition={{ duration: 0.8 }}
           className="w-full relative"
         >
-          <div className="grid h-full place-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid h-full place-items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3 fill-available">
             {!isMobile && (
               <>
                 <Card
@@ -121,7 +121,7 @@ export function ResourcesSection({ isMobile }: ResourcesSectionProps) {
             )}
             <Card
               href="/resources/github"
-              title="Calendar - GitHub Activity"
+              title="GitHub Activity"
               description="Visual representation of my GitHub contribution activity, showing commit frequency and development patterns over time"
               PreviewComponent={GitHubPreview}
             />

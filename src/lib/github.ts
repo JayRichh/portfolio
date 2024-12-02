@@ -1,10 +1,12 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 const GITHUB_API = "https://api.github.com/graphql";
 const CACHE_TIME = 3600; // 1 hour in seconds
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1000; // 1 second
 
 interface ContributionDay {
   contributionCount: number;
@@ -60,7 +62,43 @@ interface GitHubState {
   setLoadingYear: (year: number, loading: boolean) => void;
   setYearData: (data: YearContributions[]) => void;
   setLanguageData: (data: LanguageStats | null) => void;
+  updateLastFetched: () => void;
   reset: () => void;
+}
+
+// Rate limiting implementation
+const rateLimiter = {
+  lastCall: 0,
+  minInterval: 100, // Minimum time between API calls in ms
+  async waitForNext() {
+    const now = Date.now();
+    const timeSinceLastCall = now - this.lastCall;
+    if (timeSinceLastCall < this.minInterval) {
+      await new Promise(resolve => setTimeout(resolve, this.minInterval - timeSinceLastCall));
+    }
+    this.lastCall = Date.now();
+  }
+};
+
+// Retry logic with exponential backoff
+async function withRetry<T>(fn: () => Promise<T>, retries = MAX_RETRIES): Promise<T> {
+  try {
+    await rateLimiter.waitForNext();
+    return await fn();
+  } catch (error) {
+    if (retries > 0 && error instanceof AxiosError && error.response?.status === 429) {
+      await new Promise(resolve => setTimeout(resolve, RETRY_DELAY * (MAX_RETRIES - retries + 1)));
+      return withRetry(fn, retries - 1);
+    }
+    throw error;
+  }
+}
+
+// Centralized token validation
+function validateGitHubToken(): void {
+  if (!GITHUB_TOKEN) {
+    throw new Error("GitHub token not found");
+  }
 }
 
 export const useGitHubStore = create<GitHubState>()(
@@ -91,6 +129,7 @@ export const useGitHubStore = create<GitHubState>()(
         }),
       setYearData: (yearData) => set({ yearData }),
       setLanguageData: (languageData) => set({ languageData }),
+      updateLastFetched: () => set({ lastFetched: Date.now() }),
       reset: () =>
         set({
           progress: 0,
@@ -153,15 +192,17 @@ async function fetchYearContributions(
     to: `${year}-12-31T23:59:59Z`,
   };
 
-  const response = await axios.post(
-    GITHUB_API,
-    { query, variables },
-    {
-      headers: {
-        Authorization: `Bearer ${GITHUB_TOKEN}`,
-        "Content-Type": "application/json",
+  const response = await withRetry(() => 
+    axios.post(
+      GITHUB_API,
+      { query, variables },
+      {
+        headers: {
+          Authorization: `Bearer ${GITHUB_TOKEN}`,
+          "Content-Type": "application/json",
+        },
       },
-    },
+    )
   );
 
   const contributionsCollection =
@@ -208,7 +249,6 @@ async function fetchYearContributions(
   const q1 = getQuartile(nonZeroValues, 0.25);
   const q2 = getQuartile(nonZeroValues, 0.5);
   const q3 = getQuartile(nonZeroValues, 0.75);
-  const max = Math.max(...nonZeroValues);
 
   // Scale the contributions using quartile-based thresholds
   const scaledContributions = contributions.map((contribution) => ({
@@ -277,19 +317,21 @@ async function fetchAllRepositories(): Promise<Repository[]> {
         cursor,
       };
 
-      const response = await axios.post(
-        GITHUB_API,
-        { query, variables },
-        {
-          headers: {
-            Authorization: `Bearer ${GITHUB_TOKEN}`,
-            "Content-Type": "application/json",
+      const response = await withRetry(() =>
+        axios.post(
+          GITHUB_API,
+          { query, variables },
+          {
+            headers: {
+              Authorization: `Bearer ${GITHUB_TOKEN}`,
+              "Content-Type": "application/json",
+            },
+            timeout: 30000,
           },
-          timeout: 30000,
-        },
+        )
       );
 
-      const { nodes, pageInfo } = response.data.data.user.repositories;
+      const { nodes, pageInfo } = (response as any).data.data.user.repositories;
       repositories.push(...nodes);
 
       hasNextPage = pageInfo.hasNextPage;
@@ -349,35 +391,28 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
 
 export async function fetchGitHubContributions(): Promise<YearContributions[]> {
   const store = useGitHubStore.getState();
-  const { setProgress, setError, setYearData, setLoading } = store;
-
-  if (!GITHUB_TOKEN) {
-    setError("GitHub token not found");
-    return [];
-  }
+  const { setProgress, setError, setYearData, setLoading, updateLastFetched } = store;
 
   try {
+    validateGitHubToken();
     setLoading(true);
-    store.reset(); // Reset progress to 0
+    store.reset();
 
-    // Phase 1: Initialize (0-10%)
     setProgress(10);
 
-    // Phase 2: Fetch contributions (10-40%)
     const currentYear = new Date().getFullYear();
     const yearsToFetch = [currentYear, currentYear - 1];
 
     const yearResults = await Promise.all(
       yearsToFetch.map(async (year) => {
         const result = await fetchYearContributions(year);
-        setProgress(25); // Increment progress after each year
+        setProgress(25);
         return result;
       }),
     );
 
     setProgress(40);
 
-    // Phase 3: Process contributions (40-60%)
     const allContributions = yearResults.filter(
       (result): result is YearContributions => result !== null,
     );
@@ -387,18 +422,16 @@ export async function fetchGitHubContributions(): Promise<YearContributions[]> {
     );
     setProgress(60);
 
-    // Phase 4: Fetch and process language data (60-90%)
     const languageStats = await fetchLanguageStats();
     setProgress(90);
 
-    // Phase 5: Finalize (90-100%)
     setYearData(sortedContributions);
+    updateLastFetched();
     setProgress(100);
 
     return sortedContributions;
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Error fetching GitHub data";
+    const message = error instanceof Error ? error.message : "Error fetching GitHub data";
     setError(message);
     return [];
   } finally {
@@ -410,14 +443,10 @@ export async function fetchPreviousYear(
   year: number,
 ): Promise<YearContributions | null> {
   const store = useGitHubStore.getState();
-  const { setError, setLoadingYear, yearData, setYearData } = store;
-
-  if (!GITHUB_TOKEN) {
-    setError("GitHub token not found");
-    return null;
-  }
+  const { setError, setLoadingYear, yearData, setYearData, updateLastFetched } = store;
 
   try {
+    validateGitHubToken();
     setLoadingYear(year, true);
     const yearContributions = await fetchYearContributions(year);
 
@@ -426,12 +455,12 @@ export async function fetchPreviousYear(
         (a, b) => b.year - a.year,
       );
       setYearData(updatedYearData);
+      updateLastFetched();
     }
 
     return yearContributions;
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Error fetching GitHub data";
+    const message = error instanceof Error ? error.message : "Error fetching GitHub data";
     setError(message);
     return null;
   } finally {
@@ -441,38 +470,28 @@ export async function fetchPreviousYear(
 
 export async function fetchGitHubLanguages(): Promise<LanguageStats | null> {
   const store = useGitHubStore.getState();
-  const { setProgress, setError, setLanguageData, setLoading } = store;
-
-  if (!GITHUB_TOKEN) {
-    setError("GitHub token not found");
-    return null;
-  }
+  const { setProgress, setError, setLanguageData, setLoading, updateLastFetched } = store;
 
   try {
+    validateGitHubToken();
     setLoading(true);
-    store.reset(); // Reset progress to 0
+    store.reset();
 
-    // Phase 1: Initialize (0-20%)
     setProgress(20);
 
-    // Phase 2: Fetch repositories (20-50%)
     const repos = await fetchAllRepositories();
     setProgress(50);
 
-    // Phase 3: Process language data (50-80%)
     const stats = await fetchLanguageStats();
     setProgress(80);
 
-    // Phase 4: Finalize (80-100%)
     setLanguageData(stats);
+    updateLastFetched();
     setProgress(100);
 
     return stats;
   } catch (error) {
-    const message =
-      error instanceof Error
-        ? error.message
-        : "Error fetching GitHub language data";
+    const message = error instanceof Error ? error.message : "Error fetching GitHub language data";
     setError(message);
     return null;
   } finally {

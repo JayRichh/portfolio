@@ -8,7 +8,6 @@ import { cn } from "../../utils/cn";
 import { WordMapPreview } from "./_components/WordMapPreview";
 import { MindMapPreview } from "./_components/MindMapPreview";
 import { GitHubPreview } from "./_components/GitHubPreview";
-import { fetchGitHubContributions } from "../../lib/github";
 import {
   PageSection,
   PageTitle,
@@ -51,12 +50,7 @@ const Card = ({
 
   useEffect(() => {
     setMounted(true);
-
-    // Prefetch GitHub contributions if the card is for the GitHub route
-    if (href === "/resources/github") {
-      fetchGitHubContributions().catch(console.error);
-    }
-  }, [href]);
+  }, []);
 
   return (
     <Link

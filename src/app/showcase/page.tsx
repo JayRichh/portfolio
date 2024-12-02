@@ -5,6 +5,7 @@ import { ScrollToTop } from "../../components/ui/scroll-to-top";
 import { HeroSection } from "./_components/HeroSection";
 import { ResourcesSection } from "./_components/ResourcesSection";
 import { ProjectCard } from "./_components/ProjectCard";
+import type { ProjectData } from "./_components/ProjectCard/types";
 
 const useScreenSize = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -31,7 +32,7 @@ const handleScroll = () => {
   });
 };
 
-const projectsData = [
+const projectsData: ProjectData[] = [
   {
     title: "SteamShare",
     description:
@@ -64,7 +65,7 @@ const projectsData = [
     theme: {
       textColor: "text-gray-900 dark:text-[#66c0f4]",
       gradient:
-        "bg-gradient-to-b from-gray-100 to-white dark:from-[#1b2838] dark:to-gray-900",
+        "bg-gradient-to-b from-gray-100 via-blue-50 to-white dark:from-[#1b2838] dark:via-[#213352] dark:to-gray-900",
     },
   },
   {
@@ -99,7 +100,7 @@ const projectsData = [
     theme: {
       textColor: "text-gray-900 dark:text-primary",
       gradient:
-        "bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800",
+        "bg-gradient-to-b from-white via-purple-50 to-gray-50 dark:from-gray-900 dark:via-purple-950 dark:to-gray-800",
     },
   },
   {
@@ -128,7 +129,7 @@ const projectsData = [
     theme: {
       textColor: "text-gray-900 dark:text-[#4CAF50]",
       gradient:
-        "bg-gradient-to-b from-white to-gray-50 dark:from-emerald-950 dark:to-gray-900",
+        "bg-gradient-to-b from-white via-green-50 to-gray-50 dark:from-emerald-950 dark:via-[#0c3a1d] dark:to-gray-900",
     },
   },
   {
@@ -162,7 +163,7 @@ const projectsData = [
     theme: {
       textColor: "text-gray-900 dark:text-[#FF6B6B]",
       gradient:
-        "bg-gradient-to-b from-white to-gray-50 dark:from-rose-950 dark:to-gray-900",
+        "bg-gradient-to-b from-white via-red-50 to-gray-50 dark:from-rose-950 dark:via-[#450a16] dark:to-gray-900",
     },
     reverse: true,
   },
@@ -192,7 +193,7 @@ const projectsData = [
     theme: {
       textColor: "text-gray-900 dark:text-zinc-200",
       gradient:
-        "bg-gradient-to-b from-gray-50 to-white dark:from-zinc-900 dark:to-gray-900",
+        "bg-gradient-to-b from-gray-50 via-zinc-100 to-white dark:from-zinc-900 dark:via-[#1a1a1f] dark:to-gray-900",
     },
     reverse: true,
   },

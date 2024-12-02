@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "~/*": ["./src/*"]
     }
   },
   "include": [
@@ -31,7 +32,8 @@
     "./config/**/*.ts",
     "components/**/*",
     "lib/**/*.ts",
-    "app"
+    "lib/**/*.tsx",
+    "app",
   ],
   "exclude": ["node_modules", ".next"]
 }

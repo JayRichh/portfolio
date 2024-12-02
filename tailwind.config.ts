@@ -10,6 +10,18 @@ const config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      'xs': {'max': '480px'},
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1400px',
+      '7xl': '1800px',
+      '8xl': '1920px',
+      '9xl': '2100px',
+      '10xl': '2400px',
+    },
     container: {
       center: true,
       padding: "2rem",

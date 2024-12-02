@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { ResponsiveImage } from "./image";
 
 interface SpotlightProps {
   src: string;
@@ -50,12 +50,11 @@ const SpotlightModal = ({
           <X size={24} />
         </button>
         <div className="relative w-full h-full rounded-lg overflow-hidden">
-          <Image
+          <ResponsiveImage
             src={src}
             alt={alt}
             fill
             className="object-contain"
-            sizes="(max-width: 768px) 90vw, (max-width: 1200px) 80vw, 70vw"
           />
         </div>
       </motion.div>
@@ -121,7 +120,7 @@ export function Spotlight({ src, alt, className = "" }: SpotlightProps) {
               : "none",
           }}
         />
-        <Image
+        <ResponsiveImage
           src={src}
           alt={alt}
           fill
