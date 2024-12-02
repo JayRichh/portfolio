@@ -16,6 +16,7 @@ import {
   Code,
   Cpu,
   Github,
+  Info,
   Linkedin,
   Mail,
   Rocket,
@@ -28,6 +29,12 @@ import { Button } from "../../components/ui/button";
 import HobbiesSection from "./_components/about-hobbies";
 import { useGitHubStore } from "../../lib/github";
 import { ProgressLoader } from "../../components/ui/progress-loader";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../../components/ui/tooltip";
 
 const ResponsivePie = dynamic(() => import("@nivo/pie").then(mod => mod.ResponsivePie), {
   ssr: false,
@@ -42,7 +49,6 @@ const ScrollDownIndicator = dynamic(
   () => import("./_components/scroll-down-indicator"),
   { ssr: false },
 );
-
 const timelineData = [
   {
     year: "2022 - Present",
@@ -87,6 +93,26 @@ const timelineData = [
     icon: Book,
   },
 ];
+const InfoTooltip = ({ content, size = "md" }: { content: string; size?: "sm" | "md" | "lg" }) => {
+  const sizeClasses = {
+    sm: "h-4 w-4",
+    md: "h-5 w-5",
+    lg: "h-6 w-6"
+  };
+
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Info className={`${sizeClasses[size]} text-muted-foreground/75 hover:text-muted-foreground cursor-help transition-colors`} />
+        </TooltipTrigger>
+        <TooltipContent>
+          <p className="max-w-[280px] leading-relaxed">{content}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
 
 const TopSection: React.FC = () => {
   const { theme } = useTheme();
@@ -138,14 +164,20 @@ const TopSection: React.FC = () => {
         transition={{ duration: 0.3 }}
         className="w-full max-w-screen-xl"
       >
-        <motion.h2
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="mb-8 pt-24 text-center text-4xl font-extrabold text-primary sm:text-5xl md:text-6xl"
-        >
-          Technology
-        </motion.h2>
+        <div className="flex items-center justify-center gap-2 mb-8 pt-24">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="text-center text-4xl font-extrabold text-primary sm:text-5xl md:text-6xl"
+          >
+            Technology
+          </motion.h2>
+          <InfoTooltip 
+            content="Data sourced from GitHub repositories, showing the distribution of programming languages across all projects. Includes both public and private repositories."
+            size="lg"
+          />
+        </div>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -204,6 +236,7 @@ const TopSection: React.FC = () => {
                       fontSize: "14px",
                       borderRadius: "6px",
                       boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                      padding: "12px 16px",
                     },
                   },
                 }}

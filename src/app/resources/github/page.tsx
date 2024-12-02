@@ -5,11 +5,18 @@ import { ResponsiveCalendarCanvas } from "@nivo/calendar";
 import { ResponsivePie } from "@nivo/pie";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
+import { Info } from "lucide-react";
 import {
   fetchPreviousYear,
   useGitHubStore,
 } from "../../../lib/github";
 import { ProgressLoader } from "../../../components/ui/progress-loader";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../../../components/ui/tooltip";
 
 // Extracted color constants
 const COLORS = {
@@ -35,6 +42,27 @@ interface CalendarProps {
   };
   isDark: boolean;
 }
+
+const InfoTooltip = ({ content, size = "md" }: { content: string; size?: "sm" | "md" | "lg" }) => {
+  const sizeClasses = {
+    sm: "h-4 w-4",
+    md: "h-5 w-5",
+    lg: "h-6 w-6"
+  };
+
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Info className={`${sizeClasses[size]} text-muted-foreground/75 hover:text-muted-foreground cursor-help transition-colors`} />
+        </TooltipTrigger>
+        <TooltipContent>
+          <p className="max-w-[280px] leading-relaxed">{content}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
 
 const Calendar: React.FC<CalendarProps> = ({ direction, selectedYear, isDark }) => {
   const colors = isDark ? COLORS.dark : COLORS.light;
@@ -102,11 +130,25 @@ const LanguageDistribution: React.FC<{ isDark: boolean }> = ({ isDark }) => {
     color: color || "#666",
   }));
 
+  function formatNumber(num: number | undefined | null): string {
+    if (num === undefined || num === null) return "0";
+    
+    if (num >= 1000000) {
+      return `${(num / 1000000).toFixed(1)}M`;
+    }
+    if (num >= 1000) {
+      return `${(num / 1000).toFixed(1)}K`;
+    }
+    return num.toString();
+  }
+
   return (
     <div className="mt-16">
-      <h2 className="text-2xl font-bold text-primary mb-6">
-        Language Distribution
-      </h2>
+      <div className="flex items-center gap-2 mb-6">
+        <h2 className="text-2xl font-bold text-primary">
+          Language Distribution
+        </h2>
+      </div>
       <div className="rounded-xl border border-border/50 bg-background/30 backdrop-blur-sm p-4 md:p-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="h-[600px] relative order-2 lg:order-1">
@@ -143,9 +185,15 @@ const LanguageDistribution: React.FC<{ isDark: boolean }> = ({ isDark }) => {
             />
           </div>
           <div className="flex flex-col order-1 lg:order-2">
-            <h3 className="text-xl font-semibold mb-4">
-              Code Composition Analysis
-            </h3>
+            <div className="flex items-center gap-2">
+              <h3 className="text-xl font-semibold">
+                Code Composition Analysis
+              </h3>
+              <InfoTooltip 
+                content="Lines of code and file counts are estimated based on language-specific averages. Actual numbers may vary based on coding style and file organization."
+                size="sm"
+              />
+            </div>
             <div className="relative flex-1 min-h-0">
               <div className="absolute inset-0 overflow-y-auto pr-2 custom-scrollbar">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4">
@@ -174,8 +222,9 @@ const LanguageDistribution: React.FC<{ isDark: boolean }> = ({ isDark }) => {
                           }}
                         />
                       </div>
-                      <div className="mt-2 text-xs text-muted-foreground">
-                        {Math.round(lang.size / 1024)}KB
+                      <div className="mt-2 text-xs text-muted-foreground flex justify-between">
+                        <span>{formatNumber(lang.lineCount || 0)} lines</span>
+                        <span>{formatNumber(lang.fileCount || 0)} files</span>
                       </div>
                     </div>
                   ))}
@@ -183,10 +232,10 @@ const LanguageDistribution: React.FC<{ isDark: boolean }> = ({ isDark }) => {
               </div>
             </div>
             <div className="mt-6 text-sm text-muted-foreground border-t border-border/50 pt-4">
-              <p>
-                Total codebase size:{" "}
-                {Math.round(languageData.totalSize / 1024)}KB
-              </p>
+              <div className="flex justify-between">
+                <span>Total Lines: {formatNumber(languageData.totalLines || 0)}</span>
+                <span>Total Files: {formatNumber(languageData.totalFiles || 0)}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -206,7 +255,6 @@ export default function GitHubPage() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
-  // Loading state
   if (isLoading) {
     return (
       <div className="flex h-[calc(100vh-112px)] items-center justify-center">
@@ -217,7 +265,6 @@ export default function GitHubPage() {
     );
   }
 
-  // Error state
   if (error) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -231,7 +278,6 @@ export default function GitHubPage() {
     );
   }
 
-  // No data state
   if (!yearData.length) {
     return (
       <div className="container mx-auto px-4 py-16">
@@ -281,10 +327,16 @@ export default function GitHubPage() {
       className="container mx-auto px-4 py-16"
     >
       <div className="mb-8">
-        <h1 className="mb-4 text-4xl font-bold text-primary">
-          GitHub Activity
-        </h1>
-        <p className="text-lg text-muted-foreground">
+        <div className="flex items-center gap-2">
+          <h1 className="text-4xl font-bold text-primary">
+            GitHub Activity
+          </h1>
+          <InfoTooltip 
+            content="Data sourced from GitHub's GraphQL API. Shows contributions across all repositories, including commits, issues, pull requests, and code reviews."
+            size="lg"
+          />
+        </div>
+        <p className="text-lg text-muted-foreground mt-4">
           A visualization of my repository activity, showing contribution
           patterns and language distribution across all repositories.
         </p>
@@ -358,15 +410,6 @@ export default function GitHubPage() {
       </motion.div>
 
       <LanguageDistribution isDark={isDark} />
-
-      <div className="mt-12 text-sm text-muted-foreground border-t border-border/50 pt-4 w-full">
-        <p className="text-center w-full mx-auto">
-          Data sourced from GitHub's GraphQL API. Contribution data includes
-          commits, issues, pull requests, and code reviews to distinct
-          repositories. Language statistics are calculated from all public
-          and private repositories.
-        </p>
-      </div>
     </motion.div>
   );
 }

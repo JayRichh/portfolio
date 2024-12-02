@@ -8,6 +8,9 @@ const CACHE_TIME = 3600; // 1 hour in seconds
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000; // 1 second
 
+// Languages to exclude from stats
+const EXCLUDED_LANGUAGES = new Set(["Roff"]);
+
 interface ContributionDay {
   contributionCount: number;
   date: string;
@@ -29,13 +32,21 @@ export interface LanguageStats {
     percentage: number;
     color: string;
     size: number;
+    lineCount: number;
+    fileCount: number;
   }>;
   totalSize: number;
+  totalFiles: number;
+  totalLines: number;
 }
 
 interface Repository {
   name: string;
   isPrivate: boolean;
+  isFork: boolean;
+  owner: {
+    login: string;
+  };
   languages?: {
     edges?: Array<{
       size: number;
@@ -66,10 +77,9 @@ interface GitHubState {
   reset: () => void;
 }
 
-// Rate limiting implementation
 const rateLimiter = {
   lastCall: 0,
-  minInterval: 100, // Minimum time between API calls in ms
+  minInterval: 100,
   async waitForNext() {
     const now = Date.now();
     const timeSinceLastCall = now - this.lastCall;
@@ -80,7 +90,6 @@ const rateLimiter = {
   }
 };
 
-// Retry logic with exponential backoff
 async function withRetry<T>(fn: () => Promise<T>, retries = MAX_RETRIES): Promise<T> {
   try {
     await rateLimiter.waitForNext();
@@ -94,11 +103,60 @@ async function withRetry<T>(fn: () => Promise<T>, retries = MAX_RETRIES): Promis
   }
 }
 
-// Centralized token validation
 function validateGitHubToken(): void {
   if (!GITHUB_TOKEN) {
     throw new Error("GitHub token not found");
   }
+}
+
+// Estimate lines of code based on file size and language
+function estimateLineCount(size: number, language: string): number {
+  // Average bytes per line for different language categories
+  const bytesPerLine: { [key: string]: number } = {
+    // Markup/Style languages (more verbose)
+    HTML: 40,
+    CSS: 30,
+    SCSS: 30,
+    // Scripting languages (medium verbosity)
+    JavaScript: 35,
+    TypeScript: 35,
+    Python: 25,
+    // Compiled languages (more concise)
+    Go: 20,
+    Rust: 25,
+    C: 20,
+    "C++": 25,
+    // Default for other languages
+    default: 30,
+  };
+
+  const bpl = bytesPerLine[language] || bytesPerLine.default;
+  return Math.round(size / bpl);
+}
+
+// Estimate file count based on total size and average file size for the language
+function estimateFileCount(size: number, language: string): number {
+  // Average bytes per file for different language categories
+  const bytesPerFile: { [key: string]: number } = {
+    // Markup/Style languages
+    HTML: 8000,
+    CSS: 5000,
+    SCSS: 5000,
+    // Scripting languages
+    JavaScript: 10000,
+    TypeScript: 12000,
+    Python: 8000,
+    // Compiled languages
+    Go: 15000,
+    Rust: 12000,
+    C: 10000,
+    "C++": 12000,
+    // Default for other languages
+    default: 10000,
+  };
+
+  const bpf = bytesPerFile[language] || bytesPerFile.default;
+  return Math.max(1, Math.round(size / bpf));
 }
 
 export const useGitHubStore = create<GitHubState>()(
@@ -113,7 +171,7 @@ export const useGitHubStore = create<GitHubState>()(
       lastFetched: null,
       setProgress: (progress) =>
         set((state) => ({
-          progress: Math.max(state.progress, progress), // Ensure progress never goes backwards
+          progress: Math.max(state.progress, progress),
         })),
       setError: (error) => set({ error }),
       setLoading: (isLoading) => set({ isLoading }),
@@ -211,8 +269,6 @@ async function fetchYearContributions(
   if (!calendar) return null;
 
   const weeks: ContributionWeek[] = calendar.weeks;
-
-  // Create a map of all days in the year with zero contributions
   const yearStart = new Date(year, 0, 1);
   const yearEnd = new Date(year, 11, 31);
   const allDays = new Map();
@@ -222,7 +278,6 @@ async function fetchYearContributions(
     allDays.set(dateStr, { day: dateStr, value: 0 });
   }
 
-  // Update the map with actual contributions
   weeks.forEach((week) => {
     week.contributionDays.forEach((day) => {
       const value = day.contributionCount;
@@ -230,7 +285,6 @@ async function fetchYearContributions(
     });
   });
 
-  // Convert the map to an array and calculate quartiles for non-zero values
   const contributions = Array.from(allDays.values());
   const nonZeroValues = contributions.map((c) => c.value).filter((v) => v > 0);
   nonZeroValues.sort((a, b) => a - b);
@@ -250,7 +304,6 @@ async function fetchYearContributions(
   const q2 = getQuartile(nonZeroValues, 0.5);
   const q3 = getQuartile(nonZeroValues, 0.75);
 
-  // Scale the contributions using quartile-based thresholds
   const scaledContributions = contributions.map((contribution) => ({
     day: contribution.day,
     value:
@@ -279,9 +332,8 @@ async function fetchAllRepositories(): Promise<Repository[]> {
         repositories(
           first: 100,
           after: $cursor,
-          ownerAffiliations: OWNER,
-          isFork: false,
-          orderBy: {field: UPDATED_AT, direction: DESC}
+          ownerAffiliations: [OWNER, COLLABORATOR],
+          orderBy: {field: PUSHED_AT, direction: DESC}
         ) {
           pageInfo {
             hasNextPage
@@ -290,7 +342,11 @@ async function fetchAllRepositories(): Promise<Repository[]> {
           nodes {
             name
             isPrivate
-            languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+            isFork
+            owner {
+              login
+            }
+            languages(first: 20, orderBy: {field: SIZE, direction: DESC}) {
               edges {
                 size
                 node {
@@ -332,7 +388,13 @@ async function fetchAllRepositories(): Promise<Repository[]> {
       );
 
       const { nodes, pageInfo } = (response as any).data.data.user.repositories;
-      repositories.push(...nodes);
+      
+      // Filter repositories to include only those you own or have significant contributions to
+      const filteredNodes = nodes.filter((repo: Repository) => {
+        return repo.owner.login === "jayrichh" || !repo.isFork;
+      });
+      
+      repositories.push(...filteredNodes);
 
       hasNextPage = pageInfo.hasNextPage;
       cursor = pageInfo.endCursor;
@@ -347,10 +409,14 @@ async function fetchAllRepositories(): Promise<Repository[]> {
 
 async function fetchLanguageStats(): Promise<LanguageStats> {
   const repos = await fetchAllRepositories();
-  const languageMap = new Map<string, { size: number; color: string }>();
+  const languageMap = new Map<
+    string,
+    { size: number; color: string; lineCount: number; fileCount: number }
+  >();
   let totalSize = 0;
+  let totalFiles = 0;
+  let totalLines = 0;
 
-  // Process repositories in chunks to avoid memory issues with large datasets
   const chunkSize = 50;
   for (let i = 0; i < repos.length; i += chunkSize) {
     const chunk = repos.slice(i, i + chunkSize);
@@ -360,32 +426,49 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
 
       repo.languages.edges.forEach((edge) => {
         const { name, color } = edge.node;
+        if (EXCLUDED_LANGUAGES.has(name)) return;
+        
         const size = edge.size;
+        const lineCount = estimateLineCount(size, name);
+        const fileCount = estimateFileCount(size, name);
 
-        const current = languageMap.get(name) || { size: 0, color };
+        const current = languageMap.get(name) || { 
+          size: 0, 
+          color, 
+          lineCount: 0,
+          fileCount: 0
+        };
+        
         languageMap.set(name, {
           size: current.size + size,
           color,
+          lineCount: current.lineCount + lineCount,
+          fileCount: current.fileCount + fileCount
         });
+        
         totalSize += size;
+        totalFiles += fileCount;
+        totalLines += lineCount;
       });
     });
   }
 
   const languages = Array.from(languageMap.entries())
-    .map(([name, { size, color }]) => ({
+    .map(([name, { size, color, lineCount, fileCount }]) => ({
       name,
       size,
       color: color || "#666",
       percentage: Math.round((size / totalSize) * 100 * 10) / 10,
+      lineCount,
+      fileCount
     }))
-    .filter((lang) => lang.percentage >= 0.1)
-    .sort((a, b) => b.size - a.size)
-    .slice(0, 8);
+    .sort((a, b) => b.size - a.size);
 
   return {
     languages,
     totalSize,
+    totalFiles,
+    totalLines
   };
 }
 
