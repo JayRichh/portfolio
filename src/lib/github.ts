@@ -73,9 +73,10 @@ export const useGitHubStore = create<GitHubState>()(
       yearData: [],
       languageData: null,
       lastFetched: null,
-      setProgress: (progress) => set((state) => ({
-        progress: Math.max(state.progress, progress) // Ensure progress never goes backwards
-      })),
+      setProgress: (progress) =>
+        set((state) => ({
+          progress: Math.max(state.progress, progress), // Ensure progress never goes backwards
+        })),
       setError: (error) => set({ error }),
       setLoading: (isLoading) => set({ isLoading }),
       setLoadingYear: (year, loading) =>
@@ -365,22 +366,22 @@ export async function fetchGitHubContributions(): Promise<YearContributions[]> {
     // Phase 2: Fetch contributions (10-40%)
     const currentYear = new Date().getFullYear();
     const yearsToFetch = [currentYear, currentYear - 1];
-    
+
     const yearResults = await Promise.all(
       yearsToFetch.map(async (year) => {
         const result = await fetchYearContributions(year);
         setProgress(25); // Increment progress after each year
         return result;
-      })
+      }),
     );
-    
+
     setProgress(40);
 
     // Phase 3: Process contributions (40-60%)
     const allContributions = yearResults.filter(
       (result): result is YearContributions => result !== null,
     );
-    
+
     const sortedContributions = allContributions.sort(
       (a, b) => b.year - a.year,
     );
@@ -465,7 +466,7 @@ export async function fetchGitHubLanguages(): Promise<LanguageStats | null> {
     // Phase 4: Finalize (80-100%)
     setLanguageData(stats);
     setProgress(100);
-    
+
     return stats;
   } catch (error) {
     const message =

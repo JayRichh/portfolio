@@ -8,6 +8,7 @@ import {
   useAnimation,
   useInView,
   useScroll,
+  useSpring,
   useTransform,
 } from "framer-motion";
 import {
@@ -231,9 +232,21 @@ const SocialLinks: React.FC = () => (
 
 const Timeline: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [containerHeight, setContainerHeight] = useState("auto");
-  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
+  const buttonRef = useRef<HTMLDivElement>(null);
+  const [lineProgress, setLineProgress] = useState(0);
+  const isInView = useInView(sectionRef, { amount: 0.1 });
   const controls = useAnimation();
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 50,
+    damping: 15,
+    restDelta: 0.001,
+  });
 
   useEffect(() => {
     if (isInView) {
@@ -241,43 +254,51 @@ const Timeline: React.FC = () => {
     }
   }, [isInView, controls]);
 
-  const getLineHeightProgress = () => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth < 640) {
-        return [0.1, 0.9];
-      } else if (window.innerWidth < 1024) {
-        return [0.12, 0.95];
-      } else {
-        return [0.15, 0.95];
+  useEffect(() => {
+    const updateLineProgress = () => {
+      if (!sectionRef.current) return;
+
+      const sectionRect = sectionRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const sectionTop = sectionRect.top;
+      const sectionHeight = sectionRect.height;
+
+      let progress = 0;
+      if (sectionTop <= viewportHeight * 0.95) {
+        progress = Math.min(
+          1,
+          (viewportHeight * 0.95 - sectionTop) / (sectionHeight * 0.65),
+        );
+
+        progress = Math.pow(progress, 1.3);
       }
-    }
-    return [0.15, 0.95];
-  };
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
+      setLineProgress(progress);
+    };
 
-  const lineHeight = useTransform(scrollYProgress, getLineHeightProgress(), [
-    "0%",
-    "100%",
-  ]);
+    window.addEventListener("scroll", updateLineProgress);
+    updateLineProgress();
+
+    return () => window.removeEventListener("scroll", updateLineProgress);
+  }, []);
 
   return (
-    <div
-      ref={sectionRef}
-      className="relative"
-      style={{ minHeight: containerHeight }}
-    >
+    <div ref={sectionRef} className="relative min-h-[800px]">
       <motion.div
-        className="absolute left-1/2 top-0 hidden w-0.5 rounded-full bg-gray-300 dark:bg-gray-600 md:block"
+        className="absolute left-1/2 top-[150px] hidden h-full w-0.5 -translate-x-[0.125rem] transform rounded-full bg-gradient-to-b from-primary via-primary to-primary/50 md:block"
         style={{
-          height: lineHeight,
+          height: `calc(100% + 280px)`,
+          maxHeight: `${lineProgress * 100}%`,
           transformOrigin: "top",
-          left: "calc(50% - 1px)",
-          top: "150px",
-          bottom: "150px",
+          opacity: smoothProgress.get(),
+          transition: "all 0.2s ease-out",
+        }}
+        initial={{ height: "0%" }}
+        animate={{ height: `${lineProgress * 100}%` }}
+        transition={{
+          duration: 0.3,
+          ease: [0.4, 0, 0.2, 1],
+          delay: 0.2,
         }}
       />
       {timelineData.map((item, index) => (
@@ -286,29 +307,58 @@ const Timeline: React.FC = () => {
           item={item}
           index={index}
           total={timelineData.length}
+          lineProgress={lineProgress}
         />
       ))}
     </div>
   );
 };
 
-const TimelineCard: React.FC<{ item: any; index: number; total: number }> = ({
-  item,
-  index,
-}) => {
+const TimelineCard: React.FC<{
+  item: any;
+  index: number;
+  total: number;
+  lineProgress: number;
+}> = ({ item, index, total, lineProgress }) => {
   const cardRef = useRef(null);
   const isInView = useInView(cardRef, { once: true, amount: 0.3 });
+  const progress = (index + 1) / total;
+  const isVisible = lineProgress >= progress;
+
+  const variants = {
+    hidden: {
+      opacity: 0,
+      x: index % 2 === 0 ? -50 : 50,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
 
   return (
     <motion.div
       ref={cardRef}
-      className={`flex ${index % 2 === 0 ? "justify-end md:justify-start" : "justify-start md:justify-end"} relative mb-12 w-full items-center`}
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.3 }}
+      className={`flex ${
+        index % 2 === 0
+          ? "justify-end md:justify-start"
+          : "justify-start md:justify-end"
+      } relative mb-12 w-full items-center`}
+      variants={variants}
+      initial="hidden"
+      animate={isInView && isVisible ? "visible" : "hidden"}
     >
-      <div
-        className={`w-full rounded-lg bg-card p-6 text-left text-card-foreground shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:bg-card dark:text-card-foreground md:w-5/12 ${index % 2 === 0 ? "border-r-2 md:text-right" : "border-l-2 md:text-left"} border-primary`}
+      <motion.div
+        className={`w-full rounded-lg bg-card p-6 text-left text-card-foreground shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:bg-card dark:text-card-foreground md:w-5/12 ${
+          index % 2 === 0
+            ? "border-r-2 md:text-right"
+            : "border-l-2 md:text-left"
+        } border-primary`}
+        whileHover={{ scale: 1.02 }}
       >
         <div className="mb-4 flex items-center md:hidden">
           <item.icon className="mr-2 h-8 w-8 text-primary dark:text-primary" />
@@ -325,7 +375,7 @@ const TimelineCard: React.FC<{ item: any; index: number; total: number }> = ({
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground dark:text-muted-foreground">
           {item.description}
         </p>
-      </div>
+      </motion.div>
       <div
         className="absolute left-1/2 hidden h-16 w-16 -translate-x-1/2 transform items-center justify-center rounded-full bg-card shadow-lg dark:bg-card dark:shadow-primary/20 md:flex"
         style={{ top: "50%" }}
@@ -345,6 +395,7 @@ const TimelineCard: React.FC<{ item: any; index: number; total: number }> = ({
 
 const AboutPage: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -374,22 +425,45 @@ const AboutPage: React.FC = () => {
         </motion.section>
         <section className="relative z-10 mt-40 flex flex-col items-center justify-start">
           <motion.div
+            ref={buttonRef}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
             viewport={{ once: true }}
             className="mb-60 text-center"
           >
-            <Link href="/code" passHref legacyBehavior>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button className="bg-primary px-6 py-6 text-lg text-primary-foreground hover:bg-primary/90">
-                  View Projects
-                </Button>
-              </motion.div>
-            </Link>
+            <p className="text-lg text-muted-foreground dark:text-muted-foreground">
+              View more..
+            </p>
+            <div className="flex flex-row gap-4">
+              <Link href="/code" passHref legacyBehavior>
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="flex"
+                  aria-label="Projects"
+                >
+                  <Button className="relative bg-primary px-6 py-4 text-lg text-primary-foreground hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                    Projects
+                  </Button>
+                </motion.a>
+              </Link>
+
+              <Link href="/showcase" passHref legacyBehavior>
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="flex"
+                  aria-label="Showcase"
+                >
+                  <Button className="relative bg-secondary px-6 py-4 text-lg text-secondary-foreground hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+                    Showcase
+                  </Button>
+                </motion.a>
+              </Link>
+            </div>
           </motion.div>
 
           <SocialLinks />

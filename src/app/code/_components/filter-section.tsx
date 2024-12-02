@@ -122,7 +122,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
             <TooltipTrigger asChild>
               <Button
                 onClick={() => setSortByRecent(!sortByRecent)}
-                className={`inline-flex items-center justify-center px-4 py-2 ${
+                className={`inline-flex items-center justify-center ${
                   sortByRecent
                     ? "bg-primary text-white hover:bg-primary/90"
                     : "bg-secondary hover:bg-secondary/80"

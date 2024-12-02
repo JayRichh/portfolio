@@ -23,58 +23,78 @@ export default function GitHubPage() {
     setYearData,
     setLanguageData,
     reset,
+    setLoading,
   } = useGitHubStore();
   const [selectedYearIndex, setSelectedYearIndex] = React.useState(0);
   const [showContent, setShowContent] = React.useState(false);
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const [initialLoadStarted, setInitialLoadStarted] = React.useState(false);
 
-  // Fetch year data
+  // Single useEffect for coordinated data fetching
   useEffect(() => {
     let mounted = true;
 
-    const loadYearData = async () => {
+    const loadData = async () => {
+      if (!mounted) return;
+
+      setLoading(true);
+      reset();
+      setInitialLoadStarted(true);
+
       try {
+        // Fetch contributions first
         const contributions = await fetchGitHubContributions();
-        if (mounted && contributions.length > 0) {
+        if (!mounted) return;
+
+        if (contributions.length > 0) {
           setYearData(contributions);
-          setShowContent(true);
         }
-      } catch (error) {
-        console.error("Error fetching GitHub year data:", error);
-      }
-    };
 
-    loadYearData();
-
-    return () => {
-      mounted = false;
-    };
-  }, [setYearData]);
-
-  // Fetch language data only once on mount
-  useEffect(() => {
-    let mounted = true;
-
-    const loadLanguageData = async () => {
-      try {
+        // Then fetch language data
         const languages = await fetchGitHubLanguages();
-        if (mounted && languages) {
+        if (!mounted) return;
+
+        if (languages) {
           setLanguageData(languages);
+        }
+
+        // Only show content if we have either contributions or language data
+        if (contributions.length > 0 || languages) {
           setShowContent(true);
         }
       } catch (error) {
-        console.error("Error fetching GitHub language data:", error);
+        console.error("Error fetching GitHub data:", error);
+      } finally {
+        if (mounted) {
+          setLoading(false);
+        }
       }
     };
 
-    loadLanguageData();
+    // Only fetch if we don't have data and haven't started loading
+    if (!yearData.length && !languageData && !initialLoadStarted) {
+      loadData();
+    } else if (yearData.length || languageData) {
+      // If we already have data, just show content
+      setShowContent(true);
+      setInitialLoadStarted(true);
+    }
 
     return () => {
       mounted = false;
     };
-  }, [setLanguageData]);
+  }, [
+    setYearData,
+    setLanguageData,
+    setLoading,
+    reset,
+    yearData.length,
+    languageData,
+    initialLoadStarted,
+  ]);
 
+  // Always show loading state first if we're loading
   if (isLoading) {
     return (
       <div className="flex h-[calc(100vh-112px)] items-center justify-center">
@@ -90,6 +110,7 @@ export default function GitHubPage() {
     );
   }
 
+  // Then show error if there is one
   if (error) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -103,6 +124,23 @@ export default function GitHubPage() {
     );
   }
 
+  // Show loading state if we haven't started loading yet
+  if (!initialLoadStarted) {
+    return (
+      <div className="flex h-[calc(100vh-112px)] items-center justify-center">
+        <ProgressLoader
+          onComplete={() => {
+            if (yearData.length > 0 || languageData) {
+              setShowContent(true);
+            }
+          }}
+          isDataReady={yearData.length > 0 || languageData !== null}
+        />
+      </div>
+    );
+  }
+
+  // Finally, show no data message if we have no data after loading
   if (!yearData.length && !languageData) {
     return (
       <div className="container mx-auto px-4 py-16">
