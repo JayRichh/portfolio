@@ -73,7 +73,9 @@ export const useGitHubStore = create<GitHubState>()(
       yearData: [],
       languageData: null,
       lastFetched: null,
-      setProgress: (progress) => set({ progress }),
+      setProgress: (progress) => set((state) => ({
+        progress: Math.max(state.progress, progress) // Ensure progress never goes backwards
+      })),
       setError: (error) => set({ error }),
       setLoading: (isLoading) => set({ isLoading }),
       setLoadingYear: (year, loading) =>
@@ -355,26 +357,40 @@ export async function fetchGitHubContributions(): Promise<YearContributions[]> {
 
   try {
     setLoading(true);
-    setProgress(5);
+    store.reset(); // Reset progress to 0
 
+    // Phase 1: Initialize (0-10%)
+    setProgress(10);
+
+    // Phase 2: Fetch contributions (10-40%)
     const currentYear = new Date().getFullYear();
     const yearsToFetch = [currentYear, currentYear - 1];
-    const progressPerYear = 60 / yearsToFetch.length;
+    
+    const yearResults = await Promise.all(
+      yearsToFetch.map(async (year) => {
+        const result = await fetchYearContributions(year);
+        setProgress(25); // Increment progress after each year
+        return result;
+      })
+    );
+    
+    setProgress(40);
 
-    // Fetch all years in parallel
-    const contributionsPromises = yearsToFetch.map((year, index) => {
-      setProgress(20 + index * 15);
-      return fetchYearContributions(year);
-    });
-
-    const yearResults = await Promise.all(contributionsPromises);
+    // Phase 3: Process contributions (40-60%)
     const allContributions = yearResults.filter(
       (result): result is YearContributions => result !== null,
     );
-
+    
     const sortedContributions = allContributions.sort(
       (a, b) => b.year - a.year,
     );
+    setProgress(60);
+
+    // Phase 4: Fetch and process language data (60-90%)
+    const languageStats = await fetchLanguageStats();
+    setProgress(90);
+
+    // Phase 5: Finalize (90-100%)
     setYearData(sortedContributions);
     setProgress(100);
 
@@ -433,10 +449,23 @@ export async function fetchGitHubLanguages(): Promise<LanguageStats | null> {
 
   try {
     setLoading(true);
-    setProgress(25);
+    store.reset(); // Reset progress to 0
+
+    // Phase 1: Initialize (0-20%)
+    setProgress(20);
+
+    // Phase 2: Fetch repositories (20-50%)
+    const repos = await fetchAllRepositories();
+    setProgress(50);
+
+    // Phase 3: Process language data (50-80%)
     const stats = await fetchLanguageStats();
+    setProgress(80);
+
+    // Phase 4: Finalize (80-100%)
     setLanguageData(stats);
     setProgress(100);
+    
     return stats;
   } catch (error) {
     const message =

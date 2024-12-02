@@ -29,10 +29,17 @@ export function ProgressLoader({
 
   const getLoadingMessage = () => {
     if (error) return "Error loading data";
-    if (progress < 25) return "Initializing...";
-    if (progress < 50) return "Loading contribution data...";
-    if (progress < 75) return "Loading language statistics...";
-    if (progress < 100) return "Processing data...";
+    if (progress < 10) return "Initializing connection...";
+    if (progress < 20) return "Connecting to GitHub API...";
+    if (progress < 30) return "Fetching recent contributions...";
+    if (progress < 40) return "Processing contribution data...";
+    if (progress < 50) return "Analyzing contribution patterns...";
+    if (progress < 60) return "Organizing contribution history...";
+    if (progress < 70) return "Fetching repository data...";
+    if (progress < 80) return "Processing language statistics...";
+    if (progress < 90) return "Analyzing code distribution...";
+    if (progress < 95) return "Finalizing data processing...";
+    if (progress < 100) return "Preparing visualization...";
     return "Complete";
   };
 
