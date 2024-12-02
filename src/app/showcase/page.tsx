@@ -5,7 +5,6 @@ import { ScrollToTop } from "../../components/ui/scroll-to-top";
 import { HeroSection } from "./_components/HeroSection";
 import { ResourcesSection } from "./_components/ResourcesSection";
 import { ProjectCard } from "./_components/ProjectCard";
-import type { ProjectData } from "./_components/ProjectCard/types";
 
 const useScreenSize = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -32,7 +31,7 @@ const handleScroll = () => {
   });
 };
 
-const projectsData: ProjectData[] = [
+const projectsData = [
   {
     title: "SteamShare",
     description:
@@ -163,7 +162,7 @@ const projectsData: ProjectData[] = [
     theme: {
       textColor: "text-gray-900 dark:text-[#FF6B6B]",
       gradient:
-        "bg-gradient-to-b from-white via-red-50 to-gray-50 dark:from-rose-950 dark:via-[#450a16] dark:to-gray-900",
+        "bg-gradient-to-b from-white via-red-50 to-gray-50 dark:from-rose-950 dark:via-[#270a16] dark:to-gray-900",
     },
     reverse: true,
   },
