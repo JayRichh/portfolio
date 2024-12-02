@@ -94,7 +94,9 @@ export default function GitHubPage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="rounded-xl border border-destructive/50 bg-destructive/10 p-6 text-center">
-          <h1 className="mb-4 text-2xl font-bold text-destructive">Error Loading GitHub Data</h1>
+          <h1 className="mb-4 text-2xl font-bold text-destructive">
+            Error Loading GitHub Data
+          </h1>
           <p className="text-muted-foreground">{error}</p>
         </div>
       </div>
@@ -127,13 +129,16 @@ export default function GitHubPage() {
     if (!selectedYear) return null;
 
     const currentYear = new Date().getFullYear();
-    const availableYears = Array.from({ length: currentYear - 2020 + 1 }, (_, i) => currentYear - i);
+    const availableYears = Array.from(
+      { length: currentYear - 2020 + 1 },
+      (_, i) => currentYear - i,
+    );
     const currentYearIndex = availableYears.indexOf(selectedYear.year);
-    
+
     const handlePreviousYear = async () => {
       const prevYear = availableYears[currentYearIndex + 1];
-      const yearIndex = yearData.findIndex(y => y.year === prevYear);
-      
+      const yearIndex = yearData.findIndex((y) => y.year === prevYear);
+
       if (yearIndex !== -1) {
         setSelectedYearIndex(yearIndex);
       } else {
@@ -144,12 +149,15 @@ export default function GitHubPage() {
         }
       }
     };
-    
+
     return (
       <div className="flex items-center justify-center gap-4 mb-6">
         <button
           onClick={handlePreviousYear}
-          disabled={currentYearIndex === availableYears.length - 1 || loadingYears.has(availableYears[currentYearIndex + 1])}
+          disabled={
+            currentYearIndex === availableYears.length - 1 ||
+            loadingYears.has(availableYears[currentYearIndex + 1])
+          }
           className={`flex min-w-[120px] items-center justify-center rounded-md px-4 py-2 transition-colors ${
             currentYearIndex === availableYears.length - 1
               ? "cursor-not-allowed opacity-50"
@@ -168,7 +176,7 @@ export default function GitHubPage() {
           onClick={() => {
             if (currentYearIndex > 0) {
               const nextYear = availableYears[currentYearIndex - 1];
-              const yearIndex = yearData.findIndex(y => y.year === nextYear);
+              const yearIndex = yearData.findIndex((y) => y.year === nextYear);
               if (yearIndex !== -1) {
                 setSelectedYearIndex(yearIndex);
               }
@@ -195,7 +203,9 @@ export default function GitHubPage() {
   }) => {
     if (!selectedYear) return null;
 
-    const contributionData = selectedYear.contributions.filter(c => c.value > 0);
+    const contributionData = selectedYear.contributions.filter(
+      (c) => c.value > 0,
+    );
 
     return (
       <ResponsiveCalendarCanvas
@@ -248,16 +258,20 @@ export default function GitHubPage() {
   const LanguageDistribution = () => {
     if (!languageData?.languages?.length) return null;
 
-    const pieLanguages = languageData.languages.map(({ name, percentage, color }) => ({
-      id: name,
-      label: name,
-      value: percentage,
-      color: color || "#666",
-    }));
+    const pieLanguages = languageData.languages.map(
+      ({ name, percentage, color }) => ({
+        id: name,
+        label: name,
+        value: percentage,
+        color: color || "#666",
+      }),
+    );
 
     return (
       <div className="mt-16">
-        <h2 className="text-2xl font-bold text-primary mb-6">Language Distribution</h2>
+        <h2 className="text-2xl font-bold text-primary mb-6">
+          Language Distribution
+        </h2>
         <div className="rounded-xl border border-border/50 bg-background/30 backdrop-blur-sm p-4 md:p-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="h-[600px] relative order-2 lg:order-1">
@@ -268,7 +282,7 @@ export default function GitHubPage() {
                 padAngle={0.5}
                 cornerRadius={4}
                 activeOuterRadiusOffset={8}
-                colors={{ datum: 'data.color' }}
+                colors={{ datum: "data.color" }}
                 borderWidth={1}
                 borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
                 enableArcLinkLabels={true}
@@ -294,17 +308,22 @@ export default function GitHubPage() {
               />
             </div>
             <div className="flex flex-col order-1 lg:order-2">
-              <h3 className="text-xl font-semibold mb-4">Code Composition Analysis</h3>
+              <h3 className="text-xl font-semibold mb-4">
+                Code Composition Analysis
+              </h3>
               <div className="relative flex-1 min-h-0">
                 <div className="absolute inset-0 overflow-y-auto pr-2 custom-scrollbar">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4">
                     {languageData.languages.map((lang) => (
-                      <div 
-                        key={lang.name} 
+                      <div
+                        key={lang.name}
                         className="p-4 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50 hover:border-border transition-colors"
                       >
                         <div className="flex justify-between items-center mb-2">
-                          <span className="font-medium" style={{ color: lang.color }}>
+                          <span
+                            className="font-medium"
+                            style={{ color: lang.color }}
+                          >
                             {lang.name}
                           </span>
                           <span className="text-sm font-medium text-muted-foreground">
@@ -329,7 +348,10 @@ export default function GitHubPage() {
                 </div>
               </div>
               <div className="mt-6 text-sm text-muted-foreground border-t border-border/50 pt-4">
-                <p>Total codebase size: {Math.round(languageData.totalSize / 1024)}KB</p>
+                <p>
+                  Total codebase size:{" "}
+                  {Math.round(languageData.totalSize / 1024)}KB
+                </p>
               </div>
             </div>
           </div>
@@ -353,14 +375,15 @@ export default function GitHubPage() {
               GitHub Activity
             </h1>
             <p className="text-lg text-muted-foreground">
-              A visualization of my repository activity, showing contribution patterns and language distribution across all repositories.
+              A visualization of my repository activity, showing contribution
+              patterns and language distribution across all repositories.
             </p>
           </div>
 
           {selectedYear && (
             <div className="mb-6 text-xl font-semibold text-center">
-              {selectedYear.totalContributions.toLocaleString()} contributions in{" "}
-              {selectedYear.year}
+              {selectedYear.totalContributions.toLocaleString()} contributions
+              in {selectedYear.year}
             </div>
           )}
 
@@ -391,7 +414,10 @@ export default function GitHubPage() {
 
           <div className="mt-12 text-sm text-muted-foreground border-t border-border/50 pt-4 w-full">
             <p className="text-center w-full mx-auto">
-              Data sourced from GitHub's GraphQL API. Contribution data includes commits, issues, pull requests, and code reviews to distinct repositories. Language statistics are calculated from all public and private repositories.
+              Data sourced from GitHub's GraphQL API. Contribution data includes
+              commits, issues, pull requests, and code reviews to distinct
+              repositories. Language statistics are calculated from all public
+              and private repositories.
             </p>
           </div>
         </motion.div>

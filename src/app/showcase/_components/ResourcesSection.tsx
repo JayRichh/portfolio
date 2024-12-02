@@ -16,7 +16,13 @@ interface CardProps {
   className?: string;
 }
 
-function Card({ href, title, description, PreviewComponent, className }: CardProps) {
+function Card({
+  href,
+  title,
+  description,
+  PreviewComponent,
+  className,
+}: CardProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -36,7 +42,7 @@ function Card({ href, title, description, PreviewComponent, className }: CardPro
         "hover:border-gray-300 dark:hover:border-white/20",
         "hover:bg-gray-50 dark:hover:bg-white/10",
         "shadow-sm hover:shadow-md dark:shadow-none",
-        "flex flex-col"
+        "flex flex-col",
       )}
       prefetch={true}
     >
@@ -57,7 +63,7 @@ function Card({ href, title, description, PreviewComponent, className }: CardPro
           <p
             className={cn(
               "text-lg leading-relaxed",
-              mounted && (theme === "dark" ? "text-white/80" : "text-gray-600")
+              mounted && (theme === "dark" ? "text-white/80" : "text-gray-600"),
             )}
           >
             {description}

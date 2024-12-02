@@ -38,13 +38,10 @@ export function ProjectCard({
   reverse = false,
 }: ProjectCardProps) {
   // Create ID from title for scroll navigation
-  const id = title.toLowerCase().replace(/\s+/g, '');
+  const id = title.toLowerCase().replace(/\s+/g, "");
 
   return (
-    <section 
-      id={id}
-      className={`w-full ${theme.gradient} scroll-mt-[100px]`}
-    >
+    <section id={id} className={`w-full ${theme.gradient} scroll-mt-[100px]`}>
       <div className="mx-auto max-w-[90rem] min-h-screen py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0 }}

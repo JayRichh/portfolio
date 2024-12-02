@@ -34,7 +34,10 @@ const showcaseItems = [
   },
 ];
 
-export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) {
+export function ShowcaseDropdown({
+  isActive,
+  isMobile,
+}: ShowcaseDropdownProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = React.useState(false);
@@ -43,13 +46,13 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
 
   // Handle scroll to element after navigation
   React.useEffect(() => {
-    if (pendingScroll && pathname === '/showcase') {
+    if (pendingScroll && pathname === "/showcase") {
       const scrollToElement = () => {
         const element = document.getElementById(pendingScroll);
         if (element) {
           window.scrollTo({
             top: element.offsetTop - 100,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         }
         setPendingScroll(null);
@@ -63,21 +66,21 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
 
   const handleNavigation = async (path: string) => {
     setIsOpen(false);
-    
-    if (path.includes('#')) {
-      const id = path.split('#')[1];
-      
-      if (pathname === '/showcase') {
+
+    if (path.includes("#")) {
+      const id = path.split("#")[1];
+
+      if (pathname === "/showcase") {
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+            behavior: "smooth",
+            block: "start",
           });
         }
       } else {
         setPendingScroll(id);
-        router.push('/showcase');
+        router.push("/showcase");
       }
     } else {
       router.push(path);
@@ -87,14 +90,17 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
   // Close dropdown on route change
   React.useEffect(() => {
     const handleRouteChange = () => setIsOpen(false);
-    window.addEventListener('popstate', handleRouteChange);
-    return () => window.removeEventListener('popstate', handleRouteChange);
+    window.addEventListener("popstate", handleRouteChange);
+    return () => window.removeEventListener("popstate", handleRouteChange);
   }, []);
 
   // Close dropdown on click outside
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -104,27 +110,27 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      window.addEventListener('scroll', handleScroll);
+      document.addEventListener("mousedown", handleClickOutside);
+      window.addEventListener("scroll", handleScroll);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [isOpen]);
 
   // Close dropdown on escape key
   React.useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsOpen(false);
+      if (event.key === "Escape") setIsOpen(false);
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
+      document.addEventListener("keydown", handleEscape);
     }
 
-    return () => document.removeEventListener('keydown', handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [isOpen]);
 
   if (isMobile) {
@@ -138,7 +144,7 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
               {
                 "text-primary bg-primary/10": isActive,
                 "text-foreground": !isActive,
-              }
+              },
             )}
           >
             Showcase
@@ -184,13 +190,13 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
             {
               "text-primary bg-primary/10": isActive,
               "text-foreground": !isActive,
-            }
+            },
           )}
         >
           Showcase
         </Button>
       </Link>
-      
+
       <Button
         variant="ghost"
         onClick={() => setIsOpen(!isOpen)}
@@ -199,17 +205,17 @@ export function ShowcaseDropdown({ isActive, isMobile }: ShowcaseDropdownProps) 
           {
             "text-primary bg-primary/10": isActive && isOpen,
             "text-foreground": !isActive || !isOpen,
-          }
+          },
         )}
       >
-        <ChevronDown 
+        <ChevronDown
           className={cn(
             "h-4 w-8 transition-transform duration-200",
-            isOpen ? "rotate-180" : ""
-          )} 
+            isOpen ? "rotate-180" : "",
+          )}
         />
       </Button>
-      
+
       <AnimatePresence>
         {isOpen && (
           <motion.div

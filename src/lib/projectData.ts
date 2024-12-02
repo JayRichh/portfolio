@@ -243,13 +243,12 @@ export const projectData: Project[] = [
       ],
     },
   },
- 
+
   {
     title: "DOMination (CSS Battle)",
     description:
       "A full-featured web app for recreating CSS battles. Test your Web Dev skills by replicating target designs using HTML/CSS, with real-time previews, scoring based on accuracy and code efficiency, and interactive comparison tools.",
-    imgUrl:
-      "/images/domination.png",
+    imgUrl: "/images/domination.png",
     repoUrl: "https://github.com/JayRichh/domination",
     liveUrl: "https://domination.vercel.app",
     updatedAt: "2024-11-28",
@@ -1419,8 +1418,6 @@ export const projectData: Project[] = [
       ],
     },
   },
-
-
 
   {
     title: "AF Buddy",

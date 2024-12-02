@@ -64,7 +64,8 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                Full Stack Web Developer with a background in Industrial Electrical Engineering
+                Full Stack Web Developer with a background in Industrial
+                Electrical Engineering
               </motion.p>
               <motion.p
                 className="text-lg text-center text-foreground sm:text-xl md:text-2xl lg:text-left"
@@ -87,7 +88,10 @@ export default function HomePage() {
                   </CtaButton>
                 </PageTransitionLink>
                 <PageTransitionLink href="/about">
-                  <CtaButton variant="outline" className="px-8 py-3 text-base sm:text-lg w-full md:w-auto">
+                  <CtaButton
+                    variant="outline"
+                    className="px-8 py-3 text-base sm:text-lg w-full md:w-auto"
+                  >
                     About Me
                   </CtaButton>
                 </PageTransitionLink>

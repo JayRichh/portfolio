@@ -22,7 +22,7 @@ export function SiteHeader() {
         "bg-background/80 backdrop-blur-md",
         "shadow-sm shadow-foreground/5",
         "supports-[backdrop-filter]:bg-background/60",
-        shouldHide && "hidden"
+        shouldHide && "hidden",
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}

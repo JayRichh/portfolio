@@ -26,7 +26,7 @@ export const RouteTransition: React.FC<RouteTransitionProps> = ({
       "/showcase",
       "/showcase/github",
       "/showcase/wordmap",
-      "/showcase/learnings"
+      "/showcase/learnings",
     ];
     routes.forEach((route) => {
       if (route !== pathname) {
@@ -63,7 +63,7 @@ export const PageTransitionLink = React.forwardRef<
     try {
       await router.push(href);
     } catch (error) {
-      console.error('Navigation failed:', error);
+      console.error("Navigation failed:", error);
     }
   };
 

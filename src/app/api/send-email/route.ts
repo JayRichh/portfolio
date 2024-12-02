@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
-const SMTP2GO_API_URL = 'https://api.smtp2go.com/v3/email/send';
-const RECIPIENT_EMAIL = 'web@jayrich.dev';
+const SMTP2GO_API_URL = "https://api.smtp2go.com/v3/email/send";
+const RECIPIENT_EMAIL = "web@jayrich.dev";
 
 // Simple rate limiting
 const RATE_LIMIT = 5; // Max 5 requests
@@ -35,44 +35,49 @@ function validateEmail(email: string): boolean {
 }
 
 export async function POST(req: NextRequest) {
-  console.log('Starting email send process...');
-  const ip = req.headers.get('x-forwarded-for') || 'unknown';
+  console.log("Starting email send process...");
+  const ip = req.headers.get("x-forwarded-for") || "unknown";
 
   if (!rateLimitCheck(ip)) {
-    console.log('Rate limit exceeded for IP:', ip);
+    console.log("Rate limit exceeded for IP:", ip);
     return NextResponse.json(
-      { error: 'Rate limit exceeded. Please try again later.' },
+      { error: "Rate limit exceeded. Please try again later." },
       { status: 429 },
     );
   }
 
   try {
     const { name, email, message, drawing } = await req.json();
-    console.log('Received request data:', { name, email, message, hasDrawing: !!drawing });
+    console.log("Received request data:", {
+      name,
+      email,
+      message,
+      hasDrawing: !!drawing,
+    });
 
     if (!name || !email || !message) {
-      console.log('Missing required fields');
+      console.log("Missing required fields");
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: "Missing required fields" },
         { status: 400 },
       );
     }
 
     if (!validateEmail(email)) {
-      console.log('Invalid email:', email);
+      console.log("Invalid email:", email);
       return NextResponse.json(
-        { error: 'Invalid email address' },
+        { error: "Invalid email address" },
         { status: 400 },
       );
     }
 
     const apiKey = process.env.NEXT_SMTP_KEY;
     if (!apiKey) {
-      console.error('NEXT_SMTP_KEY is not set in environment variables');
+      console.error("NEXT_SMTP_KEY is not set in environment variables");
       return NextResponse.json(
         {
-          error: 'Server configuration error',
-          details: 'Missing NEXT_SMTP_KEY environment variable',
+          error: "Server configuration error",
+          details: "Missing NEXT_SMTP_KEY environment variable",
         },
         { status: 500 },
       );
@@ -85,17 +90,17 @@ export async function POST(req: NextRequest) {
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Message:</strong></p>
       <p>${message}</p>
-      ${drawing ? '<p>Drawing attached below</p>' : ''}
+      ${drawing ? "<p>Drawing attached below</p>" : ""}
     `;
 
     const attachments: EmailAttachment[] = [];
     if (drawing) {
       // Remove the 'data:image/png;base64,' prefix if present
-      const base64Data = drawing.replace(/^data:image\/png;base64,/, '');
+      const base64Data = drawing.replace(/^data:image\/png;base64,/, "");
       attachments.push({
-        filename: 'drawing.png',
+        filename: "drawing.png",
         fileblob: base64Data,
-        mimetype: 'image/png',
+        mimetype: "image/png",
       });
     }
 
@@ -108,56 +113,56 @@ export async function POST(req: NextRequest) {
       html_body: htmlBody,
       custom_headers: [
         {
-          header: 'Reply-To',
-          value: email
-        }
+          header: "Reply-To",
+          value: email,
+        },
       ],
-      attachments: attachments.length > 0 ? attachments : undefined
+      attachments: attachments.length > 0 ? attachments : undefined,
     };
 
-    console.log('Preparing to send request to SMTP2GO...', {
+    console.log("Preparing to send request to SMTP2GO...", {
       to: payload.to,
       sender: payload.sender,
       subject: payload.subject,
-      hasAttachments: !!payload.attachments
+      hasAttachments: !!payload.attachments,
     });
 
     const response = await fetch(SMTP2GO_API_URL, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     });
 
     const responseData = await response.json();
-    console.log('SMTP2GO API response:', responseData);
+    console.log("SMTP2GO API response:", responseData);
 
     if (!response.ok) {
-      console.error('SMTP2GO API error response:', {
+      console.error("SMTP2GO API error response:", {
         status: response.status,
         statusText: response.statusText,
-        data: responseData
+        data: responseData,
       });
       return NextResponse.json(
         {
-          error: 'Failed to send email. Please try again later.',
+          error: "Failed to send email. Please try again later.",
           details: JSON.stringify(responseData),
         },
         { status: 500 },
       );
     }
 
-    console.log('Email sent successfully');
+    console.log("Email sent successfully");
     return NextResponse.json(
-      { message: 'Email sent successfully' },
+      { message: "Email sent successfully" },
       { status: 200 },
     );
   } catch (error) {
-    console.error('Unexpected error in email sending:', error);
+    console.error("Unexpected error in email sending:", error);
     return NextResponse.json(
       {
-        error: 'Internal server error. Please try again later.',
+        error: "Internal server error. Please try again later.",
         details: error instanceof Error ? error.message : String(error),
       },
       { status: 500 },

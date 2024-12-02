@@ -91,12 +91,13 @@ const TopSection: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const pieData = languageData?.languages.map(({ name, percentage, color }) => ({
-    id: name,
-    label: name,
-    value: percentage,
-    color: color || "#666",
-  })) || [];
+  const pieData =
+    languageData?.languages.map(({ name, percentage, color }) => ({
+      id: name,
+      label: name,
+      value: percentage,
+      color: color || "#666",
+    })) || [];
 
   return (
     <div className="flex min-h-[50vh] flex-col items-center justify-center overflow-visible px-4 md:px-8">
@@ -138,44 +139,50 @@ const TopSection: React.FC = () => {
               ))}
             </div>
           ) : (
-            <div className="h-[600px] w-full">
+            <div className="relative h-[600px] w-full">
               <ResponsivePie
-  data={pieData}
-  margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-  innerRadius={0.6}
-  padAngle={0.5}
-  cornerRadius={4}
-  activeOuterRadiusOffset={8}
-  colors={{ datum: 'data.color' }}
-  borderWidth={1}
-  borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
-  enableArcLinkLabels={true}
-  arcLinkLabelsSkipAngle={10}
-  arcLinkLabelsTextColor={isDark ? "#7d8590" : "#57606a"}
-  arcLinkLabelsThickness={2}
-  arcLinkLabelsColor={{ from: "color" }}
-  arcLabelsSkipAngle={10}
-  arcLabelsTextColor="#ffffff"
-  motionConfig="gentle"
-  transitionMode="pushIn"
-  theme={{
-    labels: {
-      text: {
-        fontSize: 16, 
-        fontWeight: 600, 
-      },
-    },
-    tooltip: {
-      container: {
-        background: isDark ? "#161b22" : "#ffffff",
-        color: isDark ? "#7d8590" : "#57606a",
-        fontSize: "14px", 
-        borderRadius: "6px",
-        boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-      },
-    },
-  }}
-/>
+                data={pieData}
+                margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+                innerRadius={0.6}
+                padAngle={0.5}
+                cornerRadius={4}
+                activeOuterRadiusOffset={8}
+                colors={{ datum: "data.color" }}
+                borderWidth={1}
+                borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
+                enableArcLinkLabels={true}
+                arcLinkLabelsSkipAngle={10}
+                arcLinkLabelsTextColor={isDark ? "#7d8590" : "#57606a"}
+                arcLinkLabelsThickness={2}
+                arcLinkLabelsColor={{ from: "color" }}
+                arcLabelsSkipAngle={10}
+                arcLabelsTextColor="#ffffff"
+                motionConfig="gentle"
+                transitionMode="pushIn"
+                theme={{
+                  labels: {
+                    text: {
+                      fontSize: 16,
+                      fontWeight: 600,
+                    },
+                  },
+                  tooltip: {
+                    container: {
+                      background: isDark ? "#161b22" : "#ffffff",
+                      color: isDark ? "#7d8590" : "#57606a",
+                      fontSize: "14px",
+                      borderRadius: "6px",
+                      boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                    },
+                  },
+                }}
+              />
+              <Link
+                href="/resources/github"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-500 ease-in-out hover:text-primary hover:shadow-md active:shadow-lg"
+              >
+                View GitHub Stats
+              </Link>
             </div>
           )}
         </motion.div>

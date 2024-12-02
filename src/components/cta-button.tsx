@@ -17,7 +17,7 @@ export const CtaButton = React.forwardRef<HTMLButtonElement, CtaButtonProps>(
           "shadow-lg hover:shadow-xl active:shadow-md",
           "transform hover:scale-[1.02] active:scale-[0.98]",
           "backdrop-blur-sm",
-          
+
           // Variant-specific styles
           variant === "default" && [
             "bg-primary/90 text-primary-foreground hover:bg-primary",
@@ -29,14 +29,14 @@ export const CtaButton = React.forwardRef<HTMLButtonElement, CtaButtonProps>(
             "focus:ring-primary/50",
             "border border-primary/20 hover:border-primary/30",
           ],
-          
-          className
+
+          className,
         )}
         ref={ref}
         {...props}
       />
     );
-  }
+  },
 );
 
 CtaButton.displayName = "CtaButton";

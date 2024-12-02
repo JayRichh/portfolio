@@ -34,8 +34,15 @@ const handleScroll = () => {
 const projectsData = [
   {
     title: "SteamShare",
-    description: "Steam screenshot management platform with integrated gallery organization and canvas editing. Features seamless Steam authentication, real-time data fetch, and collage creation tools.",
-    technologies: ["React 18", "TypeScript", "Steam Web API", "Fabric.js", "Framer Motion"],
+    description:
+      "Steam screenshot management platform with integrated gallery organization and canvas editing. Features seamless Steam authentication, real-time data fetch, and collage creation tools.",
+    technologies: [
+      "React 18",
+      "TypeScript",
+      "Steam Web API",
+      "Fabric.js",
+      "Framer Motion",
+    ],
     mainImage: {
       src: "/images/steam4.png",
       alt: "SteamShare Main",
@@ -56,13 +63,21 @@ const projectsData = [
     },
     theme: {
       textColor: "text-gray-900 dark:text-[#66c0f4]",
-      gradient: "bg-gradient-to-b from-gray-100 to-white dark:from-[#1b2838] dark:to-gray-900",
+      gradient:
+        "bg-gradient-to-b from-gray-100 to-white dark:from-[#1b2838] dark:to-gray-900",
     },
   },
   {
     title: "CSS Battle",
-    description: "A full-featured web app for recreating CSS battles with real-time previews, scoring based on accuracy and code efficiency, and interactive comparison tools.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Monaco Editor", "html2canvas"],
+    description:
+      "A full-featured web app for recreating CSS battles with real-time previews, scoring based on accuracy and code efficiency, and interactive comparison tools.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Monaco Editor",
+      "html2canvas",
+    ],
     mainImage: {
       src: "/images/editor.png",
       alt: "CSS Battle Editor",
@@ -83,12 +98,14 @@ const projectsData = [
     },
     theme: {
       textColor: "text-gray-900 dark:text-primary",
-      gradient: "bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800",
+      gradient:
+        "bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800",
     },
   },
   {
     title: "Encompass Tours",
-    description: "Digital platform for NZ motorcycle tours using Vue and Supabase. Features server-side caching, dynamic tour management, and interactive route visualization.",
+    description:
+      "Digital platform for NZ motorcycle tours using Vue and Supabase. Features server-side caching, dynamic tour management, and interactive route visualization.",
     technologies: ["Vue.js", "Supabase", "Redis", "Node.js", "TypeScript"],
     mainImage: {
       src: "/images/encompass-hero.png",
@@ -110,13 +127,21 @@ const projectsData = [
     },
     theme: {
       textColor: "text-gray-900 dark:text-[#4CAF50]",
-      gradient: "bg-gradient-to-b from-white to-gray-50 dark:from-emerald-950 dark:to-gray-900",
+      gradient:
+        "bg-gradient-to-b from-white to-gray-50 dark:from-emerald-950 dark:to-gray-900",
     },
   },
   {
     title: "PomoDev",
-    description: "A Pomodoro Timer Chrome Extension designed to boost productivity. Features customizable timers, task management, and theme options, all built with modern web technologies.",
-    technologies: ["React", "TypeScript", "Vite", "Chrome Extension API", "Firefox Add-on API"],
+    description:
+      "A Pomodoro Timer Chrome Extension designed to boost productivity. Features customizable timers, task management, and theme options, all built with modern web technologies.",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Chrome Extension API",
+      "Firefox Add-on API",
+    ],
     mainImage: {
       src: "/images/pomodev-logo.png",
       alt: "PomoDev Logo",
@@ -136,13 +161,15 @@ const projectsData = [
     },
     theme: {
       textColor: "text-gray-900 dark:text-[#FF6B6B]",
-      gradient: "bg-gradient-to-b from-white to-gray-50 dark:from-rose-950 dark:to-gray-900",
+      gradient:
+        "bg-gradient-to-b from-white to-gray-50 dark:from-rose-950 dark:to-gray-900",
     },
     reverse: true,
   },
   {
     title: "The Work Waka",
-    description: "Job application and interview tracking platform with data visualization, calendar integration, dynamic forms, and Sankey diagram reports.",
+    description:
+      "Job application and interview tracking platform with data visualization, calendar integration, dynamic forms, and Sankey diagram reports.",
     technologies: ["React", "TypeScript", "Next.js", "D3.js", "Tailwind CSS"],
     mainImage: {
       src: "/images/workwaka.png",
@@ -164,7 +191,8 @@ const projectsData = [
     },
     theme: {
       textColor: "text-gray-900 dark:text-zinc-200",
-      gradient: "bg-gradient-to-b from-gray-50 to-white dark:from-zinc-900 dark:to-gray-900",
+      gradient:
+        "bg-gradient-to-b from-gray-50 to-white dark:from-zinc-900 dark:to-gray-900",
     },
     reverse: true,
   },

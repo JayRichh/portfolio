@@ -30,14 +30,14 @@ const menuVariants = {
 };
 
 const itemVariants = {
-  closed: { 
+  closed: {
     opacity: 0,
     y: -8,
     transition: {
       duration: 0.15,
-    }
+    },
   },
-  open: { 
+  open: {
     opacity: 1,
     y: 0,
     transition: {
@@ -45,7 +45,7 @@ const itemVariants = {
       stiffness: 300,
       damping: 25,
       mass: 0.5,
-    }
+    },
   },
 };
 
@@ -62,8 +62,13 @@ export function EnhancedDropdown({
   align = "start",
   className,
 }: EnhancedDropdownProps) {
-  const menu = useMenuStore({ 
-    placement: align === "start" ? "bottom-start" : align === "end" ? "bottom-end" : "bottom",
+  const menu = useMenuStore({
+    placement:
+      align === "start"
+        ? "bottom-start"
+        : align === "end"
+          ? "bottom-end"
+          : "bottom",
     animated: true,
   });
   const mounted = menu.useState("mounted");
@@ -77,7 +82,7 @@ export function EnhancedDropdown({
           "hover:bg-primary/5 hover:text-primary",
           "touch-manipulation select-none",
           "md:p-2",
-          className
+          className,
         )}
       >
         {trigger}
@@ -91,7 +96,7 @@ export function EnhancedDropdown({
             className={cn(
               "z-50 min-w-[12rem] overflow-hidden rounded-lg border bg-popover shadow-lg outline-none",
               "touch-manipulation",
-              "md:min-w-[8rem] md:rounded-md"
+              "md:min-w-[8rem] md:rounded-md",
             )}
             render={
               <motion.div
@@ -121,7 +126,7 @@ export function EnhancedDropdown({
                       "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
                       "touch-manipulation",
                       "md:rounded-sm md:px-2 md:py-1.5 md:text-sm",
-                      child.props.className
+                      child.props.className,
                     )}
                     render={
                       <motion.div

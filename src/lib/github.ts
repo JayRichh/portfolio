@@ -76,7 +76,7 @@ export const useGitHubStore = create<GitHubState>()(
       setProgress: (progress) => set({ progress }),
       setError: (error) => set({ error }),
       setLoading: (isLoading) => set({ isLoading }),
-      setLoadingYear: (year, loading) => 
+      setLoadingYear: (year, loading) =>
         set((state) => {
           const newLoadingYears = new Set(state.loadingYears);
           if (loading) {
@@ -88,31 +88,39 @@ export const useGitHubStore = create<GitHubState>()(
         }),
       setYearData: (yearData) => set({ yearData }),
       setLanguageData: (languageData) => set({ languageData }),
-      reset: () => set({ progress: 0, error: null, isLoading: false, loadingYears: new Set() }),
+      reset: () =>
+        set({
+          progress: 0,
+          error: null,
+          isLoading: false,
+          loadingYears: new Set(),
+        }),
     }),
     {
-      name: 'github-storage',
+      name: "github-storage",
       partialize: (state) => ({
         yearData: state.yearData,
         languageData: state.languageData,
         lastFetched: state.lastFetched,
       }),
-    }
-  )
+    },
+  ),
 );
 
 export const useContributions = () => {
   const yearData = useGitHubStore((state) => state.yearData);
   const lastFetched = useGitHubStore((state) => state.lastFetched);
-  
+
   if (!lastFetched || Date.now() - lastFetched > CACHE_TIME * 1000) {
     return null;
   }
-  
+
   return yearData.length > 0 ? yearData : null;
 };
 
-async function fetchYearContributions(year: number): Promise<YearContributions | null> {
+async function fetchYearContributions(
+  year: number,
+): Promise<YearContributions | null> {
   const query = `
     query ContributionsQuery($username: String!, $from: DateTime!, $to: DateTime!) {
       user(login: $username) {
@@ -153,19 +161,20 @@ async function fetchYearContributions(year: number): Promise<YearContributions |
     },
   );
 
-  const contributionsCollection = response.data.data.user.contributionsCollection;
+  const contributionsCollection =
+    response.data.data.user.contributionsCollection;
   const calendar = contributionsCollection.contributionCalendar;
   if (!calendar) return null;
 
   const weeks: ContributionWeek[] = calendar.weeks;
-  
+
   // Create a map of all days in the year with zero contributions
   const yearStart = new Date(year, 0, 1);
   const yearEnd = new Date(year, 11, 31);
   const allDays = new Map();
-  
+
   for (let d = new Date(yearStart); d <= yearEnd; d.setDate(d.getDate() + 1)) {
-    const dateStr = d.toISOString().split('T')[0];
+    const dateStr = d.toISOString().split("T")[0];
     allDays.set(dateStr, { day: dateStr, value: 0 });
   }
 
@@ -179,9 +188,9 @@ async function fetchYearContributions(year: number): Promise<YearContributions |
 
   // Convert the map to an array and calculate quartiles for non-zero values
   const contributions = Array.from(allDays.values());
-  const nonZeroValues = contributions.map(c => c.value).filter(v => v > 0);
+  const nonZeroValues = contributions.map((c) => c.value).filter((v) => v > 0);
   nonZeroValues.sort((a, b) => a - b);
-  
+
   const getQuartile = (arr: number[], quartile: number) => {
     const pos = (arr.length - 1) * quartile;
     const base = Math.floor(pos);
@@ -199,7 +208,7 @@ async function fetchYearContributions(year: number): Promise<YearContributions |
   const max = Math.max(...nonZeroValues);
 
   // Scale the contributions using quartile-based thresholds
-  const scaledContributions = contributions.map(contribution => ({
+  const scaledContributions = contributions.map((contribution) => ({
     day: contribution.day,
     value:
       contribution.value === 0
@@ -279,7 +288,7 @@ async function fetchAllRepositories(): Promise<Repository[]> {
 
       const { nodes, pageInfo } = response.data.data.user.repositories;
       repositories.push(...nodes);
-      
+
       hasNextPage = pageInfo.hasNextPage;
       cursor = pageInfo.endCursor;
     }
@@ -300,7 +309,7 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
   const chunkSize = 50;
   for (let i = 0; i < repos.length; i += chunkSize) {
     const chunk = repos.slice(i, i + chunkSize);
-    
+
     chunk.forEach((repo) => {
       if (!repo.languages?.edges) return;
 
@@ -322,16 +331,16 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
     .map(([name, { size, color }]) => ({
       name,
       size,
-      color: color || '#666',
-      percentage: Math.round((size / totalSize) * 100 * 10) / 10
+      color: color || "#666",
+      percentage: Math.round((size / totalSize) * 100 * 10) / 10,
     }))
-    .filter(lang => lang.percentage >= 0.1)
+    .filter((lang) => lang.percentage >= 0.1)
     .sort((a, b) => b.size - a.size)
     .slice(0, 8);
 
   return {
     languages,
-    totalSize
+    totalSize,
   };
 }
 
@@ -359,15 +368,20 @@ export async function fetchGitHubContributions(): Promise<YearContributions[]> {
     });
 
     const yearResults = await Promise.all(contributionsPromises);
-    const allContributions = yearResults.filter((result): result is YearContributions => result !== null);
-    
-    const sortedContributions = allContributions.sort((a, b) => b.year - a.year);
+    const allContributions = yearResults.filter(
+      (result): result is YearContributions => result !== null,
+    );
+
+    const sortedContributions = allContributions.sort(
+      (a, b) => b.year - a.year,
+    );
     setYearData(sortedContributions);
     setProgress(100);
-    
+
     return sortedContributions;
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Error fetching GitHub data";
+    const message =
+      error instanceof Error ? error.message : "Error fetching GitHub data";
     setError(message);
     return [];
   } finally {
@@ -375,7 +389,9 @@ export async function fetchGitHubContributions(): Promise<YearContributions[]> {
   }
 }
 
-export async function fetchPreviousYear(year: number): Promise<YearContributions | null> {
+export async function fetchPreviousYear(
+  year: number,
+): Promise<YearContributions | null> {
   const store = useGitHubStore.getState();
   const { setError, setLoadingYear, yearData, setYearData } = store;
 
@@ -387,15 +403,18 @@ export async function fetchPreviousYear(year: number): Promise<YearContributions
   try {
     setLoadingYear(year, true);
     const yearContributions = await fetchYearContributions(year);
-    
+
     if (yearContributions) {
-      const updatedYearData = [...yearData, yearContributions].sort((a, b) => b.year - a.year);
+      const updatedYearData = [...yearData, yearContributions].sort(
+        (a, b) => b.year - a.year,
+      );
       setYearData(updatedYearData);
     }
-    
+
     return yearContributions;
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Error fetching GitHub data";
+    const message =
+      error instanceof Error ? error.message : "Error fetching GitHub data";
     setError(message);
     return null;
   } finally {
@@ -420,7 +439,10 @@ export async function fetchGitHubLanguages(): Promise<LanguageStats | null> {
     setProgress(100);
     return stats;
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Error fetching GitHub language data";
+    const message =
+      error instanceof Error
+        ? error.message
+        : "Error fetching GitHub language data";
     setError(message);
     return null;
   } finally {

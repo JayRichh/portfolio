@@ -82,7 +82,7 @@ export function GitHubPreview() {
   const fromDate = `${currentYear.year}-01-01`;
   const toDate = `${currentYear.year}-12-31`;
 
-  const contributionData = currentYear.contributions.filter(c => c.value > 0);
+  const contributionData = currentYear.contributions.filter((c) => c.value > 0);
 
   const lightColors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
   const darkColors = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
@@ -98,7 +98,8 @@ export function GitHubPreview() {
           className="h-full w-full"
         >
           <div className="text-center text-sm text-muted-foreground mb-2">
-            {currentYear.totalContributions.toLocaleString()} contributions in {currentYear.year}
+            {currentYear.totalContributions.toLocaleString()} contributions in{" "}
+            {currentYear.year}
           </div>
           <ResponsiveCalendarCanvas
             data={contributionData}

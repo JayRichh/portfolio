@@ -16,7 +16,7 @@ export function TechTag({ children }: TechTagProps) {
         "hover:bg-gray-200 dark:hover:bg-white/25",
         "mr-2 mb-2 md:mr-3 md:mb-3 transition-all",
         "border border-gray-200 dark:border-white/30",
-        "backdrop-blur-sm"
+        "backdrop-blur-sm",
       )}
     >
       {children}

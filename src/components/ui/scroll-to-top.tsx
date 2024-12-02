@@ -29,7 +29,7 @@ export function ScrollToTop() {
 
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout;
-    
+
     const toggleVisibility = () => {
       // Only show button after scrolling down 500px
       if (window.pageYOffset > 500) {
@@ -41,7 +41,7 @@ export function ScrollToTop() {
       // Set scrolling state
       setIsScrolling(true);
       clearTimeout(scrollTimeout);
-      
+
       // Clear scrolling state after scrolling stops
       scrollTimeout = setTimeout(() => {
         setIsScrolling(false);

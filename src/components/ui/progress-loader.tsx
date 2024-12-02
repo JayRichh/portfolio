@@ -56,7 +56,7 @@ export function ProgressLoader({
         <motion.div
           className={cn(
             "absolute inset-y-0 left-0",
-            error ? "bg-destructive" : "bg-primary"
+            error ? "bg-destructive" : "bg-primary",
           )}
           initial={{ width: "0%" }}
           animate={{ width: `${progress}%` }}
@@ -66,7 +66,7 @@ export function ProgressLoader({
       <motion.div
         className={cn(
           "text-sm",
-          error ? "text-destructive" : "text-muted-foreground"
+          error ? "text-destructive" : "text-muted-foreground",
         )}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

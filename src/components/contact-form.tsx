@@ -129,7 +129,9 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
           onPointerMove={(e) =>
             e.currentTarget.hasPointerCapture(e.pointerId) && handleDrag(e)
           }
-          onPointerUp={(e) => e.currentTarget.releasePointerCapture(e.pointerId)}
+          onPointerUp={(e) =>
+            e.currentTarget.releasePointerCapture(e.pointerId)
+          }
         />
       </div>
       <button
