@@ -18,7 +18,7 @@ export function TechTag({ children }: TechTagProps) {
         "border border-gray-200 dark:border-white/30",
         "backdrop-blur-sm",
         "[text-rendering:geometricPrecision]",
-        "[-webkit-font-smoothing:antialiased]"
+        "[-webkit-font-smoothing:antialiased]",
       )}
     >
       {children}

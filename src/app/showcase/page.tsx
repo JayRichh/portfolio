@@ -68,6 +68,42 @@ const projectsData = [
     },
   },
   {
+    title: "Golf2Go",
+    description:
+      "Modern business website for a portable miniature golf company, replacing legacy WordPress site with Next.js 15 for improved performance and user experience.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "reCAPTCHA",
+      "Zod",
+      "SMTP",
+    ],
+    mainImage: {
+      src: "/images/golfhero.png",
+      alt: "Golf2Go Hero",
+    },
+    subImages: [
+      {
+        src: "/images/golf4.png",
+        alt: "Golf2Go Booking",
+      },
+      {
+        src: "/images/golf2.png",
+        alt: "Golf2Go Courses",
+      },
+    ],
+    links: {
+      live: "https://golf2go.vercel.app",
+      code: "https://github.com/JayRichh/golf2go",
+    },
+    theme: {
+      textColor: "text-gray-900 dark:text-[#4ade80]",
+      gradient:
+        "bg-gradient-to-b from-white via-green-50 to-gray-50 dark:from-green-950 dark:via-[#0f2c1d] dark:to-gray-900",
+    },
+  },
+  {
     title: "CSS Battle",
     description:
       "A full-featured web app for recreating CSS battles with real-time previews, scoring based on accuracy and code efficiency, and interactive comparison tools.",

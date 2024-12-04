@@ -4,9 +4,7 @@ import React from "react";
 import { ResponsiveCalendarCanvas } from "@nivo/calendar";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  useGitHubStore,
-} from "../../../lib/github";
+import { useGitHubStore } from "../../../lib/github";
 import { ProgressLoader } from "../../../components/ui/progress-loader";
 
 // GitHub's exact color schemes
@@ -218,9 +216,9 @@ export default function GitHubPage() {
 
       <div className="mt-8 text-sm text-muted-foreground">
         <i>
-          Note: This visualization reflects daily contributions across
-          distinct repositories, including public and private work through
-          commits, pull requests, and issues.
+          Note: This visualization reflects daily contributions across distinct
+          repositories, including public and private work through commits, pull
+          requests, and issues.
         </i>
       </div>
     </motion.div>

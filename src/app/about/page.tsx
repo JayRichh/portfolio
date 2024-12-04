@@ -36,14 +36,17 @@ import {
   TooltipTrigger,
 } from "../../components/ui/tooltip";
 
-const ResponsivePie = dynamic(() => import("@nivo/pie").then(mod => mod.ResponsivePie), {
-  ssr: false,
-  loading: () => (
-    <div className="flex min-h-[50vh] items-center justify-center">
-      <ProgressLoader isDataReady={false} />
-    </div>
-  ),
-});
+const ResponsivePie = dynamic(
+  () => import("@nivo/pie").then((mod) => mod.ResponsivePie),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex min-h-[50vh] items-center justify-center">
+        <ProgressLoader isDataReady={false} />
+      </div>
+    ),
+  },
+);
 
 const ScrollDownIndicator = dynamic(
   () => import("./_components/scroll-down-indicator"),
@@ -93,18 +96,26 @@ const timelineData = [
     icon: Book,
   },
 ];
-const InfoTooltip = ({ content, size = "md" }: { content: string; size?: "sm" | "md" | "lg" }) => {
+const InfoTooltip = ({
+  content,
+  size = "md",
+}: {
+  content: string;
+  size?: "sm" | "md" | "lg";
+}) => {
   const sizeClasses = {
     sm: "h-4 w-4",
     md: "h-5 w-5",
-    lg: "h-6 w-6"
+    lg: "h-6 w-6",
   };
 
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Info className={`${sizeClasses[size]} text-muted-foreground/75 hover:text-muted-foreground cursor-help transition-colors`} />
+          <Info
+            className={`${sizeClasses[size]} text-muted-foreground/75 hover:text-muted-foreground cursor-help transition-colors`}
+          />
         </TooltipTrigger>
         <TooltipContent>
           <p className="max-w-[280px] leading-relaxed">{content}</p>
@@ -154,7 +165,7 @@ const TopSection: React.FC = () => {
       color: color || "#666",
     })) || [];
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   return (
     <div className="flex min-h-[50vh] flex-col items-center justify-center overflow-visible px-4 md:px-8">
@@ -173,7 +184,7 @@ const TopSection: React.FC = () => {
           >
             Technology
           </motion.h2>
-          <InfoTooltip 
+          <InfoTooltip
             content="Data sourced from GitHub repositories, showing the distribution of programming languages across all projects. Includes both public and private repositories."
             size="lg"
           />

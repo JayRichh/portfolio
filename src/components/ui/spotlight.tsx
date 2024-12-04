@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { ResponsiveImage } from "./image";
+import { useDialogStore } from "../../lib/dialog-store";
+import { createPortal } from "react-dom";
 
 interface SpotlightProps {
   src: string;
@@ -19,20 +21,35 @@ const SpotlightModal = ({
   alt: string;
   onClose: () => void;
 }) => {
+  const setIsDialogOpen = useDialogStore((state) => state.setIsOpen);
+
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [onClose]);
+    
+    // Set dialog state and lock body scroll
+    setIsDialogOpen(true);
+    document.body.style.overflow = "hidden";
 
-  return (
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+      // Reset dialog state and body scroll
+      setIsDialogOpen(false);
+      document.body.style.overflow = "";
+    };
+  }, [onClose, setIsDialogOpen]);
+
+  if (typeof window === "undefined") return null;
+
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 backdrop-blur-sm"
       onClick={onClose}
     >
       <motion.div
@@ -40,16 +57,16 @@ const SpotlightModal = ({
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-        className="relative w-[90vw] h-[90vh] max-w-7xl"
+        className="relative h-[85vh] w-[85vw] max-w-7xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-background/20 hover:bg-background/30 text-white transition-colors"
+          className="absolute right-6 top-6 z-[1000] rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
         >
           <X size={24} />
         </button>
-        <div className="relative w-full h-full rounded-lg overflow-hidden">
+        <div className="relative h-full w-full rounded-lg overflow-hidden">
           <ResponsiveImage
             src={src}
             alt={alt}
@@ -58,7 +75,8 @@ const SpotlightModal = ({
           />
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 };
 

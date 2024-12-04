@@ -4,9 +4,7 @@ import React from "react";
 import { ResponsiveCalendarCanvas } from "@nivo/calendar";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  useGitHubStore,
-} from "../../../lib/github";
+import { useGitHubStore } from "../../../lib/github";
 import { ProgressLoader } from "../../../components/ui/progress-loader";
 
 export function GitHubPreview() {
@@ -29,7 +27,9 @@ export function GitHubPreview() {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="rounded-xl border border-destructive/50 bg-destructive/10 p-4 text-center">
-          <p className="text-sm text-muted-foreground">Unable to load GitHub data</p>
+          <p className="text-sm text-muted-foreground">
+            Unable to load GitHub data
+          </p>
         </div>
       </div>
     );
@@ -39,7 +39,9 @@ export function GitHubPreview() {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="rounded-xl border border-border/50 bg-background/30 backdrop-blur-sm p-4 text-center">
-          <p className="text-sm text-muted-foreground">No contribution data available</p>
+          <p className="text-sm text-muted-foreground">
+            No contribution data available
+          </p>
         </div>
       </div>
     );

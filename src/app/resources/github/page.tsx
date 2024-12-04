@@ -6,10 +6,7 @@ import { ResponsivePie } from "@nivo/pie";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 import { Info } from "lucide-react";
-import {
-  fetchPreviousYear,
-  useGitHubStore,
-} from "../../../lib/github";
+import { fetchPreviousYear, useGitHubStore } from "../../../lib/github";
 import { ProgressLoader } from "../../../components/ui/progress-loader";
 import {
   Tooltip,
@@ -43,18 +40,26 @@ interface CalendarProps {
   isDark: boolean;
 }
 
-const InfoTooltip = ({ content, size = "md" }: { content: string; size?: "sm" | "md" | "lg" }) => {
+const InfoTooltip = ({
+  content,
+  size = "md",
+}: {
+  content: string;
+  size?: "sm" | "md" | "lg";
+}) => {
   const sizeClasses = {
     sm: "h-4 w-4",
     md: "h-5 w-5",
-    lg: "h-6 w-6"
+    lg: "h-6 w-6",
   };
 
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Info className={`${sizeClasses[size]} text-muted-foreground/75 hover:text-muted-foreground cursor-help transition-colors`} />
+          <Info
+            className={`${sizeClasses[size]} text-muted-foreground/75 hover:text-muted-foreground cursor-help transition-colors`}
+          />
         </TooltipTrigger>
         <TooltipContent>
           <p className="max-w-[280px] leading-relaxed">{content}</p>
@@ -64,9 +69,15 @@ const InfoTooltip = ({ content, size = "md" }: { content: string; size?: "sm" | 
   );
 };
 
-const Calendar: React.FC<CalendarProps> = ({ direction, selectedYear, isDark }) => {
+const Calendar: React.FC<CalendarProps> = ({
+  direction,
+  selectedYear,
+  isDark,
+}) => {
   const colors = isDark ? COLORS.dark : COLORS.light;
-  const contributionData = selectedYear.contributions.filter((c) => c.value > 0);
+  const contributionData = selectedYear.contributions.filter(
+    (c) => c.value > 0,
+  );
   const fromDate = `${selectedYear.year}-01-01`;
   const toDate = `${selectedYear.year}-12-31`;
 
@@ -123,16 +134,18 @@ const LanguageDistribution: React.FC<{ isDark: boolean }> = ({ isDark }) => {
   if (!languageData?.languages?.length) return null;
 
   const colors = isDark ? COLORS.dark : COLORS.light;
-  const pieLanguages = languageData.languages.map(({ name, percentage, color }) => ({
-    id: name,
-    label: name,
-    value: percentage,
-    color: color || "#666",
-  }));
+  const pieLanguages = languageData.languages.map(
+    ({ name, percentage, color }) => ({
+      id: name,
+      label: name,
+      value: percentage,
+      color: color || "#666",
+    }),
+  );
 
   function formatNumber(num: number | undefined | null): string {
     if (num === undefined || num === null) return "0";
-    
+
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)}M`;
     }
@@ -189,7 +202,7 @@ const LanguageDistribution: React.FC<{ isDark: boolean }> = ({ isDark }) => {
               <h3 className="text-xl font-semibold">
                 Code Composition Analysis
               </h3>
-              <InfoTooltip 
+              <InfoTooltip
                 content="Lines of code and file counts are estimated based on language-specific averages. Actual numbers may vary based on coding style and file organization."
                 size="sm"
               />
@@ -233,8 +246,12 @@ const LanguageDistribution: React.FC<{ isDark: boolean }> = ({ isDark }) => {
             </div>
             <div className="mt-6 text-sm text-muted-foreground border-t border-border/50 pt-4">
               <div className="flex justify-between">
-                <span>Total Lines: {formatNumber(languageData.totalLines || 0)}</span>
-                <span>Total Files: {formatNumber(languageData.totalFiles || 0)}</span>
+                <span>
+                  Total Lines: {formatNumber(languageData.totalLines || 0)}
+                </span>
+                <span>
+                  Total Files: {formatNumber(languageData.totalFiles || 0)}
+                </span>
               </div>
             </div>
           </div>
@@ -245,12 +262,7 @@ const LanguageDistribution: React.FC<{ isDark: boolean }> = ({ isDark }) => {
 };
 
 export default function GitHubPage() {
-  const {
-    yearData,
-    isLoading,
-    loadingYears,
-    error,
-  } = useGitHubStore();
+  const { yearData, isLoading, loadingYears, error } = useGitHubStore();
   const [selectedYearIndex, setSelectedYearIndex] = React.useState(0);
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -258,9 +270,7 @@ export default function GitHubPage() {
   if (isLoading) {
     return (
       <div className="flex h-[calc(100vh-112px)] items-center justify-center">
-        <ProgressLoader
-          isDataReady={yearData.length > 0}
-        />
+        <ProgressLoader isDataReady={yearData.length > 0} />
       </div>
     );
   }
@@ -328,10 +338,8 @@ export default function GitHubPage() {
     >
       <div className="mb-8">
         <div className="flex items-center gap-2">
-          <h1 className="text-4xl font-bold text-primary">
-            GitHub Activity
-          </h1>
-          <InfoTooltip 
+          <h1 className="text-4xl font-bold text-primary">GitHub Activity</h1>
+          <InfoTooltip
             content="Data sourced from GitHub's GraphQL API. Shows contributions across all repositories, including commits, issues, pull requests, and code reviews."
             size="lg"
           />
@@ -343,8 +351,8 @@ export default function GitHubPage() {
       </div>
 
       <div className="mb-6 text-xl font-semibold text-center">
-        {selectedYear.totalContributions.toLocaleString()} contributions
-        in {selectedYear.year}
+        {selectedYear.totalContributions.toLocaleString()} contributions in{" "}
+        {selectedYear.year}
       </div>
 
       <div className="flex items-center justify-center gap-4 mb-6">
@@ -400,12 +408,20 @@ export default function GitHubPage() {
       >
         {/* Mobile View - Vertical Calendar */}
         <div className="h-[600px] md:hidden">
-          <Calendar direction="vertical" selectedYear={selectedYear} isDark={isDark} />
+          <Calendar
+            direction="vertical"
+            selectedYear={selectedYear}
+            isDark={isDark}
+          />
         </div>
 
         {/* Desktop View - Horizontal Calendar */}
         <div className="hidden md:block h-[300px]">
-          <Calendar direction="horizontal" selectedYear={selectedYear} isDark={isDark} />
+          <Calendar
+            direction="horizontal"
+            selectedYear={selectedYear}
+            isDark={isDark}
+          />
         </div>
       </motion.div>
 

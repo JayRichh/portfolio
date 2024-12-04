@@ -84,20 +84,69 @@ const rateLimiter = {
     const now = Date.now();
     const timeSinceLastCall = now - this.lastCall;
     if (timeSinceLastCall < this.minInterval) {
-      await new Promise(resolve => setTimeout(resolve, this.minInterval - timeSinceLastCall));
+      await new Promise((resolve) =>
+        setTimeout(resolve, this.minInterval - timeSinceLastCall),
+      );
     }
     this.lastCall = Date.now();
-  }
+  },
 };
 
-async function withRetry<T>(fn: () => Promise<T>, retries = MAX_RETRIES): Promise<T> {
+async function withRetry<T>(
+  fn: () => Promise<T>,
+  retries = MAX_RETRIES,
+): Promise<T> {
   try {
     await rateLimiter.waitForNext();
-    return await fn();
+    const response = await fn();
+
+    // Check for GraphQL errors in the response
+    const graphqlResponse = (response as any)?.data;
+    if (graphqlResponse?.errors?.length > 0) {
+      const errorMessage = graphqlResponse.errors[0].message;
+      if (errorMessage.includes("rate limit")) {
+        throw new Error(
+          "GitHub API rate limit exceeded. Please try again later.",
+        );
+      }
+      throw new Error(errorMessage || "GraphQL Error");
+    }
+
+    // Check if the response data is missing or malformed
+    if (!graphqlResponse?.data) {
+      throw new Error("Invalid response from GitHub API");
+    }
+
+    return response;
   } catch (error) {
-    if (retries > 0 && error instanceof AxiosError && error.response?.status === 429) {
-      await new Promise(resolve => setTimeout(resolve, RETRY_DELAY * (MAX_RETRIES - retries + 1)));
-      return withRetry(fn, retries - 1);
+    if (error instanceof AxiosError) {
+      const status = error.response?.status;
+      const message = error.response?.data?.message || error.message;
+
+      if (status === 403 && message.includes("rate limit")) {
+        throw new Error(
+          "GitHub API rate limit exceeded. Please try again later.",
+        );
+      }
+
+      if (status === 401) {
+        throw new Error(
+          "GitHub authentication failed. Please check your token.",
+        );
+      }
+
+      // If we still have retries and it's a rate limit error, retry
+      if (
+        retries > 0 &&
+        (status === 429 || (status === 403 && message.includes("rate limit")))
+      ) {
+        await new Promise((resolve) =>
+          setTimeout(resolve, RETRY_DELAY * (MAX_RETRIES - retries + 1)),
+        );
+        return withRetry(fn, retries - 1);
+      }
+
+      throw new Error(message || "Failed to fetch GitHub data");
     }
     throw error;
   }
@@ -250,7 +299,7 @@ async function fetchYearContributions(
     to: `${year}-12-31T23:59:59Z`,
   };
 
-  const response = await withRetry(() => 
+  const response = await withRetry(() =>
     axios.post(
       GITHUB_API,
       { query, variables },
@@ -260,7 +309,7 @@ async function fetchYearContributions(
           "Content-Type": "application/json",
         },
       },
-    )
+    ),
   );
 
   const contributionsCollection =
@@ -384,16 +433,16 @@ async function fetchAllRepositories(): Promise<Repository[]> {
             },
             timeout: 30000,
           },
-        )
+        ),
       );
 
       const { nodes, pageInfo } = (response as any).data.data.user.repositories;
-      
+
       // Filter repositories to include only those you own or have significant contributions to
       const filteredNodes = nodes.filter((repo: Repository) => {
         return repo.owner.login === "jayrichh" || !repo.isFork;
       });
-      
+
       repositories.push(...filteredNodes);
 
       hasNextPage = pageInfo.hasNextPage;
@@ -427,25 +476,25 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
       repo.languages.edges.forEach((edge) => {
         const { name, color } = edge.node;
         if (EXCLUDED_LANGUAGES.has(name)) return;
-        
+
         const size = edge.size;
         const lineCount = estimateLineCount(size, name);
         const fileCount = estimateFileCount(size, name);
 
-        const current = languageMap.get(name) || { 
-          size: 0, 
-          color, 
+        const current = languageMap.get(name) || {
+          size: 0,
+          color,
           lineCount: 0,
-          fileCount: 0
+          fileCount: 0,
         };
-        
+
         languageMap.set(name, {
           size: current.size + size,
           color,
           lineCount: current.lineCount + lineCount,
-          fileCount: current.fileCount + fileCount
+          fileCount: current.fileCount + fileCount,
         });
-        
+
         totalSize += size;
         totalFiles += fileCount;
         totalLines += lineCount;
@@ -460,7 +509,7 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
       color: color || "#666",
       percentage: Math.round((size / totalSize) * 100 * 10) / 10,
       lineCount,
-      fileCount
+      fileCount,
     }))
     .sort((a, b) => b.size - a.size);
 
@@ -468,13 +517,14 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
     languages,
     totalSize,
     totalFiles,
-    totalLines
+    totalLines,
   };
 }
 
 export async function fetchGitHubContributions(): Promise<YearContributions[]> {
   const store = useGitHubStore.getState();
-  const { setProgress, setError, setYearData, setLoading, updateLastFetched } = store;
+  const { setProgress, setError, setYearData, setLoading, updateLastFetched } =
+    store;
 
   try {
     validateGitHubToken();
@@ -514,7 +564,8 @@ export async function fetchGitHubContributions(): Promise<YearContributions[]> {
 
     return sortedContributions;
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Error fetching GitHub data";
+    const message =
+      error instanceof Error ? error.message : "Error fetching GitHub data";
     setError(message);
     return [];
   } finally {
@@ -526,7 +577,8 @@ export async function fetchPreviousYear(
   year: number,
 ): Promise<YearContributions | null> {
   const store = useGitHubStore.getState();
-  const { setError, setLoadingYear, yearData, setYearData, updateLastFetched } = store;
+  const { setError, setLoadingYear, yearData, setYearData, updateLastFetched } =
+    store;
 
   try {
     validateGitHubToken();
@@ -543,7 +595,8 @@ export async function fetchPreviousYear(
 
     return yearContributions;
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Error fetching GitHub data";
+    const message =
+      error instanceof Error ? error.message : "Error fetching GitHub data";
     setError(message);
     return null;
   } finally {
@@ -553,7 +606,13 @@ export async function fetchPreviousYear(
 
 export async function fetchGitHubLanguages(): Promise<LanguageStats | null> {
   const store = useGitHubStore.getState();
-  const { setProgress, setError, setLanguageData, setLoading, updateLastFetched } = store;
+  const {
+    setProgress,
+    setError,
+    setLanguageData,
+    setLoading,
+    updateLastFetched,
+  } = store;
 
   try {
     validateGitHubToken();
@@ -574,7 +633,10 @@ export async function fetchGitHubLanguages(): Promise<LanguageStats | null> {
 
     return stats;
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Error fetching GitHub language data";
+    const message =
+      error instanceof Error
+        ? error.message
+        : "Error fetching GitHub language data";
     setError(message);
     return null;
   } finally {

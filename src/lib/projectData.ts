@@ -243,7 +243,192 @@ export const projectData: Project[] = [
       ],
     },
   },
-
+  {
+    title: "Golf2Go",
+    description:
+      "Modern business website for a portable miniature golf company, replacing legacy WordPress site with Next.js 15 for improved performance and user experience",
+    imgUrl: "/images/golfhero.png",
+    repoUrl: "https://github.com/JayRichh/golf2go",
+    liveUrl: "https://golf2go.vercel.app",
+    updatedAt: "2024-12-04",
+    details: {
+      title: "Golf2Go - Professional Mini Golf Services",
+      description:
+        "A business platform for a portable miniature golf company, migrated from WordPress to Next.js for better performance and user engagement. Features streamlined booking, course showcases, and responsive design.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "reCAPTCHA",
+        "Zod",
+        "SMTP",
+      ],
+      features: [
+        {
+          title: "Streamlined Booking System",
+          text: "Professional booking flow with integrated calendar, course selection, and automated email confirmations. Replaced manual WordPress forms for better reliability.",
+          image: "/images/golf4.png",
+        },
+        {
+          title: "Course Showcase",
+          text: "High-performance gallery system featuring professional course photography, detailed specifications, and filterable layouts. Optimized images for fast loading.",
+        },
+        {
+          title: "Business Information",
+          text: "Comprehensive company information, services overview, and contact options. Improved from WordPress with better organization and accessibility.",
+        },
+        {
+          title: "Contact Integration",
+          text: "Modern contact system with automated responses and inquiry tracking. Replaced unreliable WordPress plugins with robust server-side handling.",
+        },
+      ],
+      challenges: [
+        {
+          title: "WordPress Migration",
+          text: "Carefully migrating content and SEO value from existing WordPress site while improving structure and performance.",
+        },
+        {
+          title: "Booking Integration",
+          text: "Building a reliable booking system that handles complex scheduling and automated communications.",
+        },
+        {
+          title: "Mobile Optimization",
+          text: "Ensuring perfect mobile experience for customers browsing courses and making bookings on any device.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Business Requirements",
+          points: [
+            {
+              text: "Balancing modern tech with practical business needs",
+            },
+            {
+              text: "Maintaining SEO during platform migration",
+            },
+          ],
+        },
+        {
+          title: "Customer Experience",
+          points: [
+            {
+              text: "Streamlining booking process for better conversion",
+            },
+            {
+              text: "Optimizing mobile experience for busy customers",
+            },
+          ],
+        },
+        {
+          title: "System Integration",
+          points: [
+            {
+              text: "Connecting booking system with business operations",
+            },
+            {
+              text: "Implementing reliable email and notification systems",
+            },
+          ],
+        },
+      ],
+      additionalImages: ["/images/golf3.png", "/images/golf4.png", "/images/golf2.png"],
+    },
+  },
+  {
+    title: "Checkpoint",
+    description:
+      "GitHub analytics dashboard built with Next.js 15, featuring interactive contribution visualizations, language distribution analysis, and detailed activity metrics",
+    imgUrl: "/images/_com4.png",
+    repoUrl: "https://https://github.com/JayRichh/checkpoint",
+    liveUrl: "https://checkpoint-self.vercel.app/",
+    updatedAt: "2024-12-01",
+    details: {
+      title: "Checkpoint - GitHub Analytics Platform",
+      description:
+        "A comprehensive GitHub analytics dashboard providing detailed insights into development activity, contribution patterns, and code distribution. Built with Next.js 15 and modern web technologies for optimal performance and interactivity.",
+      technologies: [
+        "Next.js 15",
+        "TypeScript",
+        "GitHub GraphQL API",
+        "Tailwind CSS",
+        "Nivo Charts",
+        "Authentication",
+      ],
+      features: [
+        {
+          title: "Contribution Analytics",
+          text: "Interactive GitHub contribution calendar with detailed activity metrics, filtering capabilities, and year-based navigation. Features responsive design and real-time data updates.",
+          image: "/images/_com2.png",
+        },
+        {
+          title: "Language Distribution",
+          text: "Advanced visualization of programming language usage across repositories, with detailed percentage breakdowns and interactive tooltips.",
+        },
+        {
+          title: "Authentication System",
+          text: "Secure GitHub OAuth integration with automatic token refresh and device flow support for seamless user authentication.",
+        },
+        {
+          title: "Performance Optimization",
+          text: "Implemented efficient data caching, lazy loading, and server-side rendering for optimal dashboard performance with large datasets.",
+        },
+      ],
+      challenges: [
+        {
+          title: "API Rate Limiting",
+          text: "Implementing efficient caching and request batching to handle GitHub API rate limits while maintaining data freshness.",
+        },
+        {
+          title: "Data Visualization",
+          text: "Creating responsive, interactive visualizations that handle varying amounts of contribution data and screen sizes.",
+        },
+        {
+          title: "Authentication Flow",
+          text: "Building a robust authentication system with token management and device flow support for various login scenarios.",
+        },
+      ],
+      learnings: [
+        {
+          title: "API Integration",
+          points: [
+            {
+              text: "Advanced GitHub API integration patterns and rate limit handling",
+            },
+            {
+              text: "Efficient data fetching and caching strategies",
+            },
+          ],
+        },
+        {
+          title: "Data Visualization",
+          points: [
+            {
+              text: "Complex data visualization techniques with D3.js",
+            },
+            {
+              text: "Interactive calendar and chart implementations",
+            },
+          ],
+        },
+        {
+          title: "Authentication",
+          points: [
+            {
+              text: "OAuth implementation with device flow support",
+            },
+            {
+              text: "Secure token management and refresh strategies",
+            },
+          ],
+        },
+      ],
+      additionalImages: [
+        "/images/_com2.png",
+        "/images/_com3.png",
+        "/images/_com4.png",
+      ],
+    },
+  },
   {
     title: "DOMination (CSS Battle)",
     description:

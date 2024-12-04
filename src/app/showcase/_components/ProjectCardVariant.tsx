@@ -44,7 +44,7 @@ const getPatternClass = (title: string): string => {
   }
 };
 
-export function ProjectCard({
+export function ProjectCardVariant({
   title,
   description,
   technologies,
