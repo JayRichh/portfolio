@@ -29,25 +29,28 @@ interface ProjectProps {
 
 const getProjectStyles = (title: string): string => {
   switch (title) {
+    case "Checkpoint":
+      return "group-[]/checkpoint:text-indigo-600 dark:group-[]/checkpoint:text-indigo-400 font-[650]";
     case "SteamShare":
-      return "group-[]/steam:text-blue-600 dark:group-[]/steam:text-blue-300";
+      return "group-[]/steam:text-blue-600 dark:group-[]/steam:text-blue-400 font-[650]";
     case "CSS Battle":
-      return "group-[]/css:text-purple-600 dark:group-[]/css:text-purple-300";
+      return "group-[]/css:text-purple-600 dark:group-[]/css:text-purple-400 font-[650]";
     case "Golf2Go":
-      return "group-[]/golf:text-emerald-600 dark:group-[]/golf:text-emerald-300";
+      return "group-[]/golf:text-emerald-600 dark:group-[]/golf:text-emerald-400 font-[650]";
     case "Encompass Tours":
-      return "group-[]/tours:text-teal-600 dark:group-[]/tours:text-teal-300";
+      return "group-[]/tours:text-teal-600 dark:group-[]/tours:text-teal-400 font-[650]";
     case "PomoDev":
-      return "group-[]/pomo:text-red-600 dark:group-[]/pomo:text-red-300";
+      return "group-[]/pomo:text-red-600 dark:group-[]/pomo:text-red-400 font-[650]";
     case "The Work Waka":
-      return "group-[]/waka:text-slate-600 dark:group-[]/waka:text-slate-300";
+      return "group-[]/waka:text-slate-600 dark:group-[]/waka:text-slate-400 font-[650]";
     default:
-      return "text-gray-900 dark:text-gray-100";
+      return "text-gray-900 dark:text-gray-100 font-[650]";
   }
 };
 
 const getGroupName = (title: string): string => {
   switch (title) {
+    case "Checkpoint": return "group/checkpoint";
     case "SteamShare": return "group/steam";
     case "CSS Battle": return "group/css";
     case "Golf2Go": return "group/golf";
@@ -58,20 +61,45 @@ const getGroupName = (title: string): string => {
   }
 };
 
-const getPatternClass = (title: string): string => {
+const getBackgroundStyle = (title: string): string => {
   switch (title) {
+    case "Checkpoint":
+      return "group-[]/checkpoint:bg-gradient-to-tr from-indigo-100/30 via-white to-transparent dark:from-indigo-950/30 dark:via-transparent";
     case "SteamShare":
-      return "bg-gradient-to-br from-blue-500/10 to-transparent dark:from-blue-500/5 animate-steam";
+      return "group-[]/steam:bg-gradient-to-br from-blue-100/30 via-sky-100/20 to-transparent dark:from-blue-950/30 dark:via-sky-950/20";
     case "CSS Battle":
-      return "bg-gradient-to-br from-purple-500/10 to-transparent dark:from-purple-500/5";
+      return "group-[]/css:bg-gradient-to-bl from-purple-100/30 via-fuchsia-100/20 to-transparent dark:from-purple-950/30 dark:via-fuchsia-950/20";
+    case "Golf2Go":
+      return "group-[]/golf:bg-gradient-to-tr from-emerald-100/30 via-green-100/20 to-transparent dark:from-emerald-950/30 dark:via-green-950/20";
     case "Encompass Tours":
-      return "bg-gradient-to-br from-emerald-500/10 to-transparent dark:from-emerald-500/5";
+      return "group-[]/tours:bg-gradient-to-br from-teal-100/30 via-cyan-100/20 to-transparent dark:from-teal-950/30 dark:via-cyan-950/20";
     case "PomoDev":
-      return "bg-gradient-to-br from-red-500/10 to-transparent dark:from-red-500/5 animate-pomo";
+      return "group-[]/pomo:bg-gradient-to-bl from-red-100/30 via-rose-100/20 to-transparent dark:from-red-950/30 dark:via-rose-950/20";
     case "The Work Waka":
-      return "bg-gradient-to-br from-gray-500/10 to-transparent dark:from-gray-500/5";
+      return "group-[]/waka:bg-gradient-to-tr from-slate-100/30 via-gray-100/20 to-transparent dark:from-slate-950/30 dark:via-gray-950/20";
     default:
-      return "bg-gradient-to-br from-blue-500/10 to-transparent dark:from-blue-500/5";
+      return "bg-gradient-to-br from-gray-100/30 to-transparent dark:from-gray-950/30";
+  }
+};
+
+const getDescriptionStyle = (title: string): string => {
+  switch (title) {
+    case "Checkpoint":
+      return "group-[]/checkpoint:text-indigo-950 dark:group-[]/checkpoint:text-indigo-200 tracking-wide";
+    case "SteamShare":
+      return "group-[]/steam:text-blue-950 dark:group-[]/steam:text-blue-200 tracking-wide";
+    case "CSS Battle":
+      return "group-[]/css:text-purple-950 dark:group-[]/css:text-purple-200 tracking-wide";
+    case "Golf2Go":
+      return "group-[]/golf:text-emerald-950 dark:group-[]/golf:text-emerald-200 tracking-wide";
+    case "Encompass Tours":
+      return "group-[]/tours:text-teal-950 dark:group-[]/tours:text-teal-200 tracking-wide";
+    case "PomoDev":
+      return "group-[]/pomo:text-red-950 dark:group-[]/pomo:text-red-200 tracking-wide";
+    case "The Work Waka":
+      return "group-[]/waka:text-slate-950 dark:group-[]/waka:text-slate-200 tracking-wide";
+    default:
+      return "text-gray-800 dark:text-gray-200 tracking-wide";
   }
 };
 
@@ -99,12 +127,11 @@ export function ProjectCard({
       "w-full scroll-mt-[100px] relative overflow-hidden",
       groupName
     )}>
-      <div className={theme.gradient}>
-        <div className={cn(
-          "absolute inset-0 opacity-20 mix-blend-soft-light",
-          getPatternClass(title)
-        )} />
-        <div className="mx-auto max-w-[90rem] min-h-screen p-4 sm:p-6 md:p-8 lg:p-16">
+      <div className={cn(
+        "relative min-h-screen transition-colors duration-500",
+        getBackgroundStyle(title)
+      )}>
+        <div className="mx-auto max-w-[90rem] p-4 sm:p-6 md:p-8 lg:p-16">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -150,7 +177,7 @@ export function ProjectCard({
                     variants={fadeInVariant}
                     transition={{ duration: 0.4 }}
                     className={cn(
-                      "text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight",
+                      "text-3xl sm:text-4xl md:text-5xl lg:text-7xl tracking-tight",
                       getProjectStyles(title)
                     )}
                   >
@@ -164,7 +191,10 @@ export function ProjectCard({
                     transition={{ duration: 0.4, delay: 0.1 }}
                     className="space-y-6 md:space-y-8"
                   >
-                    <p className="text-base sm:text-lg md:text-2xl text-gray-800 dark:text-gray-100 leading-relaxed tracking-wide font-medium">
+                    <p className={cn(
+                      "text-base sm:text-lg md:text-2xl leading-relaxed font-medium",
+                      getDescriptionStyle(title)
+                    )}>
                       {description}
                     </p>
                     <div className="flex flex-wrap gap-2">

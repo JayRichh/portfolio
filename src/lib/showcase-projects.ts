@@ -28,8 +28,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/checkpoint",
     },
     theme: {
-      textColor: "",
-      gradient: "bg-white dark:bg-gray-900",
+      textColor: "text-indigo-600 dark:text-indigo-400",
+      gradient: "",
     },
   },
   {
@@ -61,8 +61,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/steamshare",
     },
     theme: {
-      textColor: "",
-      gradient: "bg-white dark:bg-gray-900",
+      textColor: "text-blue-600 dark:text-blue-400",
+      gradient: "",
     },
   },
   {
@@ -95,8 +95,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/golf2go",
     },
     theme: {
-      textColor: "",
-      gradient: "bg-white dark:bg-gray-900",
+      textColor: "text-emerald-600 dark:text-emerald-400",
+      gradient: "",
     },
   },
   {
@@ -128,8 +128,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/domination",
     },
     theme: {
-      textColor: "",
-      gradient: "bg-white dark:bg-gray-900",
+      textColor: "text-purple-600 dark:text-purple-400",
+      gradient: "",
     },
   },
   {
@@ -155,8 +155,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh",
     },
     theme: {
-      textColor: "",
-      gradient: "bg-white dark:bg-gray-900",
+      textColor: "text-teal-600 dark:text-teal-400",
+      gradient: "",
     },
   },
   {
@@ -187,8 +187,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/pomodev",
     },
     theme: {
-      textColor: "",
-      gradient: "bg-white dark:bg-gray-900",
+      textColor: "text-red-600 dark:text-red-400",
+      gradient: "",
     },
     reverse: true,
   },
@@ -215,8 +215,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/workwaka",
     },
     theme: {
-      textColor: "",
-      gradient: "bg-white dark:bg-gray-900",
+      textColor: "text-slate-600 dark:text-slate-400",
+      gradient: "",
     },
     reverse: true,
   }
