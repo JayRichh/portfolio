@@ -9,6 +9,22 @@ const config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [
+    {
+      pattern: /^text-/,
+      variants: ['dark', 'group-\[\]\/steam', 'group-\[\]\/css', 'group-\[\]\/golf', 'group-\[\]\/tours', 'group-\[\]\/pomo', 'group-\[\]\/waka'],
+    },
+    {
+      pattern: /^bg-/,
+      variants: ['dark', 'hover', 'group-hover'],
+    },
+    'group/steam',
+    'group/css',
+    'group/golf',
+    'group/tours',
+    'group/pomo',
+    'group/waka',
+  ],
   theme: {
     screens: {
       xs: { max: "480px" },
@@ -113,12 +129,26 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        steam: {
+          "0%, 100%": { backgroundPosition: "0% 0%" },
+          "50%": { backgroundPosition: "100% 100%" },
+        },
+        pomo: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.5s",
         "fade-down": "fade-down 0.5s",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "steam": "steam 20s ease-in-out infinite",
+        "pomo": "pomo 15s linear infinite",
+      },
+      opacity: {
+        '15': '0.15',
+        '20': '0.20',
       },
     },
   },

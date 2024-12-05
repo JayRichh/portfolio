@@ -28,8 +28,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/checkpoint",
     },
     theme: {
-      textColor: "text-gray-900 dark:text-[#60a5fa]",
-      gradient: "bg-gradient-to-b from-white via-blue-50 to-gray-50 dark:from-blue-950 dark:via-[#172554] dark:to-gray-900",
+      textColor: "",
+      gradient: "bg-white dark:bg-gray-900",
     },
   },
   {
@@ -61,8 +61,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/steamshare",
     },
     theme: {
-      textColor: "text-gray-900 dark:text-[#66c0f4]",
-      gradient: "bg-gradient-to-b from-gray-100 via-blue-50 to-white dark:from-[#1b2838] dark:via-[#213352] dark:to-gray-900",
+      textColor: "",
+      gradient: "bg-white dark:bg-gray-900",
     },
   },
   {
@@ -95,8 +95,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/golf2go",
     },
     theme: {
-      textColor: "text-gray-900 dark:text-[#4ade80]",
-      gradient: "bg-gradient-to-b from-white via-green-50 to-gray-50 dark:from-green-950 dark:via-[#0f2c1d] dark:to-gray-900",
+      textColor: "",
+      gradient: "bg-white dark:bg-gray-900",
     },
   },
   {
@@ -128,8 +128,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/domination",
     },
     theme: {
-      textColor: "text-gray-900 dark:text-primary",
-      gradient: "bg-gradient-to-b from-white via-purple-50 to-gray-50 dark:from-gray-900 dark:via-purple-950 dark:to-gray-800",
+      textColor: "",
+      gradient: "bg-white dark:bg-gray-900",
     },
   },
   {
@@ -155,8 +155,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh",
     },
     theme: {
-      textColor: "text-gray-900 dark:text-[#4CAF50]",
-      gradient: "bg-gradient-to-b from-white via-green-50 to-gray-50 dark:from-emerald-950 dark:via-[#0c3a1d] dark:to-gray-900",
+      textColor: "",
+      gradient: "bg-white dark:bg-gray-900",
     },
   },
   {
@@ -187,8 +187,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/pomodev",
     },
     theme: {
-      textColor: "text-gray-900 dark:text-[#FF6B6B]",
-      gradient: "bg-gradient-to-b from-white via-red-50 to-gray-50 dark:from-rose-950 dark:via-[#270a16] dark:to-gray-900",
+      textColor: "",
+      gradient: "bg-white dark:bg-gray-900",
     },
     reverse: true,
   },
@@ -215,8 +215,8 @@ export const projectsData = [
       code: "https://github.com/JayRichh/workwaka",
     },
     theme: {
-      textColor: "text-gray-900 dark:text-zinc-200",
-      gradient: "bg-gradient-to-b from-gray-50 via-zinc-100 to-white dark:from-zinc-900 dark:via-[#1a1a1f] dark:to-gray-900",
+      textColor: "",
+      gradient: "bg-white dark:bg-gray-900",
     },
     reverse: true,
   }
