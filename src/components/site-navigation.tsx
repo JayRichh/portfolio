@@ -8,7 +8,7 @@ import { cn } from "../utils";
 import { isRouteActive } from "../utils/is-route-active";
 import { PageTransitionLink } from "./route-transition";
 import { Button } from "./ui/button";
-import { ShowcaseDropdown } from "./ui/showcase-dropdown";
+import { WorkDropdown } from "./ui/work-dropdown";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -57,7 +57,7 @@ const NavItem = ({ label, path }: { label: string; path: string }) => {
 
 export function SiteNavigation(): JSX.Element {
   const pathname = usePathname();
-  const isShowcaseActive = isRouteActive("/showcase", pathname, false);
+  const isWorkActive = isRouteActive("/work", pathname, false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const mobileMenuRef = React.useRef<HTMLDivElement>(null);
 
@@ -115,7 +115,7 @@ export function SiteNavigation(): JSX.Element {
             {links.map((item) => (
               <NavItem key={item.path} {...item} />
             ))}
-            <ShowcaseDropdown isActive={isShowcaseActive} />
+            <WorkDropdown isActive={isWorkActive} />
           </NavigationMenuList>
         </NavigationMenu>
       </div>
@@ -169,7 +169,7 @@ export function SiteNavigation(): JSX.Element {
                     </motion.div>
                   );
                 })}
-                <ShowcaseDropdown isActive={isShowcaseActive} isMobile />
+                <WorkDropdown isActive={isWorkActive} isMobile />
               </motion.div>
             )}
           </AnimatePresence>

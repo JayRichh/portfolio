@@ -524,16 +524,16 @@ const AboutPage: React.FC = () => {
                 </motion.a>
               </Link>
 
-              <Link href="/showcase" passHref legacyBehavior>
+              <Link href="/work" passHref legacyBehavior>
                 <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   className="flex"
-                  aria-label="Showcase"
+                  aria-label="Work"
                 >
                   <Button className="relative bg-secondary px-6 py-4 text-lg text-secondary-foreground hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
-                    Showcase
+                    Work
                   </Button>
                 </motion.a>
               </Link>

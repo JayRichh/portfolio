@@ -1,6 +1,6 @@
 # Portfolio Website
 
-A showcase of web development projects and technical expertise. <br>
+A Work of web development projects and technical expertise. <br>
 [www.JayRich.dev](https://www.JayRich.dev)
 
 ## Tech Stack
@@ -23,7 +23,7 @@ A showcase of web development projects and technical expertise. <br>
 
 ## Projects
 
-Showcases expertise in:
+Works expertise in:
 
 - Full-stack applications
 - Browser extensions

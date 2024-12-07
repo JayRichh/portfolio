@@ -13,7 +13,7 @@ interface WorkDropdownProps {
   isMobile?: boolean;
 }
 
-const WorkItems = [
+const workItems = [
   {
     label: "Projects",
     items: [
@@ -151,7 +151,7 @@ export function WorkDropdown({
           </Button>
         </Link>
         <AnimatePresence>
-          {WorkItems.map((section) => (
+          {workItems.map((section) => (
             <motion.div
               key={section.label}
               initial={{ opacity: 0, height: 0 }}
@@ -225,7 +225,7 @@ export function WorkDropdown({
             transition={{ duration: 0.15 }}
             className="absolute right-0 top-full z-50 mt-1 w-[200px] rounded-md border bg-background/95 backdrop-blur-sm p-1 shadow-md"
           >
-            {WorkItems.map((section, index) => (
+            {workItems.map((section, index) => (
               <div key={section.label}>
                 {index > 0 && <div className="my-1 h-px bg-border" />}
                 <div className="px-2 py-1.5 text-sm font-medium text-muted-foreground">

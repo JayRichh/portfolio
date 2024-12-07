@@ -254,7 +254,7 @@ export const projectData: Project[] = [
     details: {
       title: "Golf2Go - Professional Mini Golf Services",
       description:
-        "A business platform for a portable miniature golf company, migrated from WordPress to Next.js for better performance and user engagement. Features streamlined booking, course showcases, and responsive design.",
+        "A business platform for a portable miniature golf company, migrated from WordPress to Next.js for better performance and user engagement. Features streamlined booking, course Works, and responsive design.",
       technologies: [
         "Next.js",
         "TypeScript",
@@ -270,7 +270,7 @@ export const projectData: Project[] = [
           image: "/images/golf4.png",
         },
         {
-          title: "Course Showcase",
+          title: "Course Work",
           text: "High-performance gallery system featuring professional course photography, detailed specifications, and filterable layouts. Optimized images for fast loading.",
         },
         {
@@ -2075,7 +2075,7 @@ export const projectData: Project[] = [
   {
     title: "Portfolio Website",
     description:
-      "Personal portfolio built with Next.js 15, featuring interactive mindmap visualization and dynamic project showcases",
+      "Personal portfolio built with Next.js 15, featuring interactive mindmap visualization and dynamic project Works",
     imgUrl: "/images/main1.png",
     repoUrl: "https://github.com/JayRichh/portfolio",
     liveUrl: "https://jayrich.dev",
@@ -2101,7 +2101,7 @@ export const projectData: Project[] = [
           image: "/images/main2.png",
         },
         {
-          title: "Project Showcase",
+          title: "Project Work",
           text: "Dynamic project grid with technology-based filtering and detailed modal views. Uses Radix UI primitives with Framer Motion animations for smooth transitions.",
           image: "/images/main3.png",
         },

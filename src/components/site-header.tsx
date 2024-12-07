@@ -12,8 +12,8 @@ export function SiteHeader() {
   const pathname = usePathname();
   const isDialogOpen = useDialogStore((state) => state.isOpen);
   const isCodeRoute = pathname?.startsWith("/code");
-  const isShowcaseRoute = pathname?.startsWith("/showcase");
-  const shouldHide = (isCodeRoute || isShowcaseRoute) && isDialogOpen;
+  const isWorkRoute = pathname?.startsWith("/work");
+  const shouldHide = (isCodeRoute || isWorkRoute) && isDialogOpen;
 
   return (
     <motion.header

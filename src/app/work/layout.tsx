@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ResourcesHeader as WorksHeader } from "./_components/ResourcesHeader";
+import { ResourcesHeader } from "./_components/ResourcesHeader";
 
 export default function WorkLayout({
   children,
@@ -10,7 +10,7 @@ export default function WorkLayout({
 }) {
   return (
     <main className="relative flex flex-col">
-      <WorksHeader />
+      <ResourcesHeader />
       <div className="flex-1 overflow-hidden">{children}</div>
     </main>
   );

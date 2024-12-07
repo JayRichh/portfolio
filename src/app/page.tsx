@@ -82,9 +82,9 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <PageTransitionLink href="/showcase">
+                <PageTransitionLink href="/work">
                   <CtaButton className="px-8 py-3 text-base sm:text-lg w-full md:w-auto">
-                    View Showcase
+                    View Work
                   </CtaButton>
                 </PageTransitionLink>
                 <PageTransitionLink href="/about">
