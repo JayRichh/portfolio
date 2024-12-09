@@ -106,7 +106,6 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
     } else if (attempts > 0) {
       setTimeout(() => scrollToHash(hash, attempts - 1, delay), delay);
     }
-    // If attempts reach 0 and element is still not found, do nothing.
   }, []);
 
   const handleNavigation = React.useCallback(
@@ -115,24 +114,19 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
       const targetPath = basePath || "/";
 
       if (pathname === targetPath) {
-        // Same page navigation
         if (hash) {
           scrollToHash(hash);
-          // Update the URL with the hash without reloading
           window.history.pushState(null, "", `#${hash}`);
         }
         onClose();
       } else {
-        // Cross-page navigation
         onClose();
-        router.push(path); // Pushes the path including the hash
+        router.push(path);
 
         if (hash) {
-          // After navigation, attempt to scroll to the element
-          // Delay to allow the new page to render
           setTimeout(() => {
             scrollToHash(hash);
-          }, 300); // Adjust the delay as needed
+          }, 300);
         }
       }
     },
@@ -185,121 +179,159 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
             exit="exit"
             className="fixed inset-0 z-[100] flex min-h-screen w-screen flex-col bg-white dark:bg-gray-900 backdrop-blur-[8px]"
           >
-            {/* Header */}
             <motion.div
               variants={contentVariants}
-              className="flex items-center justify-between border-b border-gray-300 dark:border-gray-700 p-4"
+              className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 px-6 py-4"
             >
-              <div className="max-w-[1250px] w-full mx-auto flex items-center justify-between gap-8 px-4">
-                <motion.h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <div className="max-w-7xl w-full mx-auto flex items-center justify-between">
+                <motion.h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   Menu
                 </motion.h2>
                 <Button
                   variant="ghost"
                   size="default"
                   onClick={onClose}
-                  className="text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-800 p-3"
+                  className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 p-2"
                   aria-label="Close menu"
                 >
-                  <X className="h-12 w-12" />
+                  <X className="h-8 w-8" />
                 </Button>
               </div>
             </motion.div>
 
-            {/* Main Content */}
             <motion.div
               variants={contentVariants}
               className="flex-1 overflow-y-auto overscroll-contain"
             >
-              <div className="container mx-auto p-8">
-                <div className="grid gap-16 md:grid-cols-2">
-                  {/* Left Column */}
-                  <div className="space-y-12">
-                    {/* Navigation */}
-                    <div>
-                      <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                        Navigation
-                      </h3>
-                      <div className="grid gap-4">
-                        {mainLinks.map((item) => (
-                          <motion.div
-                            key={item.path}
-                            variants={itemVariants}
-                            whileHover={{ x: 4, transition: { duration: 0.2 } }}
+              <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col min-h-[calc(100vh-5rem)]">
+                {/* Top Navigation Section */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16">
+                  {/* Main Navigation */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-gray-700">
+                      Navigation
+                    </h3>
+                    <div className="space-y-4">
+                      {mainLinks.map((item) => (
+                        <motion.div
+                          key={item.path}
+                          variants={itemVariants}
+                          whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                        >
+                          <button
+                            onClick={() => handleNavigation(item.path)}
+                            className={cn(
+                              "block text-base font-medium transition-colors duration-300",
+                              pathname === item.path 
+                                ? "text-blue-500 dark:text-blue-400" 
+                                : "text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                            )}
                           >
-                            <button
-                              onClick={() => handleNavigation(item.path)}
-                              className={cn(
-                                "block text-lg font-medium text-gray-900 dark:text-white transition-colors duration-300 hover:text-blue-500 dark:hover:text-blue-400",
-                                pathname === item.path && "text-blue-500 dark:text-blue-400"
-                              )}
-                            >
-                              {item.label}
-                            </button>
-                          </motion.div>
-                        ))}
-                      </div>
+                            {item.label}
+                          </button>
+                        </motion.div>
+                      ))}
                     </div>
+                  </div>
 
-                    {/* Theme */}
-                    <div>
-                      <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+                  {/* Projects */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-gray-700">
+                      Projects
+                    </h3>
+                    <div className="space-y-4">
+                      {workItems.map((item) => (
+                        <motion.button
+                          key={item.path}
+                          variants={itemVariants}
+                          whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                          onClick={() => handleNavigation(item.path)}
+                          className="block w-full text-left text-base font-medium text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                        >
+                          {item.label}
+                        </motion.button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Resources */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-gray-700">
+                      Resources
+                    </h3>
+                    <div className="space-y-4">
+                      {resourceItems.map((item) => (
+                        <motion.button
+                          key={item.path}
+                          variants={itemVariants}
+                          whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                          onClick={() => handleNavigation(item.path)}
+                          className="block w-full text-left text-base font-medium text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                        >
+                          {item.label}
+                        </motion.button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Utility Section - Centered */}
+                <div className="mt-auto pt-12">
+                  <div className="max-w-3xl mx-auto flex flex-col md:flex-row justify-center items-center gap-12">
+                    {/* Theme Settings */}
+                    <div className="flex flex-col items-center space-y-4">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
                         Appearance
                       </h3>
-                      <div className="grid gap-4">
+                      <div className="flex flex-wrap justify-center gap-3">
                         {themeOptions.map(({ label, value, icon: Icon }) => (
                           <motion.button
                             key={value}
                             variants={itemVariants}
-                            whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                            whileHover={{ scale: 1.05 }}
                             onClick={() => setTheme(value)}
                             className={cn(
-                              "flex items-center gap-3 text-lg font-medium transition-colors duration-300",
+                              "flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200",
                               theme === value
-                                ? "text-blue-500 dark:text-blue-400"
-                                : "text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-400"
+                                ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
+                                : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                             )}
                           >
-                            <Icon
-                              className={cn(
-                                "h-5 w-5",
-                                theme === value && "fill-current"
-                              )}
-                            />
+                            <Icon className="h-4 w-4" />
                             {label}
                           </motion.button>
                         ))}
                       </div>
                     </div>
 
-                    {/* Social & Contact */}
-                    <div>
-                      <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+                    {/* Connect */}
+                    <div className="flex flex-col items-center space-y-4">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
                         Connect
                       </h3>
-                      <div className="grid gap-4">
+                      <div className="flex flex-wrap justify-center gap-3">
                         {socialLinks.map(({ label, icon: Icon, path, external }) => (
                           <motion.div
                             key={path}
                             variants={itemVariants}
-                            whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                            whileHover={{ scale: 1.05 }}
                           >
                             {external ? (
                               <a
                                 href={path}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-3 text-lg font-medium text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-400"
+                                className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                               >
-                                <Icon className="h-5 w-5" />
+                                <Icon className="h-4 w-4" />
                                 {label}
                               </a>
                             ) : (
                               <button
                                 onClick={() => handleNavigation(path)}
-                                className="flex items-center gap-3 text-lg font-medium text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-400"
+                                className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                               >
-                                <Icon className="h-5 w-5" />
+                                <Icon className="h-4 w-4" />
                                 {label}
                               </button>
                             )}
@@ -307,56 +339,13 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
                         ))}
                         <motion.button
                           variants={itemVariants}
-                          whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                          whileHover={{ scale: 1.05 }}
                           onClick={() => handleNavigation("/#contact")}
-                          className="flex items-center gap-3 text-lg font-medium text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-400"
+                          className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
-                          <Send className="h-5 w-5" />
+                          <Send className="h-4 w-4" />
                           Get in Touch
                         </motion.button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right Column */}
-                  <div className="space-y-12">
-                    {/* Projects */}
-                    <div>
-                      <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                        Projects
-                      </h3>
-                      <div className="grid gap-4">
-                        {workItems.map((item) => (
-                          <motion.button
-                            key={item.path}
-                            variants={itemVariants}
-                            whileHover={{ x: 4, transition: { duration: 0.2 } }}
-                            onClick={() => handleNavigation(item.path)}
-                            className="block w-full text-left text-lg font-medium text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-400"
-                          >
-                            {item.label}
-                          </motion.button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Resources */}
-                    <div>
-                      <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                        Resources
-                      </h3>
-                      <div className="grid gap-4">
-                        {resourceItems.map((item) => (
-                          <motion.button
-                            key={item.path}
-                            variants={itemVariants}
-                            whileHover={{ x: 4, transition: { duration: 0.2 } }}
-                            onClick={() => handleNavigation(item.path)}
-                            className="block w-full text-left text-lg font-medium text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-400"
-                          >
-                            {item.label}
-                          </motion.button>
-                        ))}
                       </div>
                     </div>
                   </div>
