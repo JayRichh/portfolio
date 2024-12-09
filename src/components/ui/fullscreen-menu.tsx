@@ -52,7 +52,7 @@ const themeOptions = [
 const backdropVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
-  exit: { opacity: 0 },
+  exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
 const containerVariants = {
@@ -60,31 +60,54 @@ const containerVariants = {
   visible: {
     clipPath: "circle(150% at 95% 5%)",
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: [0.4, 0, 0.2, 1],
-      when: "beforeChildren",
-      staggerChildren: 0.05,
-      delayChildren: 0.2,
     },
   },
   exit: {
     clipPath: "circle(0% at 95% 5%)",
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: [0.4, 0, 0.2, 1],
-      when: "afterChildren",
     },
   },
 };
 
 const contentVariants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: {
+      delay: 0.3,
+      duration: 0.4,
+      ease: "easeOut"
+    }
+  },
+  exit: { 
+    opacity: 0,
+    transition: {
+      duration: 0.2
+    }
+  }
 };
 
 const itemVariants = {
   hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: {
+      duration: 0.3,
+      ease: "easeOut"
+    }
+  },
+  exit: { 
+    opacity: 0,
+    x: -10,
+    transition: {
+      duration: 0.2
+    }
+  }
 };
 
 export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
@@ -158,204 +181,231 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
   if (!mounted) return null;
 
   const menuContent = (
-    <AnimatePresence>
-      {isOpen && (
-        <>
+    <div className="fixed inset-0 z-[99] pointer-events-none">
+      <AnimatePresence>
+        {isOpen && (
           <motion.div
             variants={backdropVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[99] bg-black bg-opacity-50 dark:bg-white dark:bg-opacity-50 backdrop-blur-md"
+            className="fixed inset-0 z-[99] bg-black/50 dark:bg-white/50 backdrop-blur-md pointer-events-auto"
             onClick={onClose}
           />
+        )}
+      </AnimatePresence>
 
-          <motion.div
-            ref={menuRef}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="fixed inset-0 z-[100] flex min-h-screen w-screen flex-col bg-white dark:bg-gray-900 backdrop-blur-[8px]"
-          >
-            <motion.div
-              variants={contentVariants}
-              className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 px-6 py-4"
+      <motion.div
+        ref={menuRef}
+        variants={containerVariants}
+        initial="hidden"
+        animate={isOpen ? "visible" : "hidden"}
+        className={cn(
+          "fixed inset-0 z-[100] flex min-h-screen w-screen flex-col bg-white dark:bg-gray-900",
+          isOpen ? "pointer-events-auto" : "pointer-events-none"
+        )}
+      >
+        <motion.div
+          variants={contentVariants}
+          initial="hidden"
+          animate={isOpen ? "visible" : "hidden"}
+          className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 px-6 py-4"
+        >
+          <div className="max-w-7xl w-full mx-auto flex items-center justify-between">
+            <motion.h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+              Menu
+            </motion.h2>
+            <Button
+              variant="ghost"
+              size="default"
+              onClick={onClose}
+              className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 p-3"
+              aria-label="Close menu"
             >
-              <div className="max-w-7xl w-full mx-auto flex items-center justify-between">
-                <motion.h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Menu
-                </motion.h2>
-                <Button
-                  variant="ghost"
-                  size="default"
-                  onClick={onClose}
-                  className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 p-2"
-                  aria-label="Close menu"
-                >
-                  <X className="h-8 w-8" />
-                </Button>
+              <X className="h-9 w-9" />
+            </Button>
+          </div>
+        </motion.div>
+
+        <motion.div
+          variants={contentVariants}
+          initial="hidden"
+          animate={isOpen ? "visible" : "hidden"}
+          className="flex-1 overflow-y-auto overscroll-contain"
+        >
+          <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col min-h-[calc(100vh-5rem)]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-gray-700">
+                  Navigation
+                </h3>
+                <div className="space-y-4">
+                  {mainLinks.map((item, index) => (
+                    <motion.div
+                      key={item.path}
+                      custom={index}
+                      variants={itemVariants}
+                      initial="hidden"
+                      animate={isOpen ? "visible" : "hidden"}
+                      transition={{ delay: 0.4 + index * 0.1 }}
+                      whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                    >
+                      <button
+                        onClick={() => handleNavigation(item.path)}
+                        className={cn(
+                          "block text-lg font-medium transition-colors duration-300",
+                          pathname === item.path 
+                            ? "text-blue-500 dark:text-blue-400" 
+                            : "text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                        )}
+                      >
+                        {item.label}
+                      </button>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </motion.div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-gray-700">
+                  Projects
+                </h3>
+                <div className="space-y-4">
+                  {workItems.map((item, index) => (
+                    <motion.button
+                      key={item.path}
+                      custom={index}
+                      variants={itemVariants}
+                      initial="hidden"
+                      animate={isOpen ? "visible" : "hidden"}
+                      transition={{ delay: 0.5 + index * 0.1 }}
+                      whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                      onClick={() => handleNavigation(item.path)}
+                      className="block w-full text-left text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                    >
+                      {item.label}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-gray-700">
+                  Resources
+                </h3>
+                <div className="space-y-4">
+                  {resourceItems.map((item, index) => (
+                    <motion.button
+                      key={item.path}
+                      custom={index}
+                      variants={itemVariants}
+                      initial="hidden"
+                      animate={isOpen ? "visible" : "hidden"}
+                      transition={{ delay: 0.6 + index * 0.1 }}
+                      whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                      onClick={() => handleNavigation(item.path)}
+                      className="block w-full text-left text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                    >
+                      {item.label}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+            </div>
 
             <motion.div
               variants={contentVariants}
-              className="flex-1 overflow-y-auto overscroll-contain"
+              initial="hidden"
+              animate={isOpen ? "visible" : "hidden"}
+              transition={{ delay: 0.7 }}
+              className="mt-auto pt-12"
             >
-              <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col min-h-[calc(100vh-5rem)]">
-                {/* Top Navigation Section */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16">
-                  {/* Main Navigation */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-gray-700">
-                      Navigation
-                    </h3>
-                    <div className="space-y-4">
-                      {mainLinks.map((item) => (
-                        <motion.div
-                          key={item.path}
-                          variants={itemVariants}
-                          whileHover={{ x: 4, transition: { duration: 0.2 } }}
-                        >
-                          <button
-                            onClick={() => handleNavigation(item.path)}
-                            className={cn(
-                              "block text-base font-medium transition-colors duration-300",
-                              pathname === item.path 
-                                ? "text-blue-500 dark:text-blue-400" 
-                                : "text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
-                            )}
-                          >
-                            {item.label}
-                          </button>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Projects */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-gray-700">
-                      Projects
-                    </h3>
-                    <div className="space-y-4">
-                      {workItems.map((item) => (
-                        <motion.button
-                          key={item.path}
-                          variants={itemVariants}
-                          whileHover={{ x: 4, transition: { duration: 0.2 } }}
-                          onClick={() => handleNavigation(item.path)}
-                          className="block w-full text-left text-base font-medium text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
-                        >
-                          {item.label}
-                        </motion.button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Resources */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-200 dark:border-gray-700">
-                      Resources
-                    </h3>
-                    <div className="space-y-4">
-                      {resourceItems.map((item) => (
-                        <motion.button
-                          key={item.path}
-                          variants={itemVariants}
-                          whileHover={{ x: 4, transition: { duration: 0.2 } }}
-                          onClick={() => handleNavigation(item.path)}
-                          className="block w-full text-left text-base font-medium text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
-                        >
-                          {item.label}
-                        </motion.button>
-                      ))}
-                    </div>
+              <div className="max-w-3xl mx-auto flex flex-col md:flex-row justify-center items-center gap-12">
+                <div className="flex flex-col items-center space-y-4">
+                  <h3 className="text-base font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
+                    Appearance
+                  </h3>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    {themeOptions.map(({ label, value, icon: Icon }, index) => (
+                      <motion.button
+                        key={value}
+                        custom={index}
+                        variants={itemVariants}
+                        initial="hidden"
+                        animate={isOpen ? "visible" : "hidden"}
+                        transition={{ delay: 0.8 + index * 0.1 }}
+                        whileHover={{ scale: 1.05 }}
+                        onClick={() => setTheme(value)}
+                        className={cn(
+                          "flex items-center gap-2 px-4 py-2 rounded-md text-base font-medium transition-colors duration-200",
+                          theme === value
+                            ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
+                            : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        )}
+                      >
+                        <Icon className="h-5 w-5" />
+                        {label}
+                      </motion.button>
+                    ))}
                   </div>
                 </div>
 
-                {/* Bottom Utility Section - Centered */}
-                <div className="mt-auto pt-12">
-                  <div className="max-w-3xl mx-auto flex flex-col md:flex-row justify-center items-center gap-12">
-                    {/* Theme Settings */}
-                    <div className="flex flex-col items-center space-y-4">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
-                        Appearance
-                      </h3>
-                      <div className="flex flex-wrap justify-center gap-3">
-                        {themeOptions.map(({ label, value, icon: Icon }) => (
-                          <motion.button
-                            key={value}
-                            variants={itemVariants}
-                            whileHover={{ scale: 1.05 }}
-                            onClick={() => setTheme(value)}
-                            className={cn(
-                              "flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200",
-                              theme === value
-                                ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
-                                : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                            )}
+                <div className="flex flex-col items-center space-y-4">
+                  <h3 className="text-base font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
+                    Connect
+                  </h3>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    {socialLinks.map(({ label, icon: Icon, path, external }, index) => (
+                      <motion.div
+                        key={path}
+                        custom={index}
+                        variants={itemVariants}
+                        initial="hidden"
+                        animate={isOpen ? "visible" : "hidden"}
+                        transition={{ delay: 0.9 + index * 0.1 }}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        {external ? (
+                          <a
+                            href={path}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                           >
-                            <Icon className="h-4 w-4" />
+                            <Icon className="h-5 w-5" />
                             {label}
-                          </motion.button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Connect */}
-                    <div className="flex flex-col items-center space-y-4">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
-                        Connect
-                      </h3>
-                      <div className="flex flex-wrap justify-center gap-3">
-                        {socialLinks.map(({ label, icon: Icon, path, external }) => (
-                          <motion.div
-                            key={path}
-                            variants={itemVariants}
-                            whileHover={{ scale: 1.05 }}
+                          </a>
+                        ) : (
+                          <button
+                            onClick={() => handleNavigation(path)}
+                            className="flex items-center gap-2 px-4 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                           >
-                            {external ? (
-                              <a
-                                href={path}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                              >
-                                <Icon className="h-4 w-4" />
-                                {label}
-                              </a>
-                            ) : (
-                              <button
-                                onClick={() => handleNavigation(path)}
-                                className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                              >
-                                <Icon className="h-4 w-4" />
-                                {label}
-                              </button>
-                            )}
-                          </motion.div>
-                        ))}
-                        <motion.button
-                          variants={itemVariants}
-                          whileHover={{ scale: 1.05 }}
-                          onClick={() => handleNavigation("/#contact")}
-                          className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                        >
-                          <Send className="h-4 w-4" />
-                          Get in Touch
-                        </motion.button>
-                      </div>
-                    </div>
+                            <Icon className="h-5 w-5" />
+                            {label}
+                          </button>
+                        )}
+                      </motion.div>
+                    ))}
+                    <motion.button
+                      variants={itemVariants}
+                      initial="hidden"
+                      animate={isOpen ? "visible" : "hidden"}
+                      transition={{ delay: 1 }}
+                      whileHover={{ scale: 1.05 }}
+                      onClick={() => handleNavigation("/#contact")}
+                      className="flex items-center gap-2 px-4 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    >
+                      <Send className="h-5 w-5" />
+                      Get in Touch
+                    </motion.button>
                   </div>
                 </div>
               </div>
             </motion.div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
   );
 
   return createPortal(menuContent, document.body);
