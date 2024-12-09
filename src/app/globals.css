@@ -24,6 +24,8 @@
     --input: 200 30% 85%;
     --ring: 160 85% 25%;
     --radius: 0.5rem;
+    --menu-bg: 215 33% 7%;
+    --menu-highlight: 156 100% 50%;
   }
 
   .dark {
@@ -46,10 +48,16 @@
     --border: 200 30% 27%;
     --input: 200 30% 27%;
     --ring: 160 75% 50%;
+    --menu-bg: 215 33% 7%;
+    --menu-highlight: 156 100% 50%;
   }
 }
 
 @layer base {
+  * {
+    @apply border-border;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings:
@@ -106,6 +114,12 @@
     padding-left: 1rem;
     margin-bottom: 1.5rem;
   }
+
+  /* Prevent body scroll when menu is open */
+  body.menu-open {
+    overflow: hidden;
+    padding-right: var(--removed-body-scroll-bar-size, 0);
+  }
 }
 
 @layer components {
@@ -123,6 +137,32 @@
   }
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Fullscreen Menu Components */
+  .menu-backdrop {
+    @apply fixed inset-0 z-[998] bg-[hsl(var(--menu-bg))] bg-opacity-95 backdrop-blur-md;
+  }
+  .menu-container {
+    @apply fixed inset-0 z-[999] flex flex-col bg-[hsl(var(--menu-bg))];
+  }
+  .menu-header {
+    @apply flex items-center justify-between border-b border-white/10 p-6 md:p-8;
+  }
+  .menu-content {
+    @apply h-[calc(100vh-5rem)] overflow-y-auto overscroll-contain;
+  }
+  .menu-section {
+    @apply space-y-6;
+  }
+  .menu-section-title {
+    @apply text-sm font-medium text-white/60;
+  }
+  .menu-item {
+    @apply block text-lg font-medium text-white transition-colors hover:text-[hsl(var(--menu-highlight))];
+  }
+  .menu-item-active {
+    @apply text-[hsl(var(--menu-highlight))];
   }
 }
 

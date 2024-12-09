@@ -42,50 +42,44 @@ export function WorkDropdown({
   const pathname = usePathname();
   const [isOpen, setIsOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
-  const [pendingScroll, setPendingScroll] = React.useState<string | null>(null);
 
-  // Handle scroll to element after navigation
-  React.useEffect(() => {
-    if (pendingScroll && pathname === "/work") {
-      const scrollToElement = () => {
-        const element = document.getElementById(pendingScroll);
-        if (element) {
-          window.scrollTo({
-            top: element.offsetTop - 100,
-            behavior: "smooth",
-          });
-        }
-        setPendingScroll(null);
-      };
-
-      // Wait for page content to be fully rendered
-      const timer = setTimeout(scrollToElement, 500);
-      return () => clearTimeout(timer);
+  const scrollToHash = React.useCallback((hash: string, attempts = 10, delay = 100) => {
+    const element = document.getElementById(hash);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else if (attempts > 0) {
+      setTimeout(() => scrollToHash(hash, attempts - 1, delay), delay);
     }
-  }, [pathname, pendingScroll]);
+  }, []);
 
-  const handleNavigation = async (path: string) => {
-    setIsOpen(false);
+  const handleNavigation = React.useCallback(
+    (path: string) => {
+      const [basePath, hash] = path.split("#");
+      const targetPath = basePath || "/";
 
-    if (path.includes("#")) {
-      const id = path.split("#")[1];
-
-      if (pathname === "/work") {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
+      if (pathname === targetPath) {
+        // Same page navigation
+        if (hash) {
+          scrollToHash(hash);
+          // Update URL without reloading
+          window.history.pushState(null, "", `#${hash}`);
         }
+        setIsOpen(false);
       } else {
-        setPendingScroll(id);
-        router.push("/work");
+        // Cross-page navigation
+        setIsOpen(false);
+        router.push(path); // Pushes the path including the hash
+
+        if (hash) {
+          // After navigation, attempt to scroll to element
+          setTimeout(() => {
+            scrollToHash(hash);
+          }, 300);
+        }
       }
-    } else {
-      router.push(path);
-    }
-  };
+    },
+    [pathname, router, scrollToHash]
+  );
 
   // Close dropdown on route change
   React.useEffect(() => {

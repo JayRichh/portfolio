@@ -153,6 +153,7 @@ export default function HomePage() {
 
         {/* Contact Form */}
         <motion.div
+          id="contact"
           className="w-full mt-8 max-w-6xl mx-auto"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
