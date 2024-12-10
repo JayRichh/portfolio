@@ -18,7 +18,7 @@ export function SiteHeader() {
   return (
     <motion.header
       className={cn(
-        "fixed top-0 z-[100] w-full",
+        "fixed top-0 z-[98] w-full",
         "border-b border-border/40",
         "bg-background/80 backdrop-blur-md",
         "shadow-sm shadow-foreground/5",

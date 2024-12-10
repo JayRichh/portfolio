@@ -318,7 +318,8 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
               initial="hidden"
               animate={isOpen ? "visible" : "hidden"}
               transition={{ delay: 0.7 }}
-              className="mt-auto pt-12"
+              className="mt-auto py-6 px-4 border-t border-gray-200 dark:border-gray-700"
+
             >
               <div className="max-w-3xl mx-auto flex flex-col md:flex-row justify-center items-center gap-12">
                 <div className="flex flex-col items-center space-y-4">
