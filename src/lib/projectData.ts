@@ -249,7 +249,7 @@ export const projectData: Project[] = [
       "Modern business website for a portable miniature golf company, replacing legacy WordPress site with Next.js 15 for improved performance and user experience",
     imgUrl: "/images/golfhero.png",
     repoUrl: "https://github.com/JayRichh/golf2go",
-    liveUrl: "https://golf2go.vercel.app",
+    liveUrl: "https://golf2go.co.nz",
     updatedAt: "2024-12-04",
     details: {
       title: "Golf2Go - Professional Mini Golf Services",

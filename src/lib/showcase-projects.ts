@@ -91,7 +91,7 @@ export const projectsData = [
       },
     ],
     links: {
-      live: "https://golf2go.vercel.app",
+      live: "https://golf2go.co.nz",
       code: "https://github.com/JayRichh/golf2go",
     },
     theme: {
