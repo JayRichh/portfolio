@@ -211,7 +211,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
           animate={isOpen ? "visible" : "hidden"}
           className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 px-6 py-4"
         >
-          <div className="max-w-7xl w-full mx-auto flex items-center justify-between">
+          <div className="max-w-7xl w-full mx-auto flex items-center justify-between px-4 sm:px-8">
             <motion.h2 className="text-3xl font-bold text-gray-900 dark:text-white">
               Menu
             </motion.h2>
