@@ -7,7 +7,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ onScrollClick }: HeroSectionProps) {
   return (
-    <div className="relative h-screen flex items-center justify-center w-full bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-900">
+    <div className="relative h-screen flex items-center justify-center w-full">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

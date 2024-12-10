@@ -39,7 +39,7 @@ export default function WorkPage() {
   });
 
   return (
-    <div className="relative min-h-screen bg-white dark:bg-gray-900">
+    <div className="relative min-h-screen ">
       <ScrollProgress />
       <ScrollToTop />
 
