@@ -189,7 +189,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-[99] bg-black/50 dark:bg-white/50 backdrop-blur-md pointer-events-auto"
+            className="fixed inset-0 z-[99] bg-gradient-to-br from-background/95 via-background to-background pointer-events-auto backdrop-blur-md"
             onClick={onClose}
           />
         )}
@@ -201,7 +201,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
         initial="hidden"
         animate={isOpen ? "visible" : "hidden"}
         className={cn(
-          "fixed inset-0 z-[100] flex min-h-screen w-screen flex-col bg-white dark:bg-gray-900",
+          "fixed inset-0 z-[100] flex min-h-screen w-screen flex-col bg-gradient-to-br from-background via-background to-background/90",
           isOpen ? "pointer-events-auto" : "pointer-events-none"
         )}
       >
@@ -319,7 +319,6 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
               animate={isOpen ? "visible" : "hidden"}
               transition={{ delay: 0.7 }}
               className="mt-auto py-6 px-4 border-t border-gray-200 dark:border-gray-700"
-
             >
               <div className="max-w-3xl mx-auto flex flex-col md:flex-row justify-center items-center gap-12">
                 <div className="flex flex-col items-center space-y-4">
