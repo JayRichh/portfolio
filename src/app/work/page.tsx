@@ -54,12 +54,12 @@ export default function WorkPage() {
             className="sticky top-0 min-h-screen"
             style={{
               zIndex: projectsData.length - index,
-              willChange: 'transform',
+              willChange: "transform",
             }}
             initial={{ opacity: 0 }}
             whileInView={{
               opacity: 1,
-              transition: { duration: 0.5 }
+              transition: { duration: 0.5 },
             }}
             viewport={{ once: true, margin: "-20%" }}
           >

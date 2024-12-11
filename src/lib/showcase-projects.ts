@@ -1,13 +1,14 @@
 export const projectsData = [
   {
     title: "Checkpoint",
-    description: "GitHub analytics dashboard built with Next.js 15, featuring interactive contribution visualizations, language distribution analysis, and detailed activity metrics",
+    description:
+      "GitHub analytics dashboard built with Next.js 15, featuring interactive contribution visualizations, language distribution analysis, and detailed activity metrics",
     technologies: [
       "Next.js 15",
       "TypeScript",
       "GitHub GraphQL API",
       "Tailwind CSS",
-      "Nivo Charts"
+      "Nivo Charts",
     ],
     mainImage: {
       src: "/images/_com4.png",
@@ -34,7 +35,8 @@ export const projectsData = [
   },
   {
     title: "SteamShare",
-    description: "Steam screenshot management platform with integrated gallery organization and canvas editing. Features seamless Steam authentication, real-time data fetch, and collage creation tools.",
+    description:
+      "Steam screenshot management platform with integrated gallery organization and canvas editing. Features seamless Steam authentication, real-time data fetch, and collage creation tools.",
     technologies: [
       "React 18",
       "TypeScript",
@@ -67,7 +69,8 @@ export const projectsData = [
   },
   {
     title: "Golf2Go",
-    description: "Modern business website for a portable miniature golf company, replacing legacy WordPress site with Next.js 15 for improved performance and user experience.",
+    description:
+      "Modern business website for a portable miniature golf company, replacing legacy WordPress site with Next.js 15 for improved performance and user experience.",
     technologies: [
       "Next.js",
       "TypeScript",
@@ -100,8 +103,45 @@ export const projectsData = [
     },
   },
   {
+    title: "Gift List",
+    description:
+      "Next.js application utilizing TypeScript and Zod for type-safe gift tracking and analytics. Implements hierarchical data structures for group and member management with real-time visualization of spending patterns.",
+    technologies: [
+      "Next.js 15",
+      "React 18",
+      "TypeScript",
+      "Tailwind CSS",
+      "Nivo Charts",
+      "Zod",
+    ],
+    mainImage: {
+      src: "/images/gift1.png",
+      alt: "Gift List Main",
+    },
+    subImages: [
+      {
+        src: "/images/gift3.png",
+        alt: "Gift List Analytics",
+      },
+      {
+        src: "/images/gift4.png",
+        alt: "Gift List Management",
+      },
+    ],
+    links: {
+      live: "https://gifters.vercel.app",
+      code: "https://github.com/JayRichh/gift-list",
+    },
+    theme: {
+      textColor: "text-amber-600 dark:text-amber-400",
+      gradient: "",
+    },
+    reverse: true,
+  },
+  {
     title: "CSS Battle",
-    description: "A full-featured web app for recreating CSS battles with real-time previews, scoring based on accuracy and code efficiency, and interactive comparison tools.",
+    description:
+      "A full-featured web app for recreating CSS battles with real-time previews, scoring based on accuracy and code efficiency, and interactive comparison tools.",
     technologies: [
       "Next.js",
       "TypeScript",
@@ -134,7 +174,8 @@ export const projectsData = [
   },
   {
     title: "Encompass Tours",
-    description: "Digital platform for NZ motorcycle tours using Vue and Supabase. Features server-side caching, dynamic tour management, and interactive route visualization.",
+    description:
+      "Digital platform for NZ motorcycle tours using Vue and Supabase. Features server-side caching, dynamic tour management, and interactive route visualization.",
     technologies: ["Vue.js", "Supabase", "Redis", "Node.js", "TypeScript"],
     mainImage: {
       src: "/images/encompass-hero.png",
@@ -161,7 +202,8 @@ export const projectsData = [
   },
   {
     title: "PomoDev",
-    description: "A Pomodoro Timer Chrome Extension designed to boost productivity. Features customizable timers, task management, and theme options, all built with modern web technologies.",
+    description:
+      "A Pomodoro Timer Chrome Extension designed to boost productivity. Features customizable timers, task management, and theme options, all built with modern web technologies.",
     technologies: [
       "React",
       "TypeScript",
@@ -194,7 +236,8 @@ export const projectsData = [
   },
   {
     title: "The Work Waka",
-    description: "Job application and interview tracking platform with data visualization, calendar integration, dynamic forms, and Sankey diagram reports.",
+    description:
+      "Job application and interview tracking platform with data visualization, calendar integration, dynamic forms, and Sankey diagram reports.",
     technologies: ["React", "TypeScript", "Next.js", "D3.js", "Tailwind CSS"],
     mainImage: {
       src: "/images/workwaka.png",
@@ -219,5 +262,5 @@ export const projectsData = [
       gradient: "",
     },
     reverse: true,
-  }
+  },
 ];

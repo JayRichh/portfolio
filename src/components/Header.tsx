@@ -28,12 +28,8 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
         <div className="container relative">
           {/* Mobile Layout */}
           <div className="flex h-14 items-center justify-between md:hidden">
-            <div className="flex items-center">
-              {navigation}
-            </div>
-            <div className="flex flex-1 justify-center">
-              {logo}
-            </div>
+            <div className="flex items-center">{navigation}</div>
+            <div className="flex flex-1 justify-center">{logo}</div>
             <div className="flex items-center justify-end space-x-1">
               {actions}
             </div>
@@ -41,12 +37,8 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
 
           {/* Desktop Layout */}
           <div className="hidden h-14 grid-cols-3 items-center md:grid">
-            <div className="flex items-center">
-              {logo}
-            </div>
-            <nav className="order-first md:order-none">
-              {navigation}
-            </nav>
+            <div className="flex items-center">{logo}</div>
+            <nav className="order-first md:order-none">{navigation}</nav>
             <div className="flex items-center justify-end space-x-1">
               {actions}
             </div>

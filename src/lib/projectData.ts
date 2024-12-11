@@ -331,7 +331,105 @@ export const projectData: Project[] = [
           ],
         },
       ],
-      additionalImages: ["/images/golf3.png", "/images/golf4.png", "/images/golf2.png"],
+      additionalImages: [
+        "/images/golf3.png",
+        "/images/golf4.png",
+        "/images/golf2.png",
+      ],
+    },
+  },
+  {
+    title: "Gift List",
+    description:
+      "Next.js app implementing hierarchical gift management with TypeScript and real-time analytics",
+    imgUrl: "/images/gift1.png",
+    repoUrl: "https://github.com/JayRichh/gift-list",
+    liveUrl: "https://gifters.vercel.app",
+    updatedAt: "2024-12-11",
+    details: {
+      title: "Gift List",
+      description:
+        "Next.js application utilizing TypeScript and Zod for type-safe gift tracking and analytics. Implements hierarchical data structures for group and member management with real-time visualization of spending patterns.",
+      technologies: [
+        "Next.js 15",
+        "React 18",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Nivo Charts",
+        "Zod",
+      ],
+      features: [
+        {
+          title: "Data Structure Implementation",
+          text: "Hierarchical data model using TypeScript interfaces and Zod schemas for runtime validation. Implements nested relationships between groups, members, and gifts with strict type checking.",
+          image: "/images/gift3.png",
+        },
+        {
+          title: "State Management Architecture",
+          text: "Custom React hooks managing complex state interactions between gifts, groups, and analytics. Implements optimistic updates and real-time state synchronization.",
+          image: "/images/gift4.png",
+        },
+        {
+          title: "Data Visualization System",
+          text: "Integration of Nivo charts with custom theming system. Implements responsive visualizations for gift distribution, spending patterns, and budget analysis using composition pattern.",
+          image: "/images/gift2.png",
+        },
+        {
+          title: "Budget Tracking Logic",
+          text: "Multi-level budget management system with TypeScript generics for type-safe calculations across group and member hierarchies.",
+        },
+      ],
+      challenges: [
+        {
+          title: "Type System Architecture",
+          text: "Implementing complex nested type definitions while maintaining strict type safety across component boundaries and async operations.",
+        },
+        {
+          title: "Performance Optimization",
+          text: "Resolving render optimization challenges with large datasets in chart components through careful state management and memoization.",
+        },
+        {
+          title: "Component Composition",
+          text: "Designing flexible component architecture supporting various gift tracking scenarios while maintaining consistent type safety.",
+        },
+      ],
+      learnings: [
+        {
+          title: "TypeScript Pattern Implementation",
+          points: [
+            {
+              text: "Developed type-safe patterns for handling nested data structures with Zod validation",
+            },
+            {
+              text: "Implemented generic types for reusable components across different data contexts",
+            },
+          ],
+        },
+        {
+          title: "React Architecture Patterns",
+          points: [
+            {
+              text: "Built custom hooks system for encapsulating complex state logic and side effects",
+            },
+            {
+              text: "Implemented controlled component patterns for form handling with validation",
+            },
+          ],
+        },
+        {
+          title: "Performance Optimization Techniques",
+          points: [
+            {
+              text: "Applied React.memo and useMemo for optimizing chart component rerenders",
+            },
+            {
+              text: "Implemented efficient data transformation patterns for analytics calculations",
+            },
+          ],
+        },
+      ],
+      additionalImages: [],
     },
   },
   {

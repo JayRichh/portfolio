@@ -59,7 +59,7 @@ export function ProjectCardVariant({
 
   const fadeInVariant = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1 }
+    visible: { opacity: 1 },
   };
 
   return (
@@ -76,7 +76,9 @@ export function ProjectCardVariant({
             className={styles.content}
           >
             <div className={styles.grid}>
-              <div className={`lg:col-span-7 ${reverse ? "order-2" : "order-2 lg:order-1"}`}>
+              <div
+                className={`lg:col-span-7 ${reverse ? "order-2" : "order-2 lg:order-1"}`}
+              >
                 <div className="relative">
                   <Spotlight
                     src={mainImage.src}
@@ -97,7 +99,9 @@ export function ProjectCardVariant({
                 </div>
               </div>
 
-              <div className={`lg:col-span-5 ${reverse ? "order-1" : "order-1 lg:order-2"}`}>
+              <div
+                className={`lg:col-span-5 ${reverse ? "order-1" : "order-1 lg:order-2"}`}
+              >
                 <div className="space-y-6 md:space-y-8">
                   <motion.h2
                     initial="hidden"

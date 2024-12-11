@@ -52,7 +52,7 @@ export function SiteNavigation(): JSX.Element {
 
   // Handle menu state
   const handleMenuToggle = React.useCallback(() => {
-    setIsMenuOpen(prev => !prev);
+    setIsMenuOpen((prev) => !prev);
   }, []);
 
   const handleMenuClose = React.useCallback(() => {
@@ -104,10 +104,7 @@ export function SiteNavigation(): JSX.Element {
       </div>
 
       {/* Fullscreen Menu */}
-      <FullscreenMenu 
-        isOpen={isMenuOpen}
-        onClose={handleMenuClose}
-      />
+      <FullscreenMenu isOpen={isMenuOpen} onClose={handleMenuClose} />
     </nav>
   );
 }

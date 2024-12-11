@@ -28,7 +28,7 @@ const SpotlightModal = ({
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleEsc);
-    
+
     // Set dialog state and lock body scroll
     setIsDialogOpen(true);
     document.body.style.overflow = "hidden";
@@ -76,7 +76,7 @@ const SpotlightModal = ({
         </div>
       </motion.div>
     </motion.div>,
-    document.body
+    document.body,
   );
 };
 

@@ -39,7 +39,12 @@ const resourceItems = [
 ];
 
 const socialLinks = [
-  { label: "GitHub", icon: Github, path: "https://github.com/jayrichh", external: true },
+  {
+    label: "GitHub",
+    icon: Github,
+    path: "https://github.com/jayrichh",
+    external: true,
+  },
   { label: "Contact", icon: Mail, path: "/#contact", external: false },
 ];
 
@@ -75,39 +80,39 @@ const containerVariants = {
 
 const contentVariants = {
   hidden: { opacity: 0 },
-  visible: { 
+  visible: {
     opacity: 1,
     transition: {
       delay: 0.3,
       duration: 0.4,
-      ease: "easeOut"
-    }
+      ease: "easeOut",
+    },
   },
-  exit: { 
+  exit: {
     opacity: 0,
     transition: {
-      duration: 0.2
-    }
-  }
+      duration: 0.2,
+    },
+  },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, x: -20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     x: 0,
     transition: {
       duration: 0.3,
-      ease: "easeOut"
-    }
+      ease: "easeOut",
+    },
   },
-  exit: { 
+  exit: {
     opacity: 0,
     x: -10,
     transition: {
-      duration: 0.2
-    }
-  }
+      duration: 0.2,
+    },
+  },
 };
 
 export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
@@ -122,14 +127,17 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
     return () => setMounted(false);
   }, []);
 
-  const scrollToHash = React.useCallback((hash: string, attempts = 10, delay = 100) => {
-    const element = document.getElementById(hash);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else if (attempts > 0) {
-      setTimeout(() => scrollToHash(hash, attempts - 1, delay), delay);
-    }
-  }, []);
+  const scrollToHash = React.useCallback(
+    (hash: string, attempts = 10, delay = 100) => {
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else if (attempts > 0) {
+        setTimeout(() => scrollToHash(hash, attempts - 1, delay), delay);
+      }
+    },
+    [],
+  );
 
   const handleNavigation = React.useCallback(
     (path: string) => {
@@ -153,7 +161,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
         }
       }
     },
-    [pathname, router, onClose, scrollToHash]
+    [pathname, router, onClose, scrollToHash],
   );
 
   React.useEffect(() => {
@@ -166,7 +174,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
       document.body.style.overflow = "hidden";
       if (menuRef.current) {
         const focusableElements = menuRef.current.querySelectorAll<HTMLElement>(
-          'a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+          'a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])',
         );
         if (focusableElements.length) focusableElements[0].focus();
       }
@@ -202,7 +210,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
         animate={isOpen ? "visible" : "hidden"}
         className={cn(
           "fixed inset-0 z-[100] flex min-h-screen w-screen flex-col bg-gradient-to-br from-background via-background to-background/90",
-          isOpen ? "pointer-events-auto" : "pointer-events-none"
+          isOpen ? "pointer-events-auto" : "pointer-events-none",
         )}
       >
         <motion.div
@@ -254,9 +262,9 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
                         onClick={() => handleNavigation(item.path)}
                         className={cn(
                           "block text-lg font-medium transition-colors duration-300",
-                          pathname === item.path 
-                            ? "text-blue-500 dark:text-blue-400" 
-                            : "text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                          pathname === item.path
+                            ? "text-blue-500 dark:text-blue-400"
+                            : "text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400",
                         )}
                       >
                         {item.label}
@@ -340,7 +348,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
                           "flex items-center gap-2 px-4 py-2 rounded-md text-base font-medium transition-colors duration-200",
                           theme === value
                             ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
-                            : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                            : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800",
                         )}
                       >
                         <Icon className="h-5 w-5" />
@@ -355,37 +363,39 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
                     Connect
                   </h3>
                   <div className="flex flex-wrap justify-center gap-3">
-                    {socialLinks.map(({ label, icon: Icon, path, external }, index) => (
-                      <motion.div
-                        key={path}
-                        custom={index}
-                        variants={itemVariants}
-                        initial="hidden"
-                        animate={isOpen ? "visible" : "hidden"}
-                        transition={{ delay: 0.9 + index * 0.1 }}
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        {external ? (
-                          <a
-                            href={path}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                          >
-                            <Icon className="h-5 w-5" />
-                            {label}
-                          </a>
-                        ) : (
-                          <button
-                            onClick={() => handleNavigation(path)}
-                            className="flex items-center gap-2 px-4 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                          >
-                            <Icon className="h-5 w-5" />
-                            {label}
-                          </button>
-                        )}
-                      </motion.div>
-                    ))}
+                    {socialLinks.map(
+                      ({ label, icon: Icon, path, external }, index) => (
+                        <motion.div
+                          key={path}
+                          custom={index}
+                          variants={itemVariants}
+                          initial="hidden"
+                          animate={isOpen ? "visible" : "hidden"}
+                          transition={{ delay: 0.9 + index * 0.1 }}
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          {external ? (
+                            <a
+                              href={path}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-4 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                            >
+                              <Icon className="h-5 w-5" />
+                              {label}
+                            </a>
+                          ) : (
+                            <button
+                              onClick={() => handleNavigation(path)}
+                              className="flex items-center gap-2 px-4 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                            >
+                              <Icon className="h-5 w-5" />
+                              {label}
+                            </button>
+                          )}
+                        </motion.div>
+                      ),
+                    )}
                     <motion.button
                       variants={itemVariants}
                       initial="hidden"

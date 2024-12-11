@@ -34,10 +34,7 @@ const WorkItems = [
   },
 ];
 
-export function WorkDropdown({
-  isActive,
-  isMobile,
-}: WorkDropdownProps) {
+export function WorkDropdown({ isActive, isMobile }: WorkDropdownProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = React.useState(false);

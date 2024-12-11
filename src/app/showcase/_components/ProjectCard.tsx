@@ -37,6 +37,8 @@ const getProjectStyles = (title: string): string => {
       return "group-[]/css:text-purple-600 dark:group-[]/css:text-purple-400 font-[650]";
     case "Golf2Go":
       return "group-[]/golf:text-emerald-600 dark:group-[]/golf:text-emerald-400 font-[650]";
+    case "Gift List":
+      return "group-[]/gift:text-amber-600 dark:group-[]/gift:text-amber-400 font-[650]";
     case "Encompass Tours":
       return "group-[]/tours:text-teal-600 dark:group-[]/tours:text-teal-400 font-[650]";
     case "PomoDev":
@@ -50,14 +52,24 @@ const getProjectStyles = (title: string): string => {
 
 const getGroupName = (title: string): string => {
   switch (title) {
-    case "Checkpoint": return "group/checkpoint";
-    case "SteamShare": return "group/steam";
-    case "CSS Battle": return "group/css";
-    case "Golf2Go": return "group/golf";
-    case "Encompass Tours": return "group/tours";
-    case "PomoDev": return "group/pomo";
-    case "The Work Waka": return "group/waka";
-    default: return "";
+    case "Checkpoint":
+      return "group/checkpoint";
+    case "SteamShare":
+      return "group/steam";
+    case "CSS Battle":
+      return "group/css";
+    case "Golf2Go":
+      return "group/golf";
+    case "Gift List":
+      return "group/gift";
+    case "Encompass Tours":
+      return "group/tours";
+    case "PomoDev":
+      return "group/pomo";
+    case "The Work Waka":
+      return "group/waka";
+    default:
+      return "";
   }
 };
 
@@ -71,6 +83,8 @@ const getBackgroundStyle = (title: string): string => {
       return "group-[]/css:bg-gradient-to-bl from-purple-100/30 via-fuchsia-100/20 to-transparent dark:from-purple-950/30 dark:via-fuchsia-950/20";
     case "Golf2Go":
       return "group-[]/golf:bg-gradient-to-tr from-emerald-100/30 via-green-100/20 to-transparent dark:from-emerald-950/30 dark:via-green-950/20";
+    case "Gift List":
+      return "group-[]/gift:bg-gradient-to-bl from-amber-100/30 via-yellow-100/20 to-transparent dark:from-amber-950/30 dark:via-yellow-950/20";
     case "Encompass Tours":
       return "group-[]/tours:bg-gradient-to-br from-teal-100/30 via-cyan-100/20 to-transparent dark:from-teal-950/30 dark:via-cyan-950/20";
     case "PomoDev":
@@ -92,6 +106,8 @@ const getDescriptionStyle = (title: string): string => {
       return "group-[]/css:text-purple-950 dark:group-[]/css:text-purple-200 tracking-wide";
     case "Golf2Go":
       return "group-[]/golf:text-emerald-950 dark:group-[]/golf:text-emerald-200 tracking-wide";
+    case "Gift List":
+      return "group-[]/gift:text-amber-950 dark:group-[]/gift:text-amber-200 tracking-wide";
     case "Encompass Tours":
       return "group-[]/tours:text-teal-950 dark:group-[]/tours:text-teal-200 tracking-wide";
     case "PomoDev":
@@ -119,18 +135,23 @@ export function ProjectCard({
 
   const fadeInVariant = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1 }
+    visible: { opacity: 1 },
   };
 
   return (
-    <section id={id} className={cn(
-      "w-full scroll-mt-[100px] relative overflow-hidden",
-      groupName
-    )}>
-      <div className={cn(
-        "relative min-h-screen transition-colors duration-500",
-        getBackgroundStyle(title)
-      )}>
+    <section
+      id={id}
+      className={cn(
+        "w-full scroll-mt-[100px] relative overflow-hidden",
+        groupName,
+      )}
+    >
+      <div
+        className={cn(
+          "relative min-h-screen transition-colors duration-500",
+          getBackgroundStyle(title),
+        )}
+      >
         <div className="mx-auto max-w-[90rem] p-4 sm:p-6 md:p-8 lg:p-16">
           <motion.div
             initial="hidden"
@@ -141,10 +162,12 @@ export function ProjectCard({
             className="w-full relative"
           >
             <div className="grid grid-cols-1 gap-8 items-center lg:grid-cols-12 lg:gap-16">
-              <div className={cn(
-                "lg:col-span-7",
-                reverse ? "order-2" : "order-2 lg:order-1"
-              )}>
+              <div
+                className={cn(
+                  "lg:col-span-7",
+                  reverse ? "order-2" : "order-2 lg:order-1",
+                )}
+              >
                 <div className="relative">
                   <Spotlight
                     src={mainImage.src}
@@ -165,10 +188,12 @@ export function ProjectCard({
                 </div>
               </div>
 
-              <div className={cn(
-                "lg:col-span-5",
-                reverse ? "order-1" : "order-1 lg:order-2"
-              )}>
+              <div
+                className={cn(
+                  "lg:col-span-5",
+                  reverse ? "order-1" : "order-1 lg:order-2",
+                )}
+              >
                 <div className="space-y-6 md:space-y-8">
                   <motion.h2
                     initial="hidden"
@@ -178,7 +203,7 @@ export function ProjectCard({
                     transition={{ duration: 0.4 }}
                     className={cn(
                       "text-3xl sm:text-4xl md:text-5xl lg:text-7xl tracking-tight",
-                      getProjectStyles(title)
+                      getProjectStyles(title),
                     )}
                   >
                     {title}
@@ -191,10 +216,12 @@ export function ProjectCard({
                     transition={{ duration: 0.4, delay: 0.1 }}
                     className="space-y-6 md:space-y-8"
                   >
-                    <p className={cn(
-                      "text-base sm:text-lg md:text-2xl leading-relaxed font-medium",
-                      getDescriptionStyle(title)
-                    )}>
+                    <p
+                      className={cn(
+                        "text-base sm:text-lg md:text-2xl leading-relaxed font-medium",
+                        getDescriptionStyle(title),
+                      )}
+                    >
                       {description}
                     </p>
                     <div className="flex flex-wrap gap-2">

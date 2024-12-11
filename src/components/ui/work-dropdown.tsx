@@ -34,23 +34,23 @@ const workItems = [
   },
 ];
 
-export function WorkDropdown({
-  isActive,
-  isMobile,
-}: WorkDropdownProps) {
+export function WorkDropdown({ isActive, isMobile }: WorkDropdownProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
 
-  const scrollToHash = React.useCallback((hash: string, attempts = 10, delay = 100) => {
-    const element = document.getElementById(hash);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else if (attempts > 0) {
-      setTimeout(() => scrollToHash(hash, attempts - 1, delay), delay);
-    }
-  }, []);
+  const scrollToHash = React.useCallback(
+    (hash: string, attempts = 10, delay = 100) => {
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else if (attempts > 0) {
+        setTimeout(() => scrollToHash(hash, attempts - 1, delay), delay);
+      }
+    },
+    [],
+  );
 
   const handleNavigation = React.useCallback(
     (path: string) => {
@@ -78,7 +78,7 @@ export function WorkDropdown({
         }
       }
     },
-    [pathname, router, scrollToHash]
+    [pathname, router, scrollToHash],
   );
 
   // Close dropdown on route change
