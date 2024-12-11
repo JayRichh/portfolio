@@ -24,7 +24,7 @@ const mainLinks = [
 
 const workItems = [
   { label: "SteamShare", path: "/work#steamshare" },
-  { label: "golf2go", path: "/work#golf2go" },
+  { label: "Golf2go", path: "/work#golf2go" },
   { label: "CSS Battle", path: "/work#cssbattle" },
   { label: "Encompass Tours", path: "/work#encompasstours" },
   { label: "PomoDev", path: "/work#pomodev" },
