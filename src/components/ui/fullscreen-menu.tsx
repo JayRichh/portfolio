@@ -23,13 +23,12 @@ const mainLinks = [
 ];
 
 const workItems = [
-  { label: "Checkpoint", path: "/work#checkpoint" },
   { label: "SteamShare", path: "/work#steamshare" },
-  { label: "Golf2Go", path: "/work#golf2go" },
+  { label: "golf2go", path: "/work#golf2go" },
   { label: "CSS Battle", path: "/work#cssbattle" },
   { label: "Encompass Tours", path: "/work#encompasstours" },
   { label: "PomoDev", path: "/work#pomodev" },
-  { label: "The Work Waka", path: "/work#theworkwaka" },
+  { label: "Gift List", path: "/work#giftlist" },
 ];
 
 const resourceItems = [
