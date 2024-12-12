@@ -1,37 +1,41 @@
 export const projectsData = [
   {
-    title: "Checkpoint",
+    title: "Gift List",
     description:
-      "GitHub analytics dashboard built with Next.js 15, featuring interactive contribution visualizations, language distribution analysis, and detailed activity metrics",
+      "Next.js gift management app with Supabase integration, featuring hierarchical group organization, CSV import capabilities, and real-time analytics. Implements secure auth, automated CRUD operations, and persistent storage.",
     technologies: [
       "Next.js 15",
+      "React 18",
       "TypeScript",
-      "GitHub GraphQL API",
+      "Supabase",
       "Tailwind CSS",
+      "Framer Motion",
       "Nivo Charts",
+      "Zod",
     ],
     mainImage: {
-      src: "/images/_com4.png",
-      alt: "Checkpoint Main",
+      src: "/images/gift1.png",
+      alt: "Gift List Main",
     },
     subImages: [
       {
-        src: "/images/_com2.png",
-        alt: "Checkpoint Dashboard",
+        src: "/images/gift3.png",
+        alt: "Gift List Analytics",
       },
       {
-        src: "/images/_com3.png",
-        alt: "Checkpoint Analytics",
+        src: "/images/gift4.png",
+        alt: "Gift List Management",
       },
     ],
     links: {
-      live: "https://checkpoint-demo.vercel.app",
-      code: "https://github.com/JayRichh/checkpoint",
+      live: "https://gifters.vercel.app",
+      code: "https://github.com/JayRichh/gift-list",
     },
     theme: {
-      textColor: "text-indigo-600 dark:text-indigo-400",
+      textColor: "text-amber-600 dark:text-amber-400",
       gradient: "",
     },
+    reverse: true,
   },
   {
     title: "SteamShare",
@@ -66,6 +70,7 @@ export const projectsData = [
       textColor: "text-blue-600 dark:text-blue-400",
       gradient: "",
     },
+    reverse: true,
   },
   {
     title: "Golf2Go",
@@ -103,42 +108,38 @@ export const projectsData = [
     },
   },
   {
-    title: "Gift List",
+    title: "Checkpoint",
     description:
-      "Next.js gift management app with Supabase integration, featuring hierarchical group organization, CSV import capabilities, and real-time analytics. Implements secure auth, automated CRUD operations, and persistent storage.",
+      "GitHub analytics dashboard built with Next.js 15, featuring interactive contribution visualizations, language distribution analysis, and detailed activity metrics",
     technologies: [
       "Next.js 15",
-      "React 18",
       "TypeScript",
-      "Supabase",
+      "GitHub GraphQL API",
       "Tailwind CSS",
-      "Framer Motion",
       "Nivo Charts",
-      "Zod",
     ],
     mainImage: {
-      src: "/images/gift1.png",
-      alt: "Gift List Main",
+      src: "/images/_com4.png",
+      alt: "Checkpoint Main",
     },
     subImages: [
       {
-        src: "/images/gift3.png",
-        alt: "Gift List Analytics",
+        src: "/images/_com2.png",
+        alt: "Checkpoint Dashboard",
       },
       {
-        src: "/images/gift4.png",
-        alt: "Gift List Management",
+        src: "/images/_com3.png",
+        alt: "Checkpoint Analytics",
       },
     ],
     links: {
-      live: "https://gifters.vercel.app",
-      code: "https://github.com/JayRichh/gift-list",
+      live: "https://checkpoint-demo.vercel.app",
+      code: "https://github.com/JayRichh/checkpoint",
     },
     theme: {
-      textColor: "text-amber-600 dark:text-amber-400",
+      textColor: "text-indigo-600 dark:text-indigo-400",
       gradient: "",
     },
-    reverse: true,
   },
   {
     title: "CSS Battle",
@@ -201,6 +202,7 @@ export const projectsData = [
       textColor: "text-teal-600 dark:text-teal-400",
       gradient: "",
     },
+    reverse: true,
   },
   {
     title: "PomoDev",
@@ -232,35 +234,6 @@ export const projectsData = [
     },
     theme: {
       textColor: "text-red-600 dark:text-red-400",
-      gradient: "",
-    },
-    reverse: true,
-  },
-  {
-    title: "The Work Waka",
-    description:
-      "Job application and interview tracking platform with data visualization, calendar integration, dynamic forms, and Sankey diagram reports.",
-    technologies: ["React", "TypeScript", "Next.js", "D3.js", "Tailwind CSS"],
-    mainImage: {
-      src: "/images/workwaka.png",
-      alt: "Work Waka Main",
-    },
-    subImages: [
-      {
-        src: "/images/workmain.webp",
-        alt: "Work Waka Dashboard",
-      },
-      {
-        src: "/images/moitsBoat.png",
-        alt: "Work Waka Features",
-      },
-    ],
-    links: {
-      live: "https://workwaka.vercel.app",
-      code: "https://github.com/JayRichh/workwaka",
-    },
-    theme: {
-      textColor: "text-slate-600 dark:text-slate-400",
       gradient: "",
     },
     reverse: true,
