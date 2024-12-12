@@ -105,12 +105,14 @@ export const projectsData = [
   {
     title: "Gift List",
     description:
-      "Next.js application utilizing TypeScript and Zod for type-safe gift tracking and analytics. Implements hierarchical data structures for group and member management with real-time visualization of spending patterns.",
+      "Next.js gift management app with Supabase integration, featuring hierarchical group organization, CSV import capabilities, and real-time analytics. Implements secure auth, automated CRUD operations, and persistent storage.",
     technologies: [
       "Next.js 15",
       "React 18",
       "TypeScript",
+      "Supabase",
       "Tailwind CSS",
+      "Framer Motion",
       "Nivo Charts",
       "Zod",
     ],

@@ -341,19 +341,20 @@ export const projectData: Project[] = [
   {
     title: "Gift List",
     description:
-      "Next.js app implementing hierarchical gift management with TypeScript and real-time analytics",
+      "Next.js gift management app with Supabase integration, featuring hierarchical group organization, CSV import capabilities, and real-time analytics. Implements secure auth, automated CRUD operations, and persistent storage.",
     imgUrl: "/images/gift1.png",
     repoUrl: "https://github.com/JayRichh/gift-list",
     liveUrl: "https://gifters.vercel.app",
-    updatedAt: "2024-12-11",
+    updatedAt: "2024-12-12",
     details: {
       title: "Gift List",
       description:
-        "Next.js application utilizing TypeScript and Zod for type-safe gift tracking and analytics. Implements hierarchical data structures for group and member management with real-time visualization of spending patterns.",
+        "Next.js application with Supabase backend for gift tracking and analytics. Features secure authentication, CSV data import, and hierarchical group management with real-time visualization of spending patterns.",
       technologies: [
         "Next.js 15",
         "React 18",
         "TypeScript",
+        "Supabase",
         "Tailwind CSS",
         "Framer Motion",
         "Nivo Charts",
@@ -361,70 +362,70 @@ export const projectData: Project[] = [
       ],
       features: [
         {
-          title: "Data Structure Implementation",
-          text: "Hierarchical data model using TypeScript interfaces and Zod schemas for runtime validation. Implements nested relationships between groups, members, and gifts with strict type checking.",
+          title: "Supabase Integration",
+          text: "Full-featured authentication and database integration with row-level security. Implements secure data persistence and real-time updates across sessions.",
           image: "/images/gift3.png",
         },
         {
-          title: "State Management Architecture",
-          text: "Custom React hooks managing complex state interactions between gifts, groups, and analytics. Implements optimistic updates and real-time state synchronization.",
+          title: "Data Management",
+          text: "CSV import functionality supporting various formats, hierarchical group organization with descriptions, and automated CRUD operations with optimistic updates.",
           image: "/images/gift4.png",
         },
         {
-          title: "Data Visualization System",
-          text: "Integration of Nivo charts with custom theming system. Implements responsive visualizations for gift distribution, spending patterns, and budget analysis using composition pattern.",
+          title: "Analytics Visualization",
+          text: "Integration of Nivo charts with custom theming for gift distribution and spending patterns. Features responsive visualizations and budget analysis.",
           image: "/images/gift2.png",
         },
         {
-          title: "Budget Tracking Logic",
-          text: "Multi-level budget management system with TypeScript generics for type-safe calculations across group and member hierarchies.",
+          title: "Group Management",
+          text: "Multi-level group system with TypeScript generics for type-safe calculations. Includes description fields and member management capabilities.",
         },
       ],
       challenges: [
         {
-          title: "Type System Architecture",
-          text: "Implementing complex nested type definitions while maintaining strict type safety across component boundaries and async operations.",
+          title: "Data Integration",
+          text: "Implementing robust CSV parsing with support for various formats while maintaining data integrity and type safety.",
         },
         {
-          title: "Performance Optimization",
-          text: "Resolving render optimization challenges with large datasets in chart components through careful state management and memoization.",
+          title: "State Management",
+          text: "Optimizing real-time updates and state synchronization across components while maintaining consistent UI/UX.",
         },
         {
-          title: "Component Composition",
-          text: "Designing flexible component architecture supporting various gift tracking scenarios while maintaining consistent type safety.",
+          title: "Performance",
+          text: "Balancing responsive analytics with efficient data processing for large gift lists and group hierarchies.",
         },
       ],
       learnings: [
         {
-          title: "TypeScript Pattern Implementation",
+          title: "Backend Integration",
           points: [
             {
-              text: "Developed type-safe patterns for handling nested data structures with Zod validation",
+              text: "Supabase authentication and database patterns with row-level security",
             },
             {
-              text: "Implemented generic types for reusable components across different data contexts",
+              text: "Efficient data synchronization and storage strategies",
             },
           ],
         },
         {
-          title: "React Architecture Patterns",
+          title: "Data Processing",
           points: [
             {
-              text: "Built custom hooks system for encapsulating complex state logic and side effects",
+              text: "CSV parsing and validation with error handling",
             },
             {
-              text: "Implemented controlled component patterns for form handling with validation",
+              text: "Type-safe data transformations with Zod schemas",
             },
           ],
         },
         {
-          title: "Performance Optimization Techniques",
+          title: "Performance Optimization",
           points: [
             {
-              text: "Applied React.memo and useMemo for optimizing chart component rerenders",
+              text: "React component optimization for real-time updates",
             },
             {
-              text: "Implemented efficient data transformation patterns for analytics calculations",
+              text: "Efficient data transformation for analytics calculations",
             },
           ],
         },
