@@ -22,7 +22,7 @@ export const projectsData = [
         alt: "POE2 Tools Skill Tree",
       },
       {
-        src: "/images/poe2.jpg",
+        src: "/images/poe2.png",
         alt: "POE2 Tools Build Planner",
       },
     ],
