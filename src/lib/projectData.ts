@@ -144,6 +144,195 @@ export const projectData: Project[] = [
     },
   },
   {
+    title: "POE2 Tools",
+    description:
+      "Next.js toolkit for Path of Exile 2 featuring skill tree visualization, build planning, and DPS calculations. Uses Supabase for auth/data and integrates with POE API for character syncing.",
+    imgUrl: "/images/poe.png",
+    repoUrl: "https://github.com/JayRichh/poe2",
+    liveUrl: "https://poe2.dev",
+    updatedAt: "2024-12-19",
+    details: {
+      title: "POE2 Tools",
+      description:
+        "Next.js application providing essential tools for Path of Exile 2 players. Features skill tree planning with node visualization, build management with POE account integration, and detailed DPS calculations.",
+      technologies: [
+        "Next.js 15",
+        "TypeScript",
+        "Tailwind CSS",
+        "Supabase",
+        "Python (Tree Scanner)",
+        "Framer Motion",
+        "POE OAuth",
+      ],
+      features: [
+        {
+          title: "Skill Tree Visualization",
+          text: "Interactive skill tree with node filtering, regex search, and ascendancy selection. Uses custom Python scanner for node detection and includes undo/redo for allocation history. Features detailed stat tracking and node highlighting options.",
+          image: "/images/poe1.png",
+        },
+        {
+          title: "DPS Calculator",
+          text: "Dual weapon damage calculator supporting physical, elemental and chaos damage types. Includes global modifiers, real-time updates, and calculation history tracking. Visualizes damage type distribution for build analysis.",
+          image: "/images/poe2.png",
+        },
+        {
+          title: "Build Management",
+          text: "Build planning system with template support and build sharing. Integrates with POE accounts for character data syncing. Uses server-side rendering for optimal performance and includes public/private visibility options.",
+          image: "/images/poe3.png",
+        },
+        {
+          title: "Authentication System",
+          text: "Supabase authentication with email verification and password reset. Includes POE OAuth for account linking and protected routes. Features seamless session management and auth state syncing.",
+        },
+      ],
+      challenges: [
+        {
+          title: "Tree Data Structure",
+          text: "Building an efficient skill tree system that handles node relationships, path finding, and stat calculations while maintaining smooth performance with large datasets. Required careful optimization of node operations and state management.",
+        },
+        {
+          title: "Damage Calculations",
+          text: "Creating a flexible DPS system handling multiple damage types and weapon configurations. Solved through modular calculation engine and efficient state updates for real-time number crunching.",
+        },
+        {
+          title: "State Management",
+          text: "Coordinating complex state across skill tree allocation, build configurations, and live calculations. Implemented robust state management patterns while ensuring consistent data flow between components.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Next.js Architecture",
+          points: [
+            {
+              text: "Designed app router structure with mix of server and client components for optimal performance",
+            },
+            {
+              text: "Implemented dynamic routes with proper loading states and metadata handling",
+            },
+          ],
+        },
+        {
+          title: "Authentication Patterns",
+          points: [
+            {
+              text: "Built secure auth flows with Supabase including email verification and session management",
+            },
+            {
+              text: "Integrated POE OAuth with proper token refresh and error handling",
+            },
+          ],
+        },
+        {
+          title: "Performance Optimization",
+          points: [
+            {
+              text: "Developed efficient rendering strategies for large skill tree visualization",
+            },
+            {
+              text: "Implemented optimized calculation engine for real-time DPS updates",
+            },
+          ],
+        },
+      ],
+      additionalImages: [],
+    },
+  },
+  {
+    title: "Golf2Go",
+    description:
+      "Modern business website for a portable miniature golf company, replacing legacy WordPress site with Next.js 15 for improved performance and user experience",
+    imgUrl: "/images/golfhero.png",
+    repoUrl: "https://github.com/JayRichh/golf2go",
+    liveUrl: "https://golf2go.co.nz",
+    updatedAt: "2024-12-04",
+    details: {
+      title: "Golf2Go - Professional Mini Golf Services",
+      description:
+        "A business platform for a portable miniature golf company, migrated from WordPress to Next.js for better performance and user engagement. Features streamlined booking, course Works, and responsive design.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "reCAPTCHA",
+        "Zod",
+        "SMTP",
+      ],
+      features: [
+        {
+          title: "Streamlined Booking System",
+          text: "Professional booking flow with integrated calendar, course selection, and automated email confirmations. Replaced manual WordPress forms for better reliability.",
+          image: "/images/golf4.png",
+        },
+        {
+          title: "Course Work",
+          text: "High-performance gallery system featuring professional course photography, detailed specifications, and filterable layouts. Optimized images for fast loading.",
+        },
+        {
+          title: "Business Information",
+          text: "Comprehensive company information, services overview, and contact options. Improved from WordPress with better organization and accessibility.",
+        },
+        {
+          title: "Contact Integration",
+          text: "Modern contact system with automated responses and inquiry tracking. Replaced unreliable WordPress plugins with robust server-side handling.",
+        },
+      ],
+      challenges: [
+        {
+          title: "WordPress Migration",
+          text: "Carefully migrating content and SEO value from existing WordPress site while improving structure and performance.",
+        },
+        {
+          title: "Booking Integration",
+          text: "Building a reliable booking system that handles complex scheduling and automated communications.",
+        },
+        {
+          title: "Mobile Optimization",
+          text: "Ensuring perfect mobile experience for customers browsing courses and making bookings on any device.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Business Requirements",
+          points: [
+            {
+              text: "Balancing modern tech with practical business needs",
+            },
+            {
+              text: "Maintaining SEO during platform migration",
+            },
+          ],
+        },
+        {
+          title: "Customer Experience",
+          points: [
+            {
+              text: "Streamlining booking process for better conversion",
+            },
+            {
+              text: "Optimizing mobile experience for busy customers",
+            },
+          ],
+        },
+        {
+          title: "System Integration",
+          points: [
+            {
+              text: "Connecting booking system with business operations",
+            },
+            {
+              text: "Implementing reliable email and notification systems",
+            },
+          ],
+        },
+      ],
+      additionalImages: [
+        "/images/golf3.png",
+        "/images/golf4.png",
+        "/images/golf2.png",
+      ],
+    },
+  },
+  {
     title: "SteamShare",
     description:
       "Steam screenshot management platform with integrated gallery organization and canvas editing. Features seamless Steam authentication, real-time data fetch, and collage creation tools.",
@@ -240,101 +429,6 @@ export const projectData: Project[] = [
         "/images/steam6.png",
         "/images/steam7.png",
         "/images/steam8.png",
-      ],
-    },
-  },
-  {
-    title: "Golf2Go",
-    description:
-      "Modern business website for a portable miniature golf company, replacing legacy WordPress site with Next.js 15 for improved performance and user experience",
-    imgUrl: "/images/golfhero.png",
-    repoUrl: "https://github.com/JayRichh/golf2go",
-    liveUrl: "https://golf2go.co.nz",
-    updatedAt: "2024-12-04",
-    details: {
-      title: "Golf2Go - Professional Mini Golf Services",
-      description:
-        "A business platform for a portable miniature golf company, migrated from WordPress to Next.js for better performance and user engagement. Features streamlined booking, course Works, and responsive design.",
-      technologies: [
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "reCAPTCHA",
-        "Zod",
-        "SMTP",
-      ],
-      features: [
-        {
-          title: "Streamlined Booking System",
-          text: "Professional booking flow with integrated calendar, course selection, and automated email confirmations. Replaced manual WordPress forms for better reliability.",
-          image: "/images/golf4.png",
-        },
-        {
-          title: "Course Work",
-          text: "High-performance gallery system featuring professional course photography, detailed specifications, and filterable layouts. Optimized images for fast loading.",
-        },
-        {
-          title: "Business Information",
-          text: "Comprehensive company information, services overview, and contact options. Improved from WordPress with better organization and accessibility.",
-        },
-        {
-          title: "Contact Integration",
-          text: "Modern contact system with automated responses and inquiry tracking. Replaced unreliable WordPress plugins with robust server-side handling.",
-        },
-      ],
-      challenges: [
-        {
-          title: "WordPress Migration",
-          text: "Carefully migrating content and SEO value from existing WordPress site while improving structure and performance.",
-        },
-        {
-          title: "Booking Integration",
-          text: "Building a reliable booking system that handles complex scheduling and automated communications.",
-        },
-        {
-          title: "Mobile Optimization",
-          text: "Ensuring perfect mobile experience for customers browsing courses and making bookings on any device.",
-        },
-      ],
-      learnings: [
-        {
-          title: "Business Requirements",
-          points: [
-            {
-              text: "Balancing modern tech with practical business needs",
-            },
-            {
-              text: "Maintaining SEO during platform migration",
-            },
-          ],
-        },
-        {
-          title: "Customer Experience",
-          points: [
-            {
-              text: "Streamlining booking process for better conversion",
-            },
-            {
-              text: "Optimizing mobile experience for busy customers",
-            },
-          ],
-        },
-        {
-          title: "System Integration",
-          points: [
-            {
-              text: "Connecting booking system with business operations",
-            },
-            {
-              text: "Implementing reliable email and notification systems",
-            },
-          ],
-        },
-      ],
-      additionalImages: [
-        "/images/golf3.png",
-        "/images/golf4.png",
-        "/images/golf2.png",
       ],
     },
   },

@@ -1,38 +1,37 @@
 export const projectsData = [
   {
-    title: "Gift List",
+    title: "POE2 Tools",
     description:
-      "Next.js gift management app with Supabase integration, featuring hierarchical group organization, CSV import capabilities, and real-time analytics. Implements secure auth, automated CRUD operations, and persistent storage.",
+      "Next.js toolkit for Path of Exile 2 featuring skill tree visualization, build planning, and DPS calculations. Uses Supabase for auth/data and integrates with POE API for character syncing.",
     technologies: [
       "Next.js 15",
-      "React 18",
       "TypeScript",
-      "Supabase",
       "Tailwind CSS",
+      "Supabase",
+      "Python (Tree Scanner)",
       "Framer Motion",
-      "Nivo Charts",
-      "Zod",
+      "POE OAuth",
     ],
     mainImage: {
-      src: "/images/gift1.png",
-      alt: "Gift List Main",
+      src: "/images/poe.png",
+      alt: "POE2 Tools Main",
     },
     subImages: [
       {
-        src: "/images/gift3.png",
-        alt: "Gift List Analytics",
+        src: "/images/poe1.png",
+        alt: "POE2 Tools Skill Tree",
       },
       {
-        src: "/images/gift4.png",
-        alt: "Gift List Management",
+        src: "/images/poe2.jpg",
+        alt: "POE2 Tools Build Planner",
       },
     ],
     links: {
-      live: "https://gifters.vercel.app",
-      code: "https://github.com/JayRichh/gift-list",
+      live: "https://poe2.dev",
+      code: "https://github.com/JayRichh/poe2",
     },
     theme: {
-      textColor: "text-amber-600 dark:text-amber-400",
+      textColor: "text-red-600 dark:text-red-400",
       gradient: "",
     },
     reverse: true,
@@ -68,6 +67,44 @@ export const projectsData = [
     },
     theme: {
       textColor: "text-blue-600 dark:text-blue-400",
+      gradient: "",
+    },
+    reverse: true,
+  },
+  {
+    title: "Gift List",
+    description:
+      "Next.js gift management app with Supabase integration, featuring hierarchical group organization, CSV import capabilities, and real-time analytics. Implements secure auth, automated CRUD operations, and persistent storage.",
+    technologies: [
+      "Next.js 15",
+      "React 18",
+      "TypeScript",
+      "Supabase",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Nivo Charts",
+      "Zod",
+    ],
+    mainImage: {
+      src: "/images/gift1.png",
+      alt: "Gift List Main",
+    },
+    subImages: [
+      {
+        src: "/images/gift3.png",
+        alt: "Gift List Analytics",
+      },
+      {
+        src: "/images/gift4.png",
+        alt: "Gift List Management",
+      },
+    ],
+    links: {
+      live: "https://gifters.vercel.app",
+      code: "https://github.com/JayRichh/gift-list",
+    },
+    theme: {
+      textColor: "text-amber-600 dark:text-amber-400",
       gradient: "",
     },
     reverse: true,
