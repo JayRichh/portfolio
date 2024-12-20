@@ -12,6 +12,7 @@ import {
   useTransform,
 } from "framer-motion";
 import {
+  AtSign,
   Book,
   Code,
   Cpu,
@@ -292,6 +293,16 @@ const SocialLinks: React.FC = () => (
       whileTap={{ scale: 0.9 }}
     >
       <Linkedin size={32} />
+    </motion.a>
+    <motion.a
+      href="https://bsky.app/profile/jayrich.dev"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+    >
+      <AtSign size={32} />
     </motion.a>
     <motion.a
       href="mailto:web@jayrich.dev"

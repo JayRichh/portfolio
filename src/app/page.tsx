@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { GithubIcon, LinkedinIcon, MailIcon, CassetteTape } from "lucide-react";
+import { GithubIcon, LinkedinIcon, MailIcon, CassetteTape, AtSign } from "lucide-react";
 import { CtaButton } from "../components/cta-button";
 import { GradientSecondaryText } from "../components/gradient-secondary-text";
 import ContactForm from "../components/contact-form";
@@ -21,6 +21,11 @@ const SOCIAL_LINKS = [
     href: "https://linkedin.com/in/jaydenrichardson",
     icon: LinkedinIcon,
     label: "Connect with me on LinkedIn",
+  },
+  {
+    href: "https://bsky.app/profile/jayrich.dev",
+    icon: AtSign,
+    label: "Follow me on Bluesky",
   },
   {
     href: "mailto:jayrich.dev@gmail.com",
