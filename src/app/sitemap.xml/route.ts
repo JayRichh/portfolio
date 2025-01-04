@@ -9,6 +9,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: "https://jayrich.dev/work",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: "https://jayrich.dev/code",
       lastModified: new Date(),
       changeFrequency: "weekly",
@@ -26,5 +32,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: "https://jayrich.dev/resources",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: "https://jayrich.dev/wordmap",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }
   ];
 }

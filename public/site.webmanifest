@@ -1,19 +1,28 @@
 {
-  "name": "Jayden Richardson | Full Stack Developer",
+  "name": "Jayden Richardson | Web Developer",
   "short_name": "Jayden Richardson",
+  "description": "Web developer working with React, TypeScript, and modern web technologies",
+  "start_url": "/",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "prefer_related_applications": false,
+  "categories": ["development", "portfolio", "web"],
+  "lang": "en-US"
 }
