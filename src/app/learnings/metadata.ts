@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dev Notes | Jayden Richardson",
+  title: "Dev Notes",
   description: "Web development notes and resources covering React, TypeScript, and modern web practices. Interactive mind maps for exploring concepts",
   openGraph: {
     title: "Dev Notes | Jayden Richardson",

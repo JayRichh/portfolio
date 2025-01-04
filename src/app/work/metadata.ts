@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Development Projects | Jayden Richardson",
+  title: "Development Projects",
   description: "Collection of web development projects using React, Next.js, and modern web technologies. Exploring solutions in full-stack development and user experience",
   openGraph: {
     title: "Development Projects | Jayden Richardson",

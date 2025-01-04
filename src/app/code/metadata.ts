@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import { projectData } from "../../lib/projectData";
 
 export const metadata: Metadata = {
-  title: "Projects | Jayden Richardson",
+  title: "Projects",
   description:
     "Web development projects showcasing various technologies and approaches",
   openGraph: {
-    title: "Projects | Jayden Richardson",
+    title: "Projects",
     description:
       "Web development projects showcasing various technologies and approaches",
     images: projectData.slice(0, 6).map((project) => ({
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects | Jayden Richardson",
+    title: "Projects",
     description:
       "Web development projects showcasing various technologies and approaches",
     images: projectData[0].imgUrl,
