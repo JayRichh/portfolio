@@ -245,7 +245,7 @@ export const projectsData = [
     },
     subImages: [
       {
-        src: "/images/workmain.webp",
+        src: "/logo_bg_remove.png",
         alt: "Work Waka Dashboard",
       },
       {

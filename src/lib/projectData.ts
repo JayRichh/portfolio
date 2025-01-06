@@ -1183,7 +1183,7 @@ export const projectData: Project[] = [
         },
       ],
       additionalImages: [
-        "/images/workmain.webp",
+        "/logo_bg_remove.png",
         "/images/workwaka.png",
         "/images/moitsBoat.png",
       ],

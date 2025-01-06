@@ -50,7 +50,7 @@ export function generateWebsiteSchema(context: SchemaContext = defaultContext) {
     description: "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
     image: [
       `${context.siteUrl}${context.siteImage}`,
-      `${context.siteUrl}/images/workmain.webp`
+      `${context.siteUrl}/logo_bg_remove.png`
     ],
     potentialAction: {
       "@type": "SearchAction",
@@ -87,12 +87,12 @@ export function generatePortfolioSchema(context: SchemaContext = defaultContext)
     url: context.siteUrl,
     image: [
       `${context.siteUrl}${context.siteImage}`,
-      `${context.siteUrl}/images/workmain.webp`
+      `${context.siteUrl}/logo_bg_remove.png`
     ],
     screenshot: [
       {
         "@type": "ImageObject",
-        "url": `${context.siteUrl}/images/workmain.webp`,
+        "url": `${context.siteUrl}/logo_bg_remove.png`,
         "caption": "Portfolio Project Showcase"
       }
     ],

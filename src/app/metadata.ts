@@ -94,7 +94,7 @@ export const metadata: Metadata = {
         type: "image/png",
       },
       {
-        url: "/images/workmain.webp",
+        url: "/logo_bg_remove.png",
         width: 1200,
         height: 630,
         alt: "Jayden Richardson Portfolio - Featured Projects",
@@ -109,7 +109,7 @@ export const metadata: Metadata = {
       template: "%s | Jayden Richardson",
     },
     description: "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
-    images: ["/logo_bg_remove.png", "/images/workmain.webp"],
+    images: ["/logo_bg_remove.png", "/logo_bg_remove.png"],
     creator: "@jayrich88",
     site: "@jayrich88",
   },
