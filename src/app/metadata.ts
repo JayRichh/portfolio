@@ -5,22 +5,63 @@ const metadataBase = new URL("https://jayrich.dev");
 export const metadata: Metadata = {
   metadataBase,
   title: {
-    default: "Jayden Richardson | Web Developer",
+    default: "Jayden Richardson | Full Stack Web Developer",
     template: "%s | Jayden Richardson",
   },
-  description: "Web developer working with React, TypeScript, and modern web technologies",
+  description: "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
   applicationName: "Jayden Richardson Portfolio",
   keywords: [
+    // Core Skills
     "Web Development",
-    "React",
+    "Full Stack Development",
+    "React Development",
+    "TypeScript Programming",
+    "JavaScript Development",
+    "Next.js Applications",
+    "Frontend Development",
+    "Backend Development",
+
+    // Technical Expertise
+    "Web Applications",
+    "UI Development",
+    "API Integration",
+    "Cloud Services",
+    "DevOps Practices",
+    "Web Performance",
+    "Responsive Design",
+    "Web Accessibility",
+
+    // Portfolio Sections
+    "Developer Portfolio",
+    "Code Examples",
+    "Project Showcase",
+    "Technical Blog",
+    "Learning Resources",
+    "Development Tools",
+    "Interactive Demos",
+    "Web Development Projects",
+
+    // Technologies
+    "React.js",
     "Next.js",
     "TypeScript",
     "JavaScript",
-    "Frontend Development",
-    "Web Applications",
-    "UI Development",
+    "Node.js",
+    "TailwindCSS",
+    "REST APIs",
+    "GraphQL",
+
+    // Industry Terms
+    "Software Engineering",
+    "Web Development Services",
+    "Technical Consulting",
+    "Code Quality",
+    "Best Practices",
+    "Modern Web Development",
+    "Professional Developer",
+    "Technical Solutions"
   ],
-  authors: [{ name: "Jayden Richardson", url: "https://github.com/jayrich88" }],
+  authors: [{ name: "Jayden Richardson", url: "https://github.com/jayrichh" }],
   creator: "Jayden Richardson",
   publisher: "Jayden Richardson",
   formatDetection: {
@@ -36,32 +77,41 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "Jayden Richardson",
+    siteName: "Jayden Richardson Portfolio",
     locale: "en_US",
     url: "https://jayrich.dev",
     title: {
-      default: "Jayden Richardson | Web Developer",
+      default: "Jayden Richardson | Full Stack Web Developer",
       template: "%s | Jayden Richardson",
     },
-    description: "Web developer working with React, TypeScript, and modern web technologies",
+    description: "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
     images: [
       {
-        url: "/images/main1.png",
+        url: "/logo_bg_remove.png",
+        width: 512,
+        height: 512,
+        alt: "Jayden Richardson - Full Stack Developer",
+        type: "image/png",
+      },
+      {
+        url: "/images/workmain.webp",
         width: 1200,
         height: 630,
-        alt: "Jayden Richardson Portfolio",
-      },
+        alt: "Jayden Richardson Portfolio - Featured Projects",
+        type: "image/webp",
+      }
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: {
-      default: "Jayden Richardson | Web Developer",
+      default: "Jayden Richardson | Full Stack Web Developer",
       template: "%s | Jayden Richardson",
     },
-    description: "Web developer working with React, TypeScript, and modern web technologies",
-    images: ["/images/main1.png"],
+    description: "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
+    images: ["/logo_bg_remove.png", "/images/workmain.webp"],
     creator: "@jayrich88",
+    site: "@jayrich88",
   },
   robots: {
     index: true,
