@@ -8,9 +8,8 @@ export const projectsData = [
       "TypeScript",
       "Tailwind CSS",
       "Supabase",
-      "Python (Tree Scanner)",
       "Framer Motion",
-      "POE OAuth",
+      "OAuth",
     ],
     mainImage: {
       src: "/images/poe.png",
@@ -35,6 +34,41 @@ export const projectsData = [
       gradient: "",
     },
     reverse: true,
+  },
+  {
+    "title": "Tiki Tours",
+    "description": "A modern travel planning platform that helps you organize trips, manage timelines, and track expense",
+    "technologies": [
+      "Next.js 15",
+      "TypeScript",
+      "Three.js",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Nivo Charts"
+    ],
+    "mainImage": {
+      "src": "/images/tiki1.png",
+      "alt": "Tiki Tours Main"
+    },
+    "subImages": [
+      {
+        "src": "/images/tiki2.png",
+        "alt": "Timeline View"
+      },
+      {
+        "src": "/images/tiki3.png",
+        "alt": "Budget Tools"
+      }
+    ],
+    "links": {
+      "live": "https://tiki.tours",
+      "code": "https://github.com/jsrichh/tiki-tours"
+    },
+    "theme": {
+      "textColor": "text-orange-600 dark:text-orange-400",
+      "gradient": ""
+    },
+    "reverse": true
   },
   {
     title: "SteamShare",
@@ -67,44 +101,6 @@ export const projectsData = [
     },
     theme: {
       textColor: "text-blue-600 dark:text-blue-400",
-      gradient: "",
-    },
-    reverse: true,
-  },
-  {
-    title: "Gift List",
-    description:
-      "Next.js gift management app with Supabase integration, featuring hierarchical group organization, CSV import capabilities, and real-time analytics. Implements secure auth, automated CRUD operations, and persistent storage.",
-    technologies: [
-      "Next.js 15",
-      "React 18",
-      "TypeScript",
-      "Supabase",
-      "Tailwind CSS",
-      "Framer Motion",
-      "Nivo Charts",
-      "Zod",
-    ],
-    mainImage: {
-      src: "/images/gift1.png",
-      alt: "Gift List Main",
-    },
-    subImages: [
-      {
-        src: "/images/gift3.png",
-        alt: "Gift List Analytics",
-      },
-      {
-        src: "/images/gift4.png",
-        alt: "Gift List Management",
-      },
-    ],
-    links: {
-      live: "https://gifters.vercel.app",
-      code: "https://github.com/JayRichh/gift-list",
-    },
-    theme: {
-      textColor: "text-amber-600 dark:text-amber-400",
       gradient: "",
     },
     reverse: true,
@@ -271,6 +267,44 @@ export const projectsData = [
     },
     theme: {
       textColor: "text-red-600 dark:text-red-400",
+      gradient: "",
+    },
+    reverse: true,
+  },
+  {
+    title: "Gift List",
+    description:
+      "Next.js gift management app with Supabase integration, featuring hierarchical group organization, CSV import capabilities, and real-time analytics. Implements secure auth, automated CRUD operations, and persistent storage.",
+    technologies: [
+      "Next.js 15",
+      "React 18",
+      "TypeScript",
+      "Supabase",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Nivo Charts",
+      "Zod",
+    ],
+    mainImage: {
+      src: "/images/gift1.png",
+      alt: "Gift List Main",
+    },
+    subImages: [
+      {
+        src: "/images/gift3.png",
+        alt: "Gift List Analytics",
+      },
+      {
+        src: "/images/gift4.png",
+        alt: "Gift List Management",
+      },
+    ],
+    links: {
+      live: "https://gifters.vercel.app",
+      code: "https://github.com/JayRichh/gift-list",
+    },
+    theme: {
+      textColor: "text-amber-600 dark:text-amber-400",
       gradient: "",
     },
     reverse: true,
