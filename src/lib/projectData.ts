@@ -47,7 +47,7 @@ export const projectData: Project[] = [
     "imgUrl": "/images/tiki1.png",
     "repoUrl": "https://github.com/jsric/trippa",
     "liveUrl": "https://tiki.tours",
-    "updatedAt": "2024-01-10",
+    "updatedAt": "2025-01-10",
     "details": {
       "title": "Tiki Tours",
       "description": "Next.js app for organizing trips and tracking activities. Named after the NZ term for exploration.",
