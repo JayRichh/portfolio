@@ -15,13 +15,24 @@ import { GradientSecondaryText } from "../components/gradient-secondary-text";
 import ContactForm from "../components/contact-form";
 import { PageTransitionLink } from "../components/route-transition";
 import { PageSection } from "../components/page-container";
-import { ANIMATION_CONFIG } from "./code/_constants";
+import { CodePenIcon } from "../components/codepen-icon";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from "../components/ui/tooltip";
 
 const SOCIAL_LINKS = [
   {
     href: "https://github.com/JayRichh",
     icon: GithubIcon,
-    label: "Visit my GitHub profile",
+    label: "Visit my GitHub",
+  },
+  {
+    href: "https://codepen.io/JayRichh",
+    icon: CodePenIcon,
+    label: "Check out my CodePen",
   },
   {
     href: "https://linkedin.com/in/jaydenrichardson",
@@ -41,11 +52,9 @@ const SOCIAL_LINKS = [
   {
     href: "https://soundcloud.com/distortie",
     icon: CassetteTape,
-    label: "Listen to my music on Soundcloud",
+    label: "Listen to my Soundcloud",
   },
 ] as const;
-
-const staggerDelay = ANIMATION_CONFIG.STAGGER_DELAY;
 
 export default function HomePage() {
   return (
@@ -137,28 +146,42 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            <ul className="flex justify-center space-x-8">
-              {SOCIAL_LINKS.map(({ href, icon: Icon, label }, index) => (
-                <motion.li
-                  key={href}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
-                >
-                  <motion.a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.2, color: "hsl(var(--primary))" }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    className="text-foreground transition-colors hover:text-primary"
-                    aria-label={label}
+            <TooltipProvider>
+              <ul className="flex justify-center space-x-8">
+                {SOCIAL_LINKS.map(({ href, icon: Icon, label }, index) => (
+                  <motion.li
+                    key={href}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
                   >
-                    <Icon className="h-8 w-8" />
-                  </motion.a>
-                </motion.li>
-              ))}
-            </ul>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <motion.a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{
+                            scale: 1.2,
+                            color: "hsl(var(--primary))",
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 10,
+                          }}
+                          className="text-foreground transition-colors hover:text-primary"
+                          aria-label={label}
+                        >
+                          <Icon className="h-8 w-8" />
+                        </motion.a>
+                      </TooltipTrigger>
+                      <TooltipContent>{label}</TooltipContent>
+                    </Tooltip>
+                  </motion.li>
+                ))}
+              </ul>
+            </TooltipProvider>
           </motion.nav>
         </div>
 
