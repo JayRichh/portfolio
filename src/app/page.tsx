@@ -3,7 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { GithubIcon, LinkedinIcon, MailIcon, CassetteTape, AtSign } from "lucide-react";
+import {
+  GithubIcon,
+  LinkedinIcon,
+  MailIcon,
+  CassetteTape,
+  AtSign,
+} from "lucide-react";
 import { CtaButton } from "../components/cta-button";
 import { GradientSecondaryText } from "../components/gradient-secondary-text";
 import ContactForm from "../components/contact-form";

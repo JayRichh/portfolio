@@ -36,39 +36,40 @@ export const projectsData = [
     reverse: true,
   },
   {
-    "title": "Tiki Tours",
-    "description": "A modern travel planning platform that helps you organize trips, manage timelines, and track expense",
-    "technologies": [
+    title: "Tiki Tours",
+    description:
+      "A modern travel planning platform that helps you organize trips, manage timelines, and track expense",
+    technologies: [
       "Next.js 15",
       "TypeScript",
       "Three.js",
       "Tailwind CSS",
       "Framer Motion",
-      "Nivo Charts"
+      "Nivo Charts",
     ],
-    "mainImage": {
-      "src": "/images/tiki1.png",
-      "alt": "Tiki Tours Main"
+    mainImage: {
+      src: "/images/tiki1.png",
+      alt: "Tiki Tours Main",
     },
-    "subImages": [
+    subImages: [
       {
-        "src": "/images/tiki2.png",
-        "alt": "Timeline View"
+        src: "/images/tiki2.png",
+        alt: "Timeline View",
       },
       {
-        "src": "/images/tiki3.png",
-        "alt": "Budget Tools"
-      }
+        src: "/images/tiki3.png",
+        alt: "Budget Tools",
+      },
     ],
-    "links": {
-      "live": "https://tiki.tours",
-      "code": "https://github.com/jsrichh/tiki-tours"
+    links: {
+      live: "https://tiki.tours",
+      code: "https://github.com/jsrichh/tiki-tours",
     },
-    "theme": {
-      "textColor": "text-orange-600 dark:text-orange-400",
-      "gradient": ""
+    theme: {
+      textColor: "text-orange-600 dark:text-orange-400",
+      gradient: "",
     },
-    "reverse": true
+    reverse: true,
   },
   {
     title: "SteamShare",

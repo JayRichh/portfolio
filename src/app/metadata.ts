@@ -8,7 +8,8 @@ export const metadata: Metadata = {
     default: "Jayden Richardson | Full Stack Web Developer",
     template: "%s | Jayden Richardson",
   },
-  description: "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
+  description:
+    "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
   applicationName: "Jayden Richardson Portfolio",
   keywords: [
     // Core Skills
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
     "Best Practices",
     "Modern Web Development",
     "Professional Developer",
-    "Technical Solutions"
+    "Technical Solutions",
   ],
   authors: [{ name: "Jayden Richardson", url: "https://github.com/jayrichh" }],
   creator: "Jayden Richardson",
@@ -84,7 +85,8 @@ export const metadata: Metadata = {
       default: "Jayden Richardson | Full Stack Web Developer",
       template: "%s | Jayden Richardson",
     },
-    description: "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
+    description:
+      "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
     images: [
       {
         url: "/logo_bg_remove.png",
@@ -99,7 +101,7 @@ export const metadata: Metadata = {
         height: 630,
         alt: "Jayden Richardson Portfolio - Featured Projects",
         type: "image/webp",
-      }
+      },
     ],
   },
   twitter: {
@@ -108,7 +110,8 @@ export const metadata: Metadata = {
       default: "Jayden Richardson | Full Stack Web Developer",
       template: "%s | Jayden Richardson",
     },
-    description: "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
+    description:
+      "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
     images: ["/logo_bg_remove.png", "/logo_bg_remove.png"],
     creator: "@jayrich88",
     site: "@jayrich88",

@@ -7,7 +7,7 @@ type SchemaContext = {
 const defaultContext: SchemaContext = {
   siteUrl: "https://jayrich.dev",
   siteName: "Jayden Richardson Portfolio",
-  siteImage: "/logo_bg_remove.png"
+  siteImage: "/logo_bg_remove.png",
 };
 
 export function generatePersonSchema(context: SchemaContext = defaultContext) {
@@ -16,13 +16,14 @@ export function generatePersonSchema(context: SchemaContext = defaultContext) {
     "@type": "Person",
     name: "Jayden Richardson",
     jobTitle: "Full Stack Developer",
-    description: "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies",
+    description:
+      "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies",
     url: context.siteUrl,
     image: `${context.siteUrl}${context.siteImage}`,
     sameAs: [
       "https://github.com/jayrichh",
       "https://linkedin.com/in/jaydenrichardson",
-      "https://bsky.app/profile/jayrich.dev"
+      "https://bsky.app/profile/jayrich.dev",
     ],
     knowsAbout: [
       "React Development",
@@ -36,8 +37,8 @@ export function generatePersonSchema(context: SchemaContext = defaultContext) {
       "Full Stack Development",
       "Web Performance Optimization",
       "DevOps Practices",
-      "Cloud Services"
-    ]
+      "Cloud Services",
+    ],
   };
 }
 
@@ -47,15 +48,16 @@ export function generateWebsiteSchema(context: SchemaContext = defaultContext) {
     "@type": "WebSite",
     name: context.siteName,
     url: context.siteUrl,
-    description: "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
+    description:
+      "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
     image: [
       `${context.siteUrl}${context.siteImage}`,
-      `${context.siteUrl}/logo_bg_remove.png`
+      `${context.siteUrl}/logo_bg_remove.png`,
     ],
     potentialAction: {
       "@type": "SearchAction",
       target: `${context.siteUrl}/search?q={search_term_string}`,
-      "query-input": "required name=search_term_string"
+      "query-input": "required name=search_term_string",
     },
     applicationCategory: "Portfolio",
     keywords: [
@@ -66,17 +68,19 @@ export function generateWebsiteSchema(context: SchemaContext = defaultContext) {
       "javascript",
       "next.js",
       "portfolio",
-      "web applications"
+      "web applications",
     ].join(", "),
     creator: {
       "@type": "Person",
       name: "Jayden Richardson",
-      url: context.siteUrl
-    }
+      url: context.siteUrl,
+    },
   };
 }
 
-export function generatePortfolioSchema(context: SchemaContext = defaultContext) {
+export function generatePortfolioSchema(
+  context: SchemaContext = defaultContext,
+) {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -87,20 +91,21 @@ export function generatePortfolioSchema(context: SchemaContext = defaultContext)
     url: context.siteUrl,
     image: [
       `${context.siteUrl}${context.siteImage}`,
-      `${context.siteUrl}/logo_bg_remove.png`
+      `${context.siteUrl}/logo_bg_remove.png`,
     ],
     screenshot: [
       {
         "@type": "ImageObject",
-        "url": `${context.siteUrl}/logo_bg_remove.png`,
-        "caption": "Portfolio Project Showcase"
-      }
+        url: `${context.siteUrl}/logo_bg_remove.png`,
+        caption: "Portfolio Project Showcase",
+      },
     ],
-    description: "Interactive portfolio showcasing web development projects, code examples, and technical resources",
+    description:
+      "Interactive portfolio showcasing web development projects, code examples, and technical resources",
     offers: {
       "@type": "Offer",
       price: "0",
-      priceCurrency: "USD"
+      priceCurrency: "USD",
     },
     featureList: [
       "Interactive Project Showcase",
@@ -110,21 +115,21 @@ export function generatePortfolioSchema(context: SchemaContext = defaultContext)
       "Learning Resources",
       "Contact & Collaboration",
       "Project Documentation",
-      "Live Demos"
+      "Live Demos",
     ],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.8",
       ratingCount: "100",
       bestRating: "5",
-      worstRating: "1"
-    }
+      worstRating: "1",
+    },
   };
 }
 
 export function generateBreadcrumbSchema(
   context: SchemaContext = defaultContext,
-  items: Array<{ name: string; path: string; }>
+  items: Array<{ name: string; path: string }>,
 ) {
   return {
     "@context": "https://schema.org",
@@ -133,8 +138,8 @@ export function generateBreadcrumbSchema(
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `${context.siteUrl}${item.path}`
-    }))
+      item: `${context.siteUrl}${item.path}`,
+    })),
   };
 }
 
@@ -149,7 +154,7 @@ export function generateProjectSchema(
     features?: string[];
     demoUrl?: string;
     sourceUrl?: string;
-  }
+  },
 ) {
   return {
     "@context": "https://schema.org",
@@ -157,25 +162,27 @@ export function generateProjectSchema(
     name: project.name,
     description: project.description,
     url: `${context.siteUrl}${project.path}`,
-    image: project.image ? `${context.siteUrl}${project.image}` : `${context.siteUrl}${context.siteImage}`,
+    image: project.image
+      ? `${context.siteUrl}${project.image}`
+      : `${context.siteUrl}${context.siteImage}`,
     programmingLanguage: project.technologies,
     ...(project.features && {
-      featureList: project.features
+      featureList: project.features,
     }),
     ...(project.demoUrl && {
       workExample: {
         "@type": "WebApplication",
-        url: project.demoUrl
-      }
+        url: project.demoUrl,
+      },
     }),
     ...(project.sourceUrl && {
-      codeRepository: project.sourceUrl
+      codeRepository: project.sourceUrl,
     }),
     author: {
       "@type": "Person",
       name: "Jayden Richardson",
-      url: context.siteUrl
-    }
+      url: context.siteUrl,
+    },
   };
 }
 
@@ -183,6 +190,6 @@ export function generateProjectSchema(
 export function combineSchemas(...schemas: any[]) {
   return schemas.map((schema) => ({
     ...schema,
-    "@context": "https://schema.org"
+    "@context": "https://schema.org",
   }));
 }

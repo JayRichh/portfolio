@@ -4,14 +4,14 @@ export async function GET(): Promise<Response> {
   const sitemap = generateSitemap();
   return new Response(sitemap, {
     headers: {
-      'Content-Type': 'application/xml',
+      "Content-Type": "application/xml",
     },
   });
 }
 
 function generateSitemap(): string {
   const lastModified = new Date().toISOString();
-  
+
   const entries = [
     {
       url: "https://jayrich.dev",
@@ -60,18 +60,22 @@ function generateSitemap(): string {
       lastModified,
       changeFrequency: "weekly",
       priority: 0.7,
-    }
+    },
   ];
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${entries.map(entry => `
+  ${entries
+    .map(
+      (entry) => `
     <url>
       <loc>${entry.url}</loc>
       <lastmod>${entry.lastModified}</lastmod>
       <changefreq>${entry.changeFrequency}</changefreq>
       <priority>${entry.priority}</priority>
     </url>
-  `).join('')}
+  `,
+    )
+    .join("")}
 </urlset>`;
 }

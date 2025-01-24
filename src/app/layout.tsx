@@ -26,7 +26,11 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} h-full`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} h-full`}
+    >
       <head>
         <link rel="preconnect" href="https://jayrich.dev" />
         <link rel="dns-prefetch" href="https://jayrich.dev" />
@@ -34,9 +38,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           name="google-site-verification"
           content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION}
         />
-        <meta 
-          name="msvalidate.01" 
-          content={process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION} 
+        <meta
+          name="msvalidate.01"
+          content={process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION}
         />
         <meta
           name="yandex-verification"

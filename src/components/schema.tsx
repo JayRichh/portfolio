@@ -4,21 +4,21 @@ import {
   generateWebsiteSchema,
   generatePortfolioSchema,
   generateBreadcrumbSchema,
-  combineSchemas
+  combineSchemas,
 } from "../utils/schema";
 
 export function Schema() {
   const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Work", path: "/work" },
-    { name: "Code", path: "/code" }
+    { name: "Code", path: "/code" },
   ];
 
   const schema = combineSchemas(
     generatePersonSchema(),
     generateWebsiteSchema(),
     generatePortfolioSchema(),
-    generateBreadcrumbSchema(undefined, breadcrumbItems)
+    generateBreadcrumbSchema(undefined, breadcrumbItems),
   );
 
   return (

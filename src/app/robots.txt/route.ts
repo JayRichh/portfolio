@@ -4,7 +4,7 @@ export async function GET(): Promise<Response> {
   const robotsTxt = generateRobotsTxt();
   return new Response(robotsTxt, {
     headers: {
-      'Content-Type': 'text/plain',
+      "Content-Type": "text/plain",
     },
   });
 }
@@ -14,7 +14,16 @@ function generateRobotsTxt(): string {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/about", "/work", "/code", "/showcase", "/learnings", "/resources", "/wordmap"],
+        allow: [
+          "/",
+          "/about",
+          "/work",
+          "/code",
+          "/showcase",
+          "/learnings",
+          "/resources",
+          "/wordmap",
+        ],
         disallow: [
           "/api/",
           "/_next/",
@@ -35,25 +44,27 @@ function generateRobotsTxt(): string {
     host: "https://jayrich.dev",
   };
 
-  let content = '';
-  
+  let content = "";
+
   // Add User-agent rules
-  rules.rules.forEach(rule => {
+  rules.rules.forEach((rule) => {
     content += `User-agent: ${rule.userAgent}\n`;
     if (rule.allow) {
-      (Array.isArray(rule.allow) ? rule.allow : [rule.allow]).forEach(path => {
-        content += `Allow: ${path}\n`;
-      });
+      (Array.isArray(rule.allow) ? rule.allow : [rule.allow]).forEach(
+        (path) => {
+          content += `Allow: ${path}\n`;
+        },
+      );
     }
     if (rule.disallow) {
-      rule.disallow.forEach(path => {
+      rule.disallow.forEach((path) => {
         content += `Disallow: ${path}\n`;
       });
     }
     if (rule.crawlDelay) {
       content += `Crawl-delay: ${rule.crawlDelay}\n`;
     }
-    content += '\n';
+    content += "\n";
   });
 
   // Add Sitemap and Host

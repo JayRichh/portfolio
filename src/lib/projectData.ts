@@ -42,75 +42,74 @@ export interface Project {
 
 export const projectData: Project[] = [
   {
-    "title": "Tiki Tours",
-    "description": "Trip planning app built with Next.js. Handles timelines, budgets, and activity tracking.",
-    "imgUrl": "/images/tiki1.png",
-    "repoUrl": "https://github.com/jsric/trippa",
-    "liveUrl": "https://tiki.tours",
-    "updatedAt": "2025-01-10",
-    "details": {
-      "title": "Tiki Tours",
-      "description": "Next.js app for organizing trips and tracking activities. Named after the NZ term for exploration.",
-      "technologies": [
+    title: "Tiki Tours",
+    description:
+      "Trip planning app built with Next.js. Handles timelines, budgets, and activity tracking.",
+    imgUrl: "/images/tiki1.png",
+    repoUrl: "https://github.com/jsric/trippa",
+    liveUrl: "https://tiki.tours",
+    updatedAt: "2025-01-10",
+    details: {
+      title: "Tiki Tours",
+      description:
+        "Next.js app for organizing trips and tracking activities. Named after the NZ term for exploration.",
+      technologies: [
         "Next.js 14",
         "TypeScript",
         "Three.js",
         "Tailwind CSS",
-        "Framer Motion"
+        "Framer Motion",
       ],
-      "features": [
+      features: [
         {
-          "title": "Timeline View",
-          "text": "Timeline for organizing trip activities. Uses drag-drop for quick rescheduling.",
+          title: "Timeline View",
+          text: "Timeline for organizing trip activities. Uses drag-drop for quick rescheduling.",
         },
         {
-          "title": "Budget Tools",
-          "text": "Basic expense tracking with category breakdowns.",
+          title: "Budget Tools",
+          text: "Basic expense tracking with category breakdowns.",
         },
         {
-          "title": "Activity System",
-          "text": "Form-based activity creation with status tracking.",
-        }
+          title: "Activity System",
+          text: "Form-based activity creation with status tracking.",
+        },
       ],
-      "challenges": [
+      challenges: [
         {
-          "title": "Timeline Logic",
-          "text": "Building a responsive timeline that handles overlapping activities and date changes."
+          title: "Timeline Logic",
+          text: "Building a responsive timeline that handles overlapping activities and date changes.",
         },
         {
-          "title": "Data Structure",
-          "text": "Setting up trip data for efficient updates and filtering."
-        }
+          title: "Data Structure",
+          text: "Setting up trip data for efficient updates and filtering.",
+        },
       ],
-      "learnings": [
+      learnings: [
         {
-          "title": "App Structure",
-          "points": [
+          title: "App Structure",
+          points: [
             {
-              "text": "Next.js app router patterns"
+              text: "Next.js app router patterns",
             },
             {
-              "text": "TypeScript with complex data types"
-            }
-          ]
+              text: "TypeScript with complex data types",
+            },
+          ],
         },
         {
-          "title": "UI Patterns",
-          "points": [
+          title: "UI Patterns",
+          points: [
             {
-              "text": "Timeline component optimization"
+              text: "Timeline component optimization",
             },
             {
-              "text": "Form state management"
-            }
-          ]
-        }
+              text: "Form state management",
+            },
+          ],
+        },
       ],
-      "additionalImages": [
-        "/images/tiki2.png",
-        "/images/tiki3.png"
-      ]
-    }
+      additionalImages: ["/images/tiki2.png", "/images/tiki3.png"],
+    },
   },
   {
     title: "Encompass Travel",
