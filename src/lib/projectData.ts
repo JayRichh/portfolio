@@ -42,73 +42,96 @@ export interface Project {
 
 export const projectData: Project[] = [
   {
-    title: "Tiki Tours",
+    title: "ASCII Art Generator",
     description:
-      "Trip planning app built with Next.js. Handles timelines, budgets, and activity tracking.",
-    imgUrl: "/images/tiki1.png",
-    repoUrl: "https://github.com/jsric/trippa",
-    liveUrl: "https://tiki.tours",
-    updatedAt: "2025-01-10",
+      "Interactive GIF to ASCII art converter with real-time preview, zoom controls, and multiple export formats. Features smooth animation handling and color mode support.",
+    imgUrl: "/images/ascii1.png",
+    repoUrl: "https://github.com/jsric/ascii",
+    liveUrl: "https://jayrichh.github.io/ascii/",
+    updatedAt: "2025-01-26",
     details: {
-      title: "Tiki Tours",
+      title: "ASCII Art Generator",
       description:
-        "Next.js app for organizing trips and tracking activities. Named after the NZ term for exploration.",
+        "A web application that transforms GIFs into ASCII art animations with real-time preview. Features interactive zoom/pan controls, multiple export formats, and integrated GIF browsing.",
       technologies: [
-        "Next.js 14",
-        "TypeScript",
-        "Three.js",
-        "Tailwind CSS",
-        "Framer Motion",
+        "JavaScript",
+        "p5.js",
+        "GSAP",
+        "gif.js",
+        "CSS",
+        "Canvas API",
       ],
       features: [
         {
-          title: "Timeline View",
-          text: "Timeline for organizing trip activities. Uses drag-drop for quick rescheduling.",
+          title: "Real-time ASCII Conversion",
+          text: "Dynamic GIF to ASCII conversion with instant preview and adjustable character mapping. Supports color mode and maintains animation timing.",
+          image: "/images/asciipreview.png",
         },
         {
-          title: "Budget Tools",
-          text: "Basic expense tracking with category breakdowns.",
+          title: "Interactive Controls",
+          text: "Zoom and pan functionality with GSAP animations. Features smooth transitions, grab-to-zoom, and precise slider controls.",
+          image: "/images/ascii2.png",
         },
         {
-          title: "Activity System",
-          text: "Form-based activity creation with status tracking.",
+          title: "Multi-format Export",
+          text: "Export options including animated GIF, ASCII text, JSON data, CSV format, and canvas snapshots. Preserves animation frames and timing (..sometimes - WIP).",
+          image: "/images/ascii3.png",
+        },
+        {
+          title: "GIF Browser Integration",
+          text: "Built-in GIF browser with category filtering, pagination, and preview functionality.",
         },
       ],
       challenges: [
         {
-          title: "Timeline Logic",
-          text: "Building a responsive timeline that handles overlapping activities and date changes.",
+          title: "Performance Optimization",
+          text: "Implementing real-time ASCII conversion while maintaining smooth animations and responsive controls.",
         },
         {
-          title: "Data Structure",
-          text: "Setting up trip data for efficient updates and filtering.",
+          title: "Interactive UI",
+          text: "Building zoom/pan system with GSAP animations while ensuring performance and intuitive user experience.",
+        },
+        {
+          title: "Export System",
+          text: "Creating export functionality for multiple formats while handling animations and preserving quality.",
         },
       ],
       learnings: [
         {
-          title: "App Structure",
+          title: "Animation Techniques",
           points: [
             {
-              text: "Next.js app router patterns",
+              text: "GSAP animation patterns for smooth UI transitions and controls",
             },
             {
-              text: "TypeScript with complex data types",
+              text: "Canvas manipulation strategies for real-time rendering and scaling",
             },
           ],
         },
         {
-          title: "UI Patterns",
+          title: "Performance Patterns",
           points: [
             {
-              text: "Timeline component optimization",
+              text: "Efficient ASCII conversion algorithms with frame caching",
             },
             {
-              text: "Form state management",
+              text: "Optimized canvas rendering with hardware acceleration",
+            },
+          ],
+        },
+        {
+          title: "User Experience",
+          points: [
+            {
+              text: "Intuitive zoom/pan controls with smooth animations",
+            },
+            {
+              text: "Accessible UI design with keyboard navigation support",
             },
           ],
         },
       ],
-      additionalImages: ["/images/tiki2.png", "/images/tiki3.png"],
+      additionalImages: [],
     },
   },
   {
@@ -500,6 +523,76 @@ export const projectData: Project[] = [
         "/images/steam7.png",
         "/images/steam8.png",
       ],
+    },
+  },
+  {
+    title: "Tiki Tours",
+    description:
+      "Trip planning app built with Next.js. Handles timelines, budgets, and activity tracking.",
+    imgUrl: "/images/tiki1.png",
+    repoUrl: "https://github.com/jsric/trippa",
+    liveUrl: "https://tiki.tours",
+    updatedAt: "2025-01-10",
+    details: {
+      title: "Tiki Tours",
+      description:
+        "Next.js app for organizing trips and tracking activities. Named after the NZ term for exploration.",
+      technologies: [
+        "Next.js 14",
+        "TypeScript",
+        "Three.js",
+        "Tailwind CSS",
+        "Framer Motion",
+      ],
+      features: [
+        {
+          title: "Timeline View",
+          text: "Timeline for organizing trip activities. Uses drag-drop for quick rescheduling.",
+        },
+        {
+          title: "Budget Tools",
+          text: "Basic expense tracking with category breakdowns.",
+        },
+        {
+          title: "Activity System",
+          text: "Form-based activity creation with status tracking.",
+        },
+      ],
+      challenges: [
+        {
+          title: "Timeline Logic",
+          text: "Building a responsive timeline that handles overlapping activities and date changes.",
+        },
+        {
+          title: "Data Structure",
+          text: "Setting up trip data for efficient updates and filtering.",
+        },
+      ],
+      learnings: [
+        {
+          title: "App Structure",
+          points: [
+            {
+              text: "Next.js app router patterns",
+            },
+            {
+              text: "TypeScript with complex data types",
+            },
+          ],
+        },
+        {
+          title: "UI Patterns",
+          points: [
+            {
+              text: "Timeline component optimization",
+            },
+            {
+              text: "Form state management",
+            },
+          ],
+        },
+      ],
+      additionalImages: ["/images/tiki2.png", "/images/tiki3.png"],
     },
   },
   {
