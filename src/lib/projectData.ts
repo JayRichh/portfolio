@@ -42,6 +42,102 @@ export interface Project {
 
 export const projectData: Project[] = [
   {
+    title: "Web Tools",
+    description:
+      "Collection of developer utilities built with vanilla Web Components, showcasing modern web development without framework dependencies",
+    imgUrl: "/images/toolimg2.png",
+    repoUrl: "https://github.com/jsric/tools",
+    liveUrl: "https://jayrichh.github.io/tools/",
+    updatedAt: "2025-02-21",
+    details: {
+      title: "Web Tools - Developer Utilities",
+      description:
+        "A suite of web-based developer tools built using native Web Components, demonstrating modern web development patterns without framework overhead. Features clipboard handling, emoji picking, and theme management.",
+      technologies: [
+        "JavaScript",
+        "Web Components",
+        "Shadow DOM",
+        "Custom Elements",
+        "CSS Variables",
+        "CSS Grid",
+        "Clipboard API",
+        "File API",
+      ],
+      features: [
+        {
+          title: "Web Component Architecture",
+          text: "Utilizes native Web Components with Shadow DOM for true encapsulation. Each tool is a self-contained component with isolated styles and functionality.",
+          image: "/images/toolimg1.png",
+        },
+        {
+          title: "Clipboard Handler",
+          text: "Advanced clipboard management with drag-drop support, file handling, and image processing. Features real-time preview and download capabilities.",
+          image: "/images/toolimg2.png",
+        },
+        {
+          title: "Emoji Picker",
+          text: "Unicode emoji browser with search, filtering, and category management. Implements efficient data parsing and real-time updates.",
+          image: "/images/toolimg4.png",
+        },
+        {
+          title: "Theme System",
+          text: "Dynamic theme switching with CSS variables, supporting both light and dark modes with smooth transitions.",
+          image: "/images/toolimg3.png",
+        },
+      ],
+      challenges: [
+        {
+          title: "Component Isolation",
+          text: "Implementing fully isolated components using Shadow DOM while maintaining consistent theming and styles across the application. Required careful planning of CSS variable scope and component boundaries.",
+        },
+        {
+          title: "State Management",
+          text: "Managing component state and interactions without framework assistance, using native DOM events and custom element lifecycle methods. Solved through clean event delegation and state encapsulation.",
+        },
+        {
+          title: "Performance",
+          text: "Optimizing performance with vanilla JS, including efficient DOM updates and smooth animations without framework overhead. Implemented efficient event handling and DOM manipulation strategies.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Web Components Architecture",
+          points: [
+            {
+              text: "Effective use of Shadow DOM for style encapsulation and component isolation",
+            },
+            {
+              text: "Custom element lifecycle management for clean component initialization and cleanup",
+            },
+          ],
+        },
+        {
+          title: "Modern CSS Patterns",
+          points: [
+            {
+              text: "CSS variable system for dynamic theming and consistent styling across shadow boundaries",
+            },
+            {
+              text: "Advanced grid and flexbox layouts for responsive design without framework dependencies",
+            },
+          ],
+        },
+        {
+          title: "Vanilla JavaScript Patterns",
+          points: [
+            {
+              text: "Clean event handling and DOM manipulation without framework abstractions",
+            },
+            {
+              text: "Efficient state management using native JavaScript patterns and custom events",
+            },
+          ],
+        },
+      ],
+      additionalImages: [],
+    },
+  },
+  {
     title: "ASCII Art Generator",
     description:
       "Interactive GIF to ASCII art converter with real-time preview, zoom controls, and multiple export formats. Features smooth animation handling and color mode support.",
