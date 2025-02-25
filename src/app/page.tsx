@@ -49,11 +49,6 @@ const SOCIAL_LINKS = [
     icon: MailIcon,
     label: "Send me an email",
   },
-  {
-    href: "https://soundcloud.com/distortie",
-    icon: CassetteTape,
-    label: "Listen to my Soundcloud",
-  },
 ] as const;
 
 export default function HomePage() {

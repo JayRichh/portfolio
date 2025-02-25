@@ -174,7 +174,7 @@ const hobbies: Hobby[] = [
         title: "boppin #4 - breakcore/jungle mix",
         description: "Heavy breakcore/jungle mix to get things moving.",
         imageUrl: "/images/bop10.jpg",
-        link: "https://soundcloud.com/distortie/boppin-4-breakcore-jungle-mix",
+        link: "",
         icon: Headphones,
       },
       {
@@ -182,7 +182,7 @@ const hobbies: Hobby[] = [
         description: "Favorite deep house bops with a side of slap.",
         imageUrl:
           "https://i1.sndcdn.com/artworks-UmWeZOwLJLslGQl3-4KM17g-t500x500.jpg",
-        link: "https://soundcloud.com/distortie/deep-house",
+        link: "",
         icon: Play,
       },
       {
@@ -190,21 +190,21 @@ const hobbies: Hobby[] = [
         description: "A tech house mix to keep the groove going.",
         imageUrl:
           "https://i1.sndcdn.com/artworks-2NUCC15k0vZt2UaT-RzCrkA-t500x500.jpg",
-        link: "https://soundcloud.com/distortie/boppin-tech-house-mix",
+        link: "",
         icon: Drumstick,
       },
       {
         title: "filthy dnb mix",
         description: "Filthy DnB featuring Slimzee, Boylan & Riko Dan.",
         imageUrl: "/images/bop2.webp",
-        link: "https://soundcloud.com/distortie/filthy-dnb",
+        link: "",
         icon: Music,
       },
       {
         title: "deep / tech house",
         description: "yes.",
         imageUrl: "/images/boppin.png",
-        link: "https://soundcloud.com/distortie/bop-voly",
+        link: "",
         icon: Video,
       },
     ],
