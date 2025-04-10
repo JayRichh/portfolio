@@ -138,6 +138,106 @@ export const projectData: Project[] = [
     },
   },
   {
+    title: "Trekk",
+    description:
+      "Interactive 3D hiking trail platform with topographical mapping, trail details, and community features built with Vue 3, .NET Core, and Mapbox GL",
+    imgUrl: "/images/trek1.png",
+    repoUrl: "https://github.com/jsric/trekk",
+    liveUrl: "https://trekk-seven.vercel.app",
+    updatedAt: "2025-04-10",
+    details: {
+      title: "Trekk - Interactive Hiking Trail Platform",
+      description:
+        "A comprehensive hiking trail application featuring interactive 3D topographical mapping, detailed trail information, and community features. Built with Vue 3 and .NET Core, it provides hikers with immersive trail visualization and planning tools.",
+      technologies: [
+        "Vue 3",
+        "TypeScript",
+        "Tailwind CSS",
+        "Mapbox GL",
+        ".NET Core",
+        "SignalR",
+        "Supabase",
+        "Pinia",
+        "Vite",
+      ],
+      features: [
+        {
+          title: "3D Terrain Visualization",
+          text: "Interactive 3D maps with terrain visualization powered by Mapbox GL. Features multiple view modes including 3D terrain, satellite, topographical, and contour views with dynamic trail path rendering.",
+          image: "/images/trek3.png",
+        },
+        {
+          title: "Comprehensive Trail Information",
+          text: "Detailed trail data including length, elevation gain, difficulty ratings, terrain type, and estimated completion time. Features interactive elevation profiles and trail condition reports.",
+          image: "/images/trek2.png",
+        },
+        {
+          title: "User Reviews & Community",
+          text: "Community-driven trail ratings and reviews with photo sharing capabilities. Includes hiking tips from experienced users and real-time updates on trail conditions.",
+          image: "/images/trek5.png",
+        },
+        {
+          title: "User Profiles & Trail Management",
+          text: "Personalized user profiles with favorite, completed, and planned trail tracking. Secure authentication through Supabase with profile customization options.",
+          image: "/images/trek4.png",
+        },
+      ],
+      challenges: [
+        {
+          title: "Real-time Data Synchronization",
+          text: "Implementing SignalR for real-time updates across multiple clients while maintaining performance. Solved through efficient hub design and client-side state management with Pinia.",
+        },
+        {
+          title: "3D Map Performance",
+          text: "Optimizing 3D terrain rendering for smooth performance across devices with varying capabilities. Implemented progressive loading strategies and view mode options to balance visual quality and performance.",
+        },
+        {
+          title: "Data Integration Architecture",
+          text: "Creating a unified data layer that integrates external API data (DOC API) with user-generated content from Supabase. Developed a caching system with automatic refresh mechanisms to reduce API calls while maintaining data freshness.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Modern Vue 3 Patterns",
+          points: [
+            {
+              text: "Leveraging Vue 3 Composition API with TypeScript for type-safe, reusable component logic",
+            },
+            {
+              text: "Implementing efficient state management with Pinia for reactive, modular stores",
+            },
+          ],
+        },
+        {
+          title: "Geospatial Visualization",
+          points: [
+            {
+              text: "Advanced Mapbox GL integration techniques for 3D terrain visualization and custom styling",
+            },
+            {
+              text: "Optimizing map performance through efficient data loading and rendering strategies",
+            },
+          ],
+        },
+        {
+          title: "Full-Stack Architecture",
+          points: [
+            {
+              text: "Designing a clean, maintainable architecture with clear separation of concerns",
+            },
+            {
+              text: "Implementing real-time communication between frontend and backend using SignalR",
+            },
+            {
+              text: "Integrating Supabase for authentication, database, and storage solutions",
+            },
+          ],
+        },
+      ],
+      additionalImages: [],
+    },
+  },
+  {
     title: "ASCII Art Generator",
     description:
       "Interactive GIF to ASCII art converter with real-time preview, zoom controls, and multiple export formats. Features smooth animation handling and color mode support.",
