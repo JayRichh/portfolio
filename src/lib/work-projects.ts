@@ -34,6 +34,35 @@ export const projectsData = [
     },
   },
   {
+    title: "Encompass Tours",
+    description:
+    "Digital platform for NZ motorcycle tours using Vue and Supabase, server-side caching, dynamic tour management, and interactive route visualization.",
+    technologies: ["Vue.js", "Supabase", "Redis", "Node.js", "TypeScript"],
+    mainImage: {
+      src: "/images/encompass-hero.png",
+      alt: "Encompass Tours Hero",
+    },
+    subImages: [
+      {
+        src: "/images/encompass-about.png",
+        alt: "Encompass Tours About",
+      },
+      {
+        src: "/images/encompass-contact.png",
+        alt: "Encompass Tours Contact",
+      },
+    ],
+    links: {
+      live: "https://encompasstours.co.nz",
+      code: "https://github.com/JayRichh",
+    },
+    theme: {
+      textColor: "text-teal-600 dark:text-teal-400",
+      gradient: "",
+    },
+    reverse: true,
+  },
+  {
     title: "Trekk",
     description:
       "Interactive 3D hiking trail platform with topographical mapping, trail details, and community features for outdoor enthusiasts seeking immersive trail exploration.",
@@ -70,141 +99,41 @@ export const projectsData = [
       gradient: "",
     },
   },
-  {
-    title: "Axiom",
-    description:
-      "3D graphics and game dev testing environment built with Three.js, showcasing shaders, particle systems, and physics simulations for creative experimentation.",
-    technologies: [
-      "Next.js",
-      "Three.js",
-      "TypeScript",
-      "GLSL",
-      "WGSL",
-      "React Three Fiber",
-      "Rapier Physics",
-    ],
-    mainImage: {
-      src: "/images/axiom-1.png",
-      alt: "Axiom Main",
-    },
-    subImages: [
-      {
-        src: "/images/axiom-2.png",
-        alt: "Axiom Physics",
-      },
-      {
-        src: "/images/axiom-3.png",
-        alt: "Axiom Particles",
-      },
-    ],
-    links: {
-      code: "https://github.com/JayRichh/axiom",
-    },
-    theme: {
-      textColor: "text-cyan-600 dark:text-cyan-400",
-      gradient: "",
-    },
+{
+  title: "Elite Garage Screens",
+  description:
+    "Business website for garage screen door installation with interactive gallery, form handling, and structured data for a New Zealand company.",
+  technologies: [
+    "Next.js 15",
+    "TypeScript",
+    "Tailwind CSS",
+    "Mapbox GL",
+    "Mailer (SMTP)",
+    "Zod",
+    "reCAPTCHA",
+  ],
+  mainImage: {
+    src: "/images/eweb4.png",
+    alt: "Elite Garage Screens Gallery",
   },
-  {
-    title: "POE2 Tools",
-    description:
-      "Next.js toolkit for Path of Exile 2 featuring skill tree visualization, build planning, and DPS calculations, demonstrating dynamic UI and complex integrations.",
-    technologies: [
-      "Next.js 15",
-      "TypeScript",
-      "Tailwind CSS",
-      "Supabase",
-      "Framer Motion",
-      "OAuth",
-    ],
-    mainImage: {
-      src: "/images/poe.png",
-      alt: "POE2 Tools Main",
+  subImages: [
+    {
+      src: "/images/eweb1.png",
+      alt: "Elite Garage Screens Email System",
     },
-    subImages: [
-      {
-        src: "/images/poe1.png",
-        alt: "POE2 Tools Skill Tree",
-      },
-      {
-        src: "/images/poe2.png",
-        alt: "POE2 Tools Build Planner",
-      },
-    ],
-    links: {
-      live: "https://poe2.dev",
-      code: "https://github.com/JayRichh/poe2",
+    {
+      src: "/images/eweb2.png",
+      alt: "Elite Garage Screens Form System",
     },
-    theme: {
-      textColor: "text-red-600 dark:text-red-400",
-      gradient: "",
-    },
-    reverse: true,
+  ],
+  links: {
+    live: "https://elitescreens.co.nz",
   },
-  {
-    title: "SteamShare",
-    description:
-      "Steam screenshot management platform with integrated gallery organization and canvas editing, real-time data handling and interactive media processing.",
-    technologies: [
-      "React 18",
-      "TypeScript",
-      "Steam Web API",
-      "Fabric.js",
-      "Framer Motion",
-    ],
-    mainImage: {
-      src: "/images/steam4.png",
-      alt: "SteamShare Main",
-    },
-    subImages: [
-      {
-        src: "/images/steam2.png",
-        alt: "SteamShare Gallery",
-      },
-      {
-        src: "/images/steam3.png",
-        alt: "SteamShare Editor",
-      },
-    ],
-    links: {
-      live: "https://steamshare.net",
-      code: "https://github.com/JayRichh/steamshare",
-    },
-    theme: {
-      textColor: "text-blue-600 dark:text-blue-400",
-      gradient: "",
-    },
-    reverse: true,
+  theme: {
+    textColor: "text-blue-600 dark:text-blue-400",
+    gradient: "",
   },
-  {
-    title: "Encompass Tours",
-    description:
-      "Digital platform for NZ motorcycle tours using Vue and Supabase, server-side caching, dynamic tour management, and interactive route visualization.",
-    technologies: ["Vue.js", "Supabase", "Redis", "Node.js", "TypeScript"],
-    mainImage: {
-      src: "/images/encompass-hero.png",
-      alt: "Encompass Tours Hero",
-    },
-    subImages: [
-      {
-        src: "/images/encompass-about.png",
-        alt: "Encompass Tours About",
-      },
-      {
-        src: "/images/encompass-contact.png",
-        alt: "Encompass Tours Contact",
-      },
-    ],
-    links: {
-      live: "https://encompasstours.co.nz",
-      code: "https://github.com/JayRichh",
-    },
-    theme: {
-      textColor: "text-teal-600 dark:text-teal-400",
-      gradient: "",
-    },
-    reverse: true,
-  },
+},
   {
     title: "Next.js Template",
     description:
@@ -275,6 +204,78 @@ export const projectsData = [
       gradient: "",
     },
   },
+  {
+    title: "POE2 Tools",
+    description:
+    "Next.js toolkit for Path of Exile 2 featuring skill tree visualization, build planning, and DPS calculations, demonstrating dynamic UI and complex integrations.",
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "Framer Motion",
+      "OAuth",
+    ],
+    mainImage: {
+      src: "/images/poe.png",
+      alt: "POE2 Tools Main",
+    },
+    subImages: [
+      {
+        src: "/images/poe1.png",
+        alt: "POE2 Tools Skill Tree",
+      },
+      {
+        src: "/images/poe2.png",
+        alt: "POE2 Tools Build Planner",
+      },
+    ],
+    links: {
+      live: "https://poe2.dev",
+      code: "https://github.com/JayRichh/poe2",
+    },
+    theme: {
+      textColor: "text-red-600 dark:text-red-400",
+      gradient: "",
+    },
+    reverse: true,
+  },
+  {
+    title: "SteamShare",
+    description:
+    "Steam screenshot management platform with integrated gallery organization and canvas editing, real-time data handling and interactive media processing.",
+    technologies: [
+      "React 18",
+      "TypeScript",
+      "Steam Web API",
+      "Fabric.js",
+      "Framer Motion",
+    ],
+    mainImage: {
+      src: "/images/steam4.png",
+      alt: "SteamShare Main",
+    },
+    subImages: [
+      {
+        src: "/images/steam2.png",
+        alt: "SteamShare Gallery",
+      },
+      {
+        src: "/images/steam3.png",
+        alt: "SteamShare Editor",
+      },
+    ],
+    links: {
+      live: "https://steamshare.net",
+      code: "https://github.com/JayRichh/steamshare",
+    },
+    theme: {
+      textColor: "text-blue-600 dark:text-blue-400",
+      gradient: "",
+    },
+    reverse: true,
+  },
+  
   {
     title: "Checkpoint",
     description:
