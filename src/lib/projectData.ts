@@ -42,6 +42,109 @@ export interface Project {
 
 export const projectData: Project[] = [
   {
+  title: "Riddlit",
+  description: "Team-based riddle platform for daily brain challenges and friendly competition.",
+  imgUrl: "/images/riddlittext.png",
+  repoUrl: "https://github.com/jayrichh/riddlit", 
+  liveUrl: "https://riddl.it",
+  updatedAt: "2025-07-18",
+  details: {
+    title: "Riddlit - Team Riddle Platform",
+    description: "A riddle-solving platform where teams tackle daily challenges together. Features one-shot answers, live leaderboards, and streak tracking to keep teams engaged and competitive.",
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "Tailwind CSS", 
+      "Clerk Auth",
+      "Supabase",
+      "Drizzle ORM",
+      "Framer Motion",
+      "Shadcn/ui"
+    ],
+    features: [
+      {
+        title: "Daily Riddles",
+        text: "New challenges every day, available for 24 hours. Miss one and wait for tomorrow. Keeps teams coming back with fresh content and time pressure.",
+        image: "/images/riddlit1.png"
+      },
+      {
+        title: "Team Competition", 
+        text: "Create teams, invite members, and compete together. Track collective progress while individual contributions count toward team success.",
+        image: "/images/riddlit3.png"
+      },
+      {
+        title: "Live Leaderboards",
+        text: "Rankings update instantly as answers come in. See where your team stands and watch the competition unfold in real-time.",
+        image: "/images/riddlit2.png"  
+      },
+      {
+        title: "One-Shot Answers",
+        text: "Submit once per riddle - no do-overs. Creates genuine pressure and rewards careful thinking over quick guessing.",
+        image: "/images/riddlit0.png"
+      },
+      {
+        title: "Multiple Answer Types",
+        text: "Text responses, multiple choice, numbers, or true/false. Riddle creators pick the format that best fits their puzzle.",
+      },
+      {
+        title: "Admin Tools",
+        text: "Manage users, approve riddles, and track engagement. Clean dashboard shows what's working and what needs attention."
+      }
+    ],
+    challenges: [
+      {
+        title: "Real-time Updates",
+        text: "Getting leaderboards to update instantly across all users without lag. Used Supabase real-time features with smart client-side caching."
+      },
+      {
+        title: "Team Permissions", 
+        text: "Managing who can see what riddles based on team membership and roles. Built flexible permission system using Clerk with database checks."
+      },
+      {
+        title: "Global Timing",
+        text: "Making riddles available fairly across time zones while keeping 24-hour windows consistent. Solved with UTC storage and client-side conversion."
+      }
+    ],
+    learnings: [
+      {
+        title: "Next.js 15 Performance",
+        points: [
+          {
+            text: "Server components for data fetching, client components only when needed for interactivity"
+          },
+          {
+            text: "App router patterns for clean URL structure and efficient page organization"
+          }
+        ]
+      },
+      {
+        title: "Database Design", 
+        points: [
+          {
+            text: "Efficient queries for leaderboard calculations that scale with user growth"
+          },
+          {
+            text: "Smart indexing strategy for fast riddle lookups and submission handling"
+          }
+        ]
+      },
+      {
+        title: "User Experience",
+        points: [
+          {
+            text: "Simple interfaces that work on mobile and desktop without complexity"
+          },
+          {
+            text: "Smooth animations that enhance rather than distract from core functionality"
+          }
+        ]
+      }
+    ],
+    additionalImages: []
+  }
+}
+,
+  {
   "title": "Elite Garage Screens",
   "description": "Business website for garage screen door installation with interactive gallery, form handling, and SEO optimizations built with Next.js 15.",
   "imgUrl": "/images/eweb4.png",

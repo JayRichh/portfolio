@@ -1,4 +1,34 @@
 export const projectsData = [
+{
+  title: "Riddlit",
+  description:
+    "Daily team riddles with one-shot answers, streak tracking, and instant leaderboards. Built with Next.js, Supabase, Clerk, and Drizzle ORM.",
+  technologies: ["Next.js 15", "Supabase", "Clerk", "TypeScript", "Drizzle ORM"],
+  mainImage: {
+    src: "/images/riddlittext.png",
+    alt: "Riddlit Admin Dashboard",
+  },
+  subImages: [
+    {
+      src: "/images/riddlit1.png",
+      alt: "Team Management",
+    },
+    {
+      src: "/images/riddlit3.png", 
+      alt: "Create Riddles",
+    },
+  ],
+  links: {
+    live: "https://riddl.it/",
+    code: "https://github.com/JayRichh/riddlit",
+  },
+  theme: {
+    textColor: "text-emerald-600 dark:text-emerald-400",
+    gradient: "",
+  },
+  reverse: true,
+}
+,
   {
     title: "CSS Battle",
     description:

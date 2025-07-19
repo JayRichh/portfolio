@@ -63,7 +63,7 @@ export function SiteNavigation(): JSX.Element {
   return (
     <nav className="relative z-50 flex w-full items-center justify-between">
       {/* Logo - Always visible */}
-      <div className="flex items-center">
+      <div className="flex items-center mr-4">
         <AppLogo />
       </div>
 

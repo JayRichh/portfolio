@@ -24,7 +24,7 @@ export function SiteFooter(): JSX.Element {
               >
                 Jayden Richardson
               </Link>
-              <p className="text-xs text-foreground/60">Full Stack Developer</p>
+              <p className="text-xs text-foreground/60">ello</p>
             </div>
           </div>
           
