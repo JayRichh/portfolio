@@ -5,6 +5,7 @@ import { ThemeProvider } from "../components/theme-provider";
 import { RouteTransition } from "../components/route-transition";
 import { PageContainer } from "../components/page-container";
 import { SiteHeader } from "../components/site-header";
+import { SiteFooter } from "../components/site-footer";
 import { Analytics } from "@vercel/analytics/next";
 import { GitHubDataProvider } from "../components/github-data-provider";
 import "./globals.css";
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   <PageContainer>{children}</PageContainer>
                 </RouteTransition>
               </main>
+              <SiteFooter />
             </div>
           </GitHubDataProvider>
         </ThemeProvider>

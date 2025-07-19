@@ -41,7 +41,7 @@ export interface Project {
 }
 
 export const projectData: Project[] = [
-    {
+  {
   "title": "Elite Garage Screens",
   "description": "Business website for garage screen door installation with interactive gallery, form handling, and SEO optimizations built with Next.js 15.",
   "imgUrl": "/images/eweb4.png",
@@ -149,8 +149,8 @@ export const projectData: Project[] = [
     description:
       "Collection of developer utilities built with vanilla Web Components, showcasing modern web development without framework dependencies",
     imgUrl: "/images/toolimg2.png",
-    repoUrl: "https://github.com/jsric/tools",
-    liveUrl: "https://jayrichh.github.io/tools/",
+    repoUrl: "https://github.com/JayRichh/tools",
+    liveUrl: "https://jayrichh.github.io/",
     updatedAt: "2025-02-21",
     details: {
       title: "Web Tools - Developer Utilities",

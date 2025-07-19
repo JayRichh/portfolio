@@ -7,7 +7,7 @@ type SchemaContext = {
 const defaultContext: SchemaContext = {
   siteUrl: "https://jayrich.dev",
   siteName: "Jayden Richardson Portfolio",
-  siteImage: "/logo_bg_remove.png",
+  siteImage: "/JRLOGO.png",
 };
 
 export function generatePersonSchema(context: SchemaContext = defaultContext) {

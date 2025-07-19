@@ -89,10 +89,10 @@ export const metadata: Metadata = {
       "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
     images: [
       {
-        url: "/logo_bg_remove.png",
+        url: "/JRLOGO.png",
         width: 512,
         height: 512,
-        alt: "Jayden Richardson - Full Stack Developer",
+        alt: "JR - Jayden Richardson Logo",
         type: "image/png",
       },
       {
@@ -100,7 +100,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "Jayden Richardson Portfolio - Featured Projects",
-        type: "image/webp",
+        type: "image/png",
       },
     ],
   },
@@ -112,7 +112,7 @@ export const metadata: Metadata = {
     },
     description:
       "Full Stack Web Developer specializing in React, TypeScript, and modern web technologies. Explore my portfolio of interactive web applications, development tools, and technical resources.",
-    images: ["/logo_bg_remove.png", "/logo_bg_remove.png"],
+    images: ["/JRLOGO.png", "/logo_bg_remove.png"],
     creator: "@jayrich88",
     site: "@jayrich88",
   },

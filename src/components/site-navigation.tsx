@@ -9,6 +9,7 @@ import { isRouteActive } from "../utils/is-route-active";
 import { Button } from "./ui/button";
 import { WorkDropdown } from "./ui/work-dropdown";
 import { FullscreenMenu } from "./ui/fullscreen-menu";
+import { AppLogo } from "./app-logo";
 
 const links = [
   { label: "Home", path: "/" },
@@ -61,6 +62,11 @@ export function SiteNavigation(): JSX.Element {
 
   return (
     <nav className="relative z-50 flex w-full items-center justify-between">
+      {/* Logo - Always visible */}
+      <div className="flex items-center">
+        <AppLogo />
+      </div>
+
       {/* Desktop Navigation */}
       <div className="hidden md:flex md:items-center md:space-x-1">
         {links.map((item) => (
