@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+const GITHUB_TOKEN = process.env.NEXT_GITHUB_TOKEN;
 const GITHUB_API = "https://api.github.com/graphql";
 const CACHE_TIME = 3600; // 1 hour in seconds
 const MAX_RETRIES = 3;
