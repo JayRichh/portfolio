@@ -2,8 +2,7 @@ import axios, { AxiosError } from "axios";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-const GITHUB_TOKEN = process.env.NEXT_GITHUB_TOKEN;
-const GITHUB_API = "https://api.github.com/graphql";
+const GITHUB_API = "/api/github/contributions";
 const CACHE_TIME = 3600; // 1 hour in seconds
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000; // 1 second
@@ -152,11 +151,6 @@ async function withRetry<T>(
   }
 }
 
-function validateGitHubToken(): void {
-  if (!GITHUB_TOKEN) {
-    throw new Error("GitHub token not found");
-  }
-}
 
 // Estimate lines of code based on file size and language
 function estimateLineCount(size: number, language: string): number {
@@ -305,7 +299,6 @@ async function fetchYearContributions(
       { query, variables },
       {
         headers: {
-          Authorization: `Bearer ${GITHUB_TOKEN}`,
           "Content-Type": "application/json",
         },
       },
@@ -428,7 +421,6 @@ async function fetchAllRepositories(): Promise<Repository[]> {
           { query, variables },
           {
             headers: {
-              Authorization: `Bearer ${GITHUB_TOKEN}`,
               "Content-Type": "application/json",
             },
             timeout: 30000,
@@ -527,7 +519,6 @@ export async function fetchGitHubContributions(): Promise<YearContributions[]> {
     store;
 
   try {
-    validateGitHubToken();
     setLoading(true);
     store.reset();
 
@@ -581,7 +572,6 @@ export async function fetchPreviousYear(
     store;
 
   try {
-    validateGitHubToken();
     setLoadingYear(year, true);
     const yearContributions = await fetchYearContributions(year);
 
@@ -615,7 +605,6 @@ export async function fetchGitHubLanguages(): Promise<LanguageStats | null> {
   } = store;
 
   try {
-    validateGitHubToken();
     setLoading(true);
     store.reset();
 
