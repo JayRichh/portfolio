@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Info } from "lucide-react";
 import { fetchPreviousYear, useGitHubStore } from "../../../lib/github";
 import { ProgressLoader } from "../../../components/ui/progress-loader";
+import { GitHubDataProvider } from "../../../components/github-data-provider";
 import {
   Tooltip,
   TooltipContent,
@@ -329,103 +330,107 @@ export default function GitHubPage() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      transition={{ duration: 0.5 }}
-      className="container mx-auto px-4 py-16"
-    >
-      <div className="mb-8">
-        <div className="flex items-center gap-2">
-          <h1 className="text-4xl font-bold text-primary">GitHub Activity</h1>
-          <InfoTooltip
-            content="Data sourced from GitHub's GraphQL API. Shows contributions across all repositories, including commits, issues, pull requests, and code reviews."
-            size="lg"
-          />
-        </div>
-        <p className="text-lg text-muted-foreground mt-4">
-          A visualization of my repository activity, showing contribution
-          patterns and language distribution across all repositories.
-        </p>
-      </div>
-
-      <div className="mb-6 text-xl font-semibold text-center">
-        {selectedYear.totalContributions.toLocaleString()} contributions in{" "}
-        {selectedYear.year}
-      </div>
-
-      <div className="flex items-center justify-center gap-4 mb-6">
-        <button
-          onClick={handlePreviousYear}
-          disabled={
-            currentYearIndex === availableYears.length - 1 ||
-            loadingYears.has(availableYears[currentYearIndex + 1])
-          }
-          className={`flex min-w-[120px] items-center justify-center rounded-md px-4 py-2 transition-colors ${
-            currentYearIndex === availableYears.length - 1
-              ? "cursor-not-allowed opacity-50"
-              : "bg-muted hover:bg-muted/80"
-          }`}
-          aria-label="Previous year"
-        >
-          {loadingYears.has(availableYears[currentYearIndex + 1]) ? (
-            <ProgressLoader compact />
-          ) : (
-            "Previous Year"
-          )}
-        </button>
-        <span className="text-lg font-semibold">{selectedYear.year}</span>
-        <button
-          onClick={() => {
-            if (currentYearIndex > 0) {
-              const nextYear = availableYears[currentYearIndex - 1];
-              const yearIndex = yearData.findIndex((y) => y.year === nextYear);
-              if (yearIndex !== -1) {
-                setSelectedYearIndex(yearIndex);
-              }
-            }
-          }}
-          disabled={currentYearIndex === 0}
-          className={`flex min-w-[120px] items-center justify-center rounded-md px-4 py-2 transition-colors ${
-            currentYearIndex === 0
-              ? "cursor-not-allowed opacity-50"
-              : "bg-muted hover:bg-muted/80"
-          }`}
-          aria-label="Next year"
-        >
-          Next Year
-        </button>
-      </div>
-
+    <GitHubDataProvider>
       <motion.div
-        key={selectedYear.year}
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
-        transition={{ duration: 0.3 }}
-        className="rounded-xl border border-border/50 bg-background/30 backdrop-blur-sm p-4 md:p-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.5 }}
+        className="container mx-auto px-4 py-16"
       >
-        {/* Mobile View - Vertical Calendar */}
-        <div className="h-[600px] md:hidden">
-          <Calendar
-            direction="vertical"
-            selectedYear={selectedYear}
-            isDark={isDark}
-          />
+        <div className="mb-8">
+          <div className="flex items-center gap-2">
+            <h1 className="text-4xl font-bold text-primary">GitHub Activity</h1>
+            <InfoTooltip
+              content="Data sourced from GitHub's GraphQL API. Shows contributions across all repositories, including commits, issues, pull requests, and code reviews."
+              size="lg"
+            />
+          </div>
+          <p className="text-lg text-muted-foreground mt-4">
+            A visualization of my repository activity, showing contribution
+            patterns and language distribution across all repositories.
+          </p>
         </div>
 
-        {/* Desktop View - Horizontal Calendar */}
-        <div className="hidden md:block h-[300px]">
-          <Calendar
-            direction="horizontal"
-            selectedYear={selectedYear}
-            isDark={isDark}
-          />
+        <div className="mb-6 text-xl font-semibold text-center">
+          {selectedYear.totalContributions.toLocaleString()} contributions in{" "}
+          {selectedYear.year}
         </div>
+
+        <div className="flex items-center justify-center gap-4 mb-6">
+          <button
+            onClick={handlePreviousYear}
+            disabled={
+              currentYearIndex === availableYears.length - 1 ||
+              loadingYears.has(availableYears[currentYearIndex + 1])
+            }
+            className={`flex min-w-[120px] items-center justify-center rounded-md px-4 py-2 transition-colors ${
+              currentYearIndex === availableYears.length - 1
+                ? "cursor-not-allowed opacity-50"
+                : "bg-muted hover:bg-muted/80"
+            }`}
+            aria-label="Previous year"
+          >
+            {loadingYears.has(availableYears[currentYearIndex + 1]) ? (
+              <ProgressLoader compact />
+            ) : (
+              "Previous Year"
+            )}
+          </button>
+          <span className="text-lg font-semibold">{selectedYear.year}</span>
+          <button
+            onClick={() => {
+              if (currentYearIndex > 0) {
+                const nextYear = availableYears[currentYearIndex - 1];
+                const yearIndex = yearData.findIndex(
+                  (y) => y.year === nextYear,
+                );
+                if (yearIndex !== -1) {
+                  setSelectedYearIndex(yearIndex);
+                }
+              }
+            }}
+            disabled={currentYearIndex === 0}
+            className={`flex min-w-[120px] items-center justify-center rounded-md px-4 py-2 transition-colors ${
+              currentYearIndex === 0
+                ? "cursor-not-allowed opacity-50"
+                : "bg-muted hover:bg-muted/80"
+            }`}
+            aria-label="Next year"
+          >
+            Next Year
+          </button>
+        </div>
+
+        <motion.div
+          key={selectedYear.year}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.3 }}
+          className="rounded-xl border border-border/50 bg-background/30 backdrop-blur-sm p-4 md:p-8"
+        >
+          {/* Mobile View - Vertical Calendar */}
+          <div className="h-[600px] md:hidden">
+            <Calendar
+              direction="vertical"
+              selectedYear={selectedYear}
+              isDark={isDark}
+            />
+          </div>
+
+          {/* Desktop View - Horizontal Calendar */}
+          <div className="hidden md:block h-[300px]">
+            <Calendar
+              direction="horizontal"
+              selectedYear={selectedYear}
+              isDark={isDark}
+            />
+          </div>
+        </motion.div>
+
+        <LanguageDistribution isDark={isDark} />
       </motion.div>
-
-      <LanguageDistribution isDark={isDark} />
-    </motion.div>
+    </GitHubDataProvider>
   );
 }

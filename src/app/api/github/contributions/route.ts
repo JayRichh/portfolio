@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     if (!GITHUB_TOKEN) {
       return NextResponse.json(
         { error: "GitHub token not configured" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -25,30 +25,30 @@ export async function POST(request: NextRequest) {
           "Content-Type": "application/json",
         },
         timeout: 30000,
-      }
+      },
     );
 
     return NextResponse.json(response.data);
   } catch (error: any) {
     console.error("GitHub API error:", error.response?.data || error.message);
-    
+
     if (error.response?.status === 401) {
       return NextResponse.json(
         { error: "GitHub authentication failed" },
-        { status: 401 }
+        { status: 401 },
       );
     }
-    
+
     if (error.response?.status === 403) {
       return NextResponse.json(
         { error: "GitHub API rate limit exceeded" },
-        { status: 403 }
+        { status: 403 },
       );
     }
 
     return NextResponse.json(
       { error: error.message || "Failed to fetch GitHub data" },
-      { status: error.response?.status || 500 }
+      { status: error.response?.status || 500 },
     );
   }
 }

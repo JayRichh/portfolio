@@ -74,21 +74,13 @@ export default function HomePage() {
                 </GradientSecondaryText>
               </div>
               <motion.p
-                className="text-lg text-center text-foreground sm:text-xl md:text-2xl lg:text-left"
+                className="text-lg text-center text-foreground sm:text-xl md:text-2xl lg:text-left my-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 Full Stack Web Developer with a background in Industrial
                 Electrical Engineering
-              </motion.p>
-              <motion.p
-                className="text-lg text-center text-foreground sm:text-xl md:text-2xl lg:text-left"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                Kiwi developing in the UK
               </motion.p>
 
               <motion.div

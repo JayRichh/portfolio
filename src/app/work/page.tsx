@@ -7,6 +7,7 @@ import { HeroSection } from "./_components/HeroSection";
 import { ResourcesSection } from "./_components/ResourcesSection";
 import { ProjectCard } from "./_components/ProjectCard";
 import { projectsData } from "../../lib/work-projects";
+import { GitHubDataProvider } from "../../components/github-data-provider";
 
 const useScreenSize = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -69,7 +70,9 @@ export default function WorkPage() {
       </div>
 
       <div className="relative min-h-screen">
-        <ResourcesSection isMobile={isMobile} />
+        <GitHubDataProvider>
+          <ResourcesSection isMobile={isMobile} />
+        </GitHubDataProvider>
       </div>
     </div>
   );

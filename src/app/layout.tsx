@@ -7,7 +7,6 @@ import { PageContainer } from "../components/page-container";
 import { SiteHeader } from "../components/site-header";
 import { SiteFooter } from "../components/site-footer";
 import { Analytics } from "@vercel/analytics/next";
-import { GitHubDataProvider } from "../components/github-data-provider";
 import "./globals.css";
 
 export { metadata } from "./metadata";
@@ -55,17 +54,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <GitHubDataProvider>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <main className="flex-1">
-                <RouteTransition>
-                  <PageContainer>{children}</PageContainer>
-                </RouteTransition>
-              </main>
-              <SiteFooter />
-            </div>
-          </GitHubDataProvider>
+          <div className="relative flex min-h-screen flex-col">
+            <SiteHeader />
+            <main className="flex-1">
+              <RouteTransition>
+                <PageContainer>{children}</PageContainer>
+              </RouteTransition>
+            </main>
+            <SiteFooter />
+          </div>
         </ThemeProvider>
         <Analytics />
       </body>

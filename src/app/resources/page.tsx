@@ -8,6 +8,7 @@ import { cn } from "../../utils/cn";
 import { WordMapPreview } from "./_components/WordMapPreview";
 import { MindMapPreview } from "./_components/MindMapPreview";
 import { GitHubPreview } from "./_components/GitHubPreview";
+import { GitHubDataProvider } from "../../components/github-data-provider";
 import {
   PageSection,
   PageTitle,
@@ -96,41 +97,43 @@ export default function ResourcesPage() {
   const isMobile = useScreenSize();
 
   return (
-    <PageSection>
-      <div className="">
-        <PageTitle>Resources</PageTitle>
-        <PageDescription>
-          Explore interactive visualizations of my tech journey, built while
-          learning various APIs and libraries. These tools provide insights into
-          my development progress and tech preferences.
-        </PageDescription>
-      </div>
+    <GitHubDataProvider>
+      <PageSection>
+        <div className="">
+          <PageTitle>Resources</PageTitle>
+          <PageDescription>
+            Explore interactive visualizations of my tech journey, built while
+            learning various APIs and libraries. These tools provide insights
+            into my development progress and tech preferences.
+          </PageDescription>
+        </div>
 
-      <div className="grid h-full place-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {!isMobile && ( // Render these cards only if the screen size is not mobile
-          <>
-            <Card
-              href="/resources/wordmap"
-              title="Tech Stack Visualization"
-              description="Interactive word cloud visualization of my tech stack, with size indicating usage frequency and colors representing different categories"
-              PreviewComponent={WordMapPreview}
-            />
-            <Card
-              href="/resources/learnings"
-              title="Learning Journey"
-              description="Structured overview of my programming knowledge, organized as an interactive mindmap with different categories and importance levels"
-              PreviewComponent={MindMapPreview}
-            />
-          </>
-        )}
-        {/* Always show this card */}
-        <Card
-          href="/resources/github"
-          title="GitHub Activity"
-          description="Visual representation of my repository activity, showing the frequency of contributions across different projects and development patterns over time"
-          PreviewComponent={GitHubPreview}
-        />
-      </div>
-    </PageSection>
+        <div className="grid h-full place-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {!isMobile && ( // Render these cards only if the screen size is not mobile
+            <>
+              <Card
+                href="/resources/wordmap"
+                title="Tech Stack Visualization"
+                description="Interactive word cloud visualization of my tech stack, with size indicating usage frequency and colors representing different categories"
+                PreviewComponent={WordMapPreview}
+              />
+              <Card
+                href="/resources/learnings"
+                title="Learning Journey"
+                description="Structured overview of my programming knowledge, organized as an interactive mindmap with different categories and importance levels"
+                PreviewComponent={MindMapPreview}
+              />
+            </>
+          )}
+          {/* Always show this card */}
+          <Card
+            href="/resources/github"
+            title="GitHub Activity"
+            description="Visual representation of my repository activity, showing the frequency of contributions across different projects and development patterns over time"
+            PreviewComponent={GitHubPreview}
+          />
+        </div>
+      </PageSection>
+    </GitHubDataProvider>
   );
 }

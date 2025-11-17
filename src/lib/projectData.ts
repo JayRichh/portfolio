@@ -42,210 +42,212 @@ export interface Project {
 
 export const projectData: Project[] = [
   {
-  title: "Riddlit",
-  description: "Team-based riddle platform for daily brain challenges and friendly competition.",
-  imgUrl: "/images/riddlittext.png",
-  repoUrl: "https://github.com/jayrichh/riddlit", 
-  liveUrl: "https://riddl.it",
-  updatedAt: "2025-07-18",
-  details: {
-    title: "Riddlit - Team Riddle Platform",
-    description: "A riddle-solving platform where teams tackle daily challenges together. Features one-shot answers, live leaderboards, and streak tracking to keep teams engaged and competitive.",
-    technologies: [
-      "Next.js 15",
-      "TypeScript",
-      "Tailwind CSS", 
-      "Clerk Auth",
-      "Supabase",
-      "Drizzle ORM",
-      "Framer Motion",
-      "Shadcn/ui"
-    ],
-    features: [
-      {
-        title: "Daily Riddles",
-        text: "New challenges every day, available for 24 hours. Miss one and wait for tomorrow. Keeps teams coming back with fresh content and time pressure.",
-        image: "/images/riddlit1.png"
-      },
-      {
-        title: "Team Competition", 
-        text: "Create teams, invite members, and compete together. Track collective progress while individual contributions count toward team success.",
-        image: "/images/riddlit3.png"
-      },
-      {
-        title: "Live Leaderboards",
-        text: "Rankings update instantly as answers come in. See where your team stands and watch the competition unfold in real-time.",
-        image: "/images/riddlit2.png"  
-      },
-      {
-        title: "One-Shot Answers",
-        text: "Submit once per riddle - no do-overs. Creates genuine pressure and rewards careful thinking over quick guessing.",
-        image: "/images/riddlit0.png"
-      },
-      {
-        title: "Multiple Answer Types",
-        text: "Text responses, multiple choice, numbers, or true/false. Riddle creators pick the format that best fits their puzzle.",
-      },
-      {
-        title: "Admin Tools",
-        text: "Manage users, approve riddles, and track engagement. Clean dashboard shows what's working and what needs attention."
-      }
-    ],
-    challenges: [
-      {
-        title: "Real-time Updates",
-        text: "Getting leaderboards to update instantly across all users without lag. Used Supabase real-time features with smart client-side caching."
-      },
-      {
-        title: "Team Permissions", 
-        text: "Managing who can see what riddles based on team membership and roles. Built flexible permission system using Clerk with database checks."
-      },
-      {
-        title: "Global Timing",
-        text: "Making riddles available fairly across time zones while keeping 24-hour windows consistent. Solved with UTC storage and client-side conversion."
-      }
-    ],
-    learnings: [
-      {
-        title: "Next.js 15 Performance",
-        points: [
-          {
-            text: "Server components for data fetching, client components only when needed for interactivity"
-          },
-          {
-            text: "App router patterns for clean URL structure and efficient page organization"
-          }
-        ]
-      },
-      {
-        title: "Database Design", 
-        points: [
-          {
-            text: "Efficient queries for leaderboard calculations that scale with user growth"
-          },
-          {
-            text: "Smart indexing strategy for fast riddle lookups and submission handling"
-          }
-        ]
-      },
-      {
-        title: "User Experience",
-        points: [
-          {
-            text: "Simple interfaces that work on mobile and desktop without complexity"
-          },
-          {
-            text: "Smooth animations that enhance rather than distract from core functionality"
-          }
-        ]
-      }
-    ],
-    additionalImages: []
-  }
-}
-,
+    title: "Riddlit",
+    description:
+      "Team-based riddle platform for daily brain challenges and friendly competition.",
+    imgUrl: "/images/riddlittext.png",
+    repoUrl: "https://github.com/jayrichh/riddlit",
+    liveUrl: "https://riddl.it",
+    updatedAt: "2025-07-18",
+    details: {
+      title: "Riddlit - Team Riddle Platform",
+      description:
+        "A riddle-solving platform where teams tackle daily challenges together. Features one-shot answers, live leaderboards, and streak tracking to keep teams engaged and competitive.",
+      technologies: [
+        "Next.js 15",
+        "TypeScript",
+        "Tailwind CSS",
+        "Clerk Auth",
+        "Supabase",
+        "Drizzle ORM",
+        "Framer Motion",
+        "Shadcn/ui",
+      ],
+      features: [
+        {
+          title: "Daily Riddles",
+          text: "New challenges every day, available for 24 hours. Miss one and wait for tomorrow. Keeps teams coming back with fresh content and time pressure.",
+          image: "/images/riddlit1.png",
+        },
+        {
+          title: "Team Competition",
+          text: "Create teams, invite members, and compete together. Track collective progress while individual contributions count toward team success.",
+          image: "/images/riddlit3.png",
+        },
+        {
+          title: "Live Leaderboards",
+          text: "Rankings update instantly as answers come in. See where your team stands and watch the competition unfold in real-time.",
+          image: "/images/riddlit2.png",
+        },
+        {
+          title: "One-Shot Answers",
+          text: "Submit once per riddle - no do-overs. Creates genuine pressure and rewards careful thinking over quick guessing.",
+          image: "/images/riddlit0.png",
+        },
+        {
+          title: "Multiple Answer Types",
+          text: "Text responses, multiple choice, numbers, or true/false. Riddle creators pick the format that best fits their puzzle.",
+        },
+        {
+          title: "Admin Tools",
+          text: "Manage users, approve riddles, and track engagement. Clean dashboard shows what's working and what needs attention.",
+        },
+      ],
+      challenges: [
+        {
+          title: "Real-time Updates",
+          text: "Getting leaderboards to update instantly across all users without lag. Used Supabase real-time features with smart client-side caching.",
+        },
+        {
+          title: "Team Permissions",
+          text: "Managing who can see what riddles based on team membership and roles. Built flexible permission system using Clerk with database checks.",
+        },
+        {
+          title: "Global Timing",
+          text: "Making riddles available fairly across time zones while keeping 24-hour windows consistent. Solved with UTC storage and client-side conversion.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Next.js 15 Performance",
+          points: [
+            {
+              text: "Server components for data fetching, client components only when needed for interactivity",
+            },
+            {
+              text: "App router patterns for clean URL structure and efficient page organization",
+            },
+          ],
+        },
+        {
+          title: "Database Design",
+          points: [
+            {
+              text: "Efficient queries for leaderboard calculations that scale with user growth",
+            },
+            {
+              text: "Smart indexing strategy for fast riddle lookups and submission handling",
+            },
+          ],
+        },
+        {
+          title: "User Experience",
+          points: [
+            {
+              text: "Simple interfaces that work on mobile and desktop without complexity",
+            },
+            {
+              text: "Smooth animations that enhance rather than distract from core functionality",
+            },
+          ],
+        },
+      ],
+      additionalImages: [],
+    },
+  },
   {
-  "title": "Elite Garage Screens",
-  "description": "Business website for garage screen door installation with interactive gallery, form handling, and SEO optimizations built with Next.js 15.",
-  "imgUrl": "/images/eweb4.png",
-  "repoUrl": "https://github.com/jsric/elitescreens",
-  "liveUrl": "https://elitescreens.co.nz",
-  "updatedAt": "2025-06-04",
-  "details": {
-    "title": "Elite Garage Screens - NZ Business Website",
-    "description": "Complete business website for a garage screen installation company serving New Zealand's North Island. Built with Next.js 15 App Router and modern web technologies.",
-    "technologies": [
-      "Next.js 15",
-      "TypeScript",
-      "Tailwind CSS",
-      "Mailer (SMTP)",
-      "Mapbox GL",
-      "reCAPTCHA",
-      "Zod",
-      "Framer Motion"
-    ],
-    "features": [
-      {
-        "title": "Email System",
-        "text": "SMTP2GO integration with custom HTML email templates. Includes conditional sections based on form type, error handling with timeouts, and responsive design for email clients.",
-        "image": "/images/eweb1.png"
-      },
-      {
-        "title": "Interactive Gallery",
-        "text": "Category-filtered image gallery with modal view and keyboard navigation. Features optimized image loading, transition effects, and responsive grid layout.",
-        "image": "/images/eweb4.png"
-      },
-      {
-        "title": "Form Handling",
-        "text": "TypeScript-powered form system with Zod validation and reCAPTCHA integration. Supports multiple form types with conditional fields and real-time validation.",
-        "image": "/images/eweb2.png"
-      },
-      {
-        "title": "SEO Implementation",
-        "text": "Next.js 15 metadata API with dynamic sitemap generation. Server-side structured data implementation for better search engine visibility.",
-      }
-    ],
-    "challenges": [
-      {
-        "title": "Server/Client Hydration",
-        "text": "Resolved Next.js 15 hydration mismatches between server and client rendering, particularly with date values and structured data generation."
-      },
-      {
-        "title": "Form Validation System",
-        "text": "Created type-safe form handling with runtime validation, error state management, and cross-browser compatibility for all form components."
-      },
-      {
-        "title": "Email Template Design",
-        "text": "Designed responsive HTML email templates with conditional sections based on form type while maintaining compatibility across email clients."
-      }
-    ],
-    "learnings": [
-      {
-        "title": "Next.js 15 App Router",
-        "points": [
-          {
-            "text": "Server component architecture and data flow optimization"
-          },
-          {
-            "text": "Metadata API implementation for dynamic page metadata"
-          },
-          {
-            "text": "Middleware configuration for route handling and security"
-          }
-        ]
-      },
-      {
-        "title": "TypeScript Form System",
-        "points": [
-          {
-            "text": "Strong typing for form fields and validation states"
-          },
-          {
-            "text": "Integration with server-side validation patterns"
-          },
-          {
-            "text": "Type-safe API response handling"
-          }
-        ]
-      },
-      {
-        "title": "Image Optimization",
-        "points": [
-          {
-            "text": "Next.js Image component usage for performance"
-          },
-          {
-            "text": "Responsive sizing and art direction"
-          },
-          {
-            "text": "Modal navigation and transition effects"
-          }
-        ]
-      }
-    ],
-    "additionalImages": [
-    ]
-  }
+    title: "Elite Garage Screens",
+    description:
+      "Business website for garage screen door installation with interactive gallery, form handling, and SEO optimizations built with Next.js 15.",
+    imgUrl: "/images/eweb4.png",
+    repoUrl: "https://github.com/jsric/elitescreens",
+    liveUrl: "https://elitescreens.co.nz",
+    updatedAt: "2025-06-04",
+    details: {
+      title: "Elite Garage Screens - NZ Business Website",
+      description:
+        "Complete business website for a garage screen installation company serving New Zealand's North Island. Built with Next.js 15 App Router and modern web technologies.",
+      technologies: [
+        "Next.js 15",
+        "TypeScript",
+        "Tailwind CSS",
+        "Mailer (SMTP)",
+        "Mapbox GL",
+        "reCAPTCHA",
+        "Zod",
+        "Framer Motion",
+      ],
+      features: [
+        {
+          title: "Email System",
+          text: "SMTP2GO integration with custom HTML email templates. Includes conditional sections based on form type, error handling with timeouts, and responsive design for email clients.",
+          image: "/images/eweb1.png",
+        },
+        {
+          title: "Interactive Gallery",
+          text: "Category-filtered image gallery with modal view and keyboard navigation. Features optimized image loading, transition effects, and responsive grid layout.",
+          image: "/images/eweb4.png",
+        },
+        {
+          title: "Form Handling",
+          text: "TypeScript-powered form system with Zod validation and reCAPTCHA integration. Supports multiple form types with conditional fields and real-time validation.",
+          image: "/images/eweb2.png",
+        },
+        {
+          title: "SEO Implementation",
+          text: "Next.js 15 metadata API with dynamic sitemap generation. Server-side structured data implementation for better search engine visibility.",
+        },
+      ],
+      challenges: [
+        {
+          title: "Server/Client Hydration",
+          text: "Resolved Next.js 15 hydration mismatches between server and client rendering, particularly with date values and structured data generation.",
+        },
+        {
+          title: "Form Validation System",
+          text: "Created type-safe form handling with runtime validation, error state management, and cross-browser compatibility for all form components.",
+        },
+        {
+          title: "Email Template Design",
+          text: "Designed responsive HTML email templates with conditional sections based on form type while maintaining compatibility across email clients.",
+        },
+      ],
+      learnings: [
+        {
+          title: "Next.js 15 App Router",
+          points: [
+            {
+              text: "Server component architecture and data flow optimization",
+            },
+            {
+              text: "Metadata API implementation for dynamic page metadata",
+            },
+            {
+              text: "Middleware configuration for route handling and security",
+            },
+          ],
+        },
+        {
+          title: "TypeScript Form System",
+          points: [
+            {
+              text: "Strong typing for form fields and validation states",
+            },
+            {
+              text: "Integration with server-side validation patterns",
+            },
+            {
+              text: "Type-safe API response handling",
+            },
+          ],
+        },
+        {
+          title: "Image Optimization",
+          points: [
+            {
+              text: "Next.js Image component usage for performance",
+            },
+            {
+              text: "Responsive sizing and art direction",
+            },
+            {
+              text: "Modal navigation and transition effects",
+            },
+          ],
+        },
+      ],
+      additionalImages: [],
+    },
   },
   {
     title: "Web Tools",

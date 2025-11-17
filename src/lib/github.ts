@@ -151,7 +151,6 @@ async function withRetry<T>(
   }
 }
 
-
 // Estimate lines of code based on file size and language
 function estimateLineCount(size: number, language: string): number {
   // Average bytes per line for different language categories

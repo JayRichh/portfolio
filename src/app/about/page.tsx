@@ -30,6 +30,7 @@ import { Button } from "../../components/ui/button";
 import HobbiesSection from "./_components/about-hobbies";
 import { useGitHubStore } from "../../lib/github";
 import { ProgressLoader } from "../../components/ui/progress-loader";
+import { GitHubDataProvider } from "../../components/github-data-provider";
 import {
   Tooltip,
   TooltipContent,
@@ -483,79 +484,81 @@ const AboutPage: React.FC = () => {
   const buttonRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div
-      ref={scrollRef}
-      className="min-h-screen overflow-x-hidden text-gray-900 dark:text-gray-100"
-    >
-      <div className="container mx-auto flex flex-col px-4 py-16 sm:px-6 lg:px-8">
-        <TopSection />
-        <motion.section className="relative mb-20 flex-grow">
-          <HobbiesSection />
-        </motion.section>
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="relative flex-grow"
-        >
-          <motion.h2
+    <GitHubDataProvider>
+      <div
+        ref={scrollRef}
+        className="min-h-screen overflow-x-hidden text-gray-900 dark:text-gray-100"
+      >
+        <div className="container mx-auto flex flex-col px-4 py-16 sm:px-6 lg:px-8">
+          <TopSection />
+          <motion.section className="relative mb-20 flex-grow">
+            <HobbiesSection />
+          </motion.section>
+          <motion.section
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="mb-40 text-center text-4xl font-extrabold text-primary sm:text-5xl md:text-6xl"
+            className="relative flex-grow"
           >
-            Experience
-          </motion.h2>
-          <Timeline />
-        </motion.section>
-        <section className="relative z-10 mt-40 flex flex-col items-center justify-start">
-          <motion.div
-            ref={buttonRef}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            viewport={{ once: true }}
-            className="mb-60 text-center"
-          >
-            <p className="text-lg text-muted-foreground dark:text-muted-foreground">
-              View more..
-            </p>
-            <div className="flex flex-row gap-4">
-              <Link href="/code" passHref legacyBehavior>
-                <motion.a
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="flex"
-                  aria-label="Projects"
-                >
-                  <Button className="relative bg-primary px-6 py-4 text-lg text-primary-foreground hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                    Projects
-                  </Button>
-                </motion.a>
-              </Link>
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="mb-40 text-center text-4xl font-extrabold text-primary sm:text-5xl md:text-6xl"
+            >
+              Experience
+            </motion.h2>
+            <Timeline />
+          </motion.section>
+          <section className="relative z-10 mt-40 flex flex-col items-center justify-start">
+            <motion.div
+              ref={buttonRef}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              viewport={{ once: true }}
+              className="mb-60 text-center"
+            >
+              <p className="text-lg text-muted-foreground dark:text-muted-foreground">
+                View more..
+              </p>
+              <div className="flex flex-row gap-4">
+                <Link href="/code" passHref legacyBehavior>
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="flex"
+                    aria-label="Projects"
+                  >
+                    <Button className="relative bg-primary px-6 py-4 text-lg text-primary-foreground hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                      Projects
+                    </Button>
+                  </motion.a>
+                </Link>
 
-              <Link href="/work" passHref legacyBehavior>
-                <motion.a
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="flex"
-                  aria-label="Work"
-                >
-                  <Button className="relative bg-secondary px-6 py-4 text-lg text-secondary-foreground hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
-                    Work
-                  </Button>
-                </motion.a>
-              </Link>
-            </div>
-          </motion.div>
+                <Link href="/work" passHref legacyBehavior>
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="flex"
+                    aria-label="Work"
+                  >
+                    <Button className="relative bg-secondary px-6 py-4 text-lg text-secondary-foreground hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+                      Work
+                    </Button>
+                  </motion.a>
+                </Link>
+              </div>
+            </motion.div>
 
-          <SocialLinks />
-        </section>
+            <SocialLinks />
+          </section>
+        </div>
+        <ScrollDownIndicator />
       </div>
-      <ScrollDownIndicator />
-    </div>
+    </GitHubDataProvider>
   );
 };
 

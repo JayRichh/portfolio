@@ -1,34 +1,39 @@
 export const projectsData = [
-{
-  title: "Riddlit",
-  description:
-    "Daily team riddles with one-shot answers, streak tracking, and instant leaderboards. Built with Next.js, Supabase, Clerk, and Drizzle ORM.",
-  technologies: ["Next.js 15", "Supabase", "Clerk", "TypeScript", "Drizzle ORM"],
-  mainImage: {
-    src: "/images/riddlittext.png",
-    alt: "Riddlit Admin Dashboard",
-  },
-  subImages: [
-    {
-      src: "/images/riddlit1.png",
-      alt: "Team Management",
+  {
+    title: "Riddlit",
+    description:
+      "Daily team riddles with one-shot answers, streak tracking, and instant leaderboards. Built with Next.js, Supabase, Clerk, and Drizzle ORM.",
+    technologies: [
+      "Next.js 15",
+      "Supabase",
+      "Clerk",
+      "TypeScript",
+      "Drizzle ORM",
+    ],
+    mainImage: {
+      src: "/images/riddlittext.png",
+      alt: "Riddlit Admin Dashboard",
     },
-    {
-      src: "/images/riddlit3.png", 
-      alt: "Create Riddles",
+    subImages: [
+      {
+        src: "/images/riddlit1.png",
+        alt: "Team Management",
+      },
+      {
+        src: "/images/riddlit3.png",
+        alt: "Create Riddles",
+      },
+    ],
+    links: {
+      live: "https://riddl.it/",
+      code: "https://github.com/JayRichh/riddlit",
     },
-  ],
-  links: {
-    live: "https://riddl.it/",
-    code: "https://github.com/JayRichh/riddlit",
+    theme: {
+      textColor: "text-emerald-600 dark:text-emerald-400",
+      gradient: "",
+    },
+    reverse: true,
   },
-  theme: {
-    textColor: "text-emerald-600 dark:text-emerald-400",
-    gradient: "",
-  },
-  reverse: true,
-}
-,
   {
     title: "CSS Battle",
     description:
@@ -66,7 +71,7 @@ export const projectsData = [
   {
     title: "Encompass Tours",
     description:
-    "Digital platform for NZ motorcycle tours using Vue and Supabase, server-side caching, dynamic tour management, and interactive route visualization.",
+      "Digital platform for NZ motorcycle tours using Vue and Supabase, server-side caching, dynamic tour management, and interactive route visualization.",
     technologies: ["Vue.js", "Supabase", "Redis", "Node.js", "TypeScript"],
     mainImage: {
       src: "/images/encompass-hero.png",
@@ -129,41 +134,41 @@ export const projectsData = [
       gradient: "",
     },
   },
-{
-  title: "Elite Garage Screens",
-  description:
-    "Business website for garage screen door installation with interactive gallery, form handling, and structured data for a New Zealand company.",
-  technologies: [
-    "Next.js 15",
-    "TypeScript",
-    "Tailwind CSS",
-    "Mapbox GL",
-    "Mailer (SMTP)",
-    "Zod",
-    "reCAPTCHA",
-  ],
-  mainImage: {
-    src: "/images/eweb4.png",
-    alt: "Elite Garage Screens Gallery",
-  },
-  subImages: [
-    {
-      src: "/images/eweb1.png",
-      alt: "Elite Garage Screens Email System",
+  {
+    title: "Elite Garage Screens",
+    description:
+      "Business website for garage screen door installation with interactive gallery, form handling, and structured data for a New Zealand company.",
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "Tailwind CSS",
+      "Mapbox GL",
+      "Mailer (SMTP)",
+      "Zod",
+      "reCAPTCHA",
+    ],
+    mainImage: {
+      src: "/images/eweb4.png",
+      alt: "Elite Garage Screens Gallery",
     },
-    {
-      src: "/images/eweb2.png",
-      alt: "Elite Garage Screens Form System",
+    subImages: [
+      {
+        src: "/images/eweb1.png",
+        alt: "Elite Garage Screens Email System",
+      },
+      {
+        src: "/images/eweb2.png",
+        alt: "Elite Garage Screens Form System",
+      },
+    ],
+    links: {
+      live: "https://elitescreens.co.nz",
     },
-  ],
-  links: {
-    live: "https://elitescreens.co.nz",
+    theme: {
+      textColor: "text-blue-600 dark:text-blue-400",
+      gradient: "",
+    },
   },
-  theme: {
-    textColor: "text-blue-600 dark:text-blue-400",
-    gradient: "",
-  },
-},
   {
     title: "Next.js Template",
     description:
@@ -237,7 +242,7 @@ export const projectsData = [
   {
     title: "POE2 Tools",
     description:
-    "Next.js toolkit for Path of Exile 2 featuring skill tree visualization, build planning, and DPS calculations, demonstrating dynamic UI and complex integrations.",
+      "Next.js toolkit for Path of Exile 2 featuring skill tree visualization, build planning, and DPS calculations, demonstrating dynamic UI and complex integrations.",
     technologies: [
       "Next.js 15",
       "TypeScript",
@@ -273,7 +278,7 @@ export const projectsData = [
   {
     title: "SteamShare",
     description:
-    "Steam screenshot management platform with integrated gallery organization and canvas editing, real-time data handling and interactive media processing.",
+      "Steam screenshot management platform with integrated gallery organization and canvas editing, real-time data handling and interactive media processing.",
     technologies: [
       "React 18",
       "TypeScript",
@@ -305,7 +310,7 @@ export const projectsData = [
     },
     reverse: true,
   },
-  
+
   {
     title: "Checkpoint",
     description:
