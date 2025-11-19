@@ -3,11 +3,10 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 const GITHUB_API = "/api/github/contributions";
-const CACHE_TIME = 3600; // 1 hour in seconds
+const CACHE_TIME = 60; 
 const MAX_RETRIES = 3;
-const RETRY_DELAY = 1000; // 1 second
+const RETRY_DELAY = 1000; 
 
-// Languages to exclude from stats
 const EXCLUDED_LANGUAGES = new Set(["Roff"]);
 
 interface ContributionDay {
@@ -287,7 +286,7 @@ async function fetchYearContributions(
   `;
 
   const variables = {
-    username: "jayrichh",
+    username: "JayRichh",
     from: `${year}-01-01T00:00:00Z`,
     to: `${year}-12-31T23:59:59Z`,
   };
@@ -409,8 +408,8 @@ async function fetchAllRepositories(): Promise<Repository[]> {
 
   try {
     while (hasNextPage) {
-      const variables = {
-        username: "jayrichh",
+      const variables: { username: string; cursor: string | null } = {
+        username: "JayRichh",
         cursor,
       };
 
@@ -429,9 +428,8 @@ async function fetchAllRepositories(): Promise<Repository[]> {
 
       const { nodes, pageInfo } = (response as any).data.data.user.repositories;
 
-      // Filter repositories to include only those you own or have significant contributions to
       const filteredNodes = nodes.filter((repo: Repository) => {
-        return repo.owner.login === "jayrichh" || !repo.isFork;
+        return repo.owner.login === "JayRichh" || !repo.isFork;
       });
 
       repositories.push(...filteredNodes);
