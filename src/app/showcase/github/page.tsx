@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGitHubStore } from "../../../lib/github";
 import { ProgressLoader } from "../../../components/ui/progress-loader";
+import { GitHubDataProvider } from "../../../components/github-data-provider";
 
 // GitHub's exact color schemes
 const COLORS = {
@@ -129,13 +130,14 @@ export default function GitHubPage() {
   const toDate = `${selectedYear.year}-12-31`;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      transition={{ duration: 0.5 }}
-      className="container mx-auto px-4 py-16"
-    >
+    <GitHubDataProvider>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.5 }}
+        className="container mx-auto px-4 py-16"
+      >
       <div className="mb-8">
         <h1 className="mb-4 text-4xl font-bold text-primary">
           GitHub Activity
@@ -221,6 +223,7 @@ export default function GitHubPage() {
           requests, and issues.
         </i>
       </div>
-    </motion.div>
+      </motion.div>
+    </GitHubDataProvider>
   );
 }

@@ -37,14 +37,18 @@ const getProjectStyles = (title: string): string => {
       return "group-[]/css:text-purple-600 dark:group-[]/css:text-purple-400 font-[650]";
     case "Golf2Go":
       return "group-[]/golf:text-emerald-600 dark:group-[]/golf:text-emerald-400 font-[650]";
-    case "Gift List":
-      return "group-[]/gift:text-amber-600 dark:group-[]/gift:text-amber-400 font-[650]";
     case "Encompass Tours":
       return "group-[]/tours:text-teal-600 dark:group-[]/tours:text-teal-400 font-[650]";
-    case "PomoDev":
-      return "group-[]/pomo:text-red-600 dark:group-[]/pomo:text-red-400 font-[650]";
-    case "The Work Waka":
-      return "group-[]/waka:text-slate-600 dark:group-[]/waka:text-slate-400 font-[650]";
+    case "Riddlit":
+      return "group-[]/riddlit:text-emerald-600 dark:group-[]/riddlit:text-emerald-400 font-[650]";
+    case "Trekk":
+      return "group-[]/trekk:text-green-600 dark:group-[]/trekk:text-green-400 font-[650]";
+    case "Elite Garage Screens":
+      return "group-[]/elite:text-sky-600 dark:group-[]/elite:text-sky-400 font-[650]";
+    case "Next.js Template":
+      return "group-[]/template:text-violet-600 dark:group-[]/template:text-violet-400 font-[650]";
+    case "POE2 Tools":
+      return "group-[]/poe:text-red-600 dark:group-[]/poe:text-red-400 font-[650]";
     default:
       return "text-gray-900 dark:text-gray-100 font-[650]";
   }
@@ -60,14 +64,18 @@ const getGroupName = (title: string): string => {
       return "group/css";
     case "Golf2Go":
       return "group/golf";
-    case "Gift List":
-      return "group/gift";
     case "Encompass Tours":
       return "group/tours";
-    case "PomoDev":
-      return "group/pomo";
-    case "The Work Waka":
-      return "group/waka";
+    case "Riddlit":
+      return "group/riddlit";
+    case "Trekk":
+      return "group/trekk";
+    case "Elite Garage Screens":
+      return "group/elite";
+    case "Next.js Template":
+      return "group/template";
+    case "POE2 Tools":
+      return "group/poe";
     default:
       return "";
   }
@@ -83,14 +91,18 @@ const getBackgroundStyle = (title: string): string => {
       return "group-[]/css:bg-gradient-to-bl from-purple-100/30 via-fuchsia-100/20 to-transparent dark:from-purple-950/30 dark:via-fuchsia-950/20";
     case "Golf2Go":
       return "group-[]/golf:bg-gradient-to-tr from-emerald-100/30 via-green-100/20 to-transparent dark:from-emerald-950/30 dark:via-green-950/20";
-    case "Gift List":
-      return "group-[]/gift:bg-gradient-to-bl from-amber-100/30 via-yellow-100/20 to-transparent dark:from-amber-950/30 dark:via-yellow-950/20";
     case "Encompass Tours":
       return "group-[]/tours:bg-gradient-to-br from-teal-100/30 via-cyan-100/20 to-transparent dark:from-teal-950/30 dark:via-cyan-950/20";
-    case "PomoDev":
-      return "group-[]/pomo:bg-gradient-to-bl from-red-100/30 via-rose-100/20 to-transparent dark:from-red-950/30 dark:via-rose-950/20";
-    case "The Work Waka":
-      return "group-[]/waka:bg-gradient-to-tr from-slate-100/30 via-gray-100/20 to-transparent dark:from-slate-950/30 dark:via-gray-950/20";
+    case "Riddlit":
+      return "group-[]/riddlit:bg-gradient-to-bl from-emerald-100/30 via-green-100/20 to-transparent dark:from-emerald-950/30 dark:via-green-950/20";
+    case "Trekk":
+      return "group-[]/trekk:bg-gradient-to-tr from-lime-100/30 via-emerald-100/20 to-transparent dark:from-lime-950/30 dark:via-emerald-950/20";
+    case "Elite Garage Screens":
+      return "group-[]/elite:bg-gradient-to-br from-sky-100/30 via-blue-100/20 to-transparent dark:from-sky-950/30 dark:via-blue-950/20";
+    case "Next.js Template":
+      return "group-[]/template:bg-gradient-to-bl from-violet-100/30 via-purple-100/20 to-transparent dark:from-violet-950/30 dark:via-purple-950/20";
+    case "POE2 Tools":
+      return "group-[]/poe:bg-gradient-to-br from-red-100/30 via-rose-100/20 to-transparent dark:from-red-950/30 dark:via-rose-950/20";
     default:
       return "bg-gradient-to-br from-gray-100/30 to-transparent dark:from-gray-950/30";
   }
@@ -106,14 +118,18 @@ const getDescriptionStyle = (title: string): string => {
       return "group-[]/css:text-purple-950 dark:group-[]/css:text-purple-200 tracking-wide";
     case "Golf2Go":
       return "group-[]/golf:text-emerald-950 dark:group-[]/golf:text-emerald-200 tracking-wide";
-    case "Gift List":
-      return "group-[]/gift:text-amber-950 dark:group-[]/gift:text-amber-200 tracking-wide";
     case "Encompass Tours":
       return "group-[]/tours:text-teal-950 dark:group-[]/tours:text-teal-200 tracking-wide";
-    case "PomoDev":
-      return "group-[]/pomo:text-red-950 dark:group-[]/pomo:text-red-200 tracking-wide";
-    case "The Work Waka":
-      return "group-[]/waka:text-slate-950 dark:group-[]/waka:text-slate-200 tracking-wide";
+    case "Riddlit":
+      return "group-[]/riddlit:text-emerald-950 dark:group-[]/riddlit:text-emerald-200 tracking-wide";
+    case "Trekk":
+      return "group-[]/trekk:text-lime-950 dark:group-[]/trekk:text-lime-200 tracking-wide";
+    case "Elite Garage Screens":
+      return "group-[]/elite:text-sky-950 dark:group-[]/elite:text-sky-200 tracking-wide";
+    case "Next.js Template":
+      return "group-[]/template:text-violet-950 dark:group-[]/template:text-violet-200 tracking-wide";
+    case "POE2 Tools":
+      return "group-[]/poe:text-red-950 dark:group-[]/poe:text-red-200 tracking-wide";
     default:
       return "text-gray-800 dark:text-gray-200 tracking-wide";
   }

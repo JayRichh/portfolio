@@ -30,25 +30,62 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(response.data);
   } catch (error: any) {
-    console.error("GitHub API error:", error.response?.data || error.message);
+    const errorData = error.response?.data;
+    const errorMessage = error.message;
+    const status = error.response?.status;
 
-    if (error.response?.status === 401) {
+    // Check if the error data is HTML (502 errors often return HTML)
+    const isHtmlError = typeof errorData === 'string' && errorData.includes('<!DOCTYPE html>') || errorData?.includes('<html>');
+    
+    if (isHtmlError) {
+      console.error("GitHub API returned HTML error (likely 502/503)");
       return NextResponse.json(
-        { error: "GitHub authentication failed" },
+        { 
+          error: "GitHub API is temporarily unavailable. Please try refreshing the page.",
+          data: { errors: [{ message: "GitHub API temporarily unavailable" }] }
+        },
+        { status: 502 },
+      );
+    }
+
+    console.error("GitHub API error:", errorData || errorMessage);
+
+    if (status === 401) {
+      return NextResponse.json(
+        { 
+          error: "GitHub authentication failed",
+          data: { errors: [{ message: "GitHub authentication failed" }] }
+        },
         { status: 401 },
       );
     }
 
-    if (error.response?.status === 403) {
+    if (status === 502 || status === 503) {
       return NextResponse.json(
-        { error: "GitHub API rate limit exceeded" },
+        { 
+          error: "GitHub API is temporarily unavailable. Please try refreshing the page.",
+          data: { errors: [{ message: "GitHub API temporarily unavailable" }] }
+        },
+        { status: 502 },
+      );
+    }
+
+    if (status === 403) {
+      return NextResponse.json(
+        { 
+          error: "GitHub API rate limit exceeded. Please try again later.",
+          data: { errors: [{ message: "GitHub API rate limit exceeded" }] }
+        },
         { status: 403 },
       );
     }
 
     return NextResponse.json(
-      { error: error.message || "Failed to fetch GitHub data" },
-      { status: error.response?.status || 500 },
+      { 
+        error: errorMessage || "Failed to fetch GitHub data",
+        data: { errors: [{ message: errorMessage || "Failed to fetch GitHub data" }] }
+      },
+      { status: status || 500 },
     );
   }
 }

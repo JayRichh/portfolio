@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 const GITHUB_API = "/api/github/contributions";
-const CACHE_TIME = 60; 
+const CACHE_TIME = 0;
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000; 
 
@@ -365,7 +365,9 @@ async function fetchYearContributions(
   };
 }
 
-async function fetchAllRepositories(): Promise<Repository[]> {
+async function fetchAllRepositories(
+  onProgress?: (progress: number) => void
+): Promise<Repository[]> {
   const query = `
     query RepositoriesQuery($username: String!, $cursor: String) {
       user(login: $username) {
@@ -405,6 +407,7 @@ async function fetchAllRepositories(): Promise<Repository[]> {
   const repositories: Repository[] = [];
   let hasNextPage = true;
   let cursor: string | null = null;
+  let pageCount = 0;
 
   try {
     while (hasNextPage) {
@@ -429,13 +432,21 @@ async function fetchAllRepositories(): Promise<Repository[]> {
       const { nodes, pageInfo } = (response as any).data.data.user.repositories;
 
       const filteredNodes = nodes.filter((repo: Repository) => {
-        return repo.owner.login === "JayRichh" || !repo.isFork;
+        // Filter out forked repositories for language distribution
+        return !repo.isFork;
       });
 
       repositories.push(...filteredNodes);
 
       hasNextPage = pageInfo.hasNextPage;
       cursor = pageInfo.endCursor;
+      pageCount++;
+
+      // Update progress during pagination (assume ~3-5 pages typical)
+      if (onProgress && pageCount <= 5) {
+        const progressIncrement = Math.floor(10 / 5); // Spread 10% across pages
+        onProgress(60 + pageCount * progressIncrement);
+      }
     }
 
     return repositories;
@@ -445,8 +456,11 @@ async function fetchAllRepositories(): Promise<Repository[]> {
   }
 }
 
-async function fetchLanguageStats(): Promise<LanguageStats> {
-  const repos = await fetchAllRepositories();
+async function fetchLanguageStats(
+  onProgress?: (progress: number) => void
+): Promise<LanguageStats> {
+  const repos = await fetchAllRepositories(onProgress);
+
   const languageMap = new Map<
     string,
     { size: number; color: string; lineCount: number; fileCount: number }
@@ -510,6 +524,15 @@ async function fetchLanguageStats(): Promise<LanguageStats> {
   };
 }
 
+async function smoothProgressTo100(setProgress: (progress: number) => void) {
+  // Exponentially slower progress from 90 to 100
+  const delays = [80, 90, 100, 120, 140, 160, 180, 200, 220, 240]; // ms per step
+  for (let i = 0; i < 10; i++) {
+    setProgress(91 + i);
+    await new Promise(resolve => setTimeout(resolve, delays[i]));
+  }
+}
+
 export async function fetchGitHubContributions(): Promise<YearContributions[]> {
   const store = useGitHubStore.getState();
   const { setProgress, setError, setYearData, setLoading, updateLastFetched } =
@@ -517,44 +540,57 @@ export async function fetchGitHubContributions(): Promise<YearContributions[]> {
 
   try {
     setLoading(true);
-    store.reset();
-
-    setProgress(10);
+    setError(null);
+    setProgress(5);
 
     const currentYear = new Date().getFullYear();
     const yearsToFetch = [currentYear, currentYear - 1];
 
+    setProgress(15);
+
     const yearResults = await Promise.all(
-      yearsToFetch.map(async (year) => {
+      yearsToFetch.map(async (year, index) => {
         const result = await fetchYearContributions(year);
-        setProgress(25);
+        setProgress(15 + (index + 1) * 15); // 30, 45
         return result;
       }),
     );
 
-    setProgress(40);
+    setProgress(50);
 
     const allContributions = yearResults.filter(
       (result): result is YearContributions => result !== null,
     );
 
+    setProgress(55);
+
     const sortedContributions = allContributions.sort(
       (a, b) => b.year - a.year,
     );
+    
     setProgress(60);
 
-    const languageStats = await fetchLanguageStats();
-    setProgress(90);
+    const languageStats = await fetchLanguageStats((progress) => {
+      setProgress(progress);
+    });
+    
+    setProgress(75);
 
     setYearData(sortedContributions);
+    
+    setProgress(90);
+    
     updateLastFetched();
-    setProgress(100);
+    
+    // Smoothly increment from 90 to 100
+    await smoothProgressTo100(setProgress);
 
     return sortedContributions;
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Error fetching GitHub data";
     setError(message);
+    setProgress(0);
     return [];
   } finally {
     setLoading(false);
@@ -603,19 +639,24 @@ export async function fetchGitHubLanguages(): Promise<LanguageStats | null> {
 
   try {
     setLoading(true);
-    store.reset();
+    setError(null);
+    setProgress(10);
 
-    setProgress(20);
-
-    const repos = await fetchAllRepositories();
-    setProgress(50);
+    const repos = await fetchAllRepositories((progress) => {
+      setProgress(progress);
+    });
+    setProgress(70);
 
     const stats = await fetchLanguageStats();
-    setProgress(80);
+    setProgress(85);
 
     setLanguageData(stats);
+    setProgress(90);
+    
     updateLastFetched();
-    setProgress(100);
+    
+    // Smoothly increment from 90 to 100
+    await smoothProgressTo100(setProgress);
 
     return stats;
   } catch (error) {
@@ -624,6 +665,7 @@ export async function fetchGitHubLanguages(): Promise<LanguageStats | null> {
         ? error.message
         : "Error fetching GitHub language data";
     setError(message);
+    setProgress(0);
     return null;
   } finally {
     setLoading(false);

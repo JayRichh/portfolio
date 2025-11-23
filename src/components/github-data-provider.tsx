@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   fetchGitHubContributions,
   fetchGitHubLanguages,
@@ -12,44 +12,31 @@ export function GitHubDataProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { yearData, languageData, setLoading, setError } = useGitHubStore();
+  const initRef = useRef(false);
 
   useEffect(() => {
-    let mounted = true;
+    // Only run once on mount
+    if (initRef.current) return;
+    initRef.current = true;
 
-    const loadData = async () => {
-      if (!mounted) return;
+    const store = useGitHubStore.getState();
+    const { yearData, languageData, isLoading } = store;
 
-      // Only fetch if we don't have the data already
-      if (!yearData.length || !languageData) {
-        setLoading(true);
-        setError(null); // Reset any previous errors
-        try {
-          // Fetch both contributions and language data concurrently
-          await Promise.all([
-            yearData.length === 0
-              ? fetchGitHubContributions()
-              : Promise.resolve(),
-            !languageData ? fetchGitHubLanguages() : Promise.resolve(),
-          ]);
-        } catch (error) {
-          // Error handling is done in the individual fetch functions
-          // They will set the error in the store appropriately
-          console.error("Error loading GitHub data:", error);
-        } finally {
-          if (mounted) {
-            setLoading(false);
-          }
-        }
-      }
-    };
+    // Only fetch if we don't have the data and not currently loading
+    if ((!yearData.length || !languageData) && !isLoading) {
+      store.setLoading(true);
+      store.setError(null);
 
-    loadData();
-
-    return () => {
-      mounted = false;
-    };
-  }, [yearData.length, languageData, setLoading, setError]);
+      Promise.all([
+        yearData.length === 0
+          ? fetchGitHubContributions()
+          : Promise.resolve(),
+        !languageData ? fetchGitHubLanguages() : Promise.resolve(),
+      ]).catch((error) => {
+        console.error("Error loading GitHub data:", error);
+      });
+    }
+  }, []);
 
   return <>{children}</>;
 }

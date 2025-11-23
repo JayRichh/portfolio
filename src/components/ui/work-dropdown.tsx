@@ -17,12 +17,16 @@ const workItems = [
   {
     label: "Projects",
     items: [
-      { label: "SteamShare", path: "/work#steamshare" },
-      { label: "Golf2go", path: "/work#golf2go" },
+      { label: "Riddlit", path: "/work#riddlit" },
       { label: "CSS Battle", path: "/work#cssbattle" },
       { label: "Encompass Tours", path: "/work#encompasstours" },
-      { label: "PomoDev", path: "/work#pomodev" },
-      { label: "Gift List", path: "/work#giftlist" },
+      { label: "Trekk", path: "/work#trekk" },
+      { label: "Elite Garage Screens", path: "/work#elitescreens" },
+      { label: "Next.js Template", path: "/work#nextjstemplate" },
+      { label: "Golf2Go", path: "/work#golf2go" },
+      { label: "POE2 Tools", path: "/work#poe2tools" },
+      { label: "SteamShare", path: "/work#steamshare" },
+      { label: "Checkpoint", path: "/work#checkpoint" },
     ],
   },
   {
