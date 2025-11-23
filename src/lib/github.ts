@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 const GITHUB_API = "/api/github/contributions";
-const CACHE_TIME = 0;
+const CACHE_TIME = 60;
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000; 
 
