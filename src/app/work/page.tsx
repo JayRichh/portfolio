@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ScrollProgress } from "../../components/ui/scroll-progress";
-import { ScrollToTop } from "../../components/ui/scroll-to-top";
+// import { ScrollToTop } from "../../components/ui/scroll-to-top";
+import ScrollDownIndicator from "../about/_components/scroll-down-indicator";
 import { HeroSection } from "./_components/HeroSection";
 import { ResourcesSection } from "./_components/ResourcesSection";
 import { ProjectCard } from "./_components/ProjectCard";
@@ -42,7 +43,8 @@ export default function WorkPage() {
   return (
     <div className="relative min-h-screen ">
       <ScrollProgress />
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
+      <ScrollDownIndicator workPage={true} />
 
       <div className="relative min-h-screen">
         <HeroSection onScrollClick={handleScroll} />

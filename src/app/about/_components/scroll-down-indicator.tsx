@@ -12,7 +12,9 @@ import {
   TooltipTrigger,
 } from "../../../components/ui/tooltip";
 
-const ScrollIcon = () => {
+const ScrollIcon = ({
+  workPage = false,
+}) => {
   const [isMounted, setIsMounted] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -118,7 +120,10 @@ const ScrollIcon = () => {
       });
     } else {
       // Not at bottom, scroll down by viewport height
-      const scrollAmount = windowHeight * 0.85; // 85% of viewport for good progression
+      let scrollAmount = windowHeight * 0.85;
+      if (workPage) {
+        scrollAmount = windowHeight * 1;
+      }
       const targetScroll = Math.min(
         scrollPosition + scrollAmount,
         documentHeight - windowHeight
@@ -143,7 +148,7 @@ const ScrollIcon = () => {
       <Tooltip>
         <TooltipTrigger asChild>
           <motion.div
-            className="fixed bottom-8 right-8 z-50 cursor-pointer"
+            className={`fixed ${workPage ? "bottom-16" : "bottom-8"} right-8 z-50 cursor-pointer`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}

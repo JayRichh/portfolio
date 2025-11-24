@@ -51,6 +51,22 @@ export function HeroSection({ onScrollClick }: HeroSectionProps) {
           <div className="w-6 h-10 md:w-8 md:h-12 border-2 border-gray-300 dark:border-gray-700 rounded-full mx-auto mt-3 md:mt-4 relative">
             <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-gray-300 dark:bg-gray-700 rounded-full absolute left-1/2 top-2 -translate-x-1/2" />
           </div>
+          <div className="absolute bottom-2 right-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 text-gray-400 dark:text-gray-500 -rotate-45"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </div>
         </motion.div>
       </motion.div>
     </div>
