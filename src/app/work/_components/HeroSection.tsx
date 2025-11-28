@@ -35,8 +35,7 @@ export function HeroSection({ onScrollClick }: HeroSectionProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          Take a look at some of the projects I've developed, each reflecting
-          unique facets of web development.
+          Full-stack applications and tools built to solve real problems. From business platforms to developer utilities, these projects showcase modern web development practices focused on creating practical, user-centered solutions.
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}

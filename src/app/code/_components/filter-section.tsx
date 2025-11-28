@@ -63,7 +63,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
         >
           <Button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="hover:bg-primary-dark inline-flex w-full items-center justify-between bg-primary px-6 py-3 text-lg text-white transition-all duration-300"
+            className="hover:bg-primary-dark inline-flex w-full items-center justify-between bg-primary px-6 py-3 text-lg text-white dark:text-green-900 transition-all duration-300"
           >
             <span className="flex items-center">
               <Filter size={20} className="mr-2" />
